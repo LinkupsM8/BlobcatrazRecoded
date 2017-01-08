@@ -1,4 +1,4 @@
-package com.toonbasic.blobcatraz;
+package com.ToonBasic.blobcatraz;
 
 import java.io.File;
 

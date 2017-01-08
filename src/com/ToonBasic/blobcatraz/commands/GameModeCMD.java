@@ -1,4 +1,4 @@
-package com.toonbasic.commands;
+package com.ToonBasic.blobcatraz.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public abstract class GameModeCMD extends Manager {
 
-	String prefix = "§3{§bBlobcatraz§3} §f";
+	String prefix = "ï¿½3{ï¿½bBlobcatrazï¿½3} ï¿½f";
 
 	public GameModeCMD() {
 		super("gm", "blobcatraz.gamemode", false);

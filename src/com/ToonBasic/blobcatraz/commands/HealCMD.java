@@ -1,4 +1,4 @@
-package com.toonbasic.commands;
+package com.ToonBasic.blobcatraz.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 public abstract class HealCMD extends Manager {
 
-	String prefix = "§3{§bBlobcatraz§3} §f";
+	String prefix = "ï¿½3{ï¿½bBlobcatrazï¿½3} ï¿½f";
 
 	public HealCMD() {
 		super("fly", "blobcatraz.heal", false);
