@@ -5,29 +5,37 @@ import java.io.File;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Blobcatraz extends JavaPlugin {
+public class Blobcatraz extends JavaPlugin 
+{
 	public static Blobcatraz instance;
 	public static YamlConfiguration config;
 	public static File folder;
 	
 	@Override
-	public void onEnable() {
+	public void onEnable() 
+	{
 		instance = this;
 		folder = getDataFolder();
 		configs();
 		commands();
 		events();
 	}
+	
 	@Override
-	public void onDisable() {
+	public void onDisable() {}
+	
+	private void configs()
+	{
 		
 	}
-	private void configs() {
+	
+	private void commands()
+	{
 		
 	}
-	private void commands() {
-	}
-	private void events() {
+	
+	private void events()
+	{
 		
 	}
 }

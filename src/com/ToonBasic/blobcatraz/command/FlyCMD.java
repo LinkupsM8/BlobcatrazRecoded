@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.commands;
+package com.ToonBasic.blobcatraz.command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -9,8 +9,10 @@ public abstract class FlyCMD extends Manager
 	String prefix = "§3{§bBlobcatraz§3} §f";
 	public FlyCMD() {super("fly", "blobcatraz.fly", false);}
 	
-	public final void execute(final CommandSender cs, final String[] args) 
+	@Override
+	public void execute(CommandSender cs, String[] args) 
 	{
+		super.execute(cs, args);
 		if(args.length == 0)
 		{
 			if(cs instanceof Player)

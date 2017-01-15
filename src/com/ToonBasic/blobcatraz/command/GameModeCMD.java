@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.commands;
+package com.ToonBasic.blobcatraz.command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
