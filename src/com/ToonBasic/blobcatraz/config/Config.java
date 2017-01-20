@@ -11,19 +11,42 @@ public abstract class Config
 {
 	protected static final File folder = Blobcatraz.folder;
 	
-	public static void save(File file, YamlConfiguration config)
+	public void save(File file, YamlConfiguration config)
 	{
-		if(!file.exists())
+		try
 		{
-			try
+			if(!file.exists())
 			{
 				folder.mkdirs();
 				file.createNewFile();
-			} catch(Exception ex)
-			{
-				String error = "Failed to save " + file + ":\n" + ex.getMessage();
-				Util.print(error);
+				defaults();
 			}
+			config.save(file);
+		} catch(Exception ex)
+		{
+			String error = "Failed to save " + file + ":\n" + ex.getMessage();
+			Util.print(error);
 		}
 	}
+	
+	public YamlConfiguration load(File file)
+	{
+		try
+		{
+			YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+			if(!file.exists()) save(file, config);
+			config.load(file);
+			defaults();
+			return config;
+		} catch(Exception ex)
+		{
+			String error = "Failed to load " + file + ":\n" + ex.getMessage();
+			Util.print(error);
+			return null;
+		}
+	}
+	
+	public void defaults() {}
+	public void set(String path, Object value, boolean force) {}
+	public void reload() {}
 }

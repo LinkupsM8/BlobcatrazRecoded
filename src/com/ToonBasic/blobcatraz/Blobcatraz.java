@@ -2,13 +2,11 @@ package com.ToonBasic.blobcatraz;
 
 import java.io.File;
 
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Blobcatraz extends JavaPlugin 
 {
 	public static Blobcatraz instance;
-	public static YamlConfiguration config;
 	public static File folder;
 	
 	@Override

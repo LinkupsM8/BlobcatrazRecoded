@@ -1,0 +1,14 @@
+name: Blobcatraz
+version: 2.0.0
+description: Core for the Blobcatraz server
+load: POSTWORLD
+author: SirBlobman
+authors: [SirBlobman, ToonBasic]
+website: http://blobcatraz.mc-srv.com
+main: com.ToonBasic.blobcatraz.Blobcatraz
+database: false
+depend: []
+softdepend: []
+prefix: Blobcaraz
+commands:
+  
