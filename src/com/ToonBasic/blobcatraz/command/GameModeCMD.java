@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 
 public abstract class GameModeCMD extends Manager {
 
-	String prefix = "§3{§bBlobcatraz§3} §f";
 	public GameModeCMD() {super("gm", "blobcatraz.gamemode", false);}
 
 	@Override
@@ -27,7 +26,7 @@ public abstract class GameModeCMD extends Manager {
                     target = Bukkit.getPlayer(name);
                     if(target == null)
                     {
-                        p.sendMessage(prefix + "Invalid Target: " + name);
+                        p.sendMessage(PREFIX + "Invalid Target: " + name);
                         return;
                     }
                 }
@@ -35,12 +34,12 @@ public abstract class GameModeCMD extends Manager {
                 String gm = args[0].toUpperCase();
                 gamemode = match(gm);
                 target.setGameMode(gamemode);
-                target.sendMessage(prefix + "Your GameMode was changed to " + gamemode.name());
-                p.sendMessage(prefix + "Success!");
+                target.sendMessage(PREFIX + "Your GameMode was changed to " + gamemode.name());
+                p.sendMessage(PREFIX + "Success!");
             }
             else
             {
-                p.sendMessage(prefix + "Missing Arguments!");
+                p.sendMessage(PREFIX + "Missing Arguments!");
                 p.sendMessage("Usage: /gm [a/c/s/sp]");
             }
         }
