@@ -1,13 +1,17 @@
 package com.ToonBasic.blobcatraz.utility;
 
+import com.ToonBasic.blobcatraz.Blobcatraz;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
+import org.bukkit.scheduler.BukkitScheduler;
 
 public class Util
 {
-	private static final Server SERVER = Bukkit.getServer();
+    protected static final Blobcatraz PLUGIN = Blobcatraz.instance;
+	protected static final Server SERVER = Bukkit.getServer();
+	protected static final BukkitScheduler SCHEDULER = SERVER.getScheduler();
 	
 	/**
 	 * show a message in the console<br/>

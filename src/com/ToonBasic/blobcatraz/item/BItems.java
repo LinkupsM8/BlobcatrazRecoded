@@ -1,5 +1,6 @@
 package com.ToonBasic.blobcatraz.item;
 
-public class BItems {
+public class BItems
+{
 
 }
