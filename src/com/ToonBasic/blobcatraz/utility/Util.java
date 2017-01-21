@@ -7,6 +7,10 @@ import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import java.text.NumberFormat;
+import java.util.Collections;
+import java.util.List;
+
 public class Util
 {
     protected static final Blobcatraz PLUGIN = Blobcatraz.instance;
@@ -47,4 +51,30 @@ public class Util
 		String s = ChatColor.stripColor(msg);
 		return s;
 	}
+
+	public static String json(String o)
+    {
+        String json = "{\"text\": \"" + o + "\"}";
+        return json;
+    }
+
+    public static List<String> matching(List<String> o, String mat)
+    {
+        if(o == null || mat == null) return null;
+        List<String> match = Collections.emptyList();
+        for(String s : o)
+        {
+            String l = s.toLowerCase();
+            String a = mat.toLowerCase();
+            if(l.startsWith(a)) match.add(s);
+        }
+        return match;
+    }
+
+    public static String money(double d)
+    {
+        NumberFormat nf = NumberFormat.getCurrencyInstance();
+        String money = nf.format(d);
+        return money;
+    }
 }
