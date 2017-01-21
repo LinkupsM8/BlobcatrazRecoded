@@ -1,24 +1,45 @@
 package com.ToonBasic.blobcatraz.utility;
 
-public class Symbol
+public enum Symbol
 {
 	//Faces
-	public static final char SMILEY1 = '\u263A';
-	public static final char SMILEY2 = '\u263B';
-	public static final char SADFACE = '\u2639';
-
-	//Emojis
-    public static final char HEART = '\u2665';
+	SMILEY1(":)", '\u263A'),
+	SMILEY2(":-)", '\u263B'),
+	SADFACE(":(", '\u2639'),
+	HEART("<3", '\u2665'),
+	INFINITY("(8)", '\u221E'),
+	CENTS("($c)", '\u00A2'),
+	EUROS("($e)", '\u20AC'),
+	POUND("($p)", '\u00A3'),
+    PARAGRAPH("(p)", '\u00B6'),
+    LEFT_CHEVRONS("<<", '\u00AB'),
+    RIGHT_CHEVRONS(">>", '\u00BB');
 	
-	//Money Related
-	public static final char INFINITY = '\u221E';
-	public static final char CENTS = '\u00A2';
-	public static final char EUROS = '\u20AC';
-	public static final char POUND = '\u00A3';
-
-	//Other
-    public static final char SECTION = '\u00A7';
-    public static final char PARAGRAPH = '\u00B6';
-    public static final char LEFT_CHEVRONS = '\u00AB';
-    public static final char RIGHT_CHEVRONS = '\u00BB';
+	private String replace;
+	private char symbol;
+	Symbol(String replace, char symbol)
+	{
+		this.replace = replace;
+		this.symbol = symbol;
+	}
+	
+	public String replace() {return replace;}
+	public char symbol() {return symbol;}
+	
+	/**
+	 * Replaces all valid codes with their actual symbol
+	 * @param o Original Text
+	 * @return Formatted Text with symbols
+	 */
+	public static String replace(String o)
+	{
+		String ret = "";
+		for(Symbol s : values())
+		{
+			String re = s.replace();
+			String sy = Character.toString(s.symbol());
+			ret = o.replace(re, sy);
+		}
+		return ret;
+	}
 }
