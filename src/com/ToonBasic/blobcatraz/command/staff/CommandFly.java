@@ -6,8 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @PlayerOnly
-public class FlyCommand extends ICommand {
-    public FlyCommand() {
+public class CommandFly extends ICommand {
+    public CommandFly() {
         super("fly", "", "blobcatraz.staff.fly");
     }
 

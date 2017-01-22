@@ -1,7 +1,8 @@
 package com.ToonBasic.blobcatraz;
 
 import com.ToonBasic.blobcatraz.command.CommandFramework;
-import com.ToonBasic.blobcatraz.command.staff.FlyCommand;
+import com.ToonBasic.blobcatraz.command.staff.CommandFly;
+import com.ToonBasic.blobcatraz.command.staff.CommandGamemode;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Core extends JavaPlugin {
@@ -19,7 +20,8 @@ public class Core extends JavaPlugin {
         getLogger().info("Now disabling Blobcatraz...");
     }
     public void run() {
-        framework.registerCommand(new FlyCommand());
+        framework.registerCommand(new CommandFly());
+        framework.registerCommand(new CommandGamemode());
         framework.registerCommands();
     }
 }
