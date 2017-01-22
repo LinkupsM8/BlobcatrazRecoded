@@ -1,11 +1,11 @@
-package com.toonbasic.blobcatraz;
+package com.ToonBasic.blobcatraz;
 
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 
 public class PublicHandlers {
-    public static String prefix = "§3{§bBlobcatraz§3} ";
+    public static String prefix = color("&3{&bBlobcatraz&3} &f");
 
-    public static void color(String msg) {
-        ChatColor.translateAlternateColorCodes('&', msg);
+    public static String color(String msg) {
+        return ChatColor.translateAlternateColorCodes('&', msg);
     }
 }
