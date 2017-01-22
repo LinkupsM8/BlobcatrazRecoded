@@ -1,6 +1,12 @@
 package com.ToonBasic.blobcatraz;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+
+import java.util.Collections;
+import java.util.List;
 
 public class PublicHandlers {
     public static String prefix = color("&3{&bBlobcatraz&3} &f");
@@ -8,4 +14,51 @@ public class PublicHandlers {
     public static String color(String msg) {
         return ChatColor.translateAlternateColorCodes('&', msg);
     }
+
+    public static String finalArgs(int start, String... args) {
+        StringBuilder sb = new StringBuilder();
+        for(int i = start; i < args.length; i++) {
+            if(i != start) sb.append(" ");
+            sb.append(args[i]);
+        }
+        return sb.toString();
+    }
+
+    public static List<String> matching(List<String> o, String mat) {
+        if(o == null || mat == null) return Collections.emptyList();
+        List<String> match = Collections.emptyList();
+        for(String s : o) {
+            String l = s.toLowerCase();
+            String a = mat.toLowerCase();
+            if(l.startsWith(a)) match.add(s);
+        }
+        return match;
+    }
+
+    public static String json(String o) {
+        String json = "{\"text\": \"" + o + "\"}";
+        return json;
+    }
+
+    public static List<Block> blocks(Location l1, Location l2) {
+        List<Block> list = Collections.emptyList();
+        int topX = (l1.getBlockX() < l2.getBlockX() ? l2.getBlockX() : l1.getBlockX());
+        int botX = (l1.getBlockX() > l2.getBlockX() ? l2.getBlockX() : l1.getBlockX());
+        int topY = (l1.getBlockY() < l2.getBlockY() ? l2.getBlockY() : l1.getBlockY());
+        int botY = (l1.getBlockY() > l2.getBlockY() ? l2.getBlockY() : l1.getBlockY());
+        int topZ = (l1.getBlockZ() < l2.getBlockZ() ? l2.getBlockZ() : l1.getBlockZ());
+        int botZ = (l1.getBlockZ() > l2.getBlockZ() ? l2.getBlockZ() : l1.getBlockZ());
+        for(int x = botX; x <= topX; x++) {
+            for(int z = botZ; z <= topZ; z++) {
+                for(int y = botY; y <= topY; y++) {
+                    World w = l1.getWorld();
+                    Block b = w.getBlockAt(x, y, z);
+                    list.add(b);
+                }
+            }
+        }
+        return list;
+    }
+
+
 }
