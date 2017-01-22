@@ -1,0 +1,8 @@
+name: Blobcatraz
+version: 0.1
+description: Core plugin for Blobcatraz
+main: com.toonbasic.blobcatraz.Core
+commands:
+  Fly:
+    usage: /fly <name>
+    description: Enables & Disables your Fly.
