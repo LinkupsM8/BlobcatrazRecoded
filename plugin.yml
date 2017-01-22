@@ -1,7 +1,7 @@
 name: Blobcatraz
 version: 0.1
 description: Core plugin for Blobcatraz
-main: com.toonbasic.blobcatraz.Core
+main: com.ToonBasic.blobcatraz.Core
 commands:
   Fly:
     usage: /fly <name>

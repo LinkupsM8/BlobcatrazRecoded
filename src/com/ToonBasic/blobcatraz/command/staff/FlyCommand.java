@@ -1,7 +1,7 @@
-package com.toonbasic.blobcatraz.cmds.staff;
+package com.ToonBasic.blobcatraz.command.staff;
 
-import com.toonbasic.blobcatraz.cmds.ICommand;
-import com.toonbasic.blobcatraz.cmds.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -20,13 +20,12 @@ public class FlyCommand extends ICommand {
                 p.setAllowFlight(true);
                 p.setFlying(true);
                 p.sendMessage(prefix + "§fYou have enabled flying!");
-            } else if(arg.equals("off"))
-            {
+            } else if(arg.equals("off")) {
                 p.setFlying(false);
                 p.setAllowFlight(false);
                 p.sendMessage(prefix + "§fYou have disabled flying!");
             } else {
-
+                p.sendMessage("Invalid Arguments: Did you mean /fly [on/off]");
             }
         } else {
             cs.sendMessage("Missing Arguments: Did you mean /fly [on/off]");

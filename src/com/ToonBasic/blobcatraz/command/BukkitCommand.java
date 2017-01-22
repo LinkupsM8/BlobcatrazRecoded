@@ -1,4 +1,4 @@
-package com.toonbasic.blobcatraz.cmds;
+package com.ToonBasic.blobcatraz.command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;

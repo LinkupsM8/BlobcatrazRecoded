@@ -1,4 +1,4 @@
-package com.toonbasic.blobcatraz.cmds;
+package com.ToonBasic.blobcatraz.command;
 
 import com.google.common.reflect.ClassPath;
 import org.bukkit.Bukkit;

@@ -1,6 +1,6 @@
-package com.toonbasic.blobcatraz.cmds;
+package com.ToonBasic.blobcatraz.command;
 
-import com.toonbasic.blobcatraz.PublicHandlers;
+import com.ToonBasic.blobcatraz.PublicHandlers;
 import org.bukkit.command.CommandExecutor;
 
 import org.bukkit.ChatColor;
