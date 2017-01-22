@@ -5,10 +5,12 @@ import com.ToonBasic.blobcatraz.command.staff.CommandFly;
 import com.ToonBasic.blobcatraz.command.staff.CommandGamemode;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 public class Core extends JavaPlugin {
     public static Core instance;
+    public static File folder;
     public static Logger LOG;
 
     CommandFramework framework;
@@ -16,6 +18,7 @@ public class Core extends JavaPlugin {
     public void onEnable() {
         instance = this;
         LOG = getLogger();
+        folder = getDataFolder();
         framework = new CommandFramework(instance);
         LOG.info("Now registering Blobcatraz...");
         run();

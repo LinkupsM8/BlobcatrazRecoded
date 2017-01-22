@@ -21,7 +21,7 @@ public class CommandBan extends ICommand {
             Player p = Bukkit.getPlayer(target);
             if(p != null) {
                 BanList bl = Bukkit.getBanList(Type.NAME);
-                String nreason = PublicHandlers.color("&4You are now banned!" + "\n&fReason: &r" + reason + "\n&fBanned By: " + cs.getName() + "\n&fAppeal At: &3&o&nhttp://blobcatraz.mc-srv.com";
+                String nreason = PublicHandlers.color("&4You are banned!" + "\n&fReason: &r" + reason + "\n&fBanned By: " + cs.getName() + "\n&fAppeal At: &3&o&nhttp://blobcatraz.mc-srv.com");
                 bl.addBan(p.getName(), nreason, null, cs.getName());
                 p.kickPlayer(nreason);
             } else {
