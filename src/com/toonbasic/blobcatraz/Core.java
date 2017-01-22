@@ -14,13 +14,14 @@ import java.util.logging.Level;
 public class Core extends JavaPlugin {
     public static Core instance;
 
-    CommandFramework framework = new CommandFramework(instance);
+    CommandFramework framework;
 
     public void onEnable() {
         instance = this;
-        getLogger().info("Now loading Blobcatraz...");
+        framework = new CommandFramework(instance);
+        getLogger().info("Now registering Blobcatraz...");
+        run();
     }
-
     public void onDisable() {
         getLogger().info("Now disabling Blobcatraz...");
     }
