@@ -1,5 +1,6 @@
 package com.toonbasic.blobcatraz.cmds;
 
+import com.toonbasic.blobcatraz.PublicHandlers;
 import org.bukkit.command.CommandExecutor;
 
 import org.bukkit.ChatColor;
@@ -20,6 +21,7 @@ public abstract class ICommand implements CommandExecutor {
     private CommandSender sender;
     private String commandUsed;
 
+    public String prefix = PublicHandlers.prefix;
     public ICommand(String name, String usage) {
         this(name, usage, null);
     }
