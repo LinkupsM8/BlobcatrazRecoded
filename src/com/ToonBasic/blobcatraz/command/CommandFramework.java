@@ -1,113 +1,112 @@
 package com.ToonBasic.blobcatraz.command;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
+import com.ToonBasic.blobcatraz.PublicHandlers;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.google.common.reflect.ClassPath;
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
 import org.bukkit.help.GenericCommandHelpTopic;
+import org.bukkit.help.HelpMap;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicComparator;
 import org.bukkit.help.IndexHelpTopic;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.SimplePluginManager;
 
-import com.google.common.reflect.ClassPath;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class CommandFramework {
+    private static final Server SERVER = Bukkit.getServer();
+    private static final PluginManager PLUGIN_MANAGER = SERVER.getPluginManager();
+    private static final HelpMap HELP_MAP = SERVER.getHelpMap();
+
     private final Plugin plugin;
-    private final HashMap<ICommand, Plugin> cmds;
-    private CommandMap map;
-    private ArrayList<String> commands;
+    private static Map<ICommand, Plugin> cmds;
+    private CommandMap commandMap;
+    private static List<String> commands;
 
     public CommandFramework(Plugin plugin) {
         this.plugin = plugin;
-        commands = new ArrayList<>();
-        cmds = new HashMap<>();
-        if (this.plugin.getServer().getPluginManager() instanceof SimplePluginManager) {
-            SimplePluginManager manager = (SimplePluginManager) this.plugin.getServer().getPluginManager();
+        commands = new ArrayList<String>();
+        cmds = Maps.newHashMap();
+
+        if (PLUGIN_MANAGER instanceof SimplePluginManager) {
             try {
-                Field field = null;
-                try {
-                    field = SimplePluginManager.class.getDeclaredField("commandMap");
-                } catch (NoSuchFieldException | SecurityException e) {
-                    e.printStackTrace();
-                }
-                if (field == null) {
-                    return;
-                }
+                SimplePluginManager spm = (SimplePluginManager) PLUGIN_MANAGER;
+                Class<? extends SimplePluginManager> c = spm.getClass();
+                Field field = c.getDeclaredField("commandMap");
                 field.setAccessible(true);
-                map = ((CommandMap) field.get(manager));
-            } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldError | NullPointerException e) {
-                e.printStackTrace();
+                commandMap = (CommandMap) field.get(spm);
+            } catch (Exception ex) {
+                String error = "CommandFramework Failure:";
+                PublicHandlers.print(error);
+                ex.printStackTrace();
             }
         }
     }
 
-
     public synchronized List<ICommand> addAll(String packageName) throws ClassNotFoundException, IOException {
-        final ClassLoader loader = this.getClass().getClassLoader();
-        List<ICommand> commands = new ArrayList<>();
-        ClassPath.from(loader).getTopLevelClasses().forEach(info -> {
+        Class<? extends CommandFramework> c = getClass();
+        ClassLoader cl = c.getClassLoader();
+        List<ICommand> commands = new ArrayList<ICommand>();
+        ClassPath.from(cl).getTopLevelClasses().forEach(info -> {
             if (info.getName().startsWith(packageName)) {
-                final Class<?> clazz = info.load();
+                Class<?> clazz = info.load();
                 if (clazz.getSuperclass() == ICommand.class) {
-                    try {commands.add(((ICommand) clazz.newInstance()));
-                    } catch (InstantiationException | IllegalAccessException e) {
-                        e.printStackTrace();
+                    try {
+                        ICommand ic = (ICommand) clazz.newInstance();
+                        commands.add(ic);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
                 }
-
             }
         });
         commands.forEach(this::registerCommand);
         return commands;
     }
 
-    public List<String> getCommands() {
-        return commands;
-    }
-
-    public void registerCommand(ICommand cmd) {
-        cmds.put(cmd, plugin);
-    }
+    public List<String> getCommands() {return commands;}
+    public void registerCommand(ICommand ic) {cmds.put(ic, plugin);}
 
     public void registerCommands() {
-        Set<HelpTopic> help = new TreeSet<>(HelpTopicComparator.helpTopicComparatorInstance());
+        Set<HelpTopic> help = Sets.newTreeSet(HelpTopicComparator.helpTopicComparatorInstance());
         int i = 0;
-        commands = new ArrayList<>();
-        for (ICommand cmd : cmds.keySet()) {
+        commands = new ArrayList<String>();
+        for(ICommand ic : cmds.keySet()) {
             i++;
-            commands.add(cmd.getCommand());
+            commands.add(ic.getCommand());
+            if(ic.getAliases() != null) {
+                List<String> aliases = Arrays.asList(ic.getAliases());
+                aliases.forEach(s -> commands.add(s));
+            }
+            BukkitCommand bc = new BukkitCommand(ic.getCommand(), ic.getExecutor(), plugin);
+            if(ic.getAliases() != null) {
+                bc.setAliases(Arrays.asList(ic.getAliases()));
+            }
+            if(ic.getUsage() != null) {
+                bc.setUsage("/" + ic.getCommand() + " " + ic.getUsage());
+            }
 
-            if (cmd.getAliases() != null) {
-                Arrays.asList(cmd.getAliases()).forEach(s -> commands.add(s));
-            }
-            BukkitCommand com = new BukkitCommand(cmd.getCommand(), cmd.getExecutor(), plugin);
-            if (cmd.getAliases() != null) {
-                com.setAliases(Arrays.asList(cmd.getAliases()));
-            }
-            if (cmd.getUsage() != null) {
-                com.setUsage(cmd.getUsage());
-            }
-
-            com.setLabel(cmd.getCommand());
-            com.setUsage("/" + cmd.getCommand() + " " + cmd.getUsage());
-            com.setDescription(plugin.getName() + " " + cmd.getCommand() + " command.");
-            map.register(plugin.getName(), com);
-            Command command = map.getCommand(cmd.getCommand());
-            HelpTopic topic = new GenericCommandHelpTopic(command);
-            help.add(topic);
+            bc.setLabel(ic.getCommand());
+            bc.setDescription(plugin.getName() + " " + ic.getCommand() + " command.");
+            commandMap.register(plugin.getName(), bc);
+            Command cmd = commandMap.getCommand(ic.getCommand());
+            HelpTopic ht = new GenericCommandHelpTopic(cmd);
+            help.add(ht);
         }
-        IndexHelpTopic indexTopic = new IndexHelpTopic(plugin.getName(), "All commands for " + plugin.getName(), null, help, "§6Below is a list of all " + plugin.getName() + " commands:");
-        Bukkit.getServer().getHelpMap().addTopic(indexTopic);
+        IndexHelpTopic iht = new IndexHelpTopic(plugin.getName(), "All commands for " + plugin.getName(), null, help, "§6Below is a list of commands from " + plugin.getName());
+        HELP_MAP.addTopic(iht);
         plugin.getLogger().info("[Blobcatraz] Registered " + i + " commands and " + commands.size() + " aliases");
     }
 }

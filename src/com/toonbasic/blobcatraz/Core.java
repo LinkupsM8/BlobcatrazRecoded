@@ -1,13 +1,13 @@
 package com.ToonBasic.blobcatraz;
 
-import java.io.File;
-import java.util.logging.Logger;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 import com.ToonBasic.blobcatraz.command.CommandFramework;
+import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandFly;
 import com.ToonBasic.blobcatraz.command.staff.CommandGamemode;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.util.logging.Logger;
 
 public class Core extends JavaPlugin {
     public static Core instance;
@@ -28,6 +28,7 @@ public class Core extends JavaPlugin {
         LOG.info("Now disabling Blobcatraz...");
     }
     public void run() {
+        framework.registerCommand(new CommandBan());
         framework.registerCommand(new CommandFly());
         framework.registerCommand(new CommandGamemode());
         framework.registerCommands();

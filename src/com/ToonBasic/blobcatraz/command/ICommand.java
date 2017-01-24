@@ -1,5 +1,13 @@
 package com.ToonBasic.blobcatraz.command;
 
+import com.ToonBasic.blobcatraz.PublicHandlers;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,22 +15,12 @@ import java.lang.annotation.Target;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandException;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.permissions.Permission;
-
-import com.ToonBasic.blobcatraz.PublicHandlers;
-
 public abstract class ICommand implements CommandExecutor {
     private String command;
     private String usage;
     private Permission perm;
     private String[] aliases;
-    private int minArgs;
+    private int minArgs = 0;
     private boolean player = false, disabled = false;
     private CommandSender sender;
     private String commandUsed;
@@ -59,32 +57,36 @@ public abstract class ICommand implements CommandExecutor {
 
     private boolean executeCmd(CommandSender sender, Command cmd, String label, String[] args) {
         this.sender = sender;
-        commandUsed = label;
-        if (disabled) {
+        this.commandUsed = label;
+        if(disabled) {
             sender.sendMessage(Language.COMMAND_DISABLED);
             return true;
         }
-        if ((player) && (!(sender instanceof Player))) {
-            sender.sendMessage(Language.PLAYER_ONLY);
-            return true;
-        }
-        if ((sender instanceof Player))
-            if (!sender.hasPermission(perm)) {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Language.NO_PERMISSION));
+        if(player) {
+            boolean p = (sender instanceof Player);
+            if(!p) {
+                sender.sendMessage(Language.PLAYER_ONLY);
                 return true;
             }
-
-
-        if (args.length < minArgs) {
+        }
+        if(sender instanceof Player) {
+            boolean has = sender.hasPermission(perm);
+            if(!has) {
+                sender.sendMessage(PublicHandlers.color(Language.NO_PERMISSION));
+                return true;
+            }
+        }
+        if(args.length < minArgs) {
+            sender.sendMessage(Language.INCORRECT_USAGE);
             sender.sendMessage(getFormattedUsage(label));
             return true;
         }
-
         try {
             handleCommand(sender, args);
-        } catch (CommandException e) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "There was an error processing this command. Please report this!"));
-            e.printStackTrace();
+        } catch(Exception ex) {
+            String error = PublicHandlers.color("There was a command processing error! Please report this!");
+            sender.sendMessage(error);
+            ex.printStackTrace();
         }
         return true;
     }

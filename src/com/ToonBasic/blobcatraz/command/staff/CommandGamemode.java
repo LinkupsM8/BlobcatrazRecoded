@@ -9,12 +9,12 @@ import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 
 @PlayerOnly
 public class CommandGamemode extends ICommand {
-    public CommandGamemode() {super("gm", "", "blobcatraz.staff.gamemode");}
+    public CommandGamemode() {super("gm", "<gamemode>", "blobcatraz.staff.gamemode");}
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
         Player p = (Player) cs;
-        if(args.length > 1) {
+        if(args.length > 0) {
             GameMode gamemode = GameMode.SURVIVAL;
             String gm = args[0];
             gamemode = match(gm);

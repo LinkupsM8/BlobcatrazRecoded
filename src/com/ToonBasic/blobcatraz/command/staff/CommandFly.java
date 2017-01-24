@@ -9,7 +9,7 @@ import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 @PlayerOnly
 public class CommandFly extends ICommand {
     public CommandFly() {
-        super("fly", "", "blobcatraz.staff.fly");
+        super("fly", "<on/off>", "blobcatraz.staff.fly");
     }
 
     @Override
