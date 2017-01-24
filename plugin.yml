@@ -2,13 +2,3 @@ name: Blobcatraz
 version: 0.0.1
 description: Core plugin for Blobcatraz
 main: com.ToonBasic.blobcatraz.Core
-commands:
-  fly:
-    usage: /fly <name>
-    description: Enables & Disables your Fly.
-  gm:
-    usage: /gm <gamemode>
-    description: Change your game mode
-  ban:
-    usage: /ban <player> <reason>
-    description: Prevent a player from joining your server
