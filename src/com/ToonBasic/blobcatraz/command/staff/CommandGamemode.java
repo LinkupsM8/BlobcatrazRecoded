@@ -1,10 +1,11 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 
 @PlayerOnly
 public class CommandGamemode extends ICommand {

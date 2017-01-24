@@ -1,14 +1,14 @@
 package com.ToonBasic.blobcatraz;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Logger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Logger;
 
 public class PublicHandlers {
     public static String prefix = color("&3{&bBlobcatraz&3} &f");
@@ -16,8 +16,7 @@ public class PublicHandlers {
     public static String color(String msg) {return ChatColor.translateAlternateColorCodes('&', msg);}
     public static String strip(String msg) {return ChatColor.stripColor(msg);}
 
-    public static void print(Object o)
-    {
+    public static void print(Object o) {
         String msg = o.toString();
         Logger log = Bukkit.getLogger();
         log.info(strip(prefix + msg));

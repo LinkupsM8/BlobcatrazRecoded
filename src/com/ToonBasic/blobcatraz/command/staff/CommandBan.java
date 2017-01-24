@@ -1,12 +1,13 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
-import com.ToonBasic.blobcatraz.command.ICommand;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.ToonBasic.blobcatraz.PublicHandlers;
+import com.ToonBasic.blobcatraz.command.ICommand;
 
 public class CommandBan extends ICommand {
     public CommandBan() {super("ban", "", "blobcatraz.staff.ban");}

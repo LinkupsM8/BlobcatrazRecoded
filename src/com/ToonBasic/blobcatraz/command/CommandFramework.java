@@ -1,14 +1,25 @@
 package com.ToonBasic.blobcatraz.command;
 
-import com.google.common.reflect.ClassPath;
-import org.bukkit.Bukkit;
-import org.bukkit.command.*;
-import org.bukkit.help.*;
-import org.bukkit.plugin.*;
-
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandMap;
+import org.bukkit.help.GenericCommandHelpTopic;
+import org.bukkit.help.HelpTopic;
+import org.bukkit.help.HelpTopicComparator;
+import org.bukkit.help.IndexHelpTopic;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.SimplePluginManager;
+
+import com.google.common.reflect.ClassPath;
 
 public class CommandFramework {
     private final Plugin plugin;

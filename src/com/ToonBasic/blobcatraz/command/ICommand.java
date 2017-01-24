@@ -1,6 +1,12 @@
 package com.ToonBasic.blobcatraz.command;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
@@ -9,12 +15,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.ToonBasic.blobcatraz.PublicHandlers;
 
 public abstract class ICommand implements CommandExecutor {
     private String command;

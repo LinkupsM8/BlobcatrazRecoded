@@ -13,9 +13,7 @@ public class ConfigDatabase {
 
     public static YamlConfiguration load(OfflinePlayer op) {
         try {
-            UUID uuid = op.getUniqueId();
-            String f = uuid + ".yml";
-            File file = new File(folder, f);
+            File file = file(op);
             YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
             if(!file.exists()) save(config, file);
             config.load(file);
@@ -56,5 +54,49 @@ public class ConfigDatabase {
     private static void set(YamlConfiguration config, String path, Object value, boolean force) {
         boolean b = (config.get(path) == null);
         if(b || force) config.set(path, value);
+    }
+
+    private static File file(OfflinePlayer op) {
+        UUID uuid = op.getUniqueId();
+        String f = uuid + ".yml";
+        File file = new File(folder, f);
+        return file;
+    }
+
+    /*Start Database*/
+    public static String nickName(OfflinePlayer op) {
+        YamlConfiguration config = load(op);
+        String name = config.getString("nickname");
+        String nick = PublicHandlers.color(name);
+        return nick;
+    }
+
+    public static int votes(OfflinePlayer op) {
+        YamlConfiguration config = load(op);
+        int votes = config.getInt("votes.amount");
+        return votes;
+    }
+
+    public static double balance(OfflinePlayer op) {
+        YamlConfiguration config = load(op);
+        double balance = config.getDouble("balance");
+        return balance;
+    }
+
+    public static void setBalance(OfflinePlayer op, double amount) {
+        YamlConfiguration config = load(op);
+        set(config, "balance", amount, true);
+        save(config, file(op));
+    }
+
+    public static void deposit(OfflinePlayer op, double amount) {
+        double balance = balance(op);
+        double namount = balance + amount;
+        setBalance(op, namount);
+    }
+
+    public static void withdraw(OfflinePlayer op, double amount) {
+        double namount = (-1 * amount);
+        deposit(op, namount);
     }
 }
