@@ -22,12 +22,13 @@ public class Core extends JavaPlugin {
         folder = getDataFolder();
         framework = new CommandFramework(instance);
         LOG.info("Now registering Blobcatraz...");
-        run();
+        commands();
     }
     public void onDisable() {
         LOG.info("Now disabling Blobcatraz...");
     }
-    public void run() {
+    
+    public void commands() {
         framework.registerCommand(new CommandBan());
         framework.registerCommand(new CommandFly());
         framework.registerCommand(new CommandGamemode());

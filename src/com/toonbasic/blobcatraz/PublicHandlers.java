@@ -1,5 +1,6 @@
 package com.ToonBasic.blobcatraz;
 
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
@@ -45,6 +46,13 @@ public class PublicHandlers {
     public static String json(String o) {
         String json = "{\"text\": \"" + o + "\"}";
         return json;
+    }
+    
+    public static String money(double amount) {
+    	DecimalFormat df = new DecimalFormat("#.##");
+    	df.setDecimalSeparatorAlwaysShown(true);
+    	String money = "$" + df.format(amount);
+    	return money;
     }
 
     public static List<Block> blocks(Location l1, Location l2) {

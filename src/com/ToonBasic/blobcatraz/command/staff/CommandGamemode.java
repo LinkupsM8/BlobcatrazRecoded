@@ -9,7 +9,7 @@ import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 
 @PlayerOnly
 public class CommandGamemode extends ICommand {
-    public CommandGamemode() {super("gm", "<gamemode>", "blobcatraz.staff.gamemode");}
+    public CommandGamemode() {super("gm", "<gamemode>", "blobcatraz.staff.gamemode", "gamemode");}
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
