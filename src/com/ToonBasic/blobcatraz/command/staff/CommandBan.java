@@ -25,7 +25,8 @@ public class CommandBan extends ICommand {
                 bl.addBan(p.getName(), nreason, null, cs.getName());
                 p.kickPlayer(PublicHandlers.color("&4You are banned!" + "\n&fReason: &r") + nreason);
             } else {
-                cs.sendMessage("§3" + target + " §ris not a Player");
+				String error = String.format(Language.INVALID_TARGET, target);
+				cs.sendMessage(error);
             }
         }
     }

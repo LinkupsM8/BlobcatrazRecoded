@@ -46,8 +46,7 @@ public class ConfigDatabase {
         set(config, "username", op.getName(), false);
         set(config, "nickname", op.getName(), false);
         set(config, "balance", 0.00D, false);
-        set(config, "votes.amount", 0, false);
-        set(config, "votes.next prize", 5, false);
+        set(config, "tokens", 0, false);
         save(config, file);
     }
 
@@ -71,9 +70,9 @@ public class ConfigDatabase {
         return nick;
     }
 
-    public static int votes(OfflinePlayer op) {
+    public static int tokens(OfflinePlayer op) {
         YamlConfiguration config = load(op);
-        int votes = config.getInt("votes.amount");
+        int votes = config.getInt("tokens");
         return votes;
     }
 
