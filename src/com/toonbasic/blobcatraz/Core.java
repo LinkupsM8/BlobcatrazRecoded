@@ -25,6 +25,7 @@ public class Core extends JavaPlugin {
         framework = new CommandFramework(instance);
         LOG.info("Now registering Blobcatraz...");
         commands();
+        events();
     }
     public void onDisable() {
         LOG.info("Now disabling Blobcatraz...");
@@ -34,14 +35,16 @@ public class Core extends JavaPlugin {
     //Staff Commands
         framework.registerCommand(new CommandBan());
         framework.registerCommand(new CommandFly());
-        framework.registerCommand(new CommandGamemode());
-        framework.registerCommand(new CommandTempBan());
         framework.registerCommand(new CommandFreeze());
+        framework.registerCommand(new CommandGamemode());
+        framework.registerCommand(new CommandItem());
+        framework.registerCommand(new CommandTempBan());
     //Player Commands
         framework.registerCommand(new CommandBalance());
     //Register All    
         framework.registerCommands();
     }
+    
     public void events() {
         PluginManager pm = Bukkit.getPluginManager();
         //Staff Events
