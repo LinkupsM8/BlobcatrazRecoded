@@ -40,6 +40,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandFreeze());
         framework.registerCommand(new CommandGamemode());
         framework.registerCommand(new CommandItem());
+        framework.registerCommand(new CommandMobSpawn());
         framework.registerCommand(new CommandRepair());
         framework.registerCommand(new CommandShowinv());
         framework.registerCommand(new CommandSkull());
