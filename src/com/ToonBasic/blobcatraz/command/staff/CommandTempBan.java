@@ -20,13 +20,12 @@ public class CommandTempBan extends ICommand {
 			String target = args[0];
 			String time = args[1];
 			Date end1 = date(time);
-			String end2 = end1.toString();
 			String reason = PublicHandlers.finalArgs(2, args);
 			
 			Player t = Bukkit.getPlayer(target);
 			if(t != null) {
 				BanList bl = Bukkit.getBanList(Type.NAME);
-				String nreason = PublicHandlers.color("&f" + reason + "\n&f&lBanned By: &f" + cs.getName() + "\n&f&lAppeal At: &f&3&o&nhttp://blobcatraz.mc-srv.com\n&f&lEnd: &f" + end2);
+				String nreason = PublicHandlers.color("&f" + reason + "\n&f&lBanned By: &f" + cs.getName() + "\n&f&lAppeal At: &f&3&o&nhttp://blobcatraz.mc-srv.com");
 				bl.addBan(t.getName(), nreason, end1, cs.getName());
                 t.kickPlayer(PublicHandlers.color("&4You are banned!" + "\n&f&lReason: &f") + nreason);
 			} else {

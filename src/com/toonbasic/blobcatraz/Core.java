@@ -10,6 +10,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandBalance;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandFly;
 import com.ToonBasic.blobcatraz.command.staff.CommandGamemode;
+import com.ToonBasic.blobcatraz.command.staff.CommandTempBan;
 
 public class Core extends JavaPlugin {
     public static Core instance;
@@ -35,6 +36,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandBan());
         framework.registerCommand(new CommandFly());
         framework.registerCommand(new CommandGamemode());
+        framework.registerCommand(new CommandTempBan());
     //Player Commands
         framework.registerCommand(new CommandBalance());
     //Register All    
