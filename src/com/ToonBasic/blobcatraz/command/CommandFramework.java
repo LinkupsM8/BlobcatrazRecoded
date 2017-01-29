@@ -107,6 +107,6 @@ public class CommandFramework {
         }
         IndexHelpTopic iht = new IndexHelpTopic(plugin.getName(), "All commands for " + plugin.getName(), null, help, "§6Below is a list of commands from " + plugin.getName());
         HELP_MAP.addTopic(iht);
-        plugin.getLogger().info("[Blobcatraz] Registered " + i + " commands and " + commands.size() + " aliases");
+        plugin.getLogger().info("Registered " + i + " commands and " + commands.size() + " aliases");
     }
 }
