@@ -28,9 +28,14 @@ public class CommandFreeze extends ICommand implements Listener {
         if (args.length > 0) {
             Player target = Bukkit.getPlayer(args[0]);
             UUID uuid = target.getUniqueId();
+            if(freeze.contains(uuid)) {
+                freeze.remove(uuid);
+                target.sendMessage(prefix + "You are no longer frozen! Be free!");
+                cs.sendMessage(prefix + "You have unfrozen " + target.getName());
+            } else
             freeze.add(uuid);
             target.sendMessage(prefix + "You have been frozen! You will not be able to move!");
-            cs.sendMessage(prefix + "You have frozen " + target.getName());
+            cs.sendMessage(prefix + "You have froze " + target.getName());
         }
     }
     @EventHandler
