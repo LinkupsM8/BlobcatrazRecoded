@@ -1,6 +1,7 @@
 package com.ToonBasic.blobcatraz;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
@@ -21,6 +22,11 @@ public class PublicHandlers {
         String msg = o.toString();
         Logger log = Bukkit.getLogger();
         log.info(strip(prefix + msg));
+    }
+    
+    public static <T> List<T> newList() {
+    	List<T> list = new ArrayList<T>();
+    	return list;
     }
 
     public static String finalArgs(int start, String... args) {
