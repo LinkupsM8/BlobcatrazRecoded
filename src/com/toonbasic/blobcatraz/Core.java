@@ -3,14 +3,20 @@ package com.ToonBasic.blobcatraz;
 import java.io.File;
 import java.util.logging.Logger;
 
-import com.ToonBasic.blobcatraz.command.staff.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ToonBasic.blobcatraz.command.CommandFramework;
+import com.ToonBasic.blobcatraz.command.player.CommandAFK;
 import com.ToonBasic.blobcatraz.command.player.CommandBalance;
 import com.ToonBasic.blobcatraz.command.player.CommandNickname;
+import com.ToonBasic.blobcatraz.command.staff.CommandBan;
+import com.ToonBasic.blobcatraz.command.staff.CommandFly;
+import com.ToonBasic.blobcatraz.command.staff.CommandFreeze;
+import com.ToonBasic.blobcatraz.command.staff.CommandGamemode;
+import com.ToonBasic.blobcatraz.command.staff.CommandItem;
+import com.ToonBasic.blobcatraz.command.staff.CommandTempBan;
 
 public class Core extends JavaPlugin {
     public static Core instance;
@@ -40,8 +46,8 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandGamemode());
         framework.registerCommand(new CommandItem());
         framework.registerCommand(new CommandTempBan());
-        framework.registerCommand(new CommandRandomTP());
     //Player Commands
+        framework.registerCommand(new CommandAFK());
         framework.registerCommand(new CommandBalance());
         framework.registerCommand(new CommandNickname());
     //Register All    
@@ -53,6 +59,7 @@ public class Core extends JavaPlugin {
     //Staff Events
         pm.registerEvents(new CommandFreeze(), this);
     //Player Events
+        pm.registerEvents(new CommandAFK(), this);
         pm.registerEvents(new CommandNickname(), this);
     }
 }
