@@ -77,7 +77,6 @@ public abstract class ICommand implements CommandExecutor {
             }
         }
         if(args.length < minArgs) {
-            sender.sendMessage(Language.INCORRECT_USAGE);
             sender.sendMessage(getFormattedUsage(label));
             return true;
         }
