@@ -69,6 +69,12 @@ public class ConfigDatabase {
         String nick = PublicHandlers.color(name);
         return nick;
     }
+    
+    public static void nickName(OfflinePlayer op, String nick) {
+    	YamlConfiguration config = load(op);
+    	set(config, "nickname", nick, true);
+    	save(config, file(op));
+    }
 
     public static int tokens(OfflinePlayer op) {
         YamlConfiguration config = load(op);
