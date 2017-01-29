@@ -45,6 +45,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandItem());
         framework.registerCommand(new CommandTempBan());
         framework.registerCommand(new CommandVanish());
+        framework.registerCommand(new CommandMobSpawn());
     //Player Commands
         framework.registerCommand(new CommandAFK());
         framework.registerCommand(new CommandBalance());
