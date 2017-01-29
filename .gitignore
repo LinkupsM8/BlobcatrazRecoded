@@ -2,8 +2,10 @@
 .idea/
 .externalToolBuilders/
 bin/
+lib/
 jar/
 
 #Files
 Blobcatraz Recoded.iml
 build.xml
+.classpath

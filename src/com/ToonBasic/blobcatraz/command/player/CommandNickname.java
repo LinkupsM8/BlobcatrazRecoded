@@ -17,7 +17,7 @@ public class CommandNickname extends ICommand implements Listener {
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
 		String name = PublicHandlers.finalArgs(0, args);
-		String nick = PublicHandlers.color(name);
+		String nick = PublicHandlers.color(name + "&r");
 		Player p = (Player) cs;
 		p.setDisplayName(nick);
 		ConfigDatabase.nickName(p, name);
