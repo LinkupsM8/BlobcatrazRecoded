@@ -1,0 +1,23 @@
+Commands
+  - kit
+  - speed
+  - back
+  - baltop
+  - ci
+  - jail
+  - home
+  - eco
+  - enchant
+  - god
+  - lightning/smite
+  - motd/setmotd
+  - mute
+  - pay
+  - powertool
+  - sudo
+  - sell/buy/worth
+  - workbench/furnace/anvil/enderchest
+Other:
+  - Better world generation to prevent lag made by Multiverse
+  - Chat Control (Disable/Enable, Ping, Emojis)
+  - Custom Scoreboard with API
