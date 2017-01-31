@@ -32,8 +32,16 @@ public class CommandShowinv extends ICommand implements Listener {
     	Player p = (Player) cs;
 
 		if (args.length == 1) {
-
+			
 			Player p2 = Bukkit.getServer().getPlayer(args[0]);
+			
+			if (p2 == null) {
+				
+				p.sendMessage("§cThat player does not exist or is not online!");
+				return;
+				
+			}
+			
 			PlayerInventory p2Inv = p2.getInventory();
 			
 			Inventory inv = Bukkit.createInventory(null, 36, "Inventory of " + p2.getName());

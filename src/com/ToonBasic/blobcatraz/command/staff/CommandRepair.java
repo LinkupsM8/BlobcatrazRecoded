@@ -71,7 +71,7 @@ public class CommandRepair extends ICommand {
 		));
 
 	public CommandRepair() {
-		super("repair", "[hand/offhand/armor/hotbar/all]", "blobcatraz.staff.repair");
+		super("repair", "[hand/offhand/armor/hotbar/all]", "blobcatraz.staff.repair", "fix");
 	}
 
 	@Override
