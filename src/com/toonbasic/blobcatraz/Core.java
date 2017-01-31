@@ -48,6 +48,8 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandMobSpawn());
         framework.registerCommand(new CommandShowinv());
         framework.registerCommand(new CommandSkull());
+        framework.registerCommand(new CommandRepair());
+        framework.registerCommand(new CommandSpeed());
     //Player Commands
         framework.registerCommand(new CommandAFK());
         framework.registerCommand(new CommandBalance());
