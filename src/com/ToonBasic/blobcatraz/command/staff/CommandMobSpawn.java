@@ -10,9 +10,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.Util;
 import com.google.common.collect.Sets;
 
 @PlayerOnly
@@ -30,10 +30,10 @@ public class CommandMobSpawn extends ICommand {
         	Location loc = look.getLocation();
         	String mob = args[0].toUpperCase();
         	if(spawn(loc, mob)) {
-        		String msg = PublicHandlers.color(prefix + "&eEntity Spawned!");
+        		String msg = Util.color(prefix + "&eEntity Spawned!");
         		p.sendMessage(msg);
         	} else {
-        		String msg = PublicHandlers.color(prefix + "&cInvalid Entity!");
+        		String msg = Util.color(prefix + "&cInvalid Entity!");
         		p.sendMessage(msg);
         	}
         }

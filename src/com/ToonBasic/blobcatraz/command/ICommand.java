@@ -1,12 +1,13 @@
 package com.ToonBasic.blobcatraz.command;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
+
+import com.ToonBasic.blobcatraz.utility.Util;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -25,7 +26,7 @@ public abstract class ICommand implements CommandExecutor {
     private CommandSender sender;
     private String commandUsed;
 
-    public String prefix = PublicHandlers.prefix;
+    public String prefix = Util.prefix;
     public ICommand(String name, String usage) {
         this(name, usage, null);
     }
@@ -72,7 +73,7 @@ public abstract class ICommand implements CommandExecutor {
         if(sender instanceof Player) {
             boolean has = sender.hasPermission(perm);
             if(!has) {
-                sender.sendMessage(PublicHandlers.color(Language.NO_PERMISSION));
+                sender.sendMessage(Util.color(Language.NO_PERMISSION));
                 return true;
             }
         }
@@ -83,7 +84,7 @@ public abstract class ICommand implements CommandExecutor {
         try {
             handleCommand(sender, args);
         } catch(Exception ex) {
-            String error = PublicHandlers.color("There was a command processing error! Please report this!");
+            String error = Util.color("There was a command processing error! Please report this!");
             sender.sendMessage(error);
             ex.printStackTrace();
         }

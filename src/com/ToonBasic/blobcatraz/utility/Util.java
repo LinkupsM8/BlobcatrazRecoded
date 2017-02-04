@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz;
+package com.ToonBasic.blobcatraz.utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
-public class PublicHandlers {
+public class Util {
     public static String prefix = color("&3{&bBlobcatraz&3} &f");
 
     public static String color(String msg) {return ChatColor.translateAlternateColorCodes('&', msg);}

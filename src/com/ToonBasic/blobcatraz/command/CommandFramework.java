@@ -1,6 +1,6 @@
 package com.ToonBasic.blobcatraz.command;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
+import com.ToonBasic.blobcatraz.utility.Util;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.reflect.ClassPath;
@@ -49,7 +49,7 @@ public class CommandFramework {
                 commandMap = (CommandMap) field.get(spm);
             } catch (Exception ex) {
                 String error = "CommandFramework Failure:";
-                PublicHandlers.print(error);
+                Util.print(error);
                 ex.printStackTrace();
             }
         }

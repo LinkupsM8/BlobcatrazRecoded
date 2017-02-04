@@ -4,10 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandBalance extends ICommand {
@@ -21,8 +21,8 @@ public class CommandBalance extends ICommand {
 			Player t = Bukkit.getPlayer(target);
 			if(t != null) {
 				double bal = ConfigDatabase.balance(t);
-				String balance = PublicHandlers.money(bal);
-				String msg = prefix + PublicHandlers.color("&d" + p.getName() + "&f's balance is &e" + balance);
+				String balance = Util.money(bal);
+				String msg = prefix + Util.color("&d" + p.getName() + "&f's balance is &e" + balance);
 				p.sendMessage(msg);
 			} else {
 				String error = String.format(Language.INVALID_TARGET, target);
@@ -30,8 +30,8 @@ public class CommandBalance extends ICommand {
 			}
 		} else {
 			double bal = ConfigDatabase.balance(p);
-			String balance = PublicHandlers.money(bal);
-			String msg = prefix + PublicHandlers.color("&aYour balance is &e" + balance);
+			String balance = Util.money(bal);
+			String msg = prefix + Util.color("&aYour balance is &e" + balance);
 			p.sendMessage(msg);
 		}
 	}
