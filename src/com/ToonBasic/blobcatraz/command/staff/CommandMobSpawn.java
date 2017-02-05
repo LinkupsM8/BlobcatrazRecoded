@@ -18,12 +18,12 @@ import com.google.common.collect.Sets;
 @PlayerOnly
 public class CommandMobSpawn extends ICommand {
     public CommandMobSpawn() {
-        super("spawnmob", "[mob]", "blobcatraz.staff.spawnmob", "mob");
+        super("spawnmob", "<mob>", "blobcatraz.staff.spawnmob", "mob");
     }
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
-        if (args.length > 1) {
+        if (args.length > 0) {
         	Player p = (Player) cs;
         	Set<Material> air = Sets.newHashSet();
         	Block look = p.getTargetBlock(air, 100);
