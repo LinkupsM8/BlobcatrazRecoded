@@ -19,7 +19,7 @@ public class CommandGamemode extends ICommand {
         Player t = p;
         if(args.length > 0) {
             if(args.length > 1) {
-            	t = Bukkit.getPlayer(args[0]);
+            	t = Bukkit.getPlayer(args[1]);
             	if(t == null) t = p;
             }
             

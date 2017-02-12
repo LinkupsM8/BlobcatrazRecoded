@@ -16,6 +16,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandFly;
 import com.ToonBasic.blobcatraz.command.staff.CommandFreeze;
 import com.ToonBasic.blobcatraz.command.staff.CommandGamemode;
 import com.ToonBasic.blobcatraz.command.staff.CommandItem;
+import com.ToonBasic.blobcatraz.command.staff.CommandLag;
 import com.ToonBasic.blobcatraz.command.staff.CommandMobSpawn;
 import com.ToonBasic.blobcatraz.command.staff.CommandRepair;
 import com.ToonBasic.blobcatraz.command.staff.CommandShowinv;
@@ -51,6 +52,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandFreeze());
         framework.registerCommand(new CommandGamemode());
         framework.registerCommand(new CommandItem());
+        framework.registerCommand(new CommandLag());
         framework.registerCommand(new CommandTempBan());
         framework.registerCommand(new CommandVanish());
         framework.registerCommand(new CommandMobSpawn());

@@ -24,10 +24,12 @@ public class Util {
         log.info(strip(prefix + msg));
     }
     
-    public static <T> List<T> newList() {
-    	List<T> list = new ArrayList<T>();
-    	return list;
-    }
+	@SafeVarargs
+	public static <T> List<T> newList(T... ts) {
+		List<T> list = new ArrayList<T>();
+		if(ts.length > 0) {for(T t : ts) list.add(t);}
+		return list;
+	}
 
     public static String finalArgs(int start, String... args) {
         StringBuilder sb = new StringBuilder();
