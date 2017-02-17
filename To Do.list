@@ -2,7 +2,6 @@ Commands
   - kit
   - back
   - baltop
-  - ci
   - jail
   - home
   - eco
@@ -15,7 +14,6 @@ Commands
   - powertool
   - sudo
   - sell/buy/worth
-  - workbench/furnace/anvil/enderchest
 Other:
   - Better world generation to prevent lag made by Multiverse
   - Chat Control (Disable/Enable, Ping, Emojis)
