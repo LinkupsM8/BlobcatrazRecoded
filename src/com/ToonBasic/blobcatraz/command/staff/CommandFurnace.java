@@ -9,16 +9,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
-/**
- * Plugin created by Lilith
- * MC-Market: http://www.mc-market.org/members/16269/
- * Spigot: https://www.spigotmc.org/members/razorkings.32987/
- * Redistribution is not permitted
- * If you find any errors, please send me a PM on either Spigot or MC-Market.
- */
 public class CommandFurnace extends ICommand {
     public CommandFurnace() {
-        super("furance", "", "blobcatraz.staff.furnace", "fur");
+        super("furnace", "", "blobcatraz.staff.furnace", "smelt");
     }
 
     @Override

@@ -1,26 +1,38 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.PlayerInventory;
 
-/**
- * Plugin created by Lilith
- * MC-Market: http://www.mc-market.org/members/16269/
- * Spigot: https://www.spigotmc.org/members/razorkings.32987/
- * Redistribution is not permitted
- * If you find any errors, please send me a PM on either Spigot or MC-Market.
- */
-@ICommand.PlayerOnly
+import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.Util;
+
+@PlayerOnly
 public class CommandClearInventory extends ICommand {
     public CommandClearInventory() {
-        super("clear", "", "blobcatraz.staff.clearinv", "ci");
+        super("clear", "[player]", "blobcatraz.staff.clearinv", "ci", "clearinventory");
     }
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
-        Player player = (Player) cs;
-        player.getInventory().clear();
-        player.sendMessage(prefix + "You have cleared your inventory!");
+    	if(args.length > 0) {
+    		String target = args[0];
+    		Player p = Bukkit.getPlayer(target);
+    		if(p != null) {
+                PlayerInventory pi = p.getInventory();
+                pi.clear();
+                p.sendMessage(prefix + cs.getName() + " cleared your inventory!");
+    		} else {
+    			String error = Util.color(Language.INVALID_TARGET);
+    			cs.sendMessage(error);
+    		}
+    	} else {
+            Player p = (Player) cs;
+            PlayerInventory pi = p.getInventory();
+            pi.clear();
+            p.sendMessage(prefix + "You have cleared your inventory!");
+    	}
     }
 }

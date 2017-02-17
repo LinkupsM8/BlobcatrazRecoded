@@ -5,16 +5,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-/**
- * Plugin created by Lilith
- * MC-Market: http://www.mc-market.org/members/16269/
- * Spigot: https://www.spigotmc.org/members/razorkings.32987/
- * Redistribution is not permitted
- * If you find any errors, please send me a PM on either Spigot or MC-Market.
- */
 public class CommandSmite extends ICommand {
     public CommandSmite() {
-        super("smite", "<player>", "blobcatraz.staff.smite", "lightning");
+        super("smite", "<player>", "blobcatraz.staff.smite", "lightning", "zap", "thor");
     }
 
     @Override
