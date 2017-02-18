@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.ToonBasic.blobcatraz.command.CommandFramework;
 import com.ToonBasic.blobcatraz.command.player.CommandAFK;
 import com.ToonBasic.blobcatraz.command.player.CommandBalance;
+import com.ToonBasic.blobcatraz.command.player.CommandEmojis;
 import com.ToonBasic.blobcatraz.command.player.CommandNickname;
 
 public class Core extends JavaPlugin {
@@ -57,6 +58,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandAFK());
         framework.registerCommand(new CommandBalance());
         framework.registerCommand(new CommandNickname());
+        framework.registerCommand(new CommandEmojis());
     //Register All    
         framework.registerCommands();
     }
@@ -70,5 +72,6 @@ public class Core extends JavaPlugin {
     //Player Events
         pm.registerEvents(new CommandAFK(), this);
         pm.registerEvents(new CommandNickname(), this);
+        pm.registerEvents(new CommandEmojis(), this);
     }
 }

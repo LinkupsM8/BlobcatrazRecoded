@@ -36,7 +36,7 @@ public class CommandSpeed extends ICommand {
 			
 			p2.setWalkSpeed((float) 0.2);
 			p2.setFlySpeed((float) 0.2);
-			p2.sendMessage("§aYour walking speed has been reset!");
+			p2.sendMessage("§aYour speed has been reset!");
 			
 		} else {
 		
