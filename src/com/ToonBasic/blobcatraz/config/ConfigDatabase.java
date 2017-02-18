@@ -1,7 +1,8 @@
 package com.ToonBasic.blobcatraz.config;
 
 import com.ToonBasic.blobcatraz.Core;
-import com.ToonBasic.blobcatraz.PublicHandlers;
+import com.ToonBasic.blobcatraz.utility.Util;
+
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -21,7 +22,7 @@ public class ConfigDatabase {
             return config;
         } catch(Exception ex) {
             String error = "Failed to load data for " + op.getName() + ":\n" + ex.getMessage();
-            PublicHandlers.print(error);
+            Util.print(error);
             return null;
         }
     }
@@ -35,7 +36,7 @@ public class ConfigDatabase {
             config.save(file);
         } catch(Exception ex) {
             String error = "Failed to save data in " + file + ":\n" + ex.getMessage();
-            PublicHandlers.print(error);
+            Util.print(error);
         }
     }
 
@@ -66,7 +67,7 @@ public class ConfigDatabase {
     public static String nickName(OfflinePlayer op) {
         YamlConfiguration config = load(op);
         String name = config.getString("nickname");
-        String nick = PublicHandlers.color(name + "&r");
+        String nick = Util.color(name + "&r");
         return nick;
     }
     

@@ -10,41 +10,43 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
-import com.google.common.collect.Sets;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandMobSpawn extends ICommand {
     public CommandMobSpawn() {
-        super("spawnmob", "[mob]", "blobcatraz.staff.spawnmob", "mob");
+        super("spawnmob", "<mob>", "blobcatraz.staff.spawnmob", "mob");
     }
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
-        if (args.length > 1) {
+        if (args.length > 0) {
         	Player p = (Player) cs;
-        	Set<Material> air = Sets.newHashSet();
+        	Set<Material> air = null;
         	Block look = p.getTargetBlock(air, 100);
         	Location loc = look.getLocation();
+        	loc.setY(loc.getY() + 1.5);
         	String mob = args[0].toUpperCase();
         	if(spawn(loc, mob)) {
-        		String msg = PublicHandlers.color(prefix + "&eEntity Spawned!");
+        		String msg = Util.color(prefix + "&eEntity Spawned!");
         		p.sendMessage(msg);
         	} else {
-        		String msg = PublicHandlers.color(prefix + "&cInvalid Entity!");
+        		String msg = Util.color(prefix + "&cInvalid Entity!");
         		p.sendMessage(msg);
         	}
         }
     }
     
     private boolean spawn(Location loc, String mob) {
-    	EntityType et = EntityType.valueOf(mob);
-    	if(et != null) {
-    		World w = loc.getWorld();
-    		w.spawnEntity(loc, et);
-    		return true;
-    	} else return false;
+    	try {
+    		EntityType et = EntityType.valueOf(mob);
+        	if(et != null) {
+        		World w = loc.getWorld();
+        		w.spawnEntity(loc, et);
+        		return true;
+        	} else return false;
+    	} catch(Exception ex) {return false;}
     }
 }

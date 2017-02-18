@@ -8,8 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
 import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 public class CommandTempBan extends ICommand {
 	public CommandTempBan() {super("tempban", "<player> <time> <reason>", "blobcatraz.staff.temban");}
@@ -20,14 +20,14 @@ public class CommandTempBan extends ICommand {
 			String target = args[0];
 			String time = args[1];
 			Date end1 = date(time);
-			String reason = PublicHandlers.finalArgs(2, args);
+			String reason = Util.finalArgs(2, args);
 			
 			Player t = Bukkit.getPlayer(target);
 			if(t != null) {
 				BanList bl = Bukkit.getBanList(Type.NAME);
-				String nreason = PublicHandlers.color("&f" + reason + "\n&f&lBanned By: &f" + cs.getName() + "\n&f&lAppeal At: &f&3&o&nhttp://blobcatraz.mc-srv.com");
+				String nreason = Util.color("&f" + reason + "\n&f&lBanned By: &f" + cs.getName() + "\n&f&lAppeal At: &f&3&o&nhttp://blobcatraz.mc-srv.com");
 				bl.addBan(t.getName(), nreason, end1, cs.getName());
-                t.kickPlayer(PublicHandlers.color("&4You are banned!" + "\n&f&lReason: &f") + nreason);
+                t.kickPlayer(Util.color("&4You are banned!" + "\n&f&lReason: &f") + nreason);
 			} else {
 				String error = String.format(Language.INVALID_TARGET, target);
 				cs.sendMessage(error);

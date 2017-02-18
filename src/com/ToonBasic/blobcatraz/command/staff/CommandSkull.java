@@ -6,9 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandSkull extends ICommand {
@@ -27,7 +27,7 @@ public class CommandSkull extends ICommand {
 			ItemStack skull = new ItemStack(Material.SKULL_ITEM);
 			skull.setDurability((short) 3);
 			SkullMeta meta = (SkullMeta) skull.getItemMeta();
-			String display = PublicHandlers.color("&r" + pName + (pName.endsWith("s") ? "'" : "'s") + " Head");
+			String display = Util.color("&r" + pName + (pName.endsWith("s") ? "'" : "'s") + " Head");
 			meta.setDisplayName(display);
 			meta.setOwner(pName);
 			skull.setItemMeta(meta);

@@ -89,8 +89,8 @@ public class CommandRepair extends ICommand {
 				i.setDurability((short) 0);
 				p.getInventory().setItemInMainHand(i);
 				
-			} else if (m.equals(Material.AIR)) p.sendMessage("§cYou can't repair nothing!");
-			else p.sendMessage("§cYou can't repair this item!");
+			} else if (m.equals(Material.AIR)) p.sendMessage("Â§cYou can't repair nothing!");
+			else p.sendMessage("Â§cYou can't repair this item!");
 			
 		} else if (args[0].equals("offhand")) {
 			
@@ -102,8 +102,8 @@ public class CommandRepair extends ICommand {
 				i.setDurability((short) 0);
 				p.getInventory().setItemInOffHand(i);
 				
-			} else if (m.equals(Material.AIR)) p.sendMessage("§cYou can't repair nothing!");
-			else p.sendMessage("§cYou can't repair this item!");
+			} else if (m.equals(Material.AIR)) p.sendMessage("Â§cYou can't repair nothing!");
+			else p.sendMessage("Â§cYou can't repair this item!");
 			
 		} else if (args[0].equals("armor")) {
 			

@@ -10,21 +10,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandAFK extends ICommand implements Listener {
 	public CommandAFK() {super("afk", "[reason]", "", "awayfromkeyboard");}
-	private static List<Player> afk = PublicHandlers.newList();
+	private static List<Player> afk = Util.newList();
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
-		String reason = PublicHandlers.finalArgs(0, args);
-		reason = PublicHandlers.color(reason);
+		String reason = Util.finalArgs(0, args);
+		reason = Util.color(reason);
 		Player p = (Player) cs;
-		String msg = PublicHandlers.color("&6 * &7" + p.getName() + " &eis now AFK\n  &f" + reason);
+		String msg = Util.color("&6 * &7" + p.getName() + " &eis now AFK\n  &f" + reason);
 		afk.add(p);
 		Bukkit.broadcastMessage(msg);
 	}
@@ -44,7 +44,7 @@ public class CommandAFK extends ICommand implements Listener {
 	private void un(Player p) {
 		if(afk.contains(p)) {
 			afk.remove(p);
-			String msg = PublicHandlers.color("&6 * &7" + p.getName() + " &eis no longer AFK");
+			String msg = Util.color("&6 * &7" + p.getName() + " &eis no longer AFK");
 			Bukkit.broadcastMessage(msg);
 		}
 	}

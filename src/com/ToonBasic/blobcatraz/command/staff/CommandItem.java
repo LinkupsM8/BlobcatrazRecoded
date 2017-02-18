@@ -6,9 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandItem extends ICommand {
@@ -20,7 +20,7 @@ public class CommandItem extends ICommand {
 		PlayerInventory pi = p.getInventory();
 		ItemStack give = match(args);
 		pi.addItem(give);
-		String msg = PublicHandlers.color(prefix + "&fYou received &e" + give.getAmount() + " &fof &c" + give.getType().name() + ":" + give.getDurability());
+		String msg = Util.color(prefix + "&fYou received &e" + give.getAmount() + " &fof &c" + give.getType().name() + ":" + give.getDurability());
 		p.sendMessage(msg);
 	}
 	

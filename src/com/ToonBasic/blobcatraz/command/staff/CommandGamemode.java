@@ -5,9 +5,9 @@ import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.ToonBasic.blobcatraz.PublicHandlers;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandGamemode extends ICommand {
@@ -19,7 +19,7 @@ public class CommandGamemode extends ICommand {
         Player t = p;
         if(args.length > 0) {
             if(args.length > 1) {
-            	t = Bukkit.getPlayer(args[0]);
+            	t = Bukkit.getPlayer(args[1]);
             	if(t == null) t = p;
             }
             
@@ -27,8 +27,8 @@ public class CommandGamemode extends ICommand {
             String gm = args[0];
             gamemode = match(gm);
             t.setGameMode(gamemode);
-            t.sendMessage(prefix + PublicHandlers.color("Your GameMode was changed to &e" + gamemode.name()));
-            if(!t.getName().equals(p.getName())) p.sendMessage(prefix + PublicHandlers.color("&d" + t.getName() + " &f's GameMode was changed to &e" + gamemode.name()));
+            t.sendMessage(prefix + Util.color("Your GameMode was changed to &e" + gamemode.name()));
+            if(!t.getName().equals(p.getName())) p.sendMessage(prefix + Util.color("&d" + t.getName() + " &f's GameMode was changed to &e" + gamemode.name()));
         } else {
             p.sendMessage("Missing Arguments: Did you mean /gm [gamemode]");
         }
