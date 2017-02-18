@@ -27,7 +27,7 @@ public class CommandSkull extends ICommand {
 			ItemStack skull = new ItemStack(Material.SKULL_ITEM);
 			skull.setDurability((short) 3);
 			SkullMeta meta = (SkullMeta) skull.getItemMeta();
-			String display = Util.color("&r" + pName + (pName.endsWith("s") ? "'" : "'s") + " Head");
+			String display = Util.color("\u00a7r" + pName + (pName.endsWith("s") ? "'" : "'s") + " Head");
 			meta.setDisplayName(display);
 			meta.setOwner(pName);
 			skull.setItemMeta(meta);
