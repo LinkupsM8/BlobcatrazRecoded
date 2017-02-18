@@ -2,11 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/SirBlobman/Downloads/Minecraft/Spigot/Plugins/Dependencies/ProtocolLib Build.347.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://ci.dmulloy2.net/job/ProtocolLib/javadoc/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/SirBlobman/Downloads/Minecraft/Spigot/BuildTools/1.11.2/Spigot/Spigot-API/target/spigot-api-1.11.2-R0.1-SNAPSHOT-shaded.jar" sourcepath="C:/Users/SirBlobman/Downloads/Minecraft/Spigot/BuildTools/1.11.2/Spigot/Spigot-API/src">
 		<attributes>
 			<attribute name="javadoc_location" value="https://hub.spigotmc.org/javadocs/spigot/"/>

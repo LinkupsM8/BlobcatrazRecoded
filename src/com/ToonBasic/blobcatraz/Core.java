@@ -52,7 +52,6 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandSmite());
         framework.registerCommand(new CommandWorkbench());
         framework.registerCommand(new CommandAnvil());
-        framework.registerCommand(new CommandFurnace());
         framework.registerCommand(new CommandEnderChest());
     //Player Commands
         framework.registerCommand(new CommandAFK());
