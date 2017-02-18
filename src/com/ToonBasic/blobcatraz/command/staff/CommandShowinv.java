@@ -31,7 +31,7 @@ public class CommandShowinv extends ICommand implements Listener {
     	
     	Player p = (Player) cs;
 
-		if (args.length == 1) {
+		if (args.length > 0) {
 			
 			Player p2 = Bukkit.getServer().getPlayer(args[0]);
 			
