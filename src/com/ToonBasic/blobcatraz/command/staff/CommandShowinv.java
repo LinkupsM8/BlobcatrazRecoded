@@ -37,7 +37,7 @@ public class CommandShowinv extends ICommand implements Listener {
 			
 			if (p2 == null) {
 				
-				p.sendMessage("§cThat player does not exist or is not online!");
+				p.sendMessage("\u00a7cThat player does not exist or is not online!");
 				return;
 				
 			}
@@ -61,13 +61,13 @@ public class CommandShowinv extends ICommand implements Listener {
 			
 			Inventory inv = Bukkit.createInventory(null, 9, "Armor of " + p.getName());
 			inv.setItem(0, p2Inv.getHelmet());
-			inv.setItem(1, new Separator("§7◄ §lHelmet", "§8§lChestplate §r§8►"));
+			inv.setItem(1, new Separator("\u00a77\u25c4 \u00a7lHelmet", "\u00a78\u00a7lChestplate \u00a7r\u00a78\u25ba"));
 			inv.setItem(2, p2Inv.getChestplate());
-			inv.setItem(3, new Separator("§7◄ §lChestplate", "§8§lLeggings §r§8►"));
+			inv.setItem(3, new Separator("\u00a77\u25c4 \u00a7lChestplate", "\u00a78\u00a7lLeggings \u00a7r\u00a78\u25ba"));
 			inv.setItem(4, p2Inv.getLeggings());
-			inv.setItem(5, new Separator("§7◄ §lLeggings", "§8§lBoots §r§8►"));
+			inv.setItem(5, new Separator("\u00a77\u25c4 \u00a7lLeggings", "\u00a78\u00a7lBoots \u00a7r\u00a78\u25ba"));
 			inv.setItem(6, p2Inv.getBoots());
-			inv.setItem(7, new Separator("§7◄ §lBoots", "§8§lShield §r§8►"));
+			inv.setItem(7, new Separator("\u00a77\u25c4 \u00a7lBoots", "\u00a78\u00a7lShield \u00a7r\u00a78\u25ba"));
 			inv.setItem(8, p2Inv.getItemInOffHand());
 			
 			p.openInventory(inv);
