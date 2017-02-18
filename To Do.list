@@ -11,9 +11,8 @@ Commands
   - mute
   - pay
   - powertool
-  - sudo
   - sell/buy/worth
 Other:
   - Better world generation to prevent lag made by Multiverse
-  - Chat Control (Disable/Enable, Ping, Emojis)
+  - Chat Control (Disable/Enable, Ping) //EMOJIS ARE DONE//
   - Custom Scoreboard with API
