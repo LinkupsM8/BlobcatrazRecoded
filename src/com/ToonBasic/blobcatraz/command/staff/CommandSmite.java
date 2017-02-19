@@ -22,8 +22,8 @@ public class CommandSmite extends ICommand {
         	String target = args[0];
         	Player t = Bukkit.getPlayer(target);
         	if(t != null) {
-        		World w = p.getWorld();
-        		Location l = p.getLocation();
+        		World w = t.getWorld();
+        		Location l = t.getLocation();
         		w.strikeLightning(l);
         	} else {
         		String error = Util.color(Language.INVALID_TARGET);
