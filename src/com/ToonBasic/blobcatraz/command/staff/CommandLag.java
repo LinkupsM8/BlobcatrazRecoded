@@ -18,7 +18,6 @@ public class CommandLag extends ICommand {
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
-		Player p = (Player) cs;
 		if(args.length == 0) {
 			String[] msg = new String[] {
 				prefix + "Server Information:",
@@ -26,7 +25,7 @@ public class CommandLag extends ICommand {
 				Util.color("&6&lCPU Usage: &e" + ServerUtil.processorUsage() + "%"),
 				Util.color("&6&lRAM Usage: &e" + ServerUtil.memoryUsage() + "MB")
 			};
-			p.sendMessage(msg);
+			cs.sendMessage(msg);
 		} else {
 			String sub = args[0].toLowerCase();
 			if(sub.equals("unloadchunks")) {
@@ -48,7 +47,7 @@ public class CommandLag extends ICommand {
 						}
 					}
 					String msg = Util.color("&7Unloaded &b" + amt + " chunks &7from &3" + w.getName());
-					p.sendMessage(msg);
+					cs.sendMessage(msg);
 				}
 			}
 		}
