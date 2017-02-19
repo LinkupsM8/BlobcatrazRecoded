@@ -55,6 +55,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandAnvil());
         framework.registerCommand(new CommandEnderChest());
         framework.registerCommand(new CommandSudo());
+        framework.registerCommand(new CommandSpy());
     //Player Commands
         framework.registerCommand(new CommandAFK());
         framework.registerCommand(new CommandBalance());
@@ -70,6 +71,7 @@ public class Core extends JavaPlugin {
         pm.registerEvents(new CommandFreeze(), this);
         pm.registerEvents(new CommandVanish(), this);
         pm.registerEvents(new CommandShowinv(), this);
+        pm.registerEvents(new CommandSpy(), this);
     //Player Events
         pm.registerEvents(new CommandAFK(), this);
         pm.registerEvents(new CommandNickname(), this);
