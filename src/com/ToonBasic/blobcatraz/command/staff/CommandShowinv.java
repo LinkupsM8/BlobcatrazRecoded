@@ -31,7 +31,7 @@ public class CommandShowinv extends ICommand implements Listener {
     	
     	Player p = (Player) cs;
 
-		if (args.length > 0) {
+		if (args.length == 1) {
 			
 			Player p2 = Bukkit.getServer().getPlayer(args[0]);
 			
@@ -57,6 +57,14 @@ public class CommandShowinv extends ICommand implements Listener {
 		} else if (args.length > 1 && args[1].equalsIgnoreCase("armor")) {
 
 			Player p2 = Bukkit.getServer().getPlayer(args[0]);
+			
+			if (p2 == null) {
+				
+				p.sendMessage("\u00a7cThat player does not exist or is not online!");
+				return;
+				
+			}
+
 			PlayerInventory p2Inv = p.getInventory();
 			
 			Inventory inv = Bukkit.createInventory(null, 9, "Armor of " + p2.getName());
