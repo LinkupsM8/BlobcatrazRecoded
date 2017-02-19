@@ -48,6 +48,7 @@ public class ConfigDatabase {
         set(config, "nickname", op.getName(), false);
         set(config, "balance", 0.00D, false);
         set(config, "tokens", 0, false);
+        set(config, "spy", false, false);
         save(config, file);
     }
 
@@ -104,5 +105,21 @@ public class ConfigDatabase {
     public static void withdraw(OfflinePlayer op, double amount) {
         double namount = (-1 * amount);
         deposit(op, namount);
+    }
+    
+    public static boolean spy(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+        boolean spy = config.getBoolean("spy");
+        return spy;
+    }
+    
+    public static void toggleSpy(OfflinePlayer op) {
+        YamlConfiguration config = load(op);
+        if (spy(op)) {
+        	set(config, "spy", false, true);
+        } else {
+        	set(config, "spy", true, true);
+        }
+        save(config, file(op));
     }
 }
