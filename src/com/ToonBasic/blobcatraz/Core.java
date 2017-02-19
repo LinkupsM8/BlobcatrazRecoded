@@ -28,6 +28,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandShowinv;
 import com.ToonBasic.blobcatraz.command.staff.CommandSkull;
 import com.ToonBasic.blobcatraz.command.staff.CommandSmite;
 import com.ToonBasic.blobcatraz.command.staff.CommandSpeed;
+import com.ToonBasic.blobcatraz.command.staff.CommandSpy;
 import com.ToonBasic.blobcatraz.command.staff.CommandSudo;
 import com.ToonBasic.blobcatraz.command.staff.CommandTempBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
