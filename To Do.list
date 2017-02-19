@@ -14,5 +14,6 @@ Commands
   - sell/buy/worth
 Other:
   - Better world generation to prevent lag made by Multiverse
-  - Chat Control (Disable/Enable, Ping) //EMOJIS ARE DONE//
+  - Chat Control (Disable/Enable, Ping)
   - Custom Scoreboard with API
+  - Portals (command and teleport)
