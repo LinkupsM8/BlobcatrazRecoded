@@ -59,7 +59,7 @@ public class CommandShowinv extends ICommand implements Listener {
 			Player p2 = Bukkit.getServer().getPlayer(args[0]);
 			PlayerInventory p2Inv = p.getInventory();
 			
-			Inventory inv = Bukkit.createInventory(null, 9, "Armor of " + p.getName());
+			Inventory inv = Bukkit.createInventory(null, 9, "Armor of " + p2.getName());
 			inv.setItem(0, p2Inv.getHelmet());
 			inv.setItem(1, new Separator("\u00a77\u25c4 \u00a7lHelmet", "\u00a78\u00a7lChestplate \u00a7r\u00a78\u25ba"));
 			inv.setItem(2, p2Inv.getChestplate());
