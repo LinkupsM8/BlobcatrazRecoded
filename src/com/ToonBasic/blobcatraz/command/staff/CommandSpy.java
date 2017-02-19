@@ -34,7 +34,7 @@ public class CommandSpy extends ICommand implements Listener {
 	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
 		
 		Player sender = e.getPlayer();
-		for (Player p : Bukkit.getServer().getOnlinePlayers()) if (!p.equals(sender)) p.sendMessage("\u00a7a<" + sender.getName() + "> /" + e.getMessage());
+		for (Player p : Bukkit.getServer().getOnlinePlayers()) if (!p.equals(sender)) p.sendMessage("\u00a7a<" + sender.getName() + "> " + e.getMessage());
 		
 	}
 }
