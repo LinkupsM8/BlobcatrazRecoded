@@ -1,12 +1,13 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 
-@ICommand.PlayerOnly
+import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+
+@PlayerOnly
 public class CommandTPAll extends ICommand {
     public CommandTPAll() {
         super("tpall", "", "blobcatraz.staff.tpall", "bringserver");
@@ -15,11 +16,11 @@ public class CommandTPAll extends ICommand {
     public void handleCommand(CommandSender cs, String[] args) {
         Player p = (Player) cs;
         p.sendMessage(prefix + "You have teleported the entire server to yourself.");
-        for(Player getOnline : Bukkit.getOnlinePlayers()) {
-            if(getOnline != p) {
-                if(getOnline.getLocation().getWorld() == p.getLocation().getWorld()) {
-                    getOnline.teleport(p);
-                    getOnline.sendMessage(prefix + "You have been summoned by the gods!");
+        for(Player on : Bukkit.getOnlinePlayers()) {
+            if(on != p) {
+                if(on.getWorld() == p.getWorld()) {
+                    on.teleport(p);
+                    on.sendMessage(prefix + "You have been summoned by the gods!");
                 }
             }
         }
