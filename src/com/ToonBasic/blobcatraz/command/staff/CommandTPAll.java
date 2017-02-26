@@ -14,10 +14,12 @@ public class CommandTPAll extends ICommand {
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
         Player p = (Player) cs;
+        p.sendMessage(prefix + "You have teleported the entire server to yourself.");
         for(Player getOnline : Bukkit.getOnlinePlayers()) {
             if(getOnline != p) {
                 if(getOnline.getLocation().getWorld() == p.getLocation().getWorld()) {
                     getOnline.teleport(p);
+                    getOnline.sendMessage(prefix + "You have been summoned by the gods!");
                 }
             }
         }
