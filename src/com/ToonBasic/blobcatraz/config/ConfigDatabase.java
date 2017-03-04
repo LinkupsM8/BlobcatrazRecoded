@@ -1,13 +1,15 @@
 package com.ToonBasic.blobcatraz.config;
 
-import com.ToonBasic.blobcatraz.Core;
-import com.ToonBasic.blobcatraz.utility.Util;
+import java.io.File;
+import java.util.Map;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
-import java.util.UUID;
+import com.ToonBasic.blobcatraz.Core;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 public class ConfigDatabase {
     private static final File folder = new File(Core.folder, "users");
@@ -94,6 +96,16 @@ public class ConfigDatabase {
         YamlConfiguration config = load(op);
         set(config, "balance", amount, true);
         save(config, file(op));
+    }
+    
+    public static Map<String, Double> balances() {
+    	Map<String, Double> map = Util.newMap();
+    	for(OfflinePlayer off : Bukkit.getOfflinePlayers()) {
+    		String nam = off.getName();
+    		double bal = balance(off);
+    		map.put(nam, bal);
+    	}
+    	return map;
     }
 
     public static void deposit(OfflinePlayer op, double amount) {

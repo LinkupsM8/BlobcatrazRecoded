@@ -10,9 +10,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.ToonBasic.blobcatraz.command.CommandFramework;
 import com.ToonBasic.blobcatraz.command.player.CommandAFK;
 import com.ToonBasic.blobcatraz.command.player.CommandBalance;
+import com.ToonBasic.blobcatraz.command.player.CommandBaltop;
 import com.ToonBasic.blobcatraz.command.player.CommandEmojis;
 import com.ToonBasic.blobcatraz.command.player.CommandHub;
 import com.ToonBasic.blobcatraz.command.player.CommandNickname;
+import com.ToonBasic.blobcatraz.command.player.CommandPay;
 import com.ToonBasic.blobcatraz.command.player.CommandRename;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
@@ -87,9 +89,11 @@ public class Core extends JavaPlugin {
     //Player Commands
         framework.registerCommand(new CommandAFK());
         framework.registerCommand(new CommandBalance());
+        framework.registerCommand(new CommandBaltop());
         framework.registerCommand(new CommandEmojis());
         framework.registerCommand(new CommandHub());
         framework.registerCommand(new CommandNickname());
+        framework.registerCommand(new CommandPay());
         framework.registerCommand(new CommandRename());
     //Register All    
         framework.registerCommands();

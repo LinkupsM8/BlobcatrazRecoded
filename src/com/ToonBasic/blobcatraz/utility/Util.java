@@ -2,8 +2,11 @@ package com.ToonBasic.blobcatraz.utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -29,6 +32,17 @@ public class Util {
 		List<T> list = new ArrayList<T>();
 		if(ts.length > 0) {for(T t : ts) list.add(t);}
 		return list;
+	}
+	
+	public static <T> List<T> newList(Collection<T> co) {
+		List<T> list = newList();
+		for(T t : co) list.add(t);
+		return list;
+	}
+	
+	public static <K, V> Map<K, V> newMap() {
+		Map<K, V> map = new HashMap<K, V>();
+		return map;
 	}
 
     public static String finalArgs(int start, String... args) {
