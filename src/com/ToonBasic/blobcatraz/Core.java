@@ -12,6 +12,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandAFK;
 import com.ToonBasic.blobcatraz.command.player.CommandBalance;
 import com.ToonBasic.blobcatraz.command.player.CommandBaltop;
 import com.ToonBasic.blobcatraz.command.player.CommandEmojis;
+import com.ToonBasic.blobcatraz.command.player.CommandHelp;
 import com.ToonBasic.blobcatraz.command.player.CommandHub;
 import com.ToonBasic.blobcatraz.command.player.CommandNickname;
 import com.ToonBasic.blobcatraz.command.player.CommandPay;
@@ -19,6 +20,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandRename;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandClearInventory;
+import com.ToonBasic.blobcatraz.command.staff.CommandEco;
 import com.ToonBasic.blobcatraz.command.staff.CommandEnderChest;
 import com.ToonBasic.blobcatraz.command.staff.CommandFly;
 import com.ToonBasic.blobcatraz.command.staff.CommandFreeze;
@@ -39,6 +41,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandTPAll;
 import com.ToonBasic.blobcatraz.command.staff.CommandTempBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
 import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
+import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenSonic;
 
 public class Core extends JavaPlugin {
@@ -63,34 +66,36 @@ public class Core extends JavaPlugin {
     
     public void commands() {
     //Staff Commands
+        framework.registerCommand(new CommandAnvil());
         framework.registerCommand(new CommandBan());
+        framework.registerCommand(new CommandClearInventory());
+        framework.registerCommand(new CommandEco());
+        framework.registerCommand(new CommandEnderChest());
         framework.registerCommand(new CommandFly());
         framework.registerCommand(new CommandFreeze());
         framework.registerCommand(new CommandGamemode());
         framework.registerCommand(new CommandHeal());
         framework.registerCommand(new CommandItem());
         framework.registerCommand(new CommandLag());
-        framework.registerCommand(new CommandTempBan());
-        framework.registerCommand(new CommandVanish());
         framework.registerCommand(new CommandMobSpawn());
+        framework.registerCommand(new CommandRepair());
         framework.registerCommand(new CommandShowinv());
         framework.registerCommand(new CommandSkull());
-        framework.registerCommand(new CommandRepair());
         framework.registerCommand(new CommandSpeed());
-        framework.registerCommand(new CommandClearInventory());
         framework.registerCommand(new CommandSmite());
-        framework.registerCommand(new CommandWorkbench());
-        framework.registerCommand(new CommandAnvil());
-        framework.registerCommand(new CommandEnderChest());
         framework.registerCommand(new CommandSonic());
         framework.registerCommand(new CommandSpy());
         framework.registerCommand(new CommandSudo());
+        framework.registerCommand(new CommandTempBan());
 		framework.registerCommand(new CommandTPAll());
+        framework.registerCommand(new CommandVanish());
+        framework.registerCommand(new CommandWorkbench());
     //Player Commands
         framework.registerCommand(new CommandAFK());
         framework.registerCommand(new CommandBalance());
         framework.registerCommand(new CommandBaltop());
         framework.registerCommand(new CommandEmojis());
+        framework.registerCommand(new CommandHelp());
         framework.registerCommand(new CommandHub());
         framework.registerCommand(new CommandNickname());
         framework.registerCommand(new CommandPay());
@@ -106,6 +111,7 @@ public class Core extends JavaPlugin {
         pm.registerEvents(new CommandVanish(), this);
         pm.registerEvents(new CommandShowinv(), this);
         pm.registerEvents(new ListenSonic(), this);
+        pm.registerEvents(new ListenAntiVoid(), this);
         pm.registerEvents(new CommandSpy(), this);
     //Player Events
         pm.registerEvents(new CommandAFK(), this);

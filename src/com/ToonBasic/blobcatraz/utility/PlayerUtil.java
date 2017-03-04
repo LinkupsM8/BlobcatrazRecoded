@@ -36,4 +36,11 @@ public class PlayerUtil extends Util {
 		Location l = b.getLocation();
 		return l;
 	}
+	
+	public static String possesive(Player p) {
+		String name = p.getName();
+		boolean s = name.toLowerCase().endsWith("s");
+		String poss = s ? name + "'" : name + "'s";
+		return poss;
+	}
 }

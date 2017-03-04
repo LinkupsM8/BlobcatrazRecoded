@@ -1,6 +1,6 @@
 package com.ToonBasic.blobcatraz.utility;
 
-import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,6 +19,13 @@ public class Util {
     public static String prefix = color("&3{&bBlobcatraz&3} &f");
 
     public static String color(String msg) {return ChatColor.translateAlternateColorCodes('&', msg);}
+    public static String[] color(String[] msg) {
+    	List<String> list = newList();
+    	for(String s : msg) {
+    		list.add(color(s));
+    	}
+    	return list.toArray(new String[0]);
+    }
     public static String strip(String msg) {return ChatColor.stripColor(msg);}
 
     public static void print(Object o) {
@@ -71,9 +78,8 @@ public class Util {
     }
     
     public static String money(double amount) {
-    	DecimalFormat df = new DecimalFormat("#.##");
-    	df.setDecimalSeparatorAlwaysShown(true);
-    	String money = "$" + df.format(amount);
+    	NumberFormat nf = NumberFormat.getCurrencyInstance();
+    	String money = nf.format(amount);
     	return money;
     }
 

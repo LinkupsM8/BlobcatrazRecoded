@@ -16,6 +16,10 @@ public class CommandHub extends ICommand {
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
 		Player p = (Player) cs;
+		hub(p);
+	}
+	
+	public static void hub(Player p) {
 		World w = Bukkit.getWorld("Hub");
 		double x = 66.50D;
 		double y = 105.0D;
