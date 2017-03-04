@@ -17,6 +17,14 @@ public class PlayerUtil extends Util {
 		p.playSound(l, s, v, pi);
 	}
 	
+	public static void sonic(Player p) {
+		Location l = p.getLocation();
+		String s = "tool.sonic.screwdriver";
+		float v = 100.0F;
+		float pi = 1.0F;
+		p.playSound(l, s, v, pi);
+	}
+	
 	public static Block lookBlock(Player p) {
 		Set<Material> set = null;
 		Block b = p.getTargetBlock(set, 200);

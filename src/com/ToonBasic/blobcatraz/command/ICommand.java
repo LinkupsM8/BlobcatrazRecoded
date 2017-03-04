@@ -134,7 +134,7 @@ public abstract class ICommand implements CommandExecutor {
     public static class Language {
         public static String NO_PERMISSION = "&cYou're not allowed to use this command!";
         public static String PLAYER_ONLY = "Only players can execute this command";
-        public static String INVALID_TARGET = "&cInvalid Target!";
+        public static String INVALID_TARGET = "&cInvalid Target";
         public static String INCORRECT_USAGE = "&cIncorrect usage!";
         public static String COMMAND_DISABLED = "&cThis command is disabled";
     }
