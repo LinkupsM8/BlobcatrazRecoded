@@ -47,6 +47,7 @@ public class ConfigDatabase {
         File file = new File(folder, uuid + ".yml");
 
         set(config, "username", op.getName(), false);
+        set(config, "prefix", "&a[&bMember&a] &f", false);
         set(config, "nickname", op.getName(), false);
         set(config, "balance", 0.00D, false);
         set(config, "tokens", 0, false);
@@ -79,6 +80,20 @@ public class ConfigDatabase {
     	set(config, "nickname", nick, true);
     	save(config, file(op));
     }
+    
+    public static String prefix(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	String prefix = config.getString("prefix");
+    	prefix = Util.color(prefix);
+    	return prefix;
+    }
+    
+    public static void prefix(OfflinePlayer op, String prefix) {
+    	YamlConfiguration config = load(op);
+    	set(config, "prefix", prefix, true);
+    	save(config, file(op));
+    }
+    
 
     public static int tokens(OfflinePlayer op) {
         YamlConfiguration config = load(op);

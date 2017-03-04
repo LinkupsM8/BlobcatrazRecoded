@@ -3,8 +3,6 @@ package com.ToonBasic.blobcatraz;
 import java.io.File;
 import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ToonBasic.blobcatraz.command.CommandFramework;
@@ -16,6 +14,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandHelp;
 import com.ToonBasic.blobcatraz.command.player.CommandHub;
 import com.ToonBasic.blobcatraz.command.player.CommandNickname;
 import com.ToonBasic.blobcatraz.command.player.CommandPay;
+import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
 import com.ToonBasic.blobcatraz.command.player.CommandRename;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
@@ -42,7 +41,9 @@ import com.ToonBasic.blobcatraz.command.staff.CommandTempBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
 import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
+import com.ToonBasic.blobcatraz.listener.ListenChat;
 import com.ToonBasic.blobcatraz.listener.ListenSonic;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 public class Core extends JavaPlugin {
     public static Core instance;
@@ -99,23 +100,27 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandHub());
         framework.registerCommand(new CommandNickname());
         framework.registerCommand(new CommandPay());
+        framework.registerCommand(new CommandPrefix());
         framework.registerCommand(new CommandRename());
     //Register All    
         framework.registerCommands();
     }
     
     public void events() {
-        PluginManager pm = Bukkit.getPluginManager();
-    //Staff Events
-        pm.registerEvents(new CommandFreeze(), this);
-        pm.registerEvents(new CommandVanish(), this);
-        pm.registerEvents(new CommandShowinv(), this);
-        pm.registerEvents(new ListenSonic(), this);
-        pm.registerEvents(new ListenAntiVoid(), this);
-        pm.registerEvents(new CommandSpy(), this);
-    //Player Events
-        pm.registerEvents(new CommandAFK(), this);
-        pm.registerEvents(new CommandNickname(), this);
-        pm.registerEvents(new CommandEmojis(), this);
+    	Util.regEvents(
+    		//Command Events
+    		new CommandFreeze(),
+    		new CommandVanish(),
+    		new CommandShowinv(),
+    		new CommandSpy(),
+    		new CommandAFK(),
+    		new CommandNickname(),
+    		new CommandEmojis(),
+    		
+    		//Listener Events
+    		new ListenChat(),
+    		new ListenSonic(),
+    		new ListenAntiVoid()
+    	);
     }
 }
