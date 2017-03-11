@@ -19,7 +19,8 @@ import com.ToonBasic.blobcatraz.command.player.CommandRename;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandClearInventory;
-import com.ToonBasic.blobcatraz.command.staff.CommandEco;
+import com.ToonBasic.blobcatraz.command.staff.CommandEconomy;
+import com.ToonBasic.blobcatraz.command.staff.CommandEnchant;
 import com.ToonBasic.blobcatraz.command.staff.CommandEnderChest;
 import com.ToonBasic.blobcatraz.command.staff.CommandFly;
 import com.ToonBasic.blobcatraz.command.staff.CommandFreeze;
@@ -29,6 +30,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandItem;
 import com.ToonBasic.blobcatraz.command.staff.CommandLag;
 import com.ToonBasic.blobcatraz.command.staff.CommandMobSpawn;
 import com.ToonBasic.blobcatraz.command.staff.CommandRepair;
+import com.ToonBasic.blobcatraz.command.staff.CommandSetMOTD;
 import com.ToonBasic.blobcatraz.command.staff.CommandShowinv;
 import com.ToonBasic.blobcatraz.command.staff.CommandSkull;
 import com.ToonBasic.blobcatraz.command.staff.CommandSmite;
@@ -42,6 +44,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
 import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
+import com.ToonBasic.blobcatraz.listener.ListenSignColor;
 import com.ToonBasic.blobcatraz.listener.ListenSonic;
 import com.ToonBasic.blobcatraz.utility.Util;
 
@@ -70,7 +73,8 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandAnvil());
         framework.registerCommand(new CommandBan());
         framework.registerCommand(new CommandClearInventory());
-        framework.registerCommand(new CommandEco());
+        framework.registerCommand(new CommandEconomy());
+        framework.registerCommand(new CommandEnchant());
         framework.registerCommand(new CommandEnderChest());
         framework.registerCommand(new CommandFly());
         framework.registerCommand(new CommandFreeze());
@@ -80,6 +84,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandLag());
         framework.registerCommand(new CommandMobSpawn());
         framework.registerCommand(new CommandRepair());
+        framework.registerCommand(new CommandSetMOTD());
         framework.registerCommand(new CommandShowinv());
         framework.registerCommand(new CommandSkull());
         framework.registerCommand(new CommandSpeed());
@@ -111,6 +116,7 @@ public class Core extends JavaPlugin {
     		//Command Events
     		new CommandFreeze(),
     		new CommandVanish(),
+    		new CommandSetMOTD(),
     		new CommandShowinv(),
     		new CommandSpy(),
     		new CommandAFK(),
@@ -119,6 +125,7 @@ public class Core extends JavaPlugin {
     		
     		//Listener Events
     		new ListenChat(),
+    		new ListenSignColor(),
     		new ListenSonic(),
     		new ListenAntiVoid()
     	);

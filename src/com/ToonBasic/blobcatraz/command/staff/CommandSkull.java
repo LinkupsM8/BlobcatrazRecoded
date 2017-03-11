@@ -25,7 +25,7 @@ public class CommandSkull extends ICommand {
 			ItemStack is = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 			ItemMeta meta = is.getItemMeta();
 			SkullMeta skull = (SkullMeta) meta;
-			String display = Util.color("&r" + PlayerUtil.possesive(p) + " Head");
+			String display = Util.color("&r" + PlayerUtil.possesive(name) + " Head");
 			skull.setDisplayName(display);
 			skull.setOwner(name);
 			is.setItemMeta(skull);

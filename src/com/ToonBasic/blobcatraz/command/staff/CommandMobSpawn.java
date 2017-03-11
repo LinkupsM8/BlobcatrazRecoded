@@ -1,17 +1,14 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import java.util.Set;
-
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
@@ -29,19 +26,20 @@ public class CommandMobSpawn extends ICommand {
         		catch(Exception ex) {}
         	}
         	Player p = (Player) cs;
-        	Set<Material> air = null;
-        	Block look = p.getTargetBlock(air, 100);
-        	Location loc = look.getLocation();
-        	loc.setY(loc.getY() + 1.5);
-        	String mob = args[0].toUpperCase();
-    		if(amount > 1000) amount = 1000;
-        	if(spawn(loc, mob, amount)) {
-        		String msg = Util.color(prefix + "&ESpawned &4" + amount+ " &eof " + mob);
-        		p.sendMessage(msg);
-        	} else {
-        		String msg = Util.color(prefix + "&cInvalid Entity!");
-        		p.sendMessage(msg);
-        	}
+        	Location look = PlayerUtil.lookLocation(p);
+        	look.setY(look.getY() + 1.5);
+        	String ent = args[0].toUpperCase();
+    		if(amount > 50) amount = 50;
+    		String[] mobs = ent.split(",");
+    		for(String mob : mobs) {
+            	if(spawn(look, mob, amount)) {
+            		String msg = Util.color(prefix + "&ESpawned &4" + amount+ " &eof " + mob);
+            		p.sendMessage(msg);
+            	} else {
+            		String msg = Util.color(prefix + "&cInvalid Entity: " + mob);
+            		p.sendMessage(msg);
+            	}
+    		}
         }
     }
     

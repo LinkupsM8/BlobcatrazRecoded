@@ -9,8 +9,8 @@ import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
-public class CommandEco extends ICommand {
-	public CommandEco() {super("eco", "<give/take/reset/set> <player> [amount]", "blobcatraz.staff.economy", "economy");}
+public class CommandEconomy extends ICommand {
+	public CommandEconomy() {super("eco", "<give/take/reset/set> <player> [amount]", "blobcatraz.staff.economy", "economy");}
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
@@ -39,7 +39,7 @@ public class CommandEco extends ICommand {
 							t.sendMessage("You lost " + Util.money(amount));
 						} else if(sub.equals("set")) {
 							ConfigDatabase.setBalance(t, amount);
-							cs.sendMessage("You set " + PlayerUtil.possesive(t) + " balance to " + Util.money(amount));
+							cs.sendMessage("You set " + PlayerUtil.possesive(tname) + " balance to " + Util.money(amount));
 							t.sendMessage("Your balance was set to " + Util.money(amount));
 						} else {
 							String error = Language.INCORRECT_USAGE;
