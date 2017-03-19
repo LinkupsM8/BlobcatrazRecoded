@@ -84,7 +84,9 @@ public class ListenSonic implements Listener {
 						b.breakNaturally();
 					} else if(glassList.contains(mat)) {
 						ItemStack glass = new ItemStack(mat, 1);
-						glass.setDurability(md.getData());
+						@SuppressWarnings("deprecation")
+						byte data = md.getData();
+						glass.setDurability(data);
 						b.breakNaturally();
 						p.getInventory().addItem(glass);
 					}

@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ToonBasic.blobcatraz.command.CommandFramework;
 import com.ToonBasic.blobcatraz.command.player.CommandAFK;
+import com.ToonBasic.blobcatraz.command.player.CommandBack;
 import com.ToonBasic.blobcatraz.command.player.CommandBalance;
 import com.ToonBasic.blobcatraz.command.player.CommandBaltop;
 import com.ToonBasic.blobcatraz.command.player.CommandEmojis;
@@ -16,12 +17,16 @@ import com.ToonBasic.blobcatraz.command.player.CommandNickname;
 import com.ToonBasic.blobcatraz.command.player.CommandPay;
 import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
 import com.ToonBasic.blobcatraz.command.player.CommandRename;
+import com.ToonBasic.blobcatraz.command.player.CommandWarp;
+import com.ToonBasic.blobcatraz.command.special.CommandNuke;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandClearInventory;
+import com.ToonBasic.blobcatraz.command.staff.CommandDelWarp;
 import com.ToonBasic.blobcatraz.command.staff.CommandEconomy;
 import com.ToonBasic.blobcatraz.command.staff.CommandEnchant;
 import com.ToonBasic.blobcatraz.command.staff.CommandEnderChest;
+import com.ToonBasic.blobcatraz.command.staff.CommandFireball;
 import com.ToonBasic.blobcatraz.command.staff.CommandFly;
 import com.ToonBasic.blobcatraz.command.staff.CommandFreeze;
 import com.ToonBasic.blobcatraz.command.staff.CommandGamemode;
@@ -31,6 +36,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandLag;
 import com.ToonBasic.blobcatraz.command.staff.CommandMobSpawn;
 import com.ToonBasic.blobcatraz.command.staff.CommandRepair;
 import com.ToonBasic.blobcatraz.command.staff.CommandSetMOTD;
+import com.ToonBasic.blobcatraz.command.staff.CommandSetWarp;
 import com.ToonBasic.blobcatraz.command.staff.CommandShowinv;
 import com.ToonBasic.blobcatraz.command.staff.CommandSkull;
 import com.ToonBasic.blobcatraz.command.staff.CommandSmite;
@@ -73,9 +79,11 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandAnvil());
         framework.registerCommand(new CommandBan());
         framework.registerCommand(new CommandClearInventory());
+        framework.registerCommand(new CommandDelWarp());
         framework.registerCommand(new CommandEconomy());
         framework.registerCommand(new CommandEnchant());
         framework.registerCommand(new CommandEnderChest());
+        framework.registerCommand(new CommandFireball());
         framework.registerCommand(new CommandFly());
         framework.registerCommand(new CommandFreeze());
         framework.registerCommand(new CommandGamemode());
@@ -85,6 +93,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandMobSpawn());
         framework.registerCommand(new CommandRepair());
         framework.registerCommand(new CommandSetMOTD());
+        framework.registerCommand(new CommandSetWarp());
         framework.registerCommand(new CommandShowinv());
         framework.registerCommand(new CommandSkull());
         framework.registerCommand(new CommandSpeed());
@@ -98,6 +107,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandWorkbench());
     //Player Commands
         framework.registerCommand(new CommandAFK());
+        framework.registerCommand(new CommandBack());
         framework.registerCommand(new CommandBalance());
         framework.registerCommand(new CommandBaltop());
         framework.registerCommand(new CommandEmojis());
@@ -107,6 +117,9 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandPay());
         framework.registerCommand(new CommandPrefix());
         framework.registerCommand(new CommandRename());
+        framework.registerCommand(new CommandWarp());
+    //Special Commands
+        framework.registerCommand(new CommandNuke());
     //Register All    
         framework.registerCommands();
     }
@@ -114,6 +127,7 @@ public class Core extends JavaPlugin {
     public void events() {
     	Util.regEvents(
     		//Command Events
+    		new CommandBack(),
     		new CommandFreeze(),
     		new CommandVanish(),
     		new CommandSetMOTD(),
