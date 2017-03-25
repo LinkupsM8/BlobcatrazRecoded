@@ -10,6 +10,11 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
+import java.util.UUID;
+
+import static com.ToonBasic.blobcatraz.command.staff.CommandChat.chatMuted;
+import static com.ToonBasic.blobcatraz.utility.Util.prefix;
+
 public class ListenChat implements Listener {
 	@EventHandler(priority=EventPriority.HIGH)
 	public void chat(AsyncPlayerChatEvent e) {
@@ -39,5 +44,19 @@ public class ListenChat implements Listener {
 				}
 			}
 		}
+	}
+
+	@EventHandler
+	public void onPlayerChat(AsyncPlayerChatEvent e) {
+		Player p = e.getPlayer();
+		UUID uuid = p.getUniqueId();
+		if(chatMuted.contains(uuid)) {
+            if (!p.hasPermission("chat.bypass")) {
+                e.setCancelled(false);
+            } else {
+                e.setCancelled(true);
+                p.sendMessage(prefix + "The chat is currently muted!");
+            }
+        }
 	}
 }

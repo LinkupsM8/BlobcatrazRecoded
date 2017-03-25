@@ -23,17 +23,17 @@ public class CommandMute extends ICommand implements Listener {
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
-        if(args.length == 0) {
+        if(args.length > 0) {
             Player t = Bukkit.getPlayer(args[0]);
             UUID uuid = t.getUniqueId();
             if(muted.contains(uuid)) {
                 muted.remove(uuid);
-                t.sendMessage(prefix + "You are no longer muted!");
-                cs.sendMessage(prefix + "You have unmuted &c" + t.getName());
+                t.sendMessage(Util.color(prefix + "You are no longer muted!"));
+                cs.sendMessage(Util.color(prefix + "You have unmuted c" + t.getName()));
             } else {
                 muted.add(uuid);
-                t.sendMessage(prefix + "You have been muted!");
-                cs.sendMessage(prefix + "You have muted &c" + t.getName());
+                t.sendMessage(Util.color(prefix + "You have been muted!"));
+                cs.sendMessage(Util.color(prefix + "You have muted &c" + t.getName()));
             }
         }
     }
