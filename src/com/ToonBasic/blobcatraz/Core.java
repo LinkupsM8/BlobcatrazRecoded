@@ -3,7 +3,8 @@ package com.ToonBasic.blobcatraz;
 import java.io.File;
 import java.util.logging.Logger;
 
-import com.ToonBasic.blobcatraz.command.staff.*;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ToonBasic.blobcatraz.command.CommandFramework;
@@ -20,11 +21,46 @@ import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
 import com.ToonBasic.blobcatraz.command.player.CommandRename;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
 import com.ToonBasic.blobcatraz.command.special.CommandNuke;
+import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
+import com.ToonBasic.blobcatraz.command.staff.CommandBan;
+import com.ToonBasic.blobcatraz.command.staff.CommandClearInventory;
+import com.ToonBasic.blobcatraz.command.staff.CommandDelWarp;
+import com.ToonBasic.blobcatraz.command.staff.CommandEconomy;
+import com.ToonBasic.blobcatraz.command.staff.CommandEnchant;
+import com.ToonBasic.blobcatraz.command.staff.CommandEnderChest;
+import com.ToonBasic.blobcatraz.command.staff.CommandFireball;
+import com.ToonBasic.blobcatraz.command.staff.CommandFly;
+import com.ToonBasic.blobcatraz.command.staff.CommandFreeze;
+import com.ToonBasic.blobcatraz.command.staff.CommandGamemode;
+import com.ToonBasic.blobcatraz.command.staff.CommandGod;
+import com.ToonBasic.blobcatraz.command.staff.CommandHeal;
+import com.ToonBasic.blobcatraz.command.staff.CommandItem;
+import com.ToonBasic.blobcatraz.command.staff.CommandLag;
+import com.ToonBasic.blobcatraz.command.staff.CommandMobSpawn;
+import com.ToonBasic.blobcatraz.command.staff.CommandMute;
+import com.ToonBasic.blobcatraz.command.staff.CommandRepair;
+import com.ToonBasic.blobcatraz.command.staff.CommandSetMOTD;
+import com.ToonBasic.blobcatraz.command.staff.CommandSetWarp;
+import com.ToonBasic.blobcatraz.command.staff.CommandShowinv;
+import com.ToonBasic.blobcatraz.command.staff.CommandSkull;
+import com.ToonBasic.blobcatraz.command.staff.CommandSmite;
+import com.ToonBasic.blobcatraz.command.staff.CommandSonic;
+import com.ToonBasic.blobcatraz.command.staff.CommandSpeed;
+import com.ToonBasic.blobcatraz.command.staff.CommandSpy;
+import com.ToonBasic.blobcatraz.command.staff.CommandSudo;
+import com.ToonBasic.blobcatraz.command.staff.CommandTPAll;
+import com.ToonBasic.blobcatraz.command.staff.CommandTempBan;
+import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
+import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
+import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
 import com.ToonBasic.blobcatraz.listener.ListenSignColor;
 import com.ToonBasic.blobcatraz.listener.ListenSonic;
 import com.ToonBasic.blobcatraz.utility.Util;
+
+import net.milkbowl.vault.Vault;
+import net.milkbowl.vault.economy.Economy;
 
 public class Core extends JavaPlugin {
     public static Core instance;
@@ -41,6 +77,12 @@ public class Core extends JavaPlugin {
         LOG.info("Now registering Blobcatraz...");
         commands();
         events();
+        if(Bukkit.getPluginManager().isPluginEnabled("Vault")) {
+        	BEconomy be = new BEconomy();
+        	Vault V = Vault.getPlugin(Vault.class);
+        	ServicePriority SP = ServicePriority.Highest;
+        	Bukkit.getServicesManager().register(Economy.class, be, V, SP);
+        }
     }
     public void onDisable() {
         LOG.info("Now disabling Blobcatraz...");

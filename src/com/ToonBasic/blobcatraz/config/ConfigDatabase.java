@@ -100,7 +100,12 @@ public class ConfigDatabase {
         int votes = config.getInt("tokens");
         return votes;
     }
-
+    
+    public static boolean hasAccount(OfflinePlayer op) {
+    	File file = file(op);
+    	return file.exists();
+    }
+    
     public static double balance(OfflinePlayer op) {
         YamlConfiguration config = load(op);
         double balance = config.getDouble("balance");
