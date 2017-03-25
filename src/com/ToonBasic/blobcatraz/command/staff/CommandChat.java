@@ -1,13 +1,10 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.utility.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-import java.util.List;
-import java.util.UUID;
+import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 public class CommandChat extends ICommand {
     public static boolean isChatMuted = false;

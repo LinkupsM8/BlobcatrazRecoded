@@ -1,5 +1,8 @@
 package com.ToonBasic.blobcatraz.listener;
 
+import static com.ToonBasic.blobcatraz.command.staff.CommandChat.isChatMuted;
+import static com.ToonBasic.blobcatraz.utility.Util.prefix;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,11 +12,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
-
-import java.util.UUID;
-
-import static com.ToonBasic.blobcatraz.command.staff.CommandChat.isChatMuted;
-import static com.ToonBasic.blobcatraz.utility.Util.prefix;
 
 public class ListenChat implements Listener {
 	@EventHandler(priority=EventPriority.HIGH)
@@ -49,7 +47,6 @@ public class ListenChat implements Listener {
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
 		Player p = e.getPlayer();
-		UUID uuid = p.getUniqueId();
 		if(isChatMuted) {
             if (!p.hasPermission("chat.bypass")) {
                 e.setCancelled(false);

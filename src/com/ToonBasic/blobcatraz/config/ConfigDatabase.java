@@ -1,6 +1,7 @@
 package com.ToonBasic.blobcatraz.config;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -48,6 +49,8 @@ public class ConfigDatabase {
 
         set(config, "username", op.getName(), false);
         set(config, "prefix", "&a[&bMember&a] &f", false);
+        set(config, "last ip", "localhost", false);
+        set(config, "last seen", System.currentTimeMillis(), false);
         set(config, "nickname", op.getName(), false);
         set(config, "balance", 0.00D, false);
         set(config, "tokens", 0, false);
@@ -93,7 +96,6 @@ public class ConfigDatabase {
     	set(config, "prefix", prefix, true);
     	save(config, file(op));
     }
-    
 
     public static int tokens(OfflinePlayer op) {
         YamlConfiguration config = load(op);
@@ -153,5 +155,30 @@ public class ConfigDatabase {
         	set(config, "spy", true, true);
         }
         save(config, file(op));
+    }
+    
+    public static Date lastSeen(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	long time = config.getLong("last seen");
+    	Date date = new Date(time);
+    	return date;
+    }
+    
+    public static void setLastSeen(OfflinePlayer op, long time) {
+    	YamlConfiguration config = load(op);
+    	set(config, "last seen", time, true);
+    	save(config, file(op));
+    }
+    
+    public static String lastIP(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	String ip = config.getString("last ip");
+    	return ip;
+    }
+    
+    public static void setIP(OfflinePlayer op, String ip) {
+    	YamlConfiguration config = load(op);
+    	set(config, "last ip", ip, true);
+    	save(config, file(op));
     }
 }

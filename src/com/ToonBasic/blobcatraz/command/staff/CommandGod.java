@@ -1,16 +1,16 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.utility.Util;
-import org.bukkit.Bukkit;
+import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-import java.util.List;
-import java.util.UUID;
+import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 @ICommand.PlayerOnly
 public class CommandGod extends ICommand implements Listener {
