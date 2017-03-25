@@ -1,23 +1,49 @@
 package com.ToonBasic.blobcatraz.utility;
 
-import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
+
+import com.ToonBasic.blobcatraz.Core;
 
 public class Util {
+	private static final Server SERVER = Bukkit.getServer();
+	private static final PluginManager PM = SERVER.getPluginManager();
+	private static final Core PLUGIN = Core.instance;
+	
     public static String prefix = color("&3{&bBlobcatraz&3} &f");
 
     public static String color(String msg) {return ChatColor.translateAlternateColorCodes('&', msg);}
+    public static String[] color(String[] msg) {
+    	List<String> list = newList();
+    	for(String s : msg) {
+    		list.add(color(s));
+    	}
+    	return list.toArray(new String[0]);
+    }
+    
     public static String strip(String msg) {return ChatColor.stripColor(msg);}
 
+    public static void regEvents(Listener... ls) {
+    	for(Listener l : ls) {
+    		if(l != null) PM.registerEvents(l, PLUGIN);
+    	}
+    }
+    
     public static void print(Object o) {
         String msg = o.toString();
         Logger log = Bukkit.getLogger();
@@ -29,6 +55,17 @@ public class Util {
 		List<T> list = new ArrayList<T>();
 		if(ts.length > 0) {for(T t : ts) list.add(t);}
 		return list;
+	}
+	
+	public static <T> List<T> newList(Collection<T> co) {
+		List<T> list = newList();
+		for(T t : co) list.add(t);
+		return list;
+	}
+	
+	public static <K, V> Map<K, V> newMap() {
+		Map<K, V> map = new HashMap<K, V>();
+		return map;
 	}
 
     public static String finalArgs(int start, String... args) {
@@ -57,9 +94,8 @@ public class Util {
     }
     
     public static String money(double amount) {
-    	DecimalFormat df = new DecimalFormat("#.##");
-    	df.setDecimalSeparatorAlwaysShown(true);
-    	String money = "$" + df.format(amount);
+    	NumberFormat nf = NumberFormat.getCurrencyInstance();
+    	String money = nf.format(amount);
     	return money;
     }
 

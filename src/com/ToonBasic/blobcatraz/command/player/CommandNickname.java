@@ -19,14 +19,16 @@ public class CommandNickname extends ICommand implements Listener {
 		String name = Util.finalArgs(0, args);
 		String nick = Util.color(name + "&r");
 		Player p = (Player) cs;
-		p.setDisplayName(nick);
+		p.setDisplayName(ConfigDatabase.prefix(p) + nick);
 		ConfigDatabase.nickName(p, name);
+		p.sendMessage("Your nickname was changed to " + nick);
 	}
 	
 	@EventHandler(priority=EventPriority.HIGHEST)
 	private void nick(PlayerLoginEvent e) {
 		Player p = e.getPlayer();
+		String prefix = ConfigDatabase.prefix(p);
 		String nick = ConfigDatabase.nickName(p);
-		p.setDisplayName(nick);
+		p.setDisplayName(prefix + nick);
 	}
 }

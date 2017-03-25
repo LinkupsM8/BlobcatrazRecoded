@@ -1,13 +1,16 @@
 package com.ToonBasic.blobcatraz.config;
 
-import com.ToonBasic.blobcatraz.Core;
-import com.ToonBasic.blobcatraz.utility.Util;
+import java.io.File;
+import java.util.Date;
+import java.util.Map;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
-import java.util.UUID;
+import com.ToonBasic.blobcatraz.Core;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 public class ConfigDatabase {
     private static final File folder = new File(Core.folder, "users");
@@ -45,6 +48,9 @@ public class ConfigDatabase {
         File file = new File(folder, uuid + ".yml");
 
         set(config, "username", op.getName(), false);
+        set(config, "prefix", "&a[&bMember&a] &f", false);
+        set(config, "last ip", "localhost", false);
+        set(config, "last seen", System.currentTimeMillis(), false);
         set(config, "nickname", op.getName(), false);
         set(config, "balance", 0.00D, false);
         set(config, "tokens", 0, false);
@@ -77,13 +83,31 @@ public class ConfigDatabase {
     	set(config, "nickname", nick, true);
     	save(config, file(op));
     }
+    
+    public static String prefix(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	String prefix = config.getString("prefix");
+    	prefix = Util.color(prefix);
+    	return prefix;
+    }
+    
+    public static void prefix(OfflinePlayer op, String prefix) {
+    	YamlConfiguration config = load(op);
+    	set(config, "prefix", prefix, true);
+    	save(config, file(op));
+    }
 
     public static int tokens(OfflinePlayer op) {
         YamlConfiguration config = load(op);
         int votes = config.getInt("tokens");
         return votes;
     }
-
+    
+    public static boolean hasAccount(OfflinePlayer op) {
+    	File file = file(op);
+    	return file.exists();
+    }
+    
     public static double balance(OfflinePlayer op) {
         YamlConfiguration config = load(op);
         double balance = config.getDouble("balance");
@@ -94,6 +118,16 @@ public class ConfigDatabase {
         YamlConfiguration config = load(op);
         set(config, "balance", amount, true);
         save(config, file(op));
+    }
+    
+    public static Map<String, Double> balances() {
+    	Map<String, Double> map = Util.newMap();
+    	for(OfflinePlayer off : Bukkit.getOfflinePlayers()) {
+    		String nam = off.getName();
+    		double bal = balance(off);
+    		map.put(nam, bal);
+    	}
+    	return map;
     }
 
     public static void deposit(OfflinePlayer op, double amount) {
@@ -121,5 +155,30 @@ public class ConfigDatabase {
         	set(config, "spy", true, true);
         }
         save(config, file(op));
+    }
+    
+    public static Date lastSeen(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	long time = config.getLong("last seen");
+    	Date date = new Date(time);
+    	return date;
+    }
+    
+    public static void setLastSeen(OfflinePlayer op, long time) {
+    	YamlConfiguration config = load(op);
+    	set(config, "last seen", time, true);
+    	save(config, file(op));
+    }
+    
+    public static String lastIP(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	String ip = config.getString("last ip");
+    	return ip;
+    }
+    
+    public static void setIP(OfflinePlayer op, String ip) {
+    	YamlConfiguration config = load(op);
+    	set(config, "last ip", ip, true);
+    	save(config, file(op));
     }
 }

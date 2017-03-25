@@ -5,7 +5,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 
+@PlayerOnly
 public class CommandEnderChest extends ICommand {
     public CommandEnderChest() {super("enderchest", "", "blobcatraz.staff.echest", "echest");}
 
