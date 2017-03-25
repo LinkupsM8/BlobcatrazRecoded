@@ -14,12 +14,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.utility.Util;
 
-/**
- * Plugin created by Lilith
- * Plugin redistribution is not permitted without proper authorization
- * You shall not claim any of my open sourced plugins as your own even if you modify the code to your liking
- * Made on 1/28/2017
- */
 @ICommand.PlayerOnly
 public class CommandFreeze extends ICommand implements Listener {
     private static List<UUID> freeze = Util.newList();

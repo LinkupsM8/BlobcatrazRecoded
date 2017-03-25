@@ -3,6 +3,7 @@ package com.ToonBasic.blobcatraz;
 import java.io.File;
 import java.util.logging.Logger;
 
+import com.ToonBasic.blobcatraz.command.staff.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ToonBasic.blobcatraz.command.CommandFramework;
@@ -19,35 +20,6 @@ import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
 import com.ToonBasic.blobcatraz.command.player.CommandRename;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
 import com.ToonBasic.blobcatraz.command.special.CommandNuke;
-import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
-import com.ToonBasic.blobcatraz.command.staff.CommandBan;
-import com.ToonBasic.blobcatraz.command.staff.CommandClearInventory;
-import com.ToonBasic.blobcatraz.command.staff.CommandDelWarp;
-import com.ToonBasic.blobcatraz.command.staff.CommandEconomy;
-import com.ToonBasic.blobcatraz.command.staff.CommandEnchant;
-import com.ToonBasic.blobcatraz.command.staff.CommandEnderChest;
-import com.ToonBasic.blobcatraz.command.staff.CommandFireball;
-import com.ToonBasic.blobcatraz.command.staff.CommandFly;
-import com.ToonBasic.blobcatraz.command.staff.CommandFreeze;
-import com.ToonBasic.blobcatraz.command.staff.CommandGamemode;
-import com.ToonBasic.blobcatraz.command.staff.CommandHeal;
-import com.ToonBasic.blobcatraz.command.staff.CommandItem;
-import com.ToonBasic.blobcatraz.command.staff.CommandLag;
-import com.ToonBasic.blobcatraz.command.staff.CommandMobSpawn;
-import com.ToonBasic.blobcatraz.command.staff.CommandRepair;
-import com.ToonBasic.blobcatraz.command.staff.CommandSetMOTD;
-import com.ToonBasic.blobcatraz.command.staff.CommandSetWarp;
-import com.ToonBasic.blobcatraz.command.staff.CommandShowinv;
-import com.ToonBasic.blobcatraz.command.staff.CommandSkull;
-import com.ToonBasic.blobcatraz.command.staff.CommandSmite;
-import com.ToonBasic.blobcatraz.command.staff.CommandSonic;
-import com.ToonBasic.blobcatraz.command.staff.CommandSpeed;
-import com.ToonBasic.blobcatraz.command.staff.CommandSpy;
-import com.ToonBasic.blobcatraz.command.staff.CommandSudo;
-import com.ToonBasic.blobcatraz.command.staff.CommandTPAll;
-import com.ToonBasic.blobcatraz.command.staff.CommandTempBan;
-import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
-import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
 import com.ToonBasic.blobcatraz.listener.ListenSignColor;
@@ -105,6 +77,8 @@ public class Core extends JavaPlugin {
 		framework.registerCommand(new CommandTPAll());
         framework.registerCommand(new CommandVanish());
         framework.registerCommand(new CommandWorkbench());
+        framework.registerCommand(new CommandGod());
+        framework.registerCommand(new CommandMute());
     //Player Commands
         framework.registerCommand(new CommandAFK());
         framework.registerCommand(new CommandBack());
@@ -136,7 +110,9 @@ public class Core extends JavaPlugin {
     		new CommandAFK(),
     		new CommandNickname(),
     		new CommandEmojis(),
-    		
+            new CommandGod(),
+            new CommandMute(),
+
     		//Listener Events
     		new ListenChat(),
     		new ListenSignColor(),
