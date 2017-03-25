@@ -13,13 +13,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class CommandMute extends ICommand implements Listener {
-
     private static List<UUID> muted = Util.newList();
-
-
-    public CommandMute() {
-        super("mute", "<player>", "blobcatraz.player.mute", "shutup", "bequiet");
-    }
+    public CommandMute() {super("mute", "<player>", "blobcatraz.player.mute", "shutup", "bequiet");}
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
