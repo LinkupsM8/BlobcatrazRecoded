@@ -12,7 +12,7 @@ import com.ToonBasic.blobcatraz.utility.Util;
 
 import java.util.UUID;
 
-import static com.ToonBasic.blobcatraz.command.staff.CommandChat.chatMuted;
+import static com.ToonBasic.blobcatraz.command.staff.CommandChat.isChatMuted;
 import static com.ToonBasic.blobcatraz.utility.Util.prefix;
 
 public class ListenChat implements Listener {
@@ -50,7 +50,7 @@ public class ListenChat implements Listener {
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
-		if(chatMuted.contains(uuid)) {
+		if(isChatMuted) {
             if (!p.hasPermission("chat.bypass")) {
                 e.setCancelled(false);
             } else {

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class CommandChat extends ICommand {
 
-    public static List<UUID> chatMuted = Util.newList();
+    public static boolean isChatMuted = false;
 
     public CommandChat() {
         super("chat", "[enable/disable]", "blobcatraz.player.chat", "ch");
@@ -21,20 +21,16 @@ public class CommandChat extends ICommand {
     public void handleCommand(CommandSender cs, String[] args) {
         if (args[0].equals("disable")) {
             cs.sendMessage(prefix + "You have muted the chat!");
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                UUID uuid = p.getUniqueId();
-                chatMuted.add(uuid);
-                Bukkit.broadcastMessage(Util.color(prefix + "The chat has been muted by: &c" + cs.getName()));
+            if(isChatMuted) {
+                isChatMuted = false;
+                Bukkit.broadcastMessage(Util.color(prefix + "The chat has been muted by &c" + cs.getName()));
             }
         } else if (args[0].equals("enable")) {
             cs.sendMessage(prefix + "You have unmuted the chat!");
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                UUID uuid = p.getUniqueId();
-                chatMuted.remove(uuid);
-                Bukkit.broadcastMessage(Util.color(prefix + "The chat has been unmuted by: &c" + cs.getName()));
+            if(!isChatMuted) {
+                isChatMuted = true;
+                Bukkit.broadcastMessage(Util.color(prefix + "The chat has been unmuted by &c" + cs.getName()));
             }
-        } else {
-            cs.sendMessage(prefix + "Invalid arguments!");
         }
     }
 }
