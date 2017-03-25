@@ -39,6 +39,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandItem;
 import com.ToonBasic.blobcatraz.command.staff.CommandLag;
 import com.ToonBasic.blobcatraz.command.staff.CommandMobSpawn;
 import com.ToonBasic.blobcatraz.command.staff.CommandMute;
+import com.ToonBasic.blobcatraz.command.staff.CommandPowertool;
 import com.ToonBasic.blobcatraz.command.staff.CommandRepair;
 import com.ToonBasic.blobcatraz.command.staff.CommandSeen;
 import com.ToonBasic.blobcatraz.command.staff.CommandSetMOTD;
@@ -103,10 +104,13 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandFly());
         framework.registerCommand(new CommandFreeze());
         framework.registerCommand(new CommandGamemode());
+        framework.registerCommand(new CommandGod());
         framework.registerCommand(new CommandHeal());
         framework.registerCommand(new CommandItem());
         framework.registerCommand(new CommandLag());
         framework.registerCommand(new CommandMobSpawn());
+        framework.registerCommand(new CommandMute());
+        framework.registerCommand(new CommandPowertool());
         framework.registerCommand(new CommandRepair());
         framework.registerCommand(new CommandSeen());
         framework.registerCommand(new CommandSetMOTD());
@@ -122,8 +126,6 @@ public class Core extends JavaPlugin {
 		framework.registerCommand(new CommandTPAll());
         framework.registerCommand(new CommandVanish());
         framework.registerCommand(new CommandWorkbench());
-        framework.registerCommand(new CommandGod());
-        framework.registerCommand(new CommandMute());
     //Player Commands
         framework.registerCommand(new CommandAFK());
         framework.registerCommand(new CommandBack());
@@ -159,6 +161,7 @@ public class Core extends JavaPlugin {
             new CommandGod(),
             new CommandMute(),
             new CommandSeen(),
+            new CommandPowertool(),
 
     		//Listener Events
     		new ListenChat(),
