@@ -63,7 +63,7 @@ public class ListenPortal implements Listener {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
 		
-		if (p.getInventory().getItemInMainHand() != wand()) return;
+		if (!p.getInventory().getItemInMainHand().equals(wand())) return;
 		if (!p.hasPermission("blobcatraz.special.portal.wand")) {
 			p.sendMessage(Util.prefix + "Permission \u00a7cblobcatraz.special.portal.wand \u00a7rrequired!");
 			return;
