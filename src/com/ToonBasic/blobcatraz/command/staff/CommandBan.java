@@ -3,6 +3,7 @@ package com.ToonBasic.blobcatraz.command.staff;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -18,12 +19,16 @@ public class CommandBan extends ICommand {
             String target = args[0];
             String reason = Util.finalArgs(1, args);
 
-            Player p = Bukkit.getPlayer(target);
-            if(p != null) {
+            @SuppressWarnings("deprecation")
+			OfflinePlayer op = Bukkit.getOfflinePlayer(target);
+            if(op != null) {
                 BanList bl = Bukkit.getBanList(Type.NAME);
                 String nreason = Util.color("&f" + reason + "\n&f&lBanned By: &f" + cs.getName() + "\n&f&lAppeal At: &f&3&o&nhttp://blobcatraz.mc-srv.com");
-                bl.addBan(p.getName(), nreason, null, cs.getName());
-                p.kickPlayer(Util.color("&4You are banned!" + "\n&fReason: &r") + nreason);
+                bl.addBan(op.getName(), nreason, null, cs.getName());
+                if(op.isOnline()) {
+                	Player p = op.getPlayer();
+                	p.kickPlayer(Util.color("&4You are banned!" + "\n&fReason: &r") + nreason);
+                }
             } else {
 				String error = String.format(Language.INVALID_TARGET, target);
 				cs.sendMessage(error);

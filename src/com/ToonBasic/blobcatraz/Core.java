@@ -15,16 +15,20 @@ import com.ToonBasic.blobcatraz.command.player.CommandBaltop;
 import com.ToonBasic.blobcatraz.command.player.CommandEmojis;
 import com.ToonBasic.blobcatraz.command.player.CommandHelp;
 import com.ToonBasic.blobcatraz.command.player.CommandHub;
+import com.ToonBasic.blobcatraz.command.player.CommandKit;
 import com.ToonBasic.blobcatraz.command.player.CommandNickname;
 import com.ToonBasic.blobcatraz.command.player.CommandPay;
 import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
 import com.ToonBasic.blobcatraz.command.player.CommandRename;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
+import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
+import com.ToonBasic.blobcatraz.command.special.CommandKitToChest;
 import com.ToonBasic.blobcatraz.command.special.CommandNuke;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandChat;
 import com.ToonBasic.blobcatraz.command.staff.CommandClearInventory;
+import com.ToonBasic.blobcatraz.command.staff.CommandDelKit;
 import com.ToonBasic.blobcatraz.command.staff.CommandDelWarp;
 import com.ToonBasic.blobcatraz.command.staff.CommandEconomy;
 import com.ToonBasic.blobcatraz.command.staff.CommandEnchant;
@@ -42,6 +46,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandMute;
 import com.ToonBasic.blobcatraz.command.staff.CommandPowertool;
 import com.ToonBasic.blobcatraz.command.staff.CommandRepair;
 import com.ToonBasic.blobcatraz.command.staff.CommandSeen;
+import com.ToonBasic.blobcatraz.command.staff.CommandSetKit;
 import com.ToonBasic.blobcatraz.command.staff.CommandSetMOTD;
 import com.ToonBasic.blobcatraz.command.staff.CommandSetWarp;
 import com.ToonBasic.blobcatraz.command.staff.CommandShowinv;
@@ -96,6 +101,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandAnvil());
         framework.registerCommand(new CommandBan());
         framework.registerCommand(new CommandClearInventory());
+        framework.registerCommand(new CommandDelKit());
         framework.registerCommand(new CommandDelWarp());
         framework.registerCommand(new CommandEconomy());
         framework.registerCommand(new CommandEnchant());
@@ -113,6 +119,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandPowertool());
         framework.registerCommand(new CommandRepair());
         framework.registerCommand(new CommandSeen());
+        framework.registerCommand(new CommandSetKit());
         framework.registerCommand(new CommandSetMOTD());
         framework.registerCommand(new CommandSetWarp());
         framework.registerCommand(new CommandShowinv());
@@ -134,6 +141,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandEmojis());
         framework.registerCommand(new CommandHelp());
         framework.registerCommand(new CommandHub());
+        framework.registerCommand(new CommandKit());
         framework.registerCommand(new CommandNickname());
         framework.registerCommand(new CommandPay());
         framework.registerCommand(new CommandPrefix());
@@ -141,6 +149,8 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandWarp());
         framework.registerCommand(new CommandChat());
     //Special Commands
+        framework.registerCommand(new CommandChestToKit());
+        framework.registerCommand(new CommandKitToChest());
         framework.registerCommand(new CommandNuke());
     //Register All    
         framework.registerCommands();
