@@ -48,7 +48,7 @@ public class ListenChat implements Listener {
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
 		Player p = e.getPlayer();
 		if(isChatMuted) {
-            if (p.isOp() && p.hasPermission("blobcatraz.chat.bypass")) {
+            if (p.isOp() || p.hasPermission("blobcatraz.chat.bypass")) {
                 e.setCancelled(false);
             } else {
                 e.setCancelled(true);
