@@ -22,8 +22,11 @@ import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
 import com.ToonBasic.blobcatraz.command.player.CommandRename;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
+import com.ToonBasic.blobcatraz.command.special.CommandDelPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandKitToChest;
 import com.ToonBasic.blobcatraz.command.special.CommandNuke;
+import com.ToonBasic.blobcatraz.command.special.CommandPortal;
+import com.ToonBasic.blobcatraz.command.special.CommandSetPortal;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandChat;
@@ -63,6 +66,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
 import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
+import com.ToonBasic.blobcatraz.listener.ListenPortal;
 import com.ToonBasic.blobcatraz.listener.ListenSignColor;
 import com.ToonBasic.blobcatraz.listener.ListenSonic;
 import com.ToonBasic.blobcatraz.utility.Util;
@@ -152,6 +156,9 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandChestToKit());
         framework.registerCommand(new CommandKitToChest());
         framework.registerCommand(new CommandNuke());
+        framework.registerCommand(new CommandDelPortal());
+        framework.registerCommand(new CommandPortal());
+        framework.registerCommand(new CommandSetPortal());
     //Register All    
         framework.registerCommands();
     }
@@ -177,7 +184,8 @@ public class Core extends JavaPlugin {
     		new ListenChat(),
     		new ListenSignColor(),
     		new ListenSonic(),
-    		new ListenAntiVoid()
+    		new ListenAntiVoid(),
+    		new ListenPortal()
     	);
     }
 }
