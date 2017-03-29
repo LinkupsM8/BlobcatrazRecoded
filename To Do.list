@@ -1,7 +1,13 @@
 Commands
-  - home
-  - sell/buy/worth
+  - /home
+  - /sell, /shop, /worth
+  - /rules
 Other:
   - Better world generation to prevent lag made by Multiverse
   - Custom Scoreboard with API
   - Shop Signs
+  
+After Release:
+  - AntiSwear
+  - AntiCheat
+  - /staff
