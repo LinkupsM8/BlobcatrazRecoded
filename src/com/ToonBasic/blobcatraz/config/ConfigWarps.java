@@ -21,7 +21,7 @@ public class ConfigWarps {
 	
 	public static YamlConfiguration load(String name) {
 		try {
-			name = StringUtils.capitalize(name);
+			name = StringUtils.capitalize(name.toLowerCase());
 			String fname = name + ".warp";
 			File file = new File(FOLDER, fname);
 			YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
@@ -43,7 +43,7 @@ public class ConfigWarps {
 	public static void save(String name, Location l, ItemStack icon) {
 		try {
 			if(name != null && l != null && icon != null) {
-				name = StringUtils.capitalize(name);
+				name = StringUtils.capitalize(name.toLowerCase());
 				if(!FOLDER.exists()) FOLDER.mkdirs();
 				World w = l.getWorld();
 				String world = w.getName();
@@ -75,6 +75,7 @@ public class ConfigWarps {
 	}
 	
 	public static boolean exists(String name) {
+		name = StringUtils.capitalize(name.toLowerCase());
 		List<String> list = stringWarps();
 		boolean exist = list.contains(name);
 		return exist;
@@ -134,7 +135,7 @@ public class ConfigWarps {
 	}
 	
 	public static void delete(String name) {
-		name = StringUtils.capitalize(name);
+		name = StringUtils.capitalize(name.toLowerCase());
 		String file = name + ".warp";
 		File warp = new File(FOLDER, file);
 		warp.delete();
