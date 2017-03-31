@@ -18,10 +18,7 @@ import java.util.ArrayList;
 import static com.ToonBasic.blobcatraz.command.staff.CommandVanish.vanished;
 
 public class CommandStaff extends ICommand {
-
-    public CommandStaff() {
-        super("staff", "", "blobcatraz.player.staff");
-    }
+    public CommandStaff() {super("staff", "", "blobcatraz.player.staff");}
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
