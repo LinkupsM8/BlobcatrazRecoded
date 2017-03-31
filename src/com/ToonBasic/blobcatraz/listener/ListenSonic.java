@@ -8,6 +8,8 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.craftbukkit.v1_11_R1.entity.CraftCreeper;
+import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -16,6 +18,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -36,6 +39,19 @@ public class ListenSonic implements Listener {
 		meta.setDisplayName(Util.color("&fSonic &fScrewdriver"));
 		sonic.setItemMeta(meta);
 		return sonic;
+	}
+	
+	@EventHandler(priority=EventPriority.HIGHEST)
+	public void sonic(PlayerInteractEntityEvent e) {
+		Player p = e.getPlayer();
+		ItemStack is = p.getInventory().getItemInMainHand();
+		if(is != null && is.equals(sonic())) {
+			Entity ee = e.getRightClicked();
+			if(ee instanceof Creeper) {
+				Creeper c = (Creeper) ee;
+				c.setPowered(true);
+			}
+		}
 	}
 	
 	@EventHandler(priority=EventPriority.HIGHEST)
@@ -72,8 +88,8 @@ public class ListenSonic implements Listener {
 						b.setType(Material.AIR);
 						TNTPrimed tnt = (TNTPrimed) w.spawnEntity(l, EntityType.PRIMED_TNT);
 						tnt.setIsIncendiary(true);
-						tnt.setFuseTicks(1000);
-						tnt.setYield(50.0F);
+						tnt.setFuseTicks(500);
+						tnt.setYield(100.0F);
 						for(Entity ent : tnt.getNearbyEntities(10, 10, 10)) {
 							String msg = "As the Doctor would say, RUN!!";
 							ent.sendMessage(msg);

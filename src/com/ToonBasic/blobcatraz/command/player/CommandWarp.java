@@ -13,7 +13,7 @@ import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandWarp extends ICommand {
-	public CommandWarp() {super("warp", "[warp name]", "blobcatraz.player.warp");}
+	public CommandWarp() {super("warp", "[warp name]", "blobcatraz.player.warp", "warps");}
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {

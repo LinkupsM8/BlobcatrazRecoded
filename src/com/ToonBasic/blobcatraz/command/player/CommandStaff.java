@@ -1,8 +1,7 @@
 package com.ToonBasic.blobcatraz.command.player;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.utility.Util;
-import net.md_5.bungee.api.ChatColor;
+import static com.ToonBasic.blobcatraz.command.staff.CommandVanish.vanished;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
@@ -10,12 +9,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
+import com.ToonBasic.blobcatraz.command.ICommand;
 
-import static com.ToonBasic.blobcatraz.command.staff.CommandVanish.vanished;
+import net.md_5.bungee.api.ChatColor;
 
 public class CommandStaff extends ICommand {
     public CommandStaff() {super("staff", "", "blobcatraz.player.staff");}
