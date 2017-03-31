@@ -20,6 +20,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandNickname;
 import com.ToonBasic.blobcatraz.command.player.CommandPay;
 import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
 import com.ToonBasic.blobcatraz.command.player.CommandRename;
+import com.ToonBasic.blobcatraz.command.player.CommandRules;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
 import com.ToonBasic.blobcatraz.command.special.CommandDelPortal;
@@ -150,6 +151,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandPay());
         framework.registerCommand(new CommandPrefix());
         framework.registerCommand(new CommandRename());
+        framework.registerCommand(new CommandRules());
         framework.registerCommand(new CommandWarp());
         framework.registerCommand(new CommandChat());
     //Special Commands
