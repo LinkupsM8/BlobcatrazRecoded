@@ -3,24 +3,12 @@ package com.ToonBasic.blobcatraz;
 import java.io.File;
 import java.util.logging.Logger;
 
+import com.ToonBasic.blobcatraz.command.player.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ToonBasic.blobcatraz.command.CommandFramework;
-import com.ToonBasic.blobcatraz.command.player.CommandAFK;
-import com.ToonBasic.blobcatraz.command.player.CommandBack;
-import com.ToonBasic.blobcatraz.command.player.CommandBalance;
-import com.ToonBasic.blobcatraz.command.player.CommandBaltop;
-import com.ToonBasic.blobcatraz.command.player.CommandEmojis;
-import com.ToonBasic.blobcatraz.command.player.CommandHelp;
-import com.ToonBasic.blobcatraz.command.player.CommandHub;
-import com.ToonBasic.blobcatraz.command.player.CommandKit;
-import com.ToonBasic.blobcatraz.command.player.CommandNickname;
-import com.ToonBasic.blobcatraz.command.player.CommandPay;
-import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
-import com.ToonBasic.blobcatraz.command.player.CommandRename;
-import com.ToonBasic.blobcatraz.command.player.CommandWarp;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
 import com.ToonBasic.blobcatraz.command.special.CommandDelPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandKitToChest;
@@ -150,8 +138,10 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandPay());
         framework.registerCommand(new CommandPrefix());
         framework.registerCommand(new CommandRename());
+        framework.registerCommand(new CommandRules());
         framework.registerCommand(new CommandWarp());
         framework.registerCommand(new CommandChat());
+        framework.registerCommand(new CommandStaff());
     //Special Commands
         framework.registerCommand(new CommandChestToKit());
         framework.registerCommand(new CommandKitToChest());
@@ -186,6 +176,8 @@ public class Core extends JavaPlugin {
     		new ListenSonic(),
     		new ListenAntiVoid(),
     		new ListenPortal()
+
+            //AntiCheat Checks
     	);
     }
 }

@@ -1,7 +1,15 @@
 Commands
-  - home
-  - sell/buy/worth
+  - /home
+  - /sell, /shop, /worth
+
 Other:
   - Better world generation to prevent lag made by Multiverse
   - Custom Scoreboard with API
+<<<<<<< HEAD
   - Shop Signs
+=======
+  - Shop Signs
+  
+After Release:
+  - AntiCheat (LATER ON)
+>>>>>>> origin/master
