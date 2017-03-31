@@ -17,7 +17,7 @@ import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandVanish extends ICommand implements Listener {
-	private static List<Player> vanished = Util.newList();
+	public static List<Player> vanished = Util.newList();
 	private static final PotionEffectType INVIS = PotionEffectType.INVISIBILITY;
 	private static final String SEE_INVIS = "blobcatraz.staff.vanish.see";
 	
