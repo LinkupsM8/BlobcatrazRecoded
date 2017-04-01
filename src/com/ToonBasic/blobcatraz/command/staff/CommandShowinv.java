@@ -23,7 +23,7 @@ import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 public class CommandShowinv extends ICommand implements Listener {
 	
     public CommandShowinv() {
-        super("showinv", "<player> [armor]", "blobcatraz.staff.showinv", "invsee");
+        super("showinv", "<player> [armor]", "blobcatraz.staff.showinv", "invsee", "openinv");
     }
 
     @Override
