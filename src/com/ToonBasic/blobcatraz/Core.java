@@ -142,6 +142,10 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandWarp());
         framework.registerCommand(new CommandChat());
         framework.registerCommand(new CommandStaff());
+        framework.registerCommand(new CommandHome());
+        framework.registerCommand(new CommandHomes());
+        framework.registerCommand(new CommandSetHome());
+        framework.registerCommand(new CommandDelHome());
     //Special Commands
         framework.registerCommand(new CommandChestToKit());
         framework.registerCommand(new CommandKitToChest());

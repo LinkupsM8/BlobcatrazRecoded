@@ -1,11 +1,14 @@
 package com.ToonBasic.blobcatraz.config;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -179,6 +182,53 @@ public class ConfigDatabase {
     public static void setIP(OfflinePlayer op, String ip) {
     	YamlConfiguration config = load(op);
     	set(config, "last ip", ip, true);
+    	save(config, file(op));
+    }
+    
+    public static void setHome(OfflinePlayer op, String rawName, Location dest) {
+    	YamlConfiguration config = load(op);
+    	String name = rawName.toLowerCase();
+		set(config, "homes." + name + ".world", dest.getWorld().getName(), true);
+		set(config, "homes." + name + ".x", dest.getX(), true);
+		set(config, "homes." + name + ".y", dest.getY(), true);
+		set(config, "homes." + name + ".z", dest.getZ(), true);
+		set(config, "homes." + name + ".yaw", dest.getYaw(), true);
+		set(config, "homes." + name + ".pitch", dest.getPitch(), true);
+    	save(config, file(op));
+    }
+    
+    public static List<String> getHomes(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+		List<String> list = Util.newList();
+		for(String s : config.getConfigurationSection("homes").getKeys(false)) {
+			list.add(s);
+		}
+		Collections.sort(list);
+		return list;
+	}
+    
+    public static boolean homeExists(OfflinePlayer op, String rawName) {
+    	YamlConfiguration config = load(op);
+    	if (!config.contains("homes")) return false;
+		return getHomes(op).contains(rawName.toLowerCase());
+	}
+    
+    public static Location getHome(OfflinePlayer op, String rawName) {
+    	YamlConfiguration config = load(op);
+    	String name = rawName.toLowerCase();
+    	return new Location(
+    		Bukkit.getWorld(config.getString("homes." + name + ".world")), 
+			config.getDouble("homes." + name + ".x"), 
+			config.getDouble("homes." + name + ".y"), 
+			config.getDouble("homes." + name + ".z"), 
+			(float) config.getDouble("homes." + name + ".yaw"), 
+			(float) config.getDouble("homes." + name + ".pitch")
+		);
+    }
+    
+    public static void delHome(OfflinePlayer op, String rawName) {
+    	YamlConfiguration config = load(op);
+		config.set("homes." + rawName.toLowerCase(), null);
     	save(config, file(op));
     }
 }

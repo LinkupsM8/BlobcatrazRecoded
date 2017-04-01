@@ -31,7 +31,7 @@ public class CommandSetPortal extends ICommand {
 				return;
 			}
 			ConfigPortals.save(name, dest, ListenPortal.getPrimary(p.getUniqueId()), ListenPortal.getSecondary(p.getUniqueId()));
-			p.sendMessage(prefix + "You have set portal \u00a72" + name + "  \u00a7rto your current location");
+			p.sendMessage(prefix + "You have set portal \u00a72" + name + " \u00a7rto your current location");
 			
 		}
 	}

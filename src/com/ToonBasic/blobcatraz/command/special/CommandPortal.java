@@ -9,11 +9,10 @@ import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.config.ConfigPortals;
 import com.ToonBasic.blobcatraz.listener.ListenPortal;
-import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandPortal extends ICommand {
-	public CommandPortal() {super("portal", "[wand]", "blobcatraz.special.portal");}
+	public CommandPortal() {super("portal", "[wand]", "blobcatraz.special.portal", "portals");}
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
@@ -22,13 +21,13 @@ public class CommandPortal extends ICommand {
 			List<String> list = ConfigPortals.getPortalList();
 			StringBuilder str = new StringBuilder();
 			for(String s : list) {
-				str.append(s + " ");
+				str.append(s + "\u00a7r, \u00a72");
 			}
 			p.sendMessage(prefix + "Portal list:");
 			p.sendMessage("\u00a72" + str.toString());
 		} else if (args[0].equals("wand")) {
 			if (!p.hasPermission("blobcatraz.special.portal.wand")) {
-				p.sendMessage(Util.prefix + "Permission \u00a7cblobcatraz.special.portal.wand \u00a7rrequired!");
+				p.sendMessage(prefix + "Permission \u00a7cblobcatraz.special.portal.wand \u00a7rrequired!");
 				return;
 			}
 			p.getInventory().addItem(ListenPortal.wand());

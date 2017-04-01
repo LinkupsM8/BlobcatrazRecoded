@@ -13,9 +13,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ListenChat implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void chat(AsyncPlayerChatEvent e) {
