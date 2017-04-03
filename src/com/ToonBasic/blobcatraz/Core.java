@@ -74,6 +74,7 @@ import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
 import com.ToonBasic.blobcatraz.listener.ListenPortal;
+import com.ToonBasic.blobcatraz.listener.ListenShopSign;
 import com.ToonBasic.blobcatraz.listener.ListenSignColor;
 import com.ToonBasic.blobcatraz.listener.ListenSonic;
 import com.ToonBasic.blobcatraz.utility.Util;
@@ -199,9 +200,8 @@ public class Core extends JavaPlugin {
     		new ListenSignColor(),
     		new ListenSonic(),
     		new ListenAntiVoid(),
-    		new ListenPortal()
-
-            //AntiCheat Checks
+    		new ListenPortal(),
+    		new ListenShopSign()
     	);
     }
 }

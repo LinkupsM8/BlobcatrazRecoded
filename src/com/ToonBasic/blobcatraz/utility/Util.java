@@ -35,9 +35,14 @@ public class Util {
     	}
     	return list.toArray(new String[0]);
     }
+
+    public static String onlyNumbers(String o) {
+    	String n = o.replaceAll("[^\\d.-]", "");
+    	return n;
+    }
     
     public static String strip(String msg) {return ChatColor.stripColor(msg);}
-
+    
     public static void regEvents(Listener... ls) {
     	for(Listener l : ls) {
     		if(l != null) PM.registerEvents(l, PLUGIN);
