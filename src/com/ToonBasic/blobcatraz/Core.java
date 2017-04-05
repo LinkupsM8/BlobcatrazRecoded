@@ -34,6 +34,7 @@ import com.ToonBasic.blobcatraz.command.special.CommandKitToChest;
 import com.ToonBasic.blobcatraz.command.special.CommandNuke;
 import com.ToonBasic.blobcatraz.command.special.CommandPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandSetPortal;
+import com.ToonBasic.blobcatraz.command.special.CommandShhh;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandChat;
@@ -174,6 +175,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandNuke());
         framework.registerCommand(new CommandPortal());
         framework.registerCommand(new CommandSetPortal());
+        framework.registerCommand(new CommandShhh());
     //Register All    
         framework.registerCommands();
     }
