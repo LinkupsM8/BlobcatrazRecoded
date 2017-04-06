@@ -6,8 +6,15 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+
+import net.minecraft.server.v1_11_R1.EntityPlayer;
+import net.minecraft.server.v1_11_R1.IChatBaseComponent;
+import net.minecraft.server.v1_11_R1.IChatBaseComponent.ChatSerializer;
+import net.minecraft.server.v1_11_R1.PacketPlayOutChat;
+import net.minecraft.server.v1_11_R1.PlayerConnection;
 
 public class PlayerUtil extends Util {
 	public static void ping(Player p) {
@@ -42,6 +49,18 @@ public class PlayerUtil extends Util {
 			if(mat != Material.AIR) {return l;}
 		}
 		return lookBlock(p).getLocation();
+	}
+	
+	public static void action(Player p, String msg) {
+		msg = color(msg);
+		String json = json(msg);
+		IChatBaseComponent icbc = ChatSerializer.a(json);
+		byte act = 2;
+		PacketPlayOutChat ppoc = new PacketPlayOutChat(icbc, act);
+		CraftPlayer cp = (CraftPlayer) p;
+		EntityPlayer ep = cp.getHandle();
+		PlayerConnection pc = ep.playerConnection;
+		pc.sendPacket(ppoc);
 	}
 	
 	public static String possesive(String name) {

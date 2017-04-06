@@ -15,6 +15,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
+import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 /*
@@ -37,6 +38,7 @@ public class ListenShopSign implements Listener {
 	
 	private void sign(SignChangeEvent e, String top) {
 		try {
+			Player p = e.getPlayer();
 			String am = e.getLine(1);
 			am = Util.onlyInteger(am);
 			int amount = Integer.parseInt(am);
@@ -49,6 +51,7 @@ public class ListenShopSign implements Listener {
 				if(mat == null) {
 					Block b = e.getBlock();
 					b.breakNaturally();
+					PlayerUtil.action(p, "&cInvalid Item!");
 					return;
 				} else ma = mat.name();
 			}
@@ -98,17 +101,17 @@ public class ListenShopSign implements Listener {
 							double bal = ConfigDatabase.balance(p);
 							if(bal < price) {
 								String error = "You don't have enough money!";
-								p.sendMessage(error);
+								PlayerUtil.action(p, error);
 							} else {
 								int first = pi.firstEmpty();
 								if(first == -1) {
 									String error = "Your inventory is too full to buy this!";
-									p.sendMessage(error);
+									PlayerUtil.action(p, error);
 								} else {
 									pi.addItem(is);
 									ConfigDatabase.withdraw(p, price);
 									String buy = Util.color("You bought &a" + amount + "&f of &a" + is.getType().name() + "&f for &2$" + price);
-									p.sendMessage(buy);
+									PlayerUtil.action(p, buy);
 								}
 							}
 						} else if(l0.equals(SELL)){
@@ -116,16 +119,15 @@ public class ListenShopSign implements Listener {
 								remove(p, is);
 								ConfigDatabase.deposit(p, price);
 								String sell = Util.color("You sold &a" + amount + "&f of &a" + is.getType().name() + "&f for &2$" + price);
-								p.sendMessage(sell);
+								PlayerUtil.action(p, sell);
 							} else {
 								String error = "You don't have enough of that item!";
-								p.sendMessage(error);
+								PlayerUtil.action(p, error);
 							}
 						} else return;				
 					} catch(Exception ex) {
 						ex.printStackTrace();
-						p.sendMessage("Invalid Shop Sign!");
-						p.sendMessage("Please contact an admin");
+						PlayerUtil.action(p, "Invalid Shop Sign! Contact an Admin");
 					}
 				}
 			}
