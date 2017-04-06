@@ -21,8 +21,8 @@ public class PlayerUtil extends Util {
 	public static void sonic(Player p) {
 		Location l = p.getLocation();
 		String s = "tool.sonic.screwdriver";
-		float v = 50.0F;
-		float pi = 1.0F;
+		float v = 0.1F;
+		float pi = 0.1F;
 		p.playSound(l, s, v, pi);
 	}
 	

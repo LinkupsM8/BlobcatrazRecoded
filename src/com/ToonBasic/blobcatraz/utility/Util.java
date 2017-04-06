@@ -36,7 +36,12 @@ public class Util {
     	return list.toArray(new String[0]);
     }
 
-    public static String onlyNumbers(String o) {
+    public static String onlyInteger(String o) {
+    	String n = o.replaceAll("[^\\d-]", "");
+    	return n;
+    }
+    
+    public static String onlyDouble(String o) {
     	String n = o.replaceAll("[^\\d.-]", "");
     	return n;
     }
@@ -101,6 +106,8 @@ public class Util {
     public static String money(double amount) {
     	NumberFormat nf = NumberFormat.getCurrencyInstance();
     	String money = nf.format(amount);
+    	if(money.startsWith("$-")) money = color("&4" + money);
+    	else money = color("&2" + money);
     	return money;
     }
 

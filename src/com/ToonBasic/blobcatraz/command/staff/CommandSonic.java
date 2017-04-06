@@ -7,7 +7,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
-import com.ToonBasic.blobcatraz.listener.ListenSonic;
+import com.ToonBasic.blobcatraz.listener.item.ListenSonic;
 
 @PlayerOnly
 public class CommandSonic extends ICommand {

@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.listener;
+package com.ToonBasic.blobcatraz.listener.item;
 
 import java.util.List;
 
@@ -46,6 +46,7 @@ public class ListenSonic implements Listener {
 		ItemStack is = p.getInventory().getItemInMainHand();
 		if(is != null && is.equals(sonic())) {
 			Entity ee = e.getRightClicked();
+			PlayerUtil.sonic(p);
 			if(ee instanceof Creeper) {
 				Creeper c = (Creeper) ee;
 				c.setPowered(true);

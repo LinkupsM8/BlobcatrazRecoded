@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
+import com.ToonBasic.blobcatraz.utility.ItemUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 /*
@@ -37,11 +38,20 @@ public class ListenShopSign implements Listener {
 	private void sign(SignChangeEvent e, String top) {
 		try {
 			String am = e.getLine(1);
-			am = Util.onlyNumbers(am);
+			am = Util.onlyInteger(am);
+			int amount = Integer.parseInt(am);
+			if(amount > 64) am = Integer.toString(64);
 			String pr = e.getLine(2);
-			pr = '$' + Util.onlyNumbers(pr);
+			pr = '$' + Util.onlyDouble(pr);
 			String ma = e.getLine(3);
-			ma = Material.matchMaterial(ma).name();
+			if(!ItemUtil.special().containsKey(ma)) {
+				Material mat = Material.matchMaterial(ma);
+				if(mat == null) {
+					Block b = e.getBlock();
+					b.breakNaturally();
+					return;
+				} else ma = mat.name();
+			}
 
 			e.setLine(0, top);
 			e.setLine(1, am);
@@ -63,9 +73,9 @@ public class ListenShopSign implements Listener {
 				String[] lines = s.getLines();
 				String l0 = lines[0];
 				String am = lines[1];
-				am = Util.onlyNumbers(am);
+				am = Util.onlyInteger(am);
 				String pr = lines[2];
-				pr = Util.onlyNumbers(pr);
+				pr = Util.onlyDouble(pr);
 				String ma = lines[3];
 				if(l0.contains(BUY) || l0.contains(SELL)) {
 					try {
@@ -73,14 +83,15 @@ public class ListenShopSign implements Listener {
 						if(amount > 64) amount = 64;
 						if(amount < 1) amount = 1;
 						double price = Double.parseDouble(pr);
-						Material mat = null;
 						short data = 0;
+						ItemStack is = null;
 						String[] ma2 = ma.split(":");
 						if(ma2.length > 1) {
-							mat = Material.matchMaterial(ma2[0]);
+							String id = ma2[0];
 							data = Short.parseShort(ma2[1]);
+							is = ItemUtil.getItem(id, amount, data);
 						} else {
-							mat = Material.matchMaterial(ma);
+							is = ItemUtil.getItem(ma, amount, data);
 						}
 
 						if(l0.equals(BUY)) {
@@ -89,7 +100,6 @@ public class ListenShopSign implements Listener {
 								String error = "You don't have enough money!";
 								p.sendMessage(error);
 							} else {
-								ItemStack is = new ItemStack(mat, amount, data);
 								int first = pi.firstEmpty();
 								if(first == -1) {
 									String error = "Your inventory is too full to buy this!";
@@ -97,16 +107,15 @@ public class ListenShopSign implements Listener {
 								} else {
 									pi.addItem(is);
 									ConfigDatabase.withdraw(p, price);
-									String buy = Util.color("You bought &a" + amount + "&f of &a" + mat.name() + "&f for &2$" + price);
+									String buy = Util.color("You bought &a" + amount + "&f of &a" + is.getType().name() + "&f for &2$" + price);
 									p.sendMessage(buy);
 								}
 							}
 						} else if(l0.equals(SELL)){
-							ItemStack is = new ItemStack(mat, amount, data);
 							if(has(p, is)) {
 								remove(p, is);
 								ConfigDatabase.deposit(p, price);
-								String sell = Util.color("You sold &a" + amount + "&f of &a" + mat.name() + "&f for &2$" + price);
+								String sell = Util.color("You sold &a" + amount + "&f of &a" + is.getType().name() + "&f for &2$" + price);
 								p.sendMessage(sell);
 							} else {
 								String error = "You don't have that item!";

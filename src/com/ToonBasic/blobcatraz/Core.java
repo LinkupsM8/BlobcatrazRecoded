@@ -77,7 +77,8 @@ import com.ToonBasic.blobcatraz.listener.ListenChat;
 import com.ToonBasic.blobcatraz.listener.ListenPortal;
 import com.ToonBasic.blobcatraz.listener.ListenShopSign;
 import com.ToonBasic.blobcatraz.listener.ListenSignColor;
-import com.ToonBasic.blobcatraz.listener.ListenSonic;
+import com.ToonBasic.blobcatraz.listener.item.ListenSonic;
+import com.ToonBasic.blobcatraz.utility.ItemUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 import net.milkbowl.vault.Vault;
@@ -181,6 +182,7 @@ public class Core extends JavaPlugin {
     }
     
     public void events() {
+    	ItemUtil.load();
     	Util.regEvents(
     		//Command Events
     		new CommandBack(),
