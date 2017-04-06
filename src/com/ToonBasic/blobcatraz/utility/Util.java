@@ -46,6 +46,12 @@ public class Util {
     	return n;
     }
     
+    public static short intToShort(int i) {
+    	if(i > Short.MAX_VALUE) i = Short.MAX_VALUE;
+    	if(i < 0) i = 0;
+    	return (short) i;
+    }
+    
     public static String strip(String msg) {return ChatColor.stripColor(msg);}
     
     public static void regEvents(Listener... ls) {
@@ -58,6 +64,12 @@ public class Util {
         String msg = o.toString();
         Logger log = Bukkit.getLogger();
         log.info(strip(prefix + msg));
+    }
+    
+    public static void broadcast(String... msg) {
+    	for(String o : msg) {
+    		Bukkit.broadcastMessage(o);
+    	}
     }
     
 	@SafeVarargs

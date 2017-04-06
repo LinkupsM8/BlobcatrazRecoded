@@ -100,6 +100,14 @@ public class ConfigDatabase {
     	save(config, file(op));
     }
 
+    public static void addTokens(OfflinePlayer op, int amount) {
+    	YamlConfiguration config = load(op);
+    	int tokens = tokens(op);
+    	tokens = tokens + amount;
+    	set(config, "tokens", tokens, true);
+    	save(config, file(op));
+    }
+    
     public static int tokens(OfflinePlayer op) {
         YamlConfiguration config = load(op);
         int votes = config.getInt("tokens");

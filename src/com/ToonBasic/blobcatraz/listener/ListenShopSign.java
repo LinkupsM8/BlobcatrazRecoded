@@ -80,8 +80,8 @@ public class ListenShopSign implements Listener {
 				if(l0.contains(BUY) || l0.contains(SELL)) {
 					try {
 						int amount = Integer.parseInt(am);
-						if(amount > 64) amount = 64;
 						if(amount < 1) amount = 1;
+						if(amount > 64) amount = 64;
 						double price = Double.parseDouble(pr);
 						short data = 0;
 						ItemStack is = null;
@@ -118,11 +118,12 @@ public class ListenShopSign implements Listener {
 								String sell = Util.color("You sold &a" + amount + "&f of &a" + is.getType().name() + "&f for &2$" + price);
 								p.sendMessage(sell);
 							} else {
-								String error = "You don't have that item!";
+								String error = "You don't have enough of that item!";
 								p.sendMessage(error);
 							}
 						} else return;				
 					} catch(Exception ex) {
+						ex.printStackTrace();
 						p.sendMessage("Invalid Shop Sign!");
 						p.sendMessage("Please contact an admin");
 					}
@@ -136,20 +137,22 @@ public class ListenShopSign implements Listener {
 			PlayerInventory pi = p.getInventory();
 			ItemStack[] items = pi.getContents();
 			for(ItemStack nis : items) {
-				Material mat1 = is.getType();
-				Material mat2 = nis.getType();
-				short data1 = is.getDurability();
-				short data2 = nis.getDurability();
-				int amount1 = is.getAmount();
-				int amount2 = nis.getAmount();
+				if(nis != null) {
+					Material mat1 = is.getType();
+					Material mat2 = nis.getType();
+					short data1 = is.getDurability();
+					short data2 = nis.getDurability();
+					int amount1 = is.getAmount();
+					int amount2 = nis.getAmount();
 
-				boolean type = (mat1 == mat2);
-				boolean data = (data1 == data2);
-				boolean amount = (amount2 >= amount1);
-				if(type && data && amount) return true;
+					boolean type = (mat1 == mat2);
+					boolean data = (data1 == data2);
+					boolean amount = (amount2 >= amount1);
+					if(type && data && amount) return true;
+				}
 			}
 			return false;
-		} catch(Exception ex) {return false;}
+		} catch(Exception ex) {ex.printStackTrace(); return false;}
 	}
 
 	private void remove(Player p, ItemStack is) {
@@ -157,19 +160,21 @@ public class ListenShopSign implements Listener {
 			PlayerInventory pi = p.getInventory();
 			ItemStack[] items = pi.getContents();
 			for(ItemStack nis : items) {
-				Material mat1 = is.getType();
-				Material mat2 = nis.getType();
-				short data1 = is.getDurability();
-				short data2 = nis.getDurability();
-				int amount1 = is.getAmount();
-				int amount2 = nis.getAmount();
+				if(nis != null) {
+					Material mat1 = is.getType();
+					Material mat2 = nis.getType();
+					short data1 = is.getDurability();
+					short data2 = nis.getDurability();
+					int amount1 = is.getAmount();
+					int amount2 = nis.getAmount();
 
-				boolean type = (mat1 == mat2);
-				boolean data = (data1 == data2);
-				boolean amou = (amount2 >= amount1);
-				if(type && data && amou) {
-					nis.setAmount(amount2 - amount1);
-					break;
+					boolean type = (mat1 == mat2);
+					boolean data = (data1 == data2);
+					boolean amou = (amount2 >= amount1);
+					if(type && data && amou) {
+						nis.setAmount(amount2 - amount1);
+						break;
+					}
 				}
 			}
 		} catch(Exception ex) {}

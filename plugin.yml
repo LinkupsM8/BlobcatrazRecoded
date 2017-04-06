@@ -2,4 +2,4 @@ name: Blobcatraz
 version: 0.0.1
 description: Core plugin for Blobcatraz
 main: com.ToonBasic.blobcatraz.Core
-softdepend: [Vault]
+softdepend: [Vault, Votifier]

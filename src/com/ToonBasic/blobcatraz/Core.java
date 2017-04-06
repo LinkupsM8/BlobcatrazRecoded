@@ -77,6 +77,7 @@ import com.ToonBasic.blobcatraz.listener.ListenChat;
 import com.ToonBasic.blobcatraz.listener.ListenPortal;
 import com.ToonBasic.blobcatraz.listener.ListenShopSign;
 import com.ToonBasic.blobcatraz.listener.ListenSignColor;
+import com.ToonBasic.blobcatraz.listener.ListenVote;
 import com.ToonBasic.blobcatraz.listener.item.ListenSonic;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
@@ -205,7 +206,8 @@ public class Core extends JavaPlugin {
     		new ListenSonic(),
     		new ListenAntiVoid(),
     		new ListenPortal(),
-    		new ListenShopSign()
+    		new ListenShopSign(),
+    		new ListenVote()
     	);
     }
 }

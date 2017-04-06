@@ -11,12 +11,50 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.ToonBasic.blobcatraz.listener.item.ListenSonic;
 
 public class ItemUtil extends Util {
-	private static Map<String, ItemStack> ITEMS = newMap();
+	/*Start Dyes*/
+	private static final ItemStack ROSE = dye(1);
+	private static final ItemStack CACTUS = dye(2);
+	private static final ItemStack COCOA = dye(3);
+	private static final ItemStack LAPIS = dye(4);
+	private static final ItemStack PURPLE = dye(5);
+	private static final ItemStack CYAN = dye(6);
+	private static final ItemStack LIGHT_GRAY = dye(7);
+	private static final ItemStack GRAY = dye(8);
+	private static final ItemStack PINK = dye(9);
+	private static final ItemStack LIME = dye(10);
+	private static final ItemStack DANDELION = dye(11);
+	private static final ItemStack LIGHT_BLUE = dye(12);
+	private static final ItemStack MAGENTA = dye(13);
+	private static final ItemStack ORANGE = dye(14);
+	private static final ItemStack BONE_MEAL = dye(15);
+	/*End Dyes*/
+	/*Start Special Items*/
+	private static final ItemStack ENCHANTED_GOLDEN_APPLE = new ItemStack(Material.GOLDEN_APPLE, 1, intToShort(1));
+	/*End Special Items*/
+	
+	private static Map<String, ItemStack> items = newMap();
+	public static Map<String, ItemStack> special() {return items;} 
 	public static void load() {
-		ITEMS.put("op sword", opSword());
-		ITEMS.put("sonic", ListenSonic.sonic());
+		items.put("op sword", opSword());
+		items.put("op bow", opBow());
+		items.put("sonic", ListenSonic.sonic());
+		items.put("rose red", ROSE);
+		items.put("cactus green", CACTUS);
+		items.put("cocoa beans", COCOA);
+		items.put("lapis lazuli", LAPIS);
+		items.put("purple dye", PURPLE);
+		items.put("cyan dye", CYAN);
+		items.put("light gray dye", LIGHT_GRAY);
+		items.put("gray dye", GRAY);
+		items.put("pink dye", PINK);
+		items.put("lime dye", LIME);
+		items.put("dandelion yellow", DANDELION);
+		items.put("light blue dye", LIGHT_BLUE);
+		items.put("magenta dye", MAGENTA);
+		items.put("orange dye", ORANGE);
+		items.put("bone meal", BONE_MEAL);
+		items.put("notch apple", ENCHANTED_GOLDEN_APPLE);
 	}
-	public static Map<String, ItemStack> special() {return ITEMS;} 
 	
 	public static final ItemStack opSword() {
 		ItemStack is = new ItemStack(Material.DIAMOND_SWORD);
@@ -26,21 +64,41 @@ public class ItemUtil extends Util {
 		meta.addEnchant(Enchantment.DURABILITY, 32767, true);
 		meta.addEnchant(Enchantment.FIRE_ASPECT, 32767, true);
 		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE);
+		meta.addItemFlags(ItemFlag.values());
 		is.setItemMeta(meta);		
 		return is;
 	}
 	
+	public static final ItemStack opBow() {
+		ItemStack is = new ItemStack(Material.BOW);
+		ItemMeta meta = is.getItemMeta();
+		meta.setDisplayName(Util.color("&4&ki&1Overpowered &1Bow&4&ki&r"));
+		meta.addEnchant(Enchantment.ARROW_DAMAGE, 32767, true);
+		meta.addEnchant(Enchantment.ARROW_INFINITE, 32767, true);
+		meta.addEnchant(Enchantment.ARROW_FIRE, 32767, true);
+		meta.addEnchant(Enchantment.ARROW_KNOCKBACK, 10, true);
+		meta.setUnbreakable(true);
+		meta.addItemFlags(ItemFlag.values());
+		is.setItemMeta(meta);
+		return is;
+	}
+	
+	public static ItemStack dye(int meta) {
+		ItemStack dye = new ItemStack(Material.INK_SACK, 1, intToShort(meta));
+		return dye;
+	}
+	
 	public static ItemStack getItem(String id, int amount, short data) {
 		Map<String, ItemStack> special = special();
-		Material mat = Material.matchMaterial(id);
+		Material mat = Material.matchMaterial(id.toUpperCase());
 		if(mat != null) {
 			ItemStack is = new ItemStack(mat, amount, data);
 			return is;
 		} else if(special.containsKey(id)){
 			ItemStack is = special.get(id);
+			if(is == null) return new ItemStack(Material.AIR);
 			is.setAmount(amount);
-			is.setDurability(data);
+			if(is.getDurability() == 0) is.setDurability(data);
 			return is;
 		}
 		return null;
