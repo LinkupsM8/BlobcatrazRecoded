@@ -21,7 +21,9 @@ import java.util.UUID;
 public class CommandStaff extends ICommand {
     public static ArrayList<UUID> staff = new ArrayList<>();
 
-    public CommandStaff() {super("staff", "", "blobcatraz.player.staff");}
+    public CommandStaff() {
+        super("staff", "", "blobcatraz.player.staff");
+    }
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
@@ -40,19 +42,17 @@ public class CommandStaff extends ICommand {
         for (Player player : Bukkit.getOnlinePlayers()) {
             UUID uuid = player.getUniqueId();
             if (staff.contains(uuid)) {
-                if (player.hasPermission("blobcatraz.staff.check")) {
-                    if (vanished.contains(player)) {
-                        //Do not add player
-                    } else {
-                        meta.setOwner(player.getName());
-                        meta.setDisplayName(ChatColor.LIGHT_PURPLE + player.getName());
-                        skull.setItemMeta(meta);
-                        heads.setItem(i, skull);
-                        i++;
-                    }
+                if (vanished.contains(player)) {
+                    //Do not add player
+                } else {
+                    meta.setOwner(player.getName());
+                    meta.setDisplayName(ChatColor.LIGHT_PURPLE + player.getName());
+                    skull.setItemMeta(meta);
+                    heads.setItem(i, skull);
+                    i++;
                 }
             }
-            p.openInventory(heads);
         }
+        p.openInventory(heads);
     }
 }
