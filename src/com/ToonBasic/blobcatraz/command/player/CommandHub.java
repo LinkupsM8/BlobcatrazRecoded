@@ -11,7 +11,7 @@ import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 
 @PlayerOnly
 public class CommandHub extends ICommand {
-	public CommandHub() {super("hub", "", "blobcatraz.player.hub", "lobby");}
+	public CommandHub() {super("hub", "", "blobcatraz.player.hub", "lobby", "spawn");}
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
