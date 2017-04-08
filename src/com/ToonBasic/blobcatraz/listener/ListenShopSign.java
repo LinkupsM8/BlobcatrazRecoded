@@ -47,13 +47,21 @@ public class ListenShopSign implements Listener {
 			pr = '$' + Util.onlyDouble(pr);
 			String ma = e.getLine(3);
 			if(!ItemUtil.special().containsKey(ma)) {
-				Material mat = Material.matchMaterial(ma);
+				Material mat = null;
+				short data = 0;
+				String[] ma2 = ma.split(":");
+				if(ma2.length > 1) {
+					String id = ma2[0];
+					data = Short.parseShort(ma2[1]);
+					mat = Material.matchMaterial(id);
+				} else mat = Material.matchMaterial(ma);
+				
 				if(mat == null) {
 					Block b = e.getBlock();
 					b.breakNaturally();
 					PlayerUtil.action(p, "&cInvalid Item!");
 					return;
-				} else ma = mat.name();
+				} else ma = mat.name() + ":" + data;
 			}
 
 			e.setLine(0, top);

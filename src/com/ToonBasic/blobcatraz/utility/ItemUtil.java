@@ -28,9 +28,19 @@ public class ItemUtil extends Util {
 	private static final ItemStack ORANGE = dye(14);
 	private static final ItemStack BONE_MEAL = dye(15);
 	/*End Dyes*/
+	
 	/*Start Special Items*/
 	private static final ItemStack ENCHANTED_GOLDEN_APPLE = new ItemStack(Material.GOLDEN_APPLE, 1, intToShort(1));
 	/*End Special Items*/
+	
+	/*Start Stones*/
+	private static final ItemStack GRANITE = new ItemStack(Material.STONE, 1, intToShort(1));
+	private static final ItemStack PGRANITE = new ItemStack(Material.STONE, 1, intToShort(2));
+	private static final ItemStack DIORITE = new ItemStack(Material.STONE, 1, intToShort(3));
+	private static final ItemStack PDIORITE = new ItemStack(Material.STONE, 1, intToShort(4));
+	private static final ItemStack ANDESITE = new ItemStack(Material.STONE, 1, intToShort(5));
+	private static final ItemStack PANDESITE = new ItemStack(Material.STONE, 1, intToShort(6));
+	/*End Stones*/
 	
 	private static Map<String, ItemStack> items = newMap();
 	public static Map<String, ItemStack> special() {return items;} 
@@ -54,6 +64,12 @@ public class ItemUtil extends Util {
 		items.put("orange dye", ORANGE);
 		items.put("bone meal", BONE_MEAL);
 		items.put("notch apple", ENCHANTED_GOLDEN_APPLE);
+		items.put("granite", GRANITE);
+		items.put("diorite", DIORITE);
+		items.put("andesite", ANDESITE);
+		items.put("polished granite", PGRANITE);
+		items.put("polished diorite", PDIORITE);
+		items.put("polished andesite", PANDESITE);
 	}
 	
 	public static final ItemStack opSword() {
