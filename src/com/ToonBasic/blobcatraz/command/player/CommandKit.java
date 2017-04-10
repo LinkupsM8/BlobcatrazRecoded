@@ -21,7 +21,7 @@ public class CommandKit extends ICommand {
 		else {
 			String name = Util.finalArgs(0, args);
 			if(ConfigKits.exists(name)) {
-				String kperm = "blobcatraz.player.kits." + name;
+				String kperm = "blobcatraz.kits." + name;
 				if(p.hasPermission(kperm)) {
 					ConfigKits.give(p, name);
 					p.sendMessage(prefix + Util.color("You have received kit &c" + name));

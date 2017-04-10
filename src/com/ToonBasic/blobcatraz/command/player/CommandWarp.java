@@ -23,7 +23,7 @@ public class CommandWarp extends ICommand {
 			List<String> list = ConfigWarps.stringWarps();
 			for(int i = 0; i < list.size(); i++) {
 				String warp = list.get(i);
-				String perm2 = "blobcatraz.player.warps." + warp;
+				String perm2 = "blobcatraz.warps." + warp;
 				if(p.hasPermission(perm2)) {
 					if(i != 0) build.append(Util.color("&r, "));
 					build.append(Util.color("&2" + warp));

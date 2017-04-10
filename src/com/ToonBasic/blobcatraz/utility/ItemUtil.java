@@ -119,4 +119,8 @@ public class ItemUtil extends Util {
 		}
 		return null;
 	}
+	
+	//public static double worth(ItemStack is) {
+		
+	//}
 }

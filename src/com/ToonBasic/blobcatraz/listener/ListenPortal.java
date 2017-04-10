@@ -6,12 +6,14 @@ import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -53,6 +55,12 @@ public class ListenPortal implements Listener {
 		im.setDisplayName("\u00a72Portal Wand");
 		wand.setItemMeta(im);
 		return wand;
+	}
+	
+	@EventHandler
+	public void antiNether(PlayerPortalEvent e) {
+		World w = e.getFrom().getWorld();
+		if(w.getName().equals("Hub")) e.setCancelled(true);
 	}
 	
 	@EventHandler

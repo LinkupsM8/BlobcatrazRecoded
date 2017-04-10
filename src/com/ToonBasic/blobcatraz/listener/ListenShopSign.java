@@ -31,9 +31,12 @@ public class ListenShopSign implements Listener {
 	
 	@EventHandler
 	public void create(SignChangeEvent e) {
-		String l0 = e.getLine(0);
-		if(l0.contains("[buy]")) sign(e, BUY);
-		else if(l0.contains("[sell]")) sign(e, SELL);
+		Player p = e.getPlayer();
+		if(p.hasPermission("blobcatraz.staff.sign.shop")) {
+			String l0 = e.getLine(0);
+			if(l0.contains("[buy]")) sign(e, BUY);
+			else if(l0.contains("[sell]")) sign(e, SELL);
+		}
 	}
 	
 	private void sign(SignChangeEvent e, String top) {

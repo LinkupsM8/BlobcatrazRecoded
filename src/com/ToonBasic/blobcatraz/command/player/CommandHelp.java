@@ -12,7 +12,7 @@ import com.ToonBasic.blobcatraz.utility.Util;
  * @author SirBlobman
  */
 public class CommandHelp extends ICommand {
-	public CommandHelp() {super("help", "", "", "?", "ayuda", "assistance", "about");}
+	public CommandHelp() {super("help", "", "blobcatraz.player.help", "?", "ayuda", "assistance", "about");}
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {

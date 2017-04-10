@@ -16,7 +16,7 @@ import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandAFK extends ICommand implements Listener {
-	public CommandAFK() {super("afk", "[reason]", "", "awayfromkeyboard");}
+	public CommandAFK() {super("afk", "[reason]", "blobcatraz.player.afk", "awayfromkeyboard");}
 	private static List<Player> afk = Util.newList();
 	
 	@Override
