@@ -3,30 +3,12 @@ package com.ToonBasic.blobcatraz;
 import java.io.File;
 import java.util.logging.Logger;
 
+import com.ToonBasic.blobcatraz.command.player.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ToonBasic.blobcatraz.command.CommandFramework;
-import com.ToonBasic.blobcatraz.command.player.CommandAFK;
-import com.ToonBasic.blobcatraz.command.player.CommandBack;
-import com.ToonBasic.blobcatraz.command.player.CommandBalance;
-import com.ToonBasic.blobcatraz.command.player.CommandBaltop;
-import com.ToonBasic.blobcatraz.command.player.CommandDelHome;
-import com.ToonBasic.blobcatraz.command.player.CommandEmojis;
-import com.ToonBasic.blobcatraz.command.player.CommandHelp;
-import com.ToonBasic.blobcatraz.command.player.CommandHome;
-import com.ToonBasic.blobcatraz.command.player.CommandHomes;
-import com.ToonBasic.blobcatraz.command.player.CommandHub;
-import com.ToonBasic.blobcatraz.command.player.CommandKit;
-import com.ToonBasic.blobcatraz.command.player.CommandNickname;
-import com.ToonBasic.blobcatraz.command.player.CommandPay;
-import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
-import com.ToonBasic.blobcatraz.command.player.CommandRename;
-import com.ToonBasic.blobcatraz.command.player.CommandRules;
-import com.ToonBasic.blobcatraz.command.player.CommandSetHome;
-import com.ToonBasic.blobcatraz.command.player.CommandStaff;
-import com.ToonBasic.blobcatraz.command.player.CommandWarp;
 import com.ToonBasic.blobcatraz.command.special.CommandCenter;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
 import com.ToonBasic.blobcatraz.command.special.CommandDelPortal;
@@ -169,6 +151,8 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandHomes());
         framework.registerCommand(new CommandSetHome());
         framework.registerCommand(new CommandDelHome());
+        framework.registerCommand(new CommandMSG());
+        framework.registerCommand(new CommandReply());
     //Special Commands
         framework.registerCommand(new CommandCenter());
         framework.registerCommand(new CommandChestToKit());
