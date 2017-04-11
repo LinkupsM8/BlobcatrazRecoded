@@ -4,10 +4,12 @@ import java.util.Map;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.ToonBasic.blobcatraz.config.ConfigWorth;
 import com.ToonBasic.blobcatraz.listener.item.ListenSonic;
 
 public class ItemUtil extends Util {
@@ -120,7 +122,21 @@ public class ItemUtil extends Util {
 		return null;
 	}
 	
-	//public static double worth(ItemStack is) {
-		
-	//}
+	public static double worth(ItemStack is) {
+		double worth = ConfigWorth.worth(is);
+		return worth;
+	}
+	
+	public static double worth(ItemStack... items) {
+		double worth = 0.0D;
+		for(ItemStack is : items) {worth = worth + worth(is);}
+		return worth;
+	}
+	
+	public static double worth(Inventory i) {
+		double worth = 0.0D;
+		ItemStack[] items = i.getContents();
+		for(ItemStack is : items) {worth = worth + worth(is);}
+		return worth;
+	}
 }

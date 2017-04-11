@@ -13,12 +13,16 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
 
+import com.ToonBasic.blobcatraz.config.ConfigDatabase;
+import com.ToonBasic.blobcatraz.utility.ItemUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 public class ListenSellAll implements Listener {
-	private static final String SELL_ALL = Util.color("&4&l[&1Sell All&4&l]&r");
+	private static final String SELL_ALL = Util.color("&4[&1Sell All&4]");
 	private static final String TITLE = Util.color("&4&lSell All");
 	
 	@EventHandler
@@ -51,7 +55,7 @@ public class ListenSellAll implements Listener {
 	
 	private void gui(Player p) {
 		int size = 54;
-		Inventory i = Bukkit.createInventory(null, size);
+		Inventory i = Bukkit.createInventory(null, size, TITLE);
 		p.openInventory(i);
 	}
 	
@@ -60,11 +64,15 @@ public class ListenSellAll implements Listener {
 		HumanEntity he = e.getPlayer();
 		if(he instanceof Player) {
 			Player p = (Player) he;
-			Inventory i = e.getInventory();
+			InventoryView iv = e.getView();
+			Inventory i = iv.getTopInventory();
 			if(i != null) {
 				String title = i.getTitle();
 				if(title.equals(TITLE)) {
-					double worth = ItemUtil.getWorth(i);
+					ItemStack[] items = i.getContents();
+					double worth = ItemUtil.worth(items);
+					ConfigDatabase.deposit(p, worth);
+					p.sendMessage(Util.prefix + "You sold an inventory worth " + Util.money(worth));
 				}
 			}
 		}

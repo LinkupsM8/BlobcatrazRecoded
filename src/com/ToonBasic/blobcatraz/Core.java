@@ -31,6 +31,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandStaff;
 import com.ToonBasic.blobcatraz.command.player.CommandTpChoose;
 import com.ToonBasic.blobcatraz.command.player.CommandTpa;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
+import com.ToonBasic.blobcatraz.command.player.CommandWorth;
 import com.ToonBasic.blobcatraz.command.special.CommandCenter;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
 import com.ToonBasic.blobcatraz.command.special.CommandDelPortal;
@@ -66,6 +67,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandSeen;
 import com.ToonBasic.blobcatraz.command.staff.CommandSetKit;
 import com.ToonBasic.blobcatraz.command.staff.CommandSetMOTD;
 import com.ToonBasic.blobcatraz.command.staff.CommandSetWarp;
+import com.ToonBasic.blobcatraz.command.staff.CommandSetWorth;
 import com.ToonBasic.blobcatraz.command.staff.CommandShowinv;
 import com.ToonBasic.blobcatraz.command.staff.CommandSkull;
 import com.ToonBasic.blobcatraz.command.staff.CommandSmite;
@@ -81,6 +83,7 @@ import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
 import com.ToonBasic.blobcatraz.listener.ListenPortal;
+import com.ToonBasic.blobcatraz.listener.ListenSellAll;
 import com.ToonBasic.blobcatraz.listener.ListenShopSign;
 import com.ToonBasic.blobcatraz.listener.ListenSignColor;
 import com.ToonBasic.blobcatraz.listener.ListenVote;
@@ -143,6 +146,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandSetKit());
         framework.registerCommand(new CommandSetMOTD());
         framework.registerCommand(new CommandSetWarp());
+        framework.registerCommand(new CommandSetWorth());
         framework.registerCommand(new CommandShowinv());
         framework.registerCommand(new CommandSkull());
         framework.registerCommand(new CommandSpeed());
@@ -179,6 +183,7 @@ public class Core extends JavaPlugin {
         framework.registerCommand(new CommandTpa());
         framework.registerCommand(new CommandTpChoose());
         framework.registerCommand(new CommandWarp());
+        framework.registerCommand(new CommandWorth());
     //Special Commands
         framework.registerCommand(new CommandCenter());
         framework.registerCommand(new CommandChestToKit());
@@ -218,6 +223,7 @@ public class Core extends JavaPlugin {
     		new ListenSonic(),
     		new ListenAntiVoid(),
     		new ListenPortal(),
+    		new ListenSellAll(),
     		new ListenShopSign(),
     		new ListenVote()
     	);
