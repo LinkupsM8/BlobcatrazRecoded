@@ -53,7 +53,7 @@ public class ListenSellAll implements Listener {
 		}
 	}
 	
-	private void gui(Player p) {
+	public static void gui(Player p) {
 		int size = 54;
 		Inventory i = Bukkit.createInventory(null, size, TITLE);
 		p.openInventory(i);
