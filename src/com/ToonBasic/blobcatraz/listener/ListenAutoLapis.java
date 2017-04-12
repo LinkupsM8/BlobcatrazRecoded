@@ -23,9 +23,8 @@ public class ListenAutoLapis implements Listener {
 	public void open(InventoryOpenEvent e) {
 		Inventory i = e.getInventory();
 		if(i instanceof EnchantingInventory) {
-			EnchantingInventory ei = (EnchantingInventory) i;
-			ei.setItem(1, LAPIS);
-			list.add(ei);
+			i.setItem(1, LAPIS);
+			list.add(i);
 		}
 	}
 	
@@ -33,8 +32,10 @@ public class ListenAutoLapis implements Listener {
 	public void close(InventoryCloseEvent e) {
 		Inventory i = e.getInventory();
 		if(list.contains(i)) {
-			i.setItem(1, null);
-			list.remove(i);
+			if(i instanceof EnchantingInventory) {
+				i.setItem(1, null);
+				list.remove(i);
+			}
 		}
 	}
 	
@@ -42,14 +43,18 @@ public class ListenAutoLapis implements Listener {
 	public void click(InventoryClickEvent e) {
 		Inventory i = e.getInventory();
 		if(list.contains(i)) {
-			int slot = e.getSlot();
-			if(slot == 1) e.setCancelled(true);
+			if(i instanceof EnchantingInventory) {
+				int slot = e.getSlot();
+				if(slot == 1) e.setCancelled(true);
+			}
 		}
 	}
 	
 	@EventHandler
 	public void ench(EnchantItemEvent e) {
 		Inventory i = e.getInventory();
-		if(list.contains(i)) i.setItem(1, LAPIS);
+		if(list.contains(i)) {
+			if(i instanceof EnchantingInventory) i.setItem(1, LAPIS);
+		}
 	}
 }
