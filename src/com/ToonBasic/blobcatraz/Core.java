@@ -82,6 +82,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
 import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
+import com.ToonBasic.blobcatraz.listener.ListenJoin;
 import com.ToonBasic.blobcatraz.listener.ListenPortal;
 import com.ToonBasic.blobcatraz.listener.ListenSellAll;
 import com.ToonBasic.blobcatraz.listener.ListenShopSign;
@@ -219,6 +220,7 @@ public class Core extends JavaPlugin {
 
     		//Listener Events
     		new ListenChat(),
+    		new ListenJoin(),
     		new ListenSignColor(),
     		new ListenSonic(),
     		new ListenAntiVoid(),
