@@ -12,7 +12,7 @@ public class ListenJoin implements Listener {
     public void join(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         String name = p.getName();
-        boolean noob = p.hasPlayedBefore();
+        boolean noob = !p.hasPlayedBefore();
         if(noob) {
         	String msg = Util.prefix + Util.color("&dPlease welcome &f" + name + " &dto &3&lBlobcatraz&d!");
         	Util.broadcast(msg);
