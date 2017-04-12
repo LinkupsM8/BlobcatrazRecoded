@@ -4,55 +4,48 @@ import static com.ToonBasic.blobcatraz.command.staff.CommandVanish.vanished;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.SkullType;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
-
-import net.md_5.bungee.api.ChatColor;
-
-import java.util.ArrayList;
-import java.util.UUID;
+import com.ToonBasic.blobcatraz.utility.PlayerUtil;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 public class CommandStaff extends ICommand {
-    public static ArrayList<UUID> staff = new ArrayList<>();
-
-    public CommandStaff() {
-        super("staff", "", "blobcatraz.player.staff");
-    }
+    public CommandStaff() {super("staff", "", "blobcatraz.player.staff", "admins", "liststaff");}
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
         Player p = (Player) cs;
-        p.sendMessage(prefix + "Now opening the staff gui...");
-        makeGUI(p);
+        PlayerUtil.action(p, "Opening the staff GUI...");
+        gui(p);
     }
-
-    public void makeGUI(Player p) {
-        Inventory heads = Bukkit.createInventory(null, 9, ChatColor.GREEN + "Online Staff: ");
-
-        ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
-        SkullMeta meta = (SkullMeta) skull.getItemMeta();
-        int i = 0;
-
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            UUID uuid = player.getUniqueId();
-            if (staff.contains(uuid)) {
-                if (vanished.contains(player)) {
-                    //Do not add player
-                } else {
-                    meta.setOwner(player.getName());
-                    meta.setDisplayName(ChatColor.LIGHT_PURPLE + player.getName());
-                    skull.setItemMeta(meta);
-                    heads.setItem(i, skull);
-                    i++;
-                }
-            }
-        }
-        p.openInventory(heads);
+    
+    public static void gui(Player p) {
+    	Inventory i = Bukkit.createInventory(null, 9, Util.color("&2Online Staff"));
+    	ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, Util.intToShort(3));
+    	ItemMeta meta = head.getItemMeta();
+    	SkullMeta sm = (SkullMeta) meta;
+    	
+    	int j = 0;
+    	String perm = "blobcatraz.staff.staff";
+    	for(Player o : Bukkit.getOnlinePlayers()) {
+    		if(o.hasPermission(perm)) {
+    			if(!vanished.contains(p)) {
+    				String name = o.getName();
+    				String dname = Util.color("&5" + name);
+    				sm.setOwner(name);
+    				sm.setDisplayName(dname);
+    				head.setItemMeta(sm);
+    				i.setItem(j, head);
+    				j++;
+    			}
+    		}
+    	}
+    	p.openInventory(i);
     }
 }
