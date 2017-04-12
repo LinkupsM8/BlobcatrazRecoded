@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.EnchantingInventory;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
@@ -44,7 +45,7 @@ public class ListenAutoLapis implements Listener {
 		Inventory i = e.getInventory();
 		if(list.contains(i)) {
 			if(i instanceof EnchantingInventory) {
-				int slot = e.getSlot();
+				int slot = e.getRawSlot();
 				if(slot == 1) e.setCancelled(true);
 			}
 		}
