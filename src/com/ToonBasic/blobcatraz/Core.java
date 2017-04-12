@@ -83,6 +83,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
 import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
 import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
+import com.ToonBasic.blobcatraz.listener.ListenAutoLapis;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
 import com.ToonBasic.blobcatraz.listener.ListenJoin;
 import com.ToonBasic.blobcatraz.listener.ListenPortal;
@@ -223,15 +224,17 @@ public class Core extends JavaPlugin {
             new CommandPowertool(),
 
     		//Listener Events
+    		new ListenAntiVoid(),
+    		new ListenAutoLapis(),
     		new ListenChat(),
     		new ListenJoin(),
     		new ListenSignColor(),
-    		new ListenSonic(),
-    		new ListenAntiVoid(),
     		new ListenPortal(),
     		new ListenSellAll(),
     		new ListenShopSign(),
-    		new ListenVote()
+    		new ListenVote(),
+    		
+    		new ListenSonic()
     	);
     }
 }
