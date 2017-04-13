@@ -24,9 +24,13 @@ public class CommandSlimeCannon extends ICommand {
 		Vector v = eye.multiply(2);
 		World w = p.getWorld();
 		Slime s = w.spawn(l, Slime.class);
-		s.setSize(1);
-		s.setVelocity(v);
-		Bukkit.getScheduler().runTaskLater(Core.instance, new Explode(s), 20L);
+		if(s != null) {
+			s.setCollidable(false);
+			s.setInvulnerable(true);
+			s.setSize(5);
+			s.setVelocity(v);
+			Bukkit.getScheduler().runTaskLater(Core.instance, new Explode(s), 20L);
+		}
 	}
 	
 	public class Explode implements Runnable {
