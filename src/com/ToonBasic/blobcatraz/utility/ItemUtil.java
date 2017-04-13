@@ -109,7 +109,7 @@ public class ItemUtil extends Util {
 	public static final ItemStack opTool(Material mat) {
 		ItemStack is = new ItemStack(mat);
 		ItemMeta meta = is.getItemMeta();
-		meta.setDisplayName("&4&ki&1Overpowered&4&ki&r");
+		meta.setDisplayName(Util.color("&4&ki&1Overpowered&4&ki&r"));
 		meta.addEnchant(Enchantment.DIG_SPEED, 32767, true);
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.values());
