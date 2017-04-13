@@ -33,6 +33,9 @@ public class ItemUtil extends Util {
 	
 	/*Start Special Items*/
 	private static final ItemStack ENCHANTED_GOLDEN_APPLE = new ItemStack(Material.GOLDEN_APPLE, 1, intToShort(1));
+	private static final ItemStack ENDER_PORTAL_FRAME = new ItemStack(Material.ENDER_PORTAL_FRAME, 1, intToShort(0));
+	private static final ItemStack OVERPOWERED_PICKAXE = opTool(Material.DIAMOND_PICKAXE);
+	private static final ItemStack OVERPOWERED_AXE = opTool(Material.DIAMOND_AXE);
 	/*End Special Items*/
 	
 	/*Start Stones*/
@@ -49,6 +52,8 @@ public class ItemUtil extends Util {
 	public static void load() {
 		items.put("op sword", opSword());
 		items.put("op bow", opBow());
+		items.put("op pickaxe", OVERPOWERED_PICKAXE);
+		items.put("op axe", OVERPOWERED_AXE);
 		items.put("sonic", ListenSonic.sonic());
 		items.put("rose red", ROSE);
 		items.put("cactus green", CACTUS);
@@ -72,6 +77,7 @@ public class ItemUtil extends Util {
 		items.put("polished granite", PGRANITE);
 		items.put("polished diorite", PDIORITE);
 		items.put("polished andesite", PANDESITE);
+		items.put("portal frame", ENDER_PORTAL_FRAME);
 	}
 	
 	public static final ItemStack opSword() {
@@ -79,7 +85,6 @@ public class ItemUtil extends Util {
 		ItemMeta meta = is.getItemMeta();	
 		meta.setDisplayName(Util.color("&4&ki&1Overpowered &1Sword&4&ki&r"));
 		meta.addEnchant(Enchantment.DAMAGE_ALL, 32767, true);
-		meta.addEnchant(Enchantment.DURABILITY, 32767, true);
 		meta.addEnchant(Enchantment.FIRE_ASPECT, 32767, true);
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.values());
@@ -95,6 +100,17 @@ public class ItemUtil extends Util {
 		meta.addEnchant(Enchantment.ARROW_INFINITE, 32767, true);
 		meta.addEnchant(Enchantment.ARROW_FIRE, 32767, true);
 		meta.addEnchant(Enchantment.ARROW_KNOCKBACK, 10, true);
+		meta.setUnbreakable(true);
+		meta.addItemFlags(ItemFlag.values());
+		is.setItemMeta(meta);
+		return is;
+	}
+	
+	public static final ItemStack opTool(Material mat) {
+		ItemStack is = new ItemStack(mat);
+		ItemMeta meta = is.getItemMeta();
+		meta.setDisplayName("&4&ki&1Overpowered&4&ki&r");
+		meta.addEnchant(Enchantment.DIG_SPEED, 32767, true);
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.values());
 		is.setItemMeta(meta);
