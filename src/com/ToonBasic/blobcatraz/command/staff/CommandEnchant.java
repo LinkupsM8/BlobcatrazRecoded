@@ -25,7 +25,11 @@ public class CommandEnchant extends ICommand {
 				PlayerInventory pi = p.getInventory();
 				ItemStack is = pi.getItemInMainHand();
 				if(is != null) {
-					is.addUnsafeEnchantment(enchant, level);
+					if(level == 0) {
+						is.removeEnchantment(enchant);
+					} else {
+						is.addUnsafeEnchantment(enchant, level);
+					}
 					p.sendMessage("Successfully enchanted your item!");
 				} else {
 					String error = "You cannot enchant AIR";

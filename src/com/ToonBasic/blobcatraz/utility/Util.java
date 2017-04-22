@@ -115,12 +115,13 @@ public class Util {
     }
     
     public static String money(double amount) {
-    	String format = String.format("%.2f", amount);
+    	String format = String.format("%,.2f", amount);
     	boolean neg = (amount < 0);
     	boolean inf = (amount >= Double.POSITIVE_INFINITY);
+    	boolean neginf = (amount <= Double.NEGATIVE_INFINITY);
     	String money = neg ? color("&4$" + format) : color("&2$" + format);
     	if(inf) money = color("&2$\u221E");
-    	if(inf && neg) money = color("&4$-\u221E");
+    	if(neginf) money = color("&4$-\u221E");
     	return money;
     }
 

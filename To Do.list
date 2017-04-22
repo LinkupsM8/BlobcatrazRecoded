@@ -1,6 +1,7 @@
 PRE-RELEASE:
  - /shop (ALIAS OF /warp shop)
  - /skyblock (ALIAS OF /warp skyblock)
+ - /block and /unblock (converts blocks to diamonds and vice versa)
  - /prison (ALIAS OF /warp prison)
  - Shop GUI
  - Custom Scoreboard

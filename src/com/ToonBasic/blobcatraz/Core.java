@@ -22,6 +22,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandHelp;
 import com.ToonBasic.blobcatraz.command.player.CommandHome;
 import com.ToonBasic.blobcatraz.command.player.CommandHomes;
 import com.ToonBasic.blobcatraz.command.player.CommandHub;
+import com.ToonBasic.blobcatraz.command.player.CommandIgnore;
 import com.ToonBasic.blobcatraz.command.player.CommandKit;
 import com.ToonBasic.blobcatraz.command.player.CommandMessage;
 import com.ToonBasic.blobcatraz.command.player.CommandNickname;
@@ -36,12 +37,14 @@ import com.ToonBasic.blobcatraz.command.player.CommandStaff;
 import com.ToonBasic.blobcatraz.command.player.CommandTpChoose;
 import com.ToonBasic.blobcatraz.command.player.CommandTpa;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
+import com.ToonBasic.blobcatraz.command.player.CommandWarps;
 import com.ToonBasic.blobcatraz.command.player.CommandWorth;
 import com.ToonBasic.blobcatraz.command.special.CommandBurn;
 import com.ToonBasic.blobcatraz.command.special.CommandCenter;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
 import com.ToonBasic.blobcatraz.command.special.CommandDelPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandHideAll;
+import com.ToonBasic.blobcatraz.command.special.CommandItemDB;
 import com.ToonBasic.blobcatraz.command.special.CommandItemHolo;
 import com.ToonBasic.blobcatraz.command.special.CommandKitToChest;
 import com.ToonBasic.blobcatraz.command.special.CommandNuke;
@@ -143,6 +146,7 @@ public class Core extends JavaPlugin {
         framework.registerCommands(
         	new CommandAnvil(),
         	new CommandBan(),
+        	new CommandChat(),
         	new CommandClearInventory(),
         	new CommandDelKit(),
         	new CommandDelWarp(),
@@ -162,7 +166,7 @@ public class Core extends JavaPlugin {
         	new CommandPowertool(),
         	new CommandRepair(),
         	new CommandSeen(),
-        	new CommandKit(),
+        	new CommandSetKit(),
         	new CommandSetMOTD(),
         	new CommandSetWarp(),
         	new CommandSetWorth(),
@@ -192,6 +196,7 @@ public class Core extends JavaPlugin {
         	new CommandHome(),
         	new CommandHomes(),
         	new CommandHub(),
+        	new CommandIgnore(),
         	new CommandKit(),
         	new CommandMessage(),
         	new CommandNickname(),
@@ -206,6 +211,7 @@ public class Core extends JavaPlugin {
         	new CommandTpa(),
         	new CommandTpChoose(),
         	new CommandWarp(),
+        	new CommandWarps(),
         	new CommandWorth()
         );
         
@@ -216,6 +222,7 @@ public class Core extends JavaPlugin {
         	new CommandChestToKit(),
         	new CommandDelPortal(),
         	new CommandHideAll(),
+        	new CommandItemDB(),
         	new CommandItemHolo(),
         	new CommandKitToChest(),
         	new CommandNuke(),
@@ -253,9 +260,11 @@ public class Core extends JavaPlugin {
     		new CommandNickname(),
     		new CommandEmojis(),
             new CommandGod(),
+            new CommandIgnore(),
             new CommandMute(),
             new CommandSeen(),
             new CommandPowertool(),
+            new CommandWarps(),
 
     		//Listener Events
     		new ListenAntiVoid(),

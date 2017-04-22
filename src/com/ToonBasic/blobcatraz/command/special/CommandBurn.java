@@ -23,7 +23,7 @@ public class CommandBurn extends ICommand {
 				time = Util.onlyInteger(time);
 				int ti = Integer.parseInt(time);
 				t.setFireTicks(ti);
-				String msg = prefix + "You set &a" + t.getName() + "&r on fire for &a" + ti + "&r ticks";
+				String msg = Util.color(prefix + "You set &a" + t.getName() + "&r on fire for &a" + ti + "&r ticks");
 				cs.sendMessage(msg);
 			} catch(Exception ex) {
 				String error = "Invalid Number: " + time;
