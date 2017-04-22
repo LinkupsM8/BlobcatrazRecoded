@@ -1,9 +1,13 @@
-Commands
-  - /shop
-Other:
-  - Better world generation to prevent lag made by Multiverse
-  - Custom Scoreboard
-After Release:
-  - AntiCheat (LATER)
-  - Auto Broadcast
-  - [item]
+PRE-RELEASE:
+ - /shop (ALIAS OF /warp shop)
+ - /skyblock (ALIAS OF /warp skyblock)
+ - /prison (ALIAS OF /warp prison)
+ - Shop GUI
+ - Custom Scoreboard
+ - Better World Generation (PREVENT MULTIVERSE LAG)
+ - Kit GUI
+ - SkyWars (CURRENTLY WIP, WILL PROVIDE REPO LINK SOON)
+
+POST-RELEASE:
+ - Automatic Broadcasting
+ - AntiCheat
