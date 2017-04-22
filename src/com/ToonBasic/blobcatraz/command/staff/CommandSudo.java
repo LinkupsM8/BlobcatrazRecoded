@@ -5,58 +5,31 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.Util;
 
-@PlayerOnly
 public class CommandSudo extends ICommand {
 
-	public CommandSudo() {
-		super("sudo", "<player> <message/command>", "blobcatraz.staff.sudo");
-	}
+	public CommandSudo() {super("sudo", "<player> <message/command>", "blobcatraz.staff.sudo");}
 
 	@Override
-	public void handleCommand(CommandSender sender, String[] args) {
-		
-		Player p = (Player) sender;
-
-		if (args.length > 1) {
-			
-			Player p2 = Bukkit.getServer().getPlayer(args[0]);
-			
-			if (p2 == null) {
-				
-				p.sendMessage("\u00a7cThat player does not exist or is not online!");
-				return;
-				
-			}
-			
-			StringBuilder str = new StringBuilder(args[1]);
-			
-			if (args.length != 2) {
-				
-				str.append(" ");
-				for (int i = 2; i < args.length - 1; i++) {
-					
-					str.append(args[i] + " ");
-					
-				}
-				str.append(args[args.length - 1]);
-			
-			}
-			
-			String sudo = str.toString();
-			
-			if (sudo.startsWith("/")) {
-				
-				Bukkit.getServer().dispatchCommand(p2, sudo.substring(1));
-				
+	public void handleCommand(CommandSender cs, String[] args) {	
+		if (args.length > 1) {	
+			Player p = Bukkit.getPlayer(args[0]);
+			if (p != null) {
+				String sudo = Util.finalArgs(1, args);
+				if (sudo.startsWith("/")) {
+					String cmd = sudo.substring(1);
+					p.performCommand(cmd);
+				} else p.chat(sudo);
 			} else {
-				
-				p2.chat(sudo);
-				
+				cs.sendMessage("\u00a7cThat player does not exist or is not online!");
+				return;
 			}
 
-		} else p.sendMessage("Missing Arguments: Did you mean /sudo <player> <message/command>");
+		} else {
+			String error = "Missing Arguments! Try /sudo <player> <msg or command>";
+			cs.sendMessage(error);
+		}
 	}
 
 }

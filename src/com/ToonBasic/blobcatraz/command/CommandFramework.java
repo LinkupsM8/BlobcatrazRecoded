@@ -77,6 +77,7 @@ public class CommandFramework {
     }
 
     public List<String> getCommands() {return commands;}
+    public void registerCommands(ICommand... ics) {for(ICommand ic : ics) registerCommand(ic);}
     public void registerCommand(ICommand ic) {cmds.put(ic, plugin);}
 
     public void registerCommands() {

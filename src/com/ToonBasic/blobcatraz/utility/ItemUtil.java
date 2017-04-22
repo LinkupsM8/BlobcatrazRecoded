@@ -13,6 +13,10 @@ import com.ToonBasic.blobcatraz.config.ConfigWorth;
 import com.ToonBasic.blobcatraz.listener.item.ListenSonic;
 
 public class ItemUtil extends Util {
+	/*Start Spawn Eggs*/
+	
+	/*End Spawn Eggs*/
+	
 	/*Start Dyes*/
 	private static final ItemStack ROSE = dye(1);
 	private static final ItemStack CACTUS = dye(2);
@@ -32,19 +36,19 @@ public class ItemUtil extends Util {
 	/*End Dyes*/
 	
 	/*Start Special Items*/
-	private static final ItemStack ENCHANTED_GOLDEN_APPLE = new ItemStack(Material.GOLDEN_APPLE, 1, intToShort(1));
-	private static final ItemStack ENDER_PORTAL_FRAME = new ItemStack(Material.ENDER_PORTAL_FRAME, 1, intToShort(0));
+	private static final ItemStack ENCHANTED_GOLDEN_APPLE = new ItemStack(Material.GOLDEN_APPLE, 1, toShort(1));
+	private static final ItemStack ENDER_PORTAL_FRAME = new ItemStack(Material.ENDER_PORTAL_FRAME, 1, toShort(0));
 	private static final ItemStack OVERPOWERED_PICKAXE = opTool(Material.DIAMOND_PICKAXE);
 	private static final ItemStack OVERPOWERED_AXE = opTool(Material.DIAMOND_AXE);
 	/*End Special Items*/
 	
 	/*Start Stones*/
-	private static final ItemStack GRANITE = new ItemStack(Material.STONE, 1, intToShort(1));
-	private static final ItemStack PGRANITE = new ItemStack(Material.STONE, 1, intToShort(2));
-	private static final ItemStack DIORITE = new ItemStack(Material.STONE, 1, intToShort(3));
-	private static final ItemStack PDIORITE = new ItemStack(Material.STONE, 1, intToShort(4));
-	private static final ItemStack ANDESITE = new ItemStack(Material.STONE, 1, intToShort(5));
-	private static final ItemStack PANDESITE = new ItemStack(Material.STONE, 1, intToShort(6));
+	private static final ItemStack GRANITE = new ItemStack(Material.STONE, 1, toShort(1));
+	private static final ItemStack PGRANITE = new ItemStack(Material.STONE, 1, toShort(2));
+	private static final ItemStack DIORITE = new ItemStack(Material.STONE, 1, toShort(3));
+	private static final ItemStack PDIORITE = new ItemStack(Material.STONE, 1, toShort(4));
+	private static final ItemStack ANDESITE = new ItemStack(Material.STONE, 1, toShort(5));
+	private static final ItemStack PANDESITE = new ItemStack(Material.STONE, 1, toShort(6));
 	/*End Stones*/
 	
 	private static Map<String, ItemStack> items = newMap();
@@ -78,6 +82,8 @@ public class ItemUtil extends Util {
 		items.put("polished diorite", PDIORITE);
 		items.put("polished andesite", PANDESITE);
 		items.put("portal frame", ENDER_PORTAL_FRAME);
+		items.put("enchant table", new ItemStack(Material.ENCHANTMENT_TABLE));
+		items.put("sticky piston", new ItemStack(Material.PISTON_STICKY_BASE));
 	}
 	
 	public static final ItemStack opSword() {
@@ -118,7 +124,7 @@ public class ItemUtil extends Util {
 	}
 	
 	public static ItemStack dye(int meta) {
-		ItemStack dye = new ItemStack(Material.INK_SACK, 1, intToShort(meta));
+		ItemStack dye = new ItemStack(Material.INK_SACK, 1, toShort(meta));
 		return dye;
 	}
 	
@@ -136,6 +142,21 @@ public class ItemUtil extends Util {
 			return is;
 		}
 		return null;
+	}
+	
+	public static String name(ItemStack is) {
+		if(is == null) return "AIR";
+		ItemMeta meta = is.getItemMeta();
+		if(meta.hasDisplayName()) return meta.getDisplayName();
+		else {
+			Material mat = is.getType();
+			short data = is.getDurability();
+			if(data == 0 || data == 32767) return mat.name();
+			else {
+				String name = mat.name() + ":" + data;
+				return name;
+			}
+		}
 	}
 	
 	public static double worth(ItemStack is) {

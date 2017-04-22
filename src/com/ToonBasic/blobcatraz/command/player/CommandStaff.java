@@ -27,7 +27,7 @@ public class CommandStaff extends ICommand {
     
     public static void gui(Player p) {
     	Inventory i = Bukkit.createInventory(null, 9, Util.color("&2Online Staff"));
-    	ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, Util.intToShort(3));
+    	ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, Util.toShort(3));
     	ItemMeta meta = head.getItemMeta();
     	SkullMeta sm = (SkullMeta) meta;
     	

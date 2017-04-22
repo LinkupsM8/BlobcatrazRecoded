@@ -23,6 +23,7 @@ public class CommandPay extends ICommand {
 			if(t != null) {
 				String mon = args[1];
 				double pay = Double.parseDouble(mon);
+				if(pay < 0) pay *= -1;
 				if(pay <= bal) {
 					ConfigDatabase.withdraw(p, pay);
 					ConfigDatabase.deposit(t, pay);

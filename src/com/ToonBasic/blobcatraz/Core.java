@@ -4,7 +4,11 @@ import java.io.File;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
+import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ToonBasic.blobcatraz.command.CommandFramework;
@@ -33,12 +37,16 @@ import com.ToonBasic.blobcatraz.command.player.CommandTpChoose;
 import com.ToonBasic.blobcatraz.command.player.CommandTpa;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
 import com.ToonBasic.blobcatraz.command.player.CommandWorth;
+import com.ToonBasic.blobcatraz.command.special.CommandBurn;
 import com.ToonBasic.blobcatraz.command.special.CommandCenter;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
 import com.ToonBasic.blobcatraz.command.special.CommandDelPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandHideAll;
+import com.ToonBasic.blobcatraz.command.special.CommandItemHolo;
 import com.ToonBasic.blobcatraz.command.special.CommandKitToChest;
 import com.ToonBasic.blobcatraz.command.special.CommandNuke;
+import com.ToonBasic.blobcatraz.command.special.CommandPTime;
+import com.ToonBasic.blobcatraz.command.special.CommandPWeather;
 import com.ToonBasic.blobcatraz.command.special.CommandPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandSetPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandShhh;
@@ -83,6 +91,8 @@ import com.ToonBasic.blobcatraz.command.staff.CommandTop;
 import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
 import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
 import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
+import com.ToonBasic.blobcatraz.config.ConfigHolo;
+import com.ToonBasic.blobcatraz.config.CustomHologram;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenAutoLapis;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
@@ -103,23 +113,26 @@ public class Core extends JavaPlugin {
     public static Core instance;
     public static File folder;
     public static Logger LOG;
-
     CommandFramework framework;
 
+    private static final Server SERVER = Bukkit.getServer();
+    private static final PluginManager PM = SERVER.getPluginManager();
+    private static final ServicesManager SM = SERVER.getServicesManager();
+    
     public void onEnable() {
         instance = this;
         LOG = getLogger();
         folder = getDataFolder();
+        if(PM.isPluginEnabled("Vault")) {
+        	BEconomy be = new BEconomy();
+        	Vault V = Vault.getPlugin(Vault.class);
+        	ServicePriority SP = ServicePriority.Highest;
+        	SM.register(Economy.class, be, V, SP);
+        }
         framework = new CommandFramework(instance);
         LOG.info("Now registering Blobcatraz...");
         commands();
         events();
-        if(Bukkit.getPluginManager().isPluginEnabled("Vault")) {
-        	BEconomy be = new BEconomy();
-        	Vault V = Vault.getPlugin(Vault.class);
-        	ServicePriority SP = ServicePriority.Highest;
-        	Bukkit.getServicesManager().register(Economy.class, be, V, SP);
-        }
     }
     public void onDisable() {
         LOG.info("Now disabling Blobcatraz...");
@@ -127,82 +140,101 @@ public class Core extends JavaPlugin {
     
     public void commands() {
     //Staff Commands
-        framework.registerCommand(new CommandAnvil());
-        framework.registerCommand(new CommandBan());
-        framework.registerCommand(new CommandClearInventory());
-        framework.registerCommand(new CommandDelKit());
-        framework.registerCommand(new CommandDelWarp());
-        framework.registerCommand(new CommandEconomy());
-        framework.registerCommand(new CommandEnchant());
-        framework.registerCommand(new CommandEnderChest());
-        framework.registerCommand(new CommandFireball());
-        framework.registerCommand(new CommandFly());
-        framework.registerCommand(new CommandFreeze());
-        framework.registerCommand(new CommandGamemode());
-        framework.registerCommand(new CommandGod());
-        framework.registerCommand(new CommandHeal());
-        framework.registerCommand(new CommandItem());
-        framework.registerCommand(new CommandLag());
-        framework.registerCommand(new CommandMobSpawn());
-        framework.registerCommand(new CommandMute());
-        framework.registerCommand(new CommandPowertool());
-        framework.registerCommand(new CommandRepair());
-        framework.registerCommand(new CommandSeen());
-        framework.registerCommand(new CommandSetKit());
-        framework.registerCommand(new CommandSetMOTD());
-        framework.registerCommand(new CommandSetWarp());
-        framework.registerCommand(new CommandSetWorth());
-        framework.registerCommand(new CommandShowinv());
-        framework.registerCommand(new CommandSkull());
-        framework.registerCommand(new CommandSpeed());
-        framework.registerCommand(new CommandSmite());
-        framework.registerCommand(new CommandSonic());
-        framework.registerCommand(new CommandSpy());
-        framework.registerCommand(new CommandSudo());
-        framework.registerCommand(new CommandTempBan());
-        framework.registerCommand(new CommandTop());
-		framework.registerCommand(new CommandTPAll());
-        framework.registerCommand(new CommandVanish());
-        framework.registerCommand(new CommandWorkbench());
+        framework.registerCommands(
+        	new CommandAnvil(),
+        	new CommandBan(),
+        	new CommandClearInventory(),
+        	new CommandDelKit(),
+        	new CommandDelWarp(),
+        	new CommandEconomy(),
+        	new CommandEnchant(),
+        	new CommandEnderChest(),
+        	new CommandFireball(),
+        	new CommandFly(),
+        	new CommandFreeze(),
+        	new CommandGamemode(),
+        	new CommandGod(),
+        	new CommandHeal(),
+        	new CommandItem(),
+        	new CommandLag(),
+        	new CommandMobSpawn(),
+        	new CommandMute(),
+        	new CommandPowertool(),
+        	new CommandRepair(),
+        	new CommandSeen(),
+        	new CommandKit(),
+        	new CommandSetMOTD(),
+        	new CommandSetWarp(),
+        	new CommandSetWorth(),
+        	new CommandShowinv(),
+        	new CommandSkull(),
+        	new CommandSmite(),
+        	new CommandSonic(),
+        	new CommandSpeed(),
+        	new CommandSpy(),
+        	new CommandSudo(),
+        	new CommandTempBan(),
+        	new CommandTop(),
+        	new CommandTPAll(),
+        	new CommandVanish(),
+        	new CommandWorkbench()
+        );
+        
     //Player Commands
-        framework.registerCommand(new CommandAFK());
-        framework.registerCommand(new CommandBack());
-        framework.registerCommand(new CommandBalance());
-        framework.registerCommand(new CommandBaltop());
-        framework.registerCommand(new CommandChat());
-        framework.registerCommand(new CommandDelHome());
-        framework.registerCommand(new CommandEmojis());
-        framework.registerCommand(new CommandHelp());
-        framework.registerCommand(new CommandHome());
-        framework.registerCommand(new CommandHomes());
-        framework.registerCommand(new CommandHub());
-        framework.registerCommand(new CommandKit());
-        framework.registerCommand(new CommandMessage());
-        framework.registerCommand(new CommandNickname());
-        framework.registerCommand(new CommandPay());
-        framework.registerCommand(new CommandPrefix());
-        framework.registerCommand(new CommandRename());
-        framework.registerCommand(new CommandReply());
-        framework.registerCommand(new CommandRules());
-        framework.registerCommand(new CommandSell());
-        framework.registerCommand(new CommandSetHome());
-        framework.registerCommand(new CommandStaff());
-        framework.registerCommand(new CommandTpa());
-        framework.registerCommand(new CommandTpChoose());
-        framework.registerCommand(new CommandWarp());
-        framework.registerCommand(new CommandWorth());
+        framework.registerCommands(
+        	new CommandAFK(),
+        	new CommandBack(),
+        	new CommandBalance(),
+        	new CommandBaltop(),
+        	new CommandDelHome(),
+        	new CommandEmojis(),
+        	new CommandHelp(),
+        	new CommandHome(),
+        	new CommandHomes(),
+        	new CommandHub(),
+        	new CommandKit(),
+        	new CommandMessage(),
+        	new CommandNickname(),
+        	new CommandPay(),
+        	new CommandPrefix(),
+        	new CommandRename(),
+        	new CommandReply(),
+        	new CommandRules(),
+        	new CommandSell(),
+        	new CommandSetHome(),
+        	new CommandStaff(),
+        	new CommandTpa(),
+        	new CommandTpChoose(),
+        	new CommandWarp(),
+        	new CommandWorth()
+        );
+        
     //Special Commands
-        framework.registerCommand(new CommandCenter());
-        framework.registerCommand(new CommandChestToKit());
-        framework.registerCommand(new CommandDelPortal());
-        framework.registerCommand(new CommandHideAll());
-        framework.registerCommand(new CommandKitToChest());
-        framework.registerCommand(new CommandNuke());
-        framework.registerCommand(new CommandPortal());
-        framework.registerCommand(new CommandSetPortal());
-        framework.registerCommand(new CommandShhh());
-        framework.registerCommand(new CommandSlimeCannon());
-        framework.registerCommand(new CommandUnbreakable());
+        framework.registerCommands(
+        	new CommandBurn(),
+        	new CommandCenter(),
+        	new CommandChestToKit(),
+        	new CommandDelPortal(),
+        	new CommandHideAll(),
+        	new CommandItemHolo(),
+        	new CommandKitToChest(),
+        	new CommandNuke(),
+        	new CommandPortal(),
+        	new CommandPTime(),
+        	new CommandPWeather(),
+        	new CommandSetPortal(),
+        	new CommandShhh(),
+        	new CommandSlimeCannon(),
+        	new CommandUnbreakable()
+        );
+        
+     //Dependents
+        if(PM.isPluginEnabled("HolographicDisplays")) {
+        	framework.registerCommand(new CommandItemHolo());
+        	ConfigurationSerialization.registerClass(CustomHologram.class);
+        	ConfigHolo.load();
+        }
+        
     //Register All    
         framework.registerCommands();
     }

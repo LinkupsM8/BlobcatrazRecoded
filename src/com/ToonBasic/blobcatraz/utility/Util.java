@@ -1,6 +1,5 @@
 package com.ToonBasic.blobcatraz.utility;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -46,10 +45,10 @@ public class Util {
     	return n;
     }
     
-    public static short intToShort(int i) {
-    	if(i > Short.MAX_VALUE) i = Short.MAX_VALUE;
-    	if(i < 0) i = 0;
-    	return (short) i;
+    public static short toShort(Number n) {
+    	if(n.doubleValue() > Short.MAX_VALUE) n = Short.MAX_VALUE;
+    	if(n.doubleValue() < 0) n = 0;
+    	return n.shortValue();
     }
     
     public static String strip(String msg) {return ChatColor.stripColor(msg);}
@@ -116,10 +115,12 @@ public class Util {
     }
     
     public static String money(double amount) {
-    	NumberFormat nf = NumberFormat.getCurrencyInstance();
-    	String money = nf.format(amount);
-    	if(money.startsWith("$-")) money = color("&4" + money);
-    	else money = color("&2" + money);
+    	String format = String.format("%.2f", amount);
+    	boolean neg = (amount < 0);
+    	boolean inf = (amount >= Double.POSITIVE_INFINITY);
+    	String money = neg ? color("&4$" + format) : color("&2$" + format);
+    	if(inf) money = color("&2$\u221E");
+    	if(inf && neg) money = color("&4$-\u221E");
     	return money;
     }
 

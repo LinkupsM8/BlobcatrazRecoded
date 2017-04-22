@@ -51,7 +51,7 @@ public class ConfigDatabase {
         File file = new File(folder, uuid + ".yml");
 
         set(config, "username", op.getName(), false);
-        set(config, "prefix", "&a[&bMember&a] &f", false);
+        set(config, "prefix", "&a[&bA&a] &f", false);
         set(config, "last ip", "localhost", false);
         set(config, "last seen", System.currentTimeMillis(), false);
         set(config, "nickname", op.getName(), false);
@@ -114,6 +114,11 @@ public class ConfigDatabase {
         return votes;
     }
     
+    public static boolean staff(OfflinePlayer op) {
+    	boolean staff = op.isOp();
+    	return staff;
+    }
+    
     public static boolean hasAccount(OfflinePlayer op) {
     	File file = file(op);
     	return file.exists();
@@ -134,9 +139,11 @@ public class ConfigDatabase {
     public static Map<String, Double> balances() {
     	Map<String, Double> map = Util.newMap();
     	for(OfflinePlayer off : Bukkit.getOfflinePlayers()) {
-    		String nam = off.getName();
-    		double bal = balance(off);
-    		map.put(nam, bal);
+    		if(!staff(off)) {
+        		String nam = off.getName();
+        		double bal = balance(off);
+        		map.put(nam, bal);
+    		}
     	}
     	return map;
     }

@@ -1,5 +1,6 @@
 package com.ToonBasic.blobcatraz.command.player;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -9,15 +10,24 @@ import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 public class CommandPrefix extends ICommand implements Listener {
-	public CommandPrefix() {super("prefix", "<prefix>", "blobcatraz.staff.prefix");}
+	public CommandPrefix() {super("prefix", "<player> <prefix>", "blobcatraz.staff.prefix");}
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
-		String prefix = Util.finalArgs(0, args) + " &f";
-		String pref = Util.color(prefix);
 		Player p = (Player) cs;
-		p.setDisplayName(pref + ConfigDatabase.nickName(p));
-		ConfigDatabase.prefix(p, prefix);
-		p.sendMessage("Your prefix was changed to " + pref);
+		String target = args[0];
+		Player t = Bukkit.getPlayer(target);
+		if(t == null) {
+			String msg = "Your target is not online, changing your prefix instead!";
+			p.sendMessage(msg);
+			t = p;
+		}
+		
+		String prefix2 = Util.finalArgs(1, args) + " &f";
+		String pref = Util.color(prefix2);
+		t.setDisplayName(pref + ConfigDatabase.nickName(t));
+		ConfigDatabase.prefix(t, prefix2);
+		p.sendMessage(prefix + "You changed the prefix of " + t.getName() + " to " + pref);
+		t.sendMessage(prefix + "Your prefix was changed to " + pref);
 	}
 }
