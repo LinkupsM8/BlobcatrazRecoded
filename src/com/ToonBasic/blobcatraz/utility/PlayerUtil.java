@@ -61,6 +61,7 @@ public class PlayerUtil extends Util {
 		EntityPlayer ep = cp.getHandle();
 		PlayerConnection pc = ep.playerConnection;
 		pc.sendPacket(ppoc);
+		ping(p);
 	}
 	
 	public static String possesive(String name) {

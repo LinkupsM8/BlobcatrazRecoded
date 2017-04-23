@@ -3,13 +3,12 @@ package com.ToonBasic.blobcatraz.command.player;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 
-public class CommandBlock extends ICommand implements Listener {
+public class CommandBlock extends ICommand {
 	public CommandBlock() {super("block", "", "blobcatraz.player.block", "condense", "compact", "combine", "compress");}
 	
 	@Override
@@ -20,7 +19,7 @@ public class CommandBlock extends ICommand implements Listener {
 			!craft(p.getInventory(), Material.COAL, Material.COAL_BLOCK, 9) &
 			!craft(p.getInventory(), Material.DIAMOND, Material.DIAMOND_BLOCK, 9) &
 			!craft(p.getInventory(), Material.EMERALD, Material.EMERALD_BLOCK, 9) &
-			!craft(p.getInventory(), Material.GOLD_INGOT, Material.	GOLD_BLOCK, 9) &
+			!craft(p.getInventory(), Material.GOLD_INGOT, Material.GOLD_BLOCK, 9) &
 			!craft(p.getInventory(), Material.IRON_INGOT, Material.IRON_BLOCK, 9) &
 			!craft(p.getInventory(), Material.INK_SACK, (short) 4, Material.LAPIS_BLOCK, 9) &
 			!craft(p.getInventory(), Material.QUARTZ, Material.QUARTZ_BLOCK, 4) &
@@ -33,7 +32,7 @@ public class CommandBlock extends ICommand implements Listener {
 		p.sendMessage(prefix + "Combined your materials!");
 	}
 	
-	public boolean craft(Inventory i, Material m, Material b, int combine) {
+	public static boolean craft(Inventory i, Material m, Material b, int combine) {
 		int materials = 0;
 		for (ItemStack is : i.getContents()) {
 			if (is == null) continue;
@@ -48,7 +47,7 @@ public class CommandBlock extends ICommand implements Listener {
 		return true;
 	}
 	
-	public boolean craft(Inventory i, Material m, short d, Material b, int combine) {
+	public static boolean craft(Inventory i, Material m, short d, Material b, int combine) {
 		int materials = 0;
 		for (ItemStack is : i.getContents()) {
 			if (is == null) continue;

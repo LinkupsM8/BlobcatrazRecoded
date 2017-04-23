@@ -17,6 +17,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandBack;
 import com.ToonBasic.blobcatraz.command.player.CommandBalance;
 import com.ToonBasic.blobcatraz.command.player.CommandBaltop;
 import com.ToonBasic.blobcatraz.command.player.CommandBlock;
+import com.ToonBasic.blobcatraz.command.player.CommandBlockChest;
 import com.ToonBasic.blobcatraz.command.player.CommandDelHome;
 import com.ToonBasic.blobcatraz.command.player.CommandEmojis;
 import com.ToonBasic.blobcatraz.command.player.CommandHelp;
@@ -193,6 +194,7 @@ public class Core extends JavaPlugin {
         	new CommandBalance(),
         	new CommandBaltop(),
         	new CommandBlock(),
+        	new CommandBlockChest(),
         	new CommandDelHome(),
         	new CommandEmojis(),
         	new CommandHelp(),
