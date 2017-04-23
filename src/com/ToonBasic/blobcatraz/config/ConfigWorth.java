@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import com.ToonBasic.blobcatraz.Core;
+import com.ToonBasic.blobcatraz.utility.ItemUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 public class ConfigWorth {
@@ -66,6 +67,8 @@ public class ConfigWorth {
 		YamlConfiguration config = load();
 		String path = name + "." + data;
 		double worth = config.getDouble(path);
+		String disp = ItemUtil.name(is);
+		if(disp.equals(Util.color("&4&ki&1Overpowered&4&ki&r"))) worth = 150000000.00D;
 		worth = worth * amount;
 		return worth;
 	}

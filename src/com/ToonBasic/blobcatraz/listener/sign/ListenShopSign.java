@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.listener;
+package com.ToonBasic.blobcatraz.listener.sign;
 
 import static com.ToonBasic.blobcatraz.utility.ItemUtil.worth;
 import static com.ToonBasic.blobcatraz.utility.Util.toShort;
@@ -40,7 +40,7 @@ public class ListenShopSign implements Listener {
 	@EventHandler
 	public void create(SignChangeEvent e) {
 		Player p = e.getPlayer();
-		if(p.hasPermission("blobcatraz.staff.sign.shop")) {
+		if(p.hasPermission("blobcatraz.sign.shop")) {
 			String l0 = e.getLine(0).toLowerCase();
 			if(l0.contains("[buy]")) sign(e);
 		}

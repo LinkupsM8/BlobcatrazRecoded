@@ -8,6 +8,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.ItemUtil;
 
 @PlayerOnly
 public class CommandEnchant extends ICommand {
@@ -20,7 +21,7 @@ public class CommandEnchant extends ICommand {
 			String ench = args[0].toUpperCase();
 			String levl = args[1];
 			try {
-				Enchantment enchant = Enchantment.getByName(ench);
+				Enchantment enchant = ItemUtil.getEnchant(ench);
 				short level = Short.parseShort(levl);
 				PlayerInventory pi = p.getInventory();
 				ItemStack is = pi.getItemInMainHand();

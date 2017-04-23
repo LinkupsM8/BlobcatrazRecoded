@@ -1,9 +1,6 @@
 PRE-RELEASE:
- - /shop (ALIAS OF /warp shop)
- - /skyblock (ALIAS OF /warp skyblock)
+ - Spawn Egg GUI Shop
  - /block and /unblock (converts blocks to diamonds and vice versa)
- - /prison (ALIAS OF /warp prison)
- - Shop GUI
  - Custom Scoreboard
  - Better World Generation (PREVENT MULTIVERSE LAG)
  - Kit GUI

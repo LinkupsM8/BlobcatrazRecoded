@@ -38,8 +38,9 @@ public class ItemUtil extends Util {
 	/*Start Special Items*/
 	private static final ItemStack ENCHANTED_GOLDEN_APPLE = new ItemStack(Material.GOLDEN_APPLE, 1, toShort(1));
 	private static final ItemStack ENDER_PORTAL_FRAME = new ItemStack(Material.ENDER_PORTAL_FRAME, 1, toShort(0));
-	private static final ItemStack OVERPOWERED_PICKAXE = opTool(Material.DIAMOND_PICKAXE);
 	private static final ItemStack OVERPOWERED_AXE = opTool(Material.DIAMOND_AXE);
+	private static final ItemStack OVERPOWERED_PICKAXE = opTool(Material.DIAMOND_PICKAXE);
+	private static final ItemStack OVERPOWERED_SHOVEL = opTool(Material.DIAMOND_SPADE);
 	/*End Special Items*/
 	
 	/*Start Stones*/
@@ -52,12 +53,16 @@ public class ItemUtil extends Util {
 	/*End Stones*/
 	
 	private static Map<String, ItemStack> items = newMap();
-	public static Map<String, ItemStack> special() {return items;} 
+	private static Map<String, Enchantment> enchants = newMap();
+	
+	public static Map<String, ItemStack> special() {return items;}
+	public static Map<String, Enchantment> customEnchants() {return enchants;}
 	public static void load() {
 		items.put("op sword", opSword());
 		items.put("op bow", opBow());
-		items.put("op pickaxe", OVERPOWERED_PICKAXE);
 		items.put("op axe", OVERPOWERED_AXE);
+		items.put("op pickaxe", OVERPOWERED_PICKAXE);
+		items.put("op shovel", OVERPOWERED_SHOVEL);
 		items.put("sonic", ListenSonic.sonic());
 		items.put("rose red", ROSE);
 		items.put("cactus green", CACTUS);
@@ -84,12 +89,27 @@ public class ItemUtil extends Util {
 		items.put("portal frame", ENDER_PORTAL_FRAME);
 		items.put("enchant table", new ItemStack(Material.ENCHANTMENT_TABLE));
 		items.put("sticky piston", new ItemStack(Material.PISTON_STICKY_BASE));
+		
+		enchants.put("sharpness", Enchantment.DAMAGE_ALL);
+		enchants.put("bane of spiders", Enchantment.DAMAGE_ARTHROPODS);
+		enchants.put("smite", Enchantment.DAMAGE_UNDEAD);
+		enchants.put("fire aspect", Enchantment.FIRE_ASPECT);
+		enchants.put("protection", Enchantment.PROTECTION_ENVIRONMENTAL);
+		enchants.put("blast protection", Enchantment.PROTECTION_EXPLOSIONS);
+		enchants.put("fire protection", Enchantment.PROTECTION_FIRE);
+		enchants.put("feather falling", Enchantment.PROTECTION_FALL);
+		enchants.put("flame", Enchantment.ARROW_FIRE);
+		enchants.put("power", Enchantment.ARROW_DAMAGE);
+		enchants.put("infinity", Enchantment.ARROW_INFINITE);
+		enchants.put("looting", Enchantment.LOOT_BONUS_MOBS);
+		enchants.put("fortune", Enchantment.LOOT_BONUS_BLOCKS);
+		enchants.put("efficiency", Enchantment.DIG_SPEED);
 	}
 	
 	public static final ItemStack opSword() {
 		ItemStack is = new ItemStack(Material.DIAMOND_SWORD);
 		ItemMeta meta = is.getItemMeta();	
-		meta.setDisplayName(Util.color("&4&ki&1Overpowered &1Sword&4&ki&r"));
+		meta.setDisplayName(Util.color("&4&ki&1Overpowered&4&ki&r"));
 		meta.addEnchant(Enchantment.DAMAGE_ALL, 32767, true);
 		meta.addEnchant(Enchantment.FIRE_ASPECT, 32767, true);
 		meta.setUnbreakable(true);
@@ -101,7 +121,7 @@ public class ItemUtil extends Util {
 	public static final ItemStack opBow() {
 		ItemStack is = new ItemStack(Material.BOW);
 		ItemMeta meta = is.getItemMeta();
-		meta.setDisplayName(Util.color("&4&ki&1Overpowered &1Bow&4&ki&r"));
+		meta.setDisplayName(Util.color("&4&ki&1Overpowered&4&ki&r"));
 		meta.addEnchant(Enchantment.ARROW_DAMAGE, 32767, true);
 		meta.addEnchant(Enchantment.ARROW_INFINITE, 32767, true);
 		meta.addEnchant(Enchantment.ARROW_FIRE, 32767, true);
@@ -156,6 +176,16 @@ public class ItemUtil extends Util {
 				String name = mat.name() + ":" + data;
 				return name;
 			}
+		}
+	}
+	
+	public static Enchantment getEnchant(String name) {
+		String name2 = name.toLowerCase();
+		if(enchants.containsKey(name2)) return enchants.get(name2);
+		else {
+			name2 = name2.toUpperCase();
+			Enchantment ench = Enchantment.getByName(name2);
+			return ench;
 		}
 	}
 	
