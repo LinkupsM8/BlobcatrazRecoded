@@ -32,6 +32,8 @@ public class ListenPortal implements Listener {
 			Location primary = ConfigPortals.getPrimary(name);
 			Location secondary = ConfigPortals.getSecondary(name);
 			
+			if (!p.getLocation().getWorld().equals(primary.getWorld())) return;
+			
 			if (p.getLocation().getX() >= Math.min(primary.getX(), secondary.getX()) - 0.3 &&
 				p.getLocation().getX() <= Math.max(primary.getX(), secondary.getX()) + 1.3 &&
 				p.getLocation().getY() >= Math.min(primary.getY(), secondary.getY()) &&
