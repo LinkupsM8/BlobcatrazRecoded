@@ -68,7 +68,7 @@ public class ConfigWorth {
 		String path = name + "." + data;
 		double worth = config.getDouble(path) * amount;
 		String disp = ItemUtil.name(is);
-		if(disp.equals(Util.color("&4&ki&1Overpowered&4&ki&r"))) worth = 150000000.00D * amount;
+		if(disp.equals(Util.color("&4&ki&1Overpowered&4&ki&r"))) worth = 150000000000.00D * amount;
 		return worth;
 	}
 	
