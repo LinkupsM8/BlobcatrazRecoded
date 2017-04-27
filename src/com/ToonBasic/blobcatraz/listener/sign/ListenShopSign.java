@@ -89,27 +89,27 @@ public class ListenShopSign implements Listener {
 						meta.setLore(Util.newList());
 						is2.setItemMeta(meta);
 						int amount = is2.getAmount();
-						double price = worth(is) * 2;
+						double price = worth(is2) * 2;
 						double bal = ConfigDatabase.balance(p);
-						if(bal >= price) {
+						if(bal < price) {
+							String error = "You don't have enough money!";
+							p.closeInventory();
+							PlayerUtil.action(p, error);
+							PlayerUtil.ping(p);
+						} else {
 							PlayerInventory pi = p.getInventory();
 							int slot = pi.firstEmpty();
 							if(slot == -1) {
 								String error = "Your inventory is full!";
 								PlayerUtil.action(p, error);
 							} else {
-								ConfigDatabase.withdraw(p, price);
 								pi.setItem(slot, is2);
-								String msg = Util.color("&eYou bought &a" + amount + " &eof &a" + ItemUtil.name(is2));
+								ConfigDatabase.withdraw(p, price);
+								String msg = Util.color("&eYou bought &a" + amount + " &eof &a" + ItemUtil.name(is2) + "&e for &a" + Util.money(price));
 								p.closeInventory();
 								PlayerUtil.action(p, msg);
 								PlayerUtil.ping(p);
 							}
-						} else {
-							String error = "You don't have enough money!";
-							p.closeInventory();
-							PlayerUtil.action(p, error);
-							PlayerUtil.ping(p);
 						}
 					}
 					if(is.equals(amount(-64))) recalc(i, -64);

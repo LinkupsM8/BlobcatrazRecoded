@@ -1,0 +1,6 @@
+name: FlatGenerator
+version: 0.0.1
+load: STARTUP
+loadbefore: [Multiverse-Core, WorldGuard]
+description: FlatGenerator addon for Blobcatraz
+main: com.SirBlobman.blobcatraz.flatgenerator.Core

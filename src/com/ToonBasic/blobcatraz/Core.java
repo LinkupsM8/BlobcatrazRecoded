@@ -49,6 +49,7 @@ import com.ToonBasic.blobcatraz.command.special.CommandHideAll;
 import com.ToonBasic.blobcatraz.command.special.CommandItemDB;
 import com.ToonBasic.blobcatraz.command.special.CommandItemHolo;
 import com.ToonBasic.blobcatraz.command.special.CommandKitToChest;
+import com.ToonBasic.blobcatraz.command.special.CommandMobEgg;
 import com.ToonBasic.blobcatraz.command.special.CommandNuke;
 import com.ToonBasic.blobcatraz.command.special.CommandPTime;
 import com.ToonBasic.blobcatraz.command.special.CommandPWeather;
@@ -107,6 +108,7 @@ import com.ToonBasic.blobcatraz.listener.ListenSellAll;
 import com.ToonBasic.blobcatraz.listener.ListenVote;
 import com.ToonBasic.blobcatraz.listener.item.ListenSonic;
 import com.ToonBasic.blobcatraz.listener.sign.ListenEnchantSign;
+import com.ToonBasic.blobcatraz.listener.sign.ListenRepairSign;
 import com.ToonBasic.blobcatraz.listener.sign.ListenShopSign;
 import com.ToonBasic.blobcatraz.listener.sign.ListenSignColor;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
@@ -230,6 +232,7 @@ public class Core extends JavaPlugin {
         	new CommandItemDB(),
         	new CommandItemHolo(),
         	new CommandKitToChest(),
+        	new CommandMobEgg(),
         	new CommandNuke(),
         	new CommandPortal(),
         	new CommandPTime(),
@@ -281,6 +284,7 @@ public class Core extends JavaPlugin {
     		new ListenSellAll(),
     		new ListenShopSign(),
     		new ListenEnchantSign(),
+    		new ListenRepairSign(),
     		new ListenVote(),
     		
     		new ListenSonic()

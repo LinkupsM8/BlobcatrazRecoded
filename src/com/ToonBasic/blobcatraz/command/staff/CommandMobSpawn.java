@@ -1,5 +1,6 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -14,7 +15,7 @@ import com.ToonBasic.blobcatraz.utility.Util;
 @PlayerOnly
 public class CommandMobSpawn extends ICommand {
     public CommandMobSpawn() {
-        super("spawnmob", "<mob> [amount] ", "blobcatraz.staff.spawnmob", "mob");
+        super("spawnmob", "<mob> [amount] [player]", "blobcatraz.staff.spawnmob", "mob");
     }
 
     @Override
@@ -27,13 +28,23 @@ public class CommandMobSpawn extends ICommand {
         	}
         	Player p = (Player) cs;
         	Location look = PlayerUtil.lookLocation(p);
+        	if(args.length > 2) {
+        		String targ = args[2];
+        		Player t = Bukkit.getPlayer(targ);
+        		if(t == null) {
+        			look = PlayerUtil.lookLocation(p);
+        			p.sendMessage(prefix + Language.INVALID_TARGET);
+        		} else {
+        			look = t.getLocation();
+        		}
+        	}
         	look.setY(look.getY() + 1.5);
         	String ent = args[0].toUpperCase();
     		if(amount > 50) amount = 50;
     		String[] mobs = ent.split(",");
     		for(String mob : mobs) {
             	if(spawn(look, mob, amount)) {
-            		String msg = Util.color(prefix + "&ESpawned &4" + amount+ " &eof " + mob);
+            		String msg = Util.color(prefix + "&ESpawned &4" + amount + " &eof " + mob);
             		p.sendMessage(msg);
             	} else {
             		String msg = Util.color(prefix + "&cInvalid Entity: " + mob);

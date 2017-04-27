@@ -14,7 +14,7 @@ import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandRepair extends ICommand {
-	private static final List<Material> whitelist = Util.newList(
+	public static final List<Material> whitelist = Util.newList(
 		Material.IRON_SPADE,
 		Material.IRON_PICKAXE,
 		Material.IRON_AXE,

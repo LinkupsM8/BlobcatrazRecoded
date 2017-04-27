@@ -155,8 +155,9 @@ public class ConfigDatabase {
     }
 
     public static void withdraw(OfflinePlayer op, double amount) {
-        double namount = (-1 * amount);
-        deposit(op, namount);
+        double balance = balance(op);
+        double namount = balance - amount;
+        setBalance(op, namount);
     }
     
     public static boolean spy(OfflinePlayer op) {

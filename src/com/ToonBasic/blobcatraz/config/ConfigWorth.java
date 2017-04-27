@@ -66,10 +66,9 @@ public class ConfigWorth {
 		
 		YamlConfiguration config = load();
 		String path = name + "." + data;
-		double worth = config.getDouble(path);
+		double worth = config.getDouble(path) * amount;
 		String disp = ItemUtil.name(is);
-		if(disp.equals(Util.color("&4&ki&1Overpowered&4&ki&r"))) worth = 150000000.00D;
-		worth = worth * amount;
+		if(disp.equals(Util.color("&4&ki&1Overpowered&4&ki&r"))) worth = 150000000.00D * amount;
 		return worth;
 	}
 	

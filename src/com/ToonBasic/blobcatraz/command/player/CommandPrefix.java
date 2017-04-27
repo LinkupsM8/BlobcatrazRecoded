@@ -14,20 +14,19 @@ public class CommandPrefix extends ICommand implements Listener {
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
-		Player p = (Player) cs;
 		String target = args[0];
 		Player t = Bukkit.getPlayer(target);
 		if(t == null) {
 			String msg = "Your target is not online, changing your prefix instead!";
-			p.sendMessage(msg);
-			t = p;
+			cs.sendMessage(msg);
+			t = (Player) cs;
 		}
 		
 		String prefix2 = Util.finalArgs(1, args) + " &f";
 		String pref = Util.color(prefix2);
 		t.setDisplayName(pref + ConfigDatabase.nickName(t));
 		ConfigDatabase.prefix(t, prefix2);
-		p.sendMessage(prefix + "You changed the prefix of " + t.getName() + " to " + pref);
+		cs.sendMessage(prefix + "You changed the prefix of " + t.getName() + " to " + pref);
 		t.sendMessage(prefix + "Your prefix was changed to " + pref);
 	}
 }
