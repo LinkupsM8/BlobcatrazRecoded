@@ -21,6 +21,7 @@ public class CommandHub extends ICommand {
 	
 	public static void hub(Player p) {
 		World w = Bukkit.getWorld("Hub");
+		if(w == null) w = Bukkit.getWorlds().get(0);
 		double x = 66.50D;
 		double y = 105.0D;
 		double z = -23.50D;

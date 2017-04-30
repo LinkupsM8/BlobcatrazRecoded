@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.listener;
+package com.ToonBasic.blobcatraz.listener.sign;
 
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;

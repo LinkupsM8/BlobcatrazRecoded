@@ -1,5 +1,7 @@
 package com.ToonBasic.blobcatraz.command.player;
 
+import static com.ToonBasic.blobcatraz.listener.sign.ListenSellAll.gui;
+
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -12,8 +14,6 @@ import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
-
-import static com.ToonBasic.blobcatraz.listener.ListenSellAll.gui;
 
 @PlayerOnly
 public class CommandSell extends ICommand {

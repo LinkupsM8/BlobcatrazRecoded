@@ -13,6 +13,8 @@ public class CommandRules extends ICommand {
 		"&a2) &bDo not grief or build offensive things",
 		"&a3) &bHave common sense and be polite!",
 		"&a4) &bIf you have fly perms, do not fly out of the mines!",
+		"&a5) &bDo not abuse bugs or glitches.",
+		"&a6) &bDo not give away your money, let new players do some work",
 		"&eThe staff have the final say in whether you get banned or not. "
 		+ "If you break any of these rules you can be "
 		+ "muted, kicked, temp-banned, or perma-banned, depending on the severity. "
