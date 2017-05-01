@@ -18,8 +18,8 @@ public class ListenDeath implements Listener {
 		String msg = e.getDeathMessage();
 		TextComponent tc = Util.death(p, msg);
 		e.setDeathMessage(null);
-		for(Player p : Bukkit.getOnlinePlayers()) {
-			Spigot s = p.spigot();
+		for(Player o : Bukkit.getOnlinePlayers()) {
+			Spigot s = o.spigot();
 			s.sendMessage(tc);
 		}
 	}
