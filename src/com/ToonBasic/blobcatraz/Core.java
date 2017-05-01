@@ -102,7 +102,9 @@ import com.ToonBasic.blobcatraz.config.CustomHologram;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenAutoLapis;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
+import com.ToonBasic.blobcatraz.listener.ListenDeath;
 import com.ToonBasic.blobcatraz.listener.ListenJoin;
+import com.ToonBasic.blobcatraz.listener.ListenMine;
 import com.ToonBasic.blobcatraz.listener.ListenPortal;
 import com.ToonBasic.blobcatraz.listener.ListenVote;
 import com.ToonBasic.blobcatraz.listener.item.ListenSonic;
@@ -290,7 +292,8 @@ public class Core extends JavaPlugin {
     		new ListenEnchantSign(),
     		new ListenRepairSign(),
     		new ListenVote(),
-    		
+    		new ListenDeath(),
+    		new ListenMine(),
     		new ListenSonic()
     	);
     }

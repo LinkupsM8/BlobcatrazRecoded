@@ -14,10 +14,17 @@ import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 
 import com.ToonBasic.blobcatraz.Core;
+
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.HoverEvent.Action;
+import net.md_5.bungee.api.chat.TextComponent;
 
 public class Util {
 	private static final Server SERVER = Bukkit.getServer();
@@ -142,5 +149,14 @@ public class Util {
             }
         }
         return list;
+    }
+    
+    public static TextComponent death(Player p, String msg) {
+    	String name = p.getDisplayName();
+    	TextComponent text = new TextComponent(color(name + " &fwas successfully revived by our medics"));
+    	BaseComponent[] bc = new ComponentBuilder(msg).create();
+    	HoverEvent he = new HoverEvent(Action.SHOW_TEXT, bc);
+    	text.setHoverEvent(he);
+    	return text;
     }
 }
