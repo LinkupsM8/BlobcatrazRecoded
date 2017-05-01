@@ -28,11 +28,10 @@ public class Util {
 
     public static String color(String msg) {return ChatColor.translateAlternateColorCodes('&', msg);}
     public static String[] color(String[] msg) {
-    	List<String> list = newList();
-    	for(String s : msg) {
-    		list.add(color(s));
+    	for(int i = msg.length; i > 0; i--) {
+    		msg[i - 1] = color(msg[i - 1]);
     	}
-    	return list.toArray(new String[0]);
+    	return msg;
     }
 
     public static String onlyInteger(String o) {

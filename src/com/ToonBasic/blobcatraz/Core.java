@@ -112,7 +112,9 @@ import com.ToonBasic.blobcatraz.listener.sign.ListenSellAll;
 import com.ToonBasic.blobcatraz.listener.sign.ListenShopSign;
 import com.ToonBasic.blobcatraz.listener.sign.ListenSignColor;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
+import com.ToonBasic.blobcatraz.utility.ScoreboardUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
+import com.ToonBasic.blobcatraz.utility.VaultUtil;
 
 import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
@@ -136,6 +138,7 @@ public class Core extends JavaPlugin {
         	Vault V = Vault.getPlugin(Vault.class);
         	ServicePriority SP = ServicePriority.Highest;
         	SM.register(Economy.class, be, V, SP);
+        	VaultUtil.setup();
         }
         framework = new CommandFramework(instance);
         LOG.info("Now registering Blobcatraz...");
@@ -256,6 +259,7 @@ public class Core extends JavaPlugin {
     
     public void events() {
     	ItemUtil.load();
+    	ScoreboardUtil.enable();
     	Util.regEvents(
     		//Command Events
     		new CommandBack(),

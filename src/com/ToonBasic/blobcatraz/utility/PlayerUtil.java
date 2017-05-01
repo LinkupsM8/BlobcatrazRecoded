@@ -25,6 +25,12 @@ public class PlayerUtil extends Util {
 		p.playSound(l, s, v, pi);
 	}
 	
+	public static int getPing(Player p) {
+		CraftPlayer cp = (CraftPlayer) p;
+		EntityPlayer ep = cp.getHandle();
+		return ep.ping;
+	}
+	
 	public static void sonic(Player p) {
 		Location l = p.getLocation();
 		String s = "tool.sonic.screwdriver";

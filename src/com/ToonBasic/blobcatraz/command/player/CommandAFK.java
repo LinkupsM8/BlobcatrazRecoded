@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.ScoreboardUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
@@ -26,6 +27,7 @@ public class CommandAFK extends ICommand implements Listener {
 		Player p = (Player) cs;
 		String msg = Util.color("&6 * &7" + p.getName() + " &eis now AFK\n  &f" + reason);
 		afk.add(p);
+		ScoreboardUtil.afk(p);
 		Bukkit.broadcastMessage(msg);
 	}
 	
@@ -44,6 +46,7 @@ public class CommandAFK extends ICommand implements Listener {
 	private void un(Player p) {
 		if(afk.contains(p)) {
 			afk.remove(p);
+			ScoreboardUtil.unAFK(p);
 			String msg = Util.color("&6 * &7" + p.getName() + " &eis no longer AFK");
 			Bukkit.broadcastMessage(msg);
 		}
