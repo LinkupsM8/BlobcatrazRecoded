@@ -1,10 +1,8 @@
 PRE-RELEASE:
  - Spawn Egg GUI Shop
- - /block and /unblock (converts blocks to diamonds and vice versa)
- - Custom Scoreboard
  - Better World Generation (PREVENT MULTIVERSE LAG)
- - Kit GUI
  - SkyWars (CURRENTLY WIP, WILL PROVIDE REPO LINK SOON)
+ - /warn
 
 POST-RELEASE:
  - Automatic Broadcasting

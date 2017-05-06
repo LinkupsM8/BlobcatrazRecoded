@@ -1,5 +1,5 @@
 name: Blobcatraz
-version: 0.0.1
+version: 1.0
 description: Core plugin for Blobcatraz
 main: com.ToonBasic.blobcatraz.Core
 softdepend: [HolographicDisplays, Vault, Votifier]

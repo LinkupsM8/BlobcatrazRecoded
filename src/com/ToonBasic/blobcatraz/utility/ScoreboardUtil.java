@@ -16,6 +16,7 @@ import org.bukkit.scoreboard.Team.Option;
 import org.bukkit.scoreboard.Team.OptionStatus;
 
 import com.ToonBasic.blobcatraz.Core;
+import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 
 public class ScoreboardUtil extends Util implements Runnable {
 	private static final Server SERVER = Bukkit.getServer();
@@ -43,10 +44,12 @@ public class ScoreboardUtil extends Util implements Runnable {
 		custom.setDisplaySlot(DisplaySlot.SIDEBAR);
 
 		String[] list = color(new String[] { //Arrays show up in reverse order on scoreboards
-			"&bPing: &f" + PlayerUtil.getPing(p),
-			"&bFood: &f" + p.getFoodLevel(),
-			"&bBalance: &f" + Util.money(VaultUtil.balance(p)),
-			"&bCurrent Rank: &f" + VaultUtil.rank(p)
+			"&b&lPing: &f" + PlayerUtil.getPing(p),
+			"&b&lSaturation: &f" + p.getSaturation(),
+			"&b&lFood: &f" + p.getFoodLevel(),
+			"&b&lTokens: &f" + ConfigDatabase.tokens(p),
+			"&b&lBalance: &f" + Util.money(VaultUtil.balance(p)),
+			"&b&lCurrent Rank: &f" + VaultUtil.mainRank(p)
 		});
 		for(int i = list.length; i > 0; i -= 1) {
 			String entry = list[i - 1];

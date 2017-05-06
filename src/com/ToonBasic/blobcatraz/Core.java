@@ -26,6 +26,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandHomes;
 import com.ToonBasic.blobcatraz.command.player.CommandHub;
 import com.ToonBasic.blobcatraz.command.player.CommandIgnore;
 import com.ToonBasic.blobcatraz.command.player.CommandKit;
+import com.ToonBasic.blobcatraz.command.player.CommandKits;
 import com.ToonBasic.blobcatraz.command.player.CommandMessage;
 import com.ToonBasic.blobcatraz.command.player.CommandNickname;
 import com.ToonBasic.blobcatraz.command.player.CommandPay;
@@ -43,6 +44,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandWarps;
 import com.ToonBasic.blobcatraz.command.player.CommandWorth;
 import com.ToonBasic.blobcatraz.command.special.CommandBurn;
 import com.ToonBasic.blobcatraz.command.special.CommandCenter;
+import com.ToonBasic.blobcatraz.command.special.CommandChangeType;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
 import com.ToonBasic.blobcatraz.command.special.CommandDelPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandHideAll;
@@ -62,6 +64,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandChat;
 import com.ToonBasic.blobcatraz.command.staff.CommandClearInventory;
+import com.ToonBasic.blobcatraz.command.staff.CommandCreateItem;
 import com.ToonBasic.blobcatraz.command.staff.CommandDelKit;
 import com.ToonBasic.blobcatraz.command.staff.CommandDelWarp;
 import com.ToonBasic.blobcatraz.command.staff.CommandEconomy;
@@ -101,12 +104,13 @@ import com.ToonBasic.blobcatraz.config.ConfigHolo;
 import com.ToonBasic.blobcatraz.config.CustomHologram;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
 import com.ToonBasic.blobcatraz.listener.ListenAutoLapis;
+import com.ToonBasic.blobcatraz.listener.ListenAutoPickup;
 import com.ToonBasic.blobcatraz.listener.ListenChat;
 import com.ToonBasic.blobcatraz.listener.ListenDeath;
 import com.ToonBasic.blobcatraz.listener.ListenJoin;
-import com.ToonBasic.blobcatraz.listener.ListenMine;
 import com.ToonBasic.blobcatraz.listener.ListenPortal;
 import com.ToonBasic.blobcatraz.listener.ListenVote;
+import com.ToonBasic.blobcatraz.listener.item.ListenChatItem;
 import com.ToonBasic.blobcatraz.listener.item.ListenSonic;
 import com.ToonBasic.blobcatraz.listener.sign.ListenEnchantSign;
 import com.ToonBasic.blobcatraz.listener.sign.ListenRepairSign;
@@ -144,6 +148,7 @@ public class Core extends JavaPlugin {
         }
         framework = new CommandFramework(instance);
         LOG.info("Now registering Blobcatraz...");
+        ConfigurationSerialization.registerClass(CustomHologram.class);
         commands();
         events();
     }
@@ -158,6 +163,7 @@ public class Core extends JavaPlugin {
         	new CommandBan(),
         	new CommandChat(),
         	new CommandClearInventory(),
+        	new CommandCreateItem(),
         	new CommandDelKit(),
         	new CommandDelWarp(),
         	new CommandEconomy(),
@@ -210,6 +216,7 @@ public class Core extends JavaPlugin {
         	new CommandHub(),
         	new CommandIgnore(),
         	new CommandKit(),
+        	new CommandKits(),
         	new CommandMessage(),
         	new CommandNickname(),
         	new CommandPay(),
@@ -231,6 +238,7 @@ public class Core extends JavaPlugin {
         framework.registerCommands(
         	new CommandBurn(),
         	new CommandCenter(),
+        	new CommandChangeType(),
         	new CommandChestToKit(),
         	new CommandDelPortal(),
         	new CommandHideAll(),
@@ -278,6 +286,7 @@ public class Core extends JavaPlugin {
             new CommandMute(),
             new CommandSeen(),
             new CommandPowertool(),
+            new CommandKits(),
             new CommandWarps(),
 
     		//Listener Events
@@ -293,8 +302,9 @@ public class Core extends JavaPlugin {
     		new ListenRepairSign(),
     		new ListenVote(),
     		new ListenDeath(),
-    		new ListenMine(),
-    		new ListenSonic()
+    		new ListenAutoPickup(),
+    		new ListenSonic(),
+    		new ListenChatItem()
     	);
     }
 }

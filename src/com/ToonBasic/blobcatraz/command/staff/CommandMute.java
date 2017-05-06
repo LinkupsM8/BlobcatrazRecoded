@@ -20,20 +20,26 @@ public class CommandMute extends ICommand implements Listener {
     public void handleCommand(CommandSender cs, String[] args) {
         if(args.length > 0) {
             Player t = Bukkit.getPlayer(args[0]);
-            UUID uuid = t.getUniqueId();
-            if(muted.contains(uuid)) {
-                muted.remove(uuid);
-                t.sendMessage(Util.color(prefix + "You are no longer muted!"));
-                cs.sendMessage(Util.color(prefix + "You have unmuted c" + t.getName()));
+            if(t == null) {
+            	String error = prefix + Language.INVALID_TARGET;
+            	cs.sendMessage(error);
             } else {
-                muted.add(uuid);
-                t.sendMessage(Util.color(prefix + "You have been muted!"));
-                cs.sendMessage(Util.color(prefix + "You have muted &c" + t.getName()));
+                UUID uuid = t.getUniqueId();
+                if(muted.contains(uuid)) {
+                    muted.remove(uuid);
+                    t.sendMessage(Util.color(prefix + "You are no longer muted!"));
+                    cs.sendMessage(Util.color(prefix + "You have unmuted c" + t.getName()));
+                } else {
+                    muted.add(uuid);
+                    t.sendMessage(Util.color(prefix + "You have been muted!"));
+                    cs.sendMessage(Util.color(prefix + "You have muted &c" + t.getName()));
+                }
             }
         }
     }
+    
     @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent e) {
+    public void chat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
         UUID uuid = p.getUniqueId();
         if(muted.contains(uuid)) {

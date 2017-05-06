@@ -28,11 +28,21 @@ public class VaultUtil extends Util {
 		//chat = c.getProvider();
 	}
 	
-	public static String rank(Player p) {
+	public static String mainRank(Player p) {
 		if(perm != null) {
 			String rank = perm.getPrimaryGroup(p);
 			return rank;
 		} else return color("&4ERROR");
+	}
+	
+	public static String[] groups(Player p) {
+		if(perm != null) {
+			String[] groups = perm.getPlayerGroups(p);
+			return groups;
+		} else {
+			String[] groups = color(newArray("&4&lFailed", "&4&lto get", "&4&lGroups!"));
+			return groups;
+		}
 	}
 	
 	public static double balance(Player p) {

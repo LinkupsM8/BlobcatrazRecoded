@@ -1,5 +1,6 @@
 package com.ToonBasic.blobcatraz.listener;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -12,14 +13,16 @@ import org.bukkit.inventory.PlayerInventory;
 
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 
-public class ListenMine implements Listener {
+public class ListenAutoPickup implements Listener {
     @EventHandler(priority=EventPriority.LOWEST)
     public void onBlockBreak(BlockBreakEvent e) {
+    	Player p = e.getPlayer();
+    	GameMode gm = p.getGameMode();
+    	if(gm == GameMode.CREATIVE) return;
+    	
+    	Block b = e.getBlock();
         e.setCancelled(true);
-        Block b = e.getBlock();
-        Player p = e.getPlayer();
         PlayerInventory pi = p.getInventory();
-        
         for(ItemStack is : b.getDrops()) {
         	int slot = pi.firstEmpty();
         	if(slot == -1) {

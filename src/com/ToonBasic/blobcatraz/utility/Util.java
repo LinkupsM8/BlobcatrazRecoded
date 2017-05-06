@@ -77,6 +77,12 @@ public class Util {
     	}
     }
     
+    @SafeVarargs
+	public static <T> T[] newArray(T... ts) {
+    	T[] t = ts;
+    	return t;
+    }
+    
 	@SafeVarargs
 	public static <T> List<T> newList(T... ts) {
 		List<T> list = new ArrayList<T>();
@@ -88,6 +94,17 @@ public class Util {
 		List<T> list = newList();
 		for(T t : co) list.add(t);
 		return list;
+	}
+	
+	public static String formatList(char type, List<String> list) {
+		if(list == null || list.isEmpty()) return "[]";
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < list.size(); i++) {
+			if(i != 0) sb.append("\n");
+			String val = " " + list.get(i);
+			sb.append(type + val);
+		}
+		return sb.toString();
 	}
 	
 	public static <K, V> Map<K, V> newMap() {
@@ -152,7 +169,7 @@ public class Util {
     }
     
     public static TextComponent death(Player p, String msg) {
-    	String name = p.getDisplayName();
+    	String name = p.getName();
     	TextComponent text = new TextComponent(color(name + " &fwas successfully revived by our medics"));
     	BaseComponent[] bc = new ComponentBuilder(msg).create();
     	HoverEvent he = new HoverEvent(Action.SHOW_TEXT, bc);

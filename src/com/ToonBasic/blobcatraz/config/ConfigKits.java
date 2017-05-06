@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Chest;
@@ -25,6 +26,8 @@ public class ConfigKits {
 	private static final File FOLDER = new File(Core.folder, "kits");
 	
 	public static YamlConfiguration load(String name) {
+		name = name.toLowerCase();
+		name = StringUtils.capitalize(name);
 		try {
 			String f = name + ".kit";
 			File file = new File(FOLDER, f);
@@ -40,6 +43,8 @@ public class ConfigKits {
 	}
 	
 	public static void save(String name, YamlConfiguration config) {
+		name = name.toLowerCase();
+		name = StringUtils.capitalize(name);
 		try {
 			if(!FOLDER.exists()) FOLDER.mkdirs();
 			String f = name + ".kit";
@@ -53,6 +58,8 @@ public class ConfigKits {
 	}
 	
 	public static List<ItemStack> kit(String name) {
+		name = name.toLowerCase();
+		name = StringUtils.capitalize(name);
 		YamlConfiguration config = load(name);
 		List<ItemStack> list = Util.newList();
 		try {
@@ -72,6 +79,8 @@ public class ConfigKits {
 	}
 	
 	public static void give(Player p, String name) {
+		name = name.toLowerCase();
+		name = StringUtils.capitalize(name);
 		if(exists(name)) {
 			PlayerInventory pi = p.getInventory();
 			List<ItemStack> kit = kit(name);
@@ -94,6 +103,8 @@ public class ConfigKits {
 	}
 	
 	public static boolean create(Inventory i, String name) {
+		name = name.toLowerCase();
+		name = StringUtils.capitalize(name);
 		YamlConfiguration config = load(name);
 		config.set("name", name);
 		int o = 0;
@@ -119,6 +130,8 @@ public class ConfigKits {
 				String kit = FilenameUtils.getBaseName(name);
 				YamlConfiguration config = load(kit);
 				String name2 = config.getString("name");
+				name2 = name2.toLowerCase();
+				name2 = StringUtils.capitalize(name2);
 				list.add(name2);
 			}
 		}
@@ -127,18 +140,24 @@ public class ConfigKits {
 	}
 	
 	public static void delete(String name) {
+		name = name.toLowerCase();
+		name = StringUtils.capitalize(name);
 		String f = name + ".kit";
 		File file = new File(FOLDER, f);
 		file.delete();
 	}
 	
 	public static boolean exists(String name) {
+		name = name.toLowerCase();
+		name = StringUtils.capitalize(name);
 		List<String> kits = kits();
 		boolean exists = kits.contains(name);
 		return exists;
 	}
 	
 	public static void kitToChest(String name, Chest c) {
+		name = name.toLowerCase();
+		name = StringUtils.capitalize(name);
 		if(exists(name)) {
 			Inventory i = c.getInventory();
 			List<ItemStack> items = kit(name);
