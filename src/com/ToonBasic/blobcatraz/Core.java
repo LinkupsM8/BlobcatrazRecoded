@@ -31,7 +31,6 @@ import com.ToonBasic.blobcatraz.command.player.CommandMessage;
 import com.ToonBasic.blobcatraz.command.player.CommandNickname;
 import com.ToonBasic.blobcatraz.command.player.CommandPay;
 import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
-import com.ToonBasic.blobcatraz.command.player.CommandRename;
 import com.ToonBasic.blobcatraz.command.player.CommandReply;
 import com.ToonBasic.blobcatraz.command.player.CommandRules;
 import com.ToonBasic.blobcatraz.command.player.CommandSell;
@@ -45,11 +44,8 @@ import com.ToonBasic.blobcatraz.command.player.CommandWarps;
 import com.ToonBasic.blobcatraz.command.player.CommandWorth;
 import com.ToonBasic.blobcatraz.command.special.CommandBurn;
 import com.ToonBasic.blobcatraz.command.special.CommandCenter;
-import com.ToonBasic.blobcatraz.command.special.CommandChangeType;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
 import com.ToonBasic.blobcatraz.command.special.CommandDelPortal;
-import com.ToonBasic.blobcatraz.command.special.CommandHideAll;
-import com.ToonBasic.blobcatraz.command.special.CommandItemDB;
 import com.ToonBasic.blobcatraz.command.special.CommandItemHolo;
 import com.ToonBasic.blobcatraz.command.special.CommandKitToChest;
 import com.ToonBasic.blobcatraz.command.special.CommandMobEgg;
@@ -224,7 +220,6 @@ public class Core extends JavaPlugin {
         	new CommandNickname(),
         	new CommandPay(),
         	new CommandPrefix(),
-        	new CommandRename(),
         	new CommandReply(),
         	new CommandRules(),
         	new CommandSell(),
@@ -242,11 +237,8 @@ public class Core extends JavaPlugin {
         framework.registerCommands(
         	new CommandBurn(),
         	new CommandCenter(),
-        	new CommandChangeType(),
         	new CommandChestToKit(),
         	new CommandDelPortal(),
-        	new CommandHideAll(),
-        	new CommandItemDB(),
         	new CommandItemHolo(),
         	new CommandKitToChest(),
         	new CommandMobEgg(),
