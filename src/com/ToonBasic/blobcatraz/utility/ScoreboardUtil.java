@@ -1,5 +1,6 @@
 package com.ToonBasic.blobcatraz.utility;
 
+import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
@@ -30,12 +31,15 @@ public class ScoreboardUtil extends Util implements Runnable {
 	@Override
 	public void run() {
 		for(Player p : SERVER.getOnlinePlayers()) {
-			update(p);
+			if(disabled.contains(p)) continue;
+			else update(p);
 		}
 	}
 	
+	private static List<Player> disabled = newList();
 	private static Map<Player, Scoreboard> scores = newMap();
 	public static void update(Player p) {
+		if(disabled.contains(p)) {disabled.remove(p);}
 		Scoreboard SB = getBoard(p);
 		Objective custom = SB.getObjective("blobcatraz");
 		custom.unregister();
@@ -45,7 +49,6 @@ public class ScoreboardUtil extends Util implements Runnable {
 
 		String[] list = color(new String[] { //Arrays show up in reverse order on scoreboards
 			"&b&lPing: &f" + PlayerUtil.getPing(p),
-			"&b&lSaturation: &f" + p.getSaturation(),
 			"&b&lFood: &f" + p.getFoodLevel(),
 			"&b&lTokens: &f" + ConfigDatabase.tokens(p),
 			"&b&lBalance: &f" + Util.money(VaultUtil.balance(p)),
@@ -58,6 +61,12 @@ public class ScoreboardUtil extends Util implements Runnable {
 		}
 		p.setScoreboard(SB);
 		scores.put(p, SB);
+	}
+	
+	public static void remove(Player p) {
+		disabled.add(p);
+		Scoreboard MAIN = SM.getMainScoreboard();
+		p.setScoreboard(MAIN);
 	}
 	
 	public static Scoreboard getBoard(Player p) {

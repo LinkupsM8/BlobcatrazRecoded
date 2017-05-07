@@ -37,6 +37,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandRules;
 import com.ToonBasic.blobcatraz.command.player.CommandSell;
 import com.ToonBasic.blobcatraz.command.player.CommandSetHome;
 import com.ToonBasic.blobcatraz.command.player.CommandStaff;
+import com.ToonBasic.blobcatraz.command.player.CommandToggleScoreboard;
 import com.ToonBasic.blobcatraz.command.player.CommandTpChoose;
 import com.ToonBasic.blobcatraz.command.player.CommandTpa;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
@@ -98,6 +99,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandTPAll;
 import com.ToonBasic.blobcatraz.command.staff.CommandTempBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandTop;
 import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
+import com.ToonBasic.blobcatraz.command.staff.CommandWarn;
 import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
 import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
 import com.ToonBasic.blobcatraz.config.ConfigHolo;
@@ -197,6 +199,7 @@ public class Core extends JavaPlugin {
         	new CommandTop(),
         	new CommandTPAll(),
         	new CommandVanish(),
+        	new CommandWarn(),
         	new CommandWorkbench()
         );
         
@@ -227,6 +230,7 @@ public class Core extends JavaPlugin {
         	new CommandSell(),
         	new CommandSetHome(),
         	new CommandStaff(),
+        	new CommandToggleScoreboard(),
         	new CommandTpa(),
         	new CommandTpChoose(),
         	new CommandWarp(),

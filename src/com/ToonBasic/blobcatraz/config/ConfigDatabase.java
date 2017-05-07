@@ -53,10 +53,12 @@ public class ConfigDatabase {
         set(config, "username", op.getName(), false);
         set(config, "prefix", "&a[&bA&a] &f", false);
         set(config, "last ip", "localhost", false);
-        set(config, "last seen", System.currentTimeMillis(), false);
+        set(config, "last seen", 0, false);
+        set(config, "last location", null, false);
         set(config, "nickname", op.getName(), false);
         set(config, "balance", 0.00D, false);
         set(config, "tokens", 0, false);
+        set(config, "warnings", Util.newList(), false);
         set(config, "spy", false, false);
         save(config, file);
     }
@@ -112,6 +114,27 @@ public class ConfigDatabase {
         YamlConfiguration config = load(op);
         int votes = config.getInt("tokens");
         return votes;
+    }
+    
+    public static List<String> warnings(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	List<String> list = config.getStringList("warnings");
+    	return list;
+    }
+    
+    public static void addWarning(OfflinePlayer op, String reason) {
+    	YamlConfiguration config = load(op);
+    	List<String> list = warnings(op);
+    	list.add(reason);
+    	set(config, "warnings", list, true);
+    	save(config, file(op));
+    }
+    
+    public static void clearWarnings(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	List<String> list = Util.newList();
+    	set(config, "warnings", list, true);
+    	save(config, file(op));
     }
     
     public static boolean staff(OfflinePlayer op) {
@@ -179,6 +202,7 @@ public class ConfigDatabase {
     public static Date lastSeen(OfflinePlayer op) {
     	YamlConfiguration config = load(op);
     	long time = config.getLong("last seen");
+    	if(time == 0) return null;
     	Date date = new Date(time);
     	return date;
     }
@@ -198,6 +222,18 @@ public class ConfigDatabase {
     public static void setIP(OfflinePlayer op, String ip) {
     	YamlConfiguration config = load(op);
     	set(config, "last ip", ip, true);
+    	save(config, file(op));
+    }
+    
+    public static Location lastLocation(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	Location l = (Location) config.get("last location");
+    	return l;
+    }
+
+    public static void setLocation(OfflinePlayer op, Location l) {
+    	YamlConfiguration config = load(op);
+    	set(config, "last location", l, true);
     	save(config, file(op));
     }
     

@@ -35,6 +35,7 @@ public class ItemUtil extends Util {
 		enchants.put("feather falling", Enchantment.PROTECTION_FALL);
 		enchants.put("flame", Enchantment.ARROW_FIRE);
 		enchants.put("power", Enchantment.ARROW_DAMAGE);
+		enchants.put("punch", Enchantment.ARROW_KNOCKBACK);
 		enchants.put("infinity", Enchantment.ARROW_INFINITE);
 		enchants.put("looting", Enchantment.LOOT_BONUS_MOBS);
 		enchants.put("fortune", Enchantment.LOOT_BONUS_BLOCKS);
@@ -96,8 +97,10 @@ public class ItemUtil extends Util {
 			is.setAmount(amount);
 			if(is.getDurability() == 0) is.setDurability(data);
 			return is;
+		} else {
+			ItemStack air = new ItemStack(Material.AIR);
+			return air;
 		}
-		return null;
 	}
 	
 	public static boolean air(ItemStack is) {

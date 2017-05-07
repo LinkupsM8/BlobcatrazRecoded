@@ -25,10 +25,14 @@ public class PlayerUtil extends Util {
 		p.playSound(l, s, v, pi);
 	}
 	
-	public static int getPing(Player p) {
+	public static String getPing(Player p) {
 		CraftPlayer cp = (CraftPlayer) p;
 		EntityPlayer ep = cp.getHandle();
-		return ep.ping;
+		int ping = ep.ping;
+		String ret = Integer.toString(ping);
+		if(ping < 0) ret = "" + -1;
+		if(ping > 1000) ret = "1000+";
+		return ret;
 	}
 	
 	public static void sonic(Player p) {

@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,18 +32,26 @@ public class CommandSeen extends ICommand implements Listener {
 			cs.sendMessage(Util.color("&a" + t.getName() + " &6is online with IP Address:"));
 			cs.sendMessage(t.getAddress().getHostString());
 		} else {
-			String ip = ConfigDatabase.lastIP(ot);
 			Date date = ConfigDatabase.lastSeen(ot);
-			SimpleDateFormat sdf = new SimpleDateFormat("MMMMMMMMMMMMMM dd, yyyy 'at' hh:mm:ss a z");
-			sdf.setTimeZone(TimeZone.getTimeZone("EST"));
-			String day = sdf.format(date);
-			String[] msg = new String[] {
-				Util.color("&a" + ot.getName() + " &6was last seen: "),
-				day,
-				Util.color("&6with the IP Address:"),
-				ip
-			};
-			cs.sendMessage(msg);
+			if(date == null) {
+				String msg = prefix + "That player was never online!";
+				cs.sendMessage(msg);
+			} else {
+				String ip = ConfigDatabase.lastIP(ot);
+				Location l = ConfigDatabase.lastLocation(ot);
+				SimpleDateFormat sdf = new SimpleDateFormat("MMMMMMMMMMMMMM dd, yyyy 'at' hh:mm:ss a z");
+				sdf.setTimeZone(TimeZone.getTimeZone("EST"));
+				String day = sdf.format(date);
+				String[] msg = new String[] {
+					Util.color("&a" + ot.getName() + " &6was last seen on: "),
+					day,
+					Util.color("&6with the IP Address:"),
+					ip,
+					Util.color("&6at this Location:"),
+					locationToString(l)
+				};
+				cs.sendMessage(msg);
+			}
 		}
 	}
 	
@@ -51,7 +61,23 @@ public class CommandSeen extends ICommand implements Listener {
 		InetSocketAddress isa = p.getAddress();
 		String ip = isa.getHostString();
 		long time = System.currentTimeMillis();
+		Location l = p.getLocation();
 		ConfigDatabase.setIP(p, ip);
 		ConfigDatabase.setLastSeen(p, time);
+		ConfigDatabase.setLocation(p, l);
+	}
+	
+	private String locationToString(Location l) {
+		if(l == null) {
+			return "null";
+		} else {
+			World w = l.getWorld();
+			String world = w.getName();
+			int x = l.getBlockX();
+			int y = l.getBlockY();
+			int z = l.getBlockZ();
+			String loc = world + ": " + x + ", " + y + ", " + z;
+			return loc;
+		}
 	}
 }
