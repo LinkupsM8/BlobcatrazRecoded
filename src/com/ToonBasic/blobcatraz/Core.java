@@ -95,6 +95,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandTempBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandTop;
 import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
 import com.ToonBasic.blobcatraz.command.staff.CommandWarn;
+import com.ToonBasic.blobcatraz.command.staff.CommandWhoIs;
 import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
 import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
 import com.ToonBasic.blobcatraz.config.ConfigHolo;
@@ -195,6 +196,7 @@ public class Core extends JavaPlugin {
         	new CommandTPAll(),
         	new CommandVanish(),
         	new CommandWarn(),
+        	new CommandWhoIs(),
         	new CommandWorkbench()
         );
         

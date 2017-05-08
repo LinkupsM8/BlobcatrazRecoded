@@ -8,6 +8,7 @@ import com.SirBlobman.itemutil.command.CommandHideAll;
 import com.SirBlobman.itemutil.command.CommandItemDB;
 import com.SirBlobman.itemutil.command.CommandRename;
 import com.SirBlobman.itemutil.command.CommandSetLore;
+import com.SirBlobman.itemutil.command.CommandUnbreakable;
 import com.ToonBasic.blobcatraz.command.CommandFramework;
 import com.ToonBasic.blobcatraz.utility.Util;
 
