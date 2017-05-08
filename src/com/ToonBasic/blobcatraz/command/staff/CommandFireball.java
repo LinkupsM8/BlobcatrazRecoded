@@ -28,7 +28,7 @@ public class CommandFireball extends ICommand {
 		Vector dir = l.getDirection().multiply(2);
 		Vector add = veye.add(dir);
 		Location shoot = add.toLocation(w, l.getYaw(), l.getPitch());
-		if(args.length > 1) {
+		if(args.length > 0) {
 			String sub = args[0].toLowerCase();
 			if(sub.equals("skull")) {
 				WitherSkull sk = w.spawn(shoot, WitherSkull.class);

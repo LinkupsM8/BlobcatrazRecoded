@@ -56,7 +56,6 @@ import com.ToonBasic.blobcatraz.command.special.CommandPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandSetPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandShhh;
 import com.ToonBasic.blobcatraz.command.special.CommandSlimeCannon;
-import com.ToonBasic.blobcatraz.command.special.CommandUnbreakable;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandChat;
@@ -248,8 +247,7 @@ public class Core extends JavaPlugin {
         	new CommandPWeather(),
         	new CommandSetPortal(),
         	new CommandShhh(),
-        	new CommandSlimeCannon(),
-        	new CommandUnbreakable()
+        	new CommandSlimeCannon()
         );
         
      //Dependents

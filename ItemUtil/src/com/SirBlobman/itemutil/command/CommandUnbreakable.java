@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.command.special;
+package com.SirBlobman.itemutil.command;
 
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;

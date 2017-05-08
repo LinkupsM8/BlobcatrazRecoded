@@ -32,7 +32,8 @@ public class Core extends com.ToonBasic.blobcatraz.Core {
 			new CommandHideAll(),
 			new CommandItemDB(),
 			new CommandRename(),
-			new CommandSetLore()
+			new CommandSetLore(),
+			new CommandUnbreakable()
 		);
 		framework.registerCommands();
 	}

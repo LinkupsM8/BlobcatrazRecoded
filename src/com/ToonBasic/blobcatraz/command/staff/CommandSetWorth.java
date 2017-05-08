@@ -35,7 +35,7 @@ public class CommandSetWorth extends ICommand {
 				String msg = prefix + Util.color("&eYou set the value of &a" + item + "&e to " + Util.money(worth));
 				p.sendMessage(msg);
 				
-				String log = "&a" + p.getName() + " &fchanged the value of &c" + ItemUtil.name(is) + " &fto " + Util.money(worth);
+				String log = Util.color("&a" + p.getName() + " &fchanged the value of &c" + ItemUtil.name(is) + " &fto " + Util.money(worth));
 				print(log);
 					}
 			} else {
