@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
+import com.ToonBasic.blobcatraz.logger.EconomyLog;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
@@ -29,6 +30,7 @@ public class CommandPay extends ICommand {
 					ConfigDatabase.deposit(t, pay);
 					p.sendMessage("You sent " + Util.money(pay) + " to " + t.getName());
 					t.sendMessage("You received " + Util.money(pay) + " from " + p.getName());
+					EconomyLog.print(p.getName() + " payed " + Util.money(pay) + " to " + t.getName());
 				} else {
 					String error = "You don't have enough money! You only have " + Util.money(bal);
 					p.sendMessage(error);

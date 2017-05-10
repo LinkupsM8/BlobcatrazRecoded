@@ -135,6 +135,7 @@ public class Core extends JavaPlugin {
     
     public void onEnable() {
         instance = this;
+        Util.enable();
         LOG = getLogger();
         folder = getDataFolder();
         if(PM.isPluginEnabled("Vault")) {

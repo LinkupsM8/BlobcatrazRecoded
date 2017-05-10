@@ -14,11 +14,12 @@ import org.bukkit.inventory.PlayerInventory;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 
 public class ListenAutoPickup implements Listener {
-    @EventHandler(priority=EventPriority.LOWEST)
+    @EventHandler(priority=EventPriority.HIGHEST)
     public void onBlockBreak(BlockBreakEvent e) {
     	Player p = e.getPlayer();
     	GameMode gm = p.getGameMode();
     	if(gm == GameMode.CREATIVE) return;
+    	if(e.isCancelled()) return;
     	
     	Block b = e.getBlock();
         e.setCancelled(true);

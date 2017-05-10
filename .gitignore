@@ -3,6 +3,7 @@
 .externalToolBuilders/
 bin/
 lib/
+SkyWars/
 
 #Files
 Blobcatraz Recoded.iml

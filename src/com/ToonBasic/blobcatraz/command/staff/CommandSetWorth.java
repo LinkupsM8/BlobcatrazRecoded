@@ -1,6 +1,6 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import static com.ToonBasic.blobcatraz.utility.Util.print;
+import static com.ToonBasic.blobcatraz.logger.EconomyLog.print;
 
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -34,13 +34,13 @@ public class CommandSetWorth extends ICommand {
 				ConfigWorth.setWorth(is, worth);
 				String msg = prefix + Util.color("&eYou set the value of &a" + item + "&e to " + Util.money(worth));
 				p.sendMessage(msg);
-				
+
 				String log = Util.color("&a" + p.getName() + " &fchanged the value of &c" + ItemUtil.name(is) + " &fto " + Util.money(worth));
 				print(log);
-					}
-			} else {
-				String error = prefix + "You are not Mr. Ohare, do not try to charge for AIR!";
-				p.sendMessage(error);
 			}
+		} else {
+			String error = prefix + "You are not Mr. Ohare, do not try to charge for AIR!";
+			p.sendMessage(error);
 		}
+	}
 	}

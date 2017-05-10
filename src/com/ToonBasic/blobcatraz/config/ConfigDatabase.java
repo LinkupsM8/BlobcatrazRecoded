@@ -143,6 +143,7 @@ public class ConfigDatabase {
     }
     
     public static boolean hasAccount(OfflinePlayer op) {
+    	if(op == null) return false;
     	File file = file(op);
     	return file.exists();
     }

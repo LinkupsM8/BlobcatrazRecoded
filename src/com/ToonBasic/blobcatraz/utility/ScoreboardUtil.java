@@ -44,15 +44,14 @@ public class ScoreboardUtil extends Util implements Runnable {
 		Objective custom = SB.getObjective("blobcatraz");
 		custom.unregister();
 		custom = SB.registerNewObjective("blobcatraz", "dummy");
-		custom.setDisplayName(color("&1&ki&3Blobcatraz&1&ki&f"));
+		custom.setDisplayName(color("&1&l&ki&3&lBlobcatraz&1&l&ki&f"));
 		custom.setDisplaySlot(DisplaySlot.SIDEBAR);
 
 		String[] list = color(new String[] { //Arrays show up in reverse order on scoreboards
-			"&b&lPing: &f" + PlayerUtil.getPing(p),
-			"&b&lFood: &f" + p.getFoodLevel(),
-			"&b&lTokens: &f" + ConfigDatabase.tokens(p),
-			"&b&lBalance: &f" + Util.money(VaultUtil.balance(p)),
-			"&b&lCurrent Rank: &f" + VaultUtil.mainRank(p)
+			"&b&lPing&c: &a&l" + PlayerUtil.getPing(p),
+			"&b&lTokens&c: &a&l" + ConfigDatabase.tokens(p),
+			"&b&lBalance&c: &a&l" + Util.money(VaultUtil.balance(p)),
+			"&b&lCurrent Rank&c: &a&l" + VaultUtil.mainRank(p)
 		});
 		for(int i = list.length; i > 0; i -= 1) {
 			String entry = list[i - 1];

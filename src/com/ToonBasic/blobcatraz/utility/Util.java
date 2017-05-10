@@ -29,9 +29,11 @@ import net.md_5.bungee.api.chat.TextComponent;
 public class Util {
 	private static final Server SERVER = Bukkit.getServer();
 	private static final PluginManager PM = SERVER.getPluginManager();
-	private static final Core PLUGIN = Core.instance;
+	private static Core PLUGIN = Core.instance;
 	
     public static String prefix = color("&3{&bBlobcatraz&3} &f");
+    
+    public static void enable() {PLUGIN = Core.instance;}
 
     public static String color(String msg) {return ChatColor.translateAlternateColorCodes('&', msg);}
     public static String[] color(String[] msg) {
@@ -47,7 +49,7 @@ public class Util {
     }
     
     public static String onlyDouble(String o) {
-    	String n = o.replaceAll("[^\\d.-]", "");
+    	String n = o.replaceAll("[^\\d-.E]", "");
     	return n;
     }
     
@@ -142,9 +144,9 @@ public class Util {
     	boolean neg = (amount < 0);
     	boolean inf = (amount >= Double.POSITIVE_INFINITY);
     	boolean neginf = (amount <= Double.NEGATIVE_INFINITY);
-    	String money = neg ? color("&4$" + format) : color("&2$" + format);
-    	if(inf) money = color("&2$\u221E");
-    	if(neginf) money = color("&4$-\u221E");
+    	String money = neg ? color("&c$" + format) : color("&c$" + format);
+    	if(inf) money = color("&a$\u221E");
+    	if(neginf) money = color("&c$-\u221E");
     	return money;
     }
 
