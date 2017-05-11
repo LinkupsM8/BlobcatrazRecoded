@@ -35,7 +35,7 @@ public class CommandEconomy extends ICommand {
 					String amt2 = Util.money(amount);
 					String bal1 = Util.money(oldBal);
 					String bal2 = Util.money(newBal);
-					String msg1 = "You gave " + amt2 + " &f to " + oname;
+					String msg1 = "You gave " + amt2 + "&f to " + oname;
 					String msg2 = "You recieved " + amt2;
 					msg(cs, ot, msg1, msg2);
 					print(cname + " changed the balance of " + oname + " from " + bal1 + " to " + bal2);
@@ -46,7 +46,7 @@ public class CommandEconomy extends ICommand {
 					String amt2 = Util.money(amount);
 					String bal1 = Util.money(oldBal);
 					String bal2 = Util.money(newBal);
-					String msg1 = "You set the balance of " + oname + " &f to " + amt2;
+					String msg1 = "You set the balance of " + oname + "&f to " + amt2;
 					String msg2 = "You now have " + bal2;
 					msg(cs, ot, msg1, msg2);
 					print(cname + " changed the balance of " + oname + " from " + bal1 + " to " + bal2);
@@ -56,7 +56,7 @@ public class CommandEconomy extends ICommand {
 					String amt2 = Util.money(amount);
 					String bal1 = Util.money(oldBal);
 					String bal2 = Util.money(newBal);
-					String msg1 = "You set the balance of " + oname + " &f to " + amt2;
+					String msg1 = "You set the balance of " + oname + "&f to " + amt2;
 					String msg2 = "You now have " + bal2;
 					msg(cs, ot, msg1, msg2);
 					print(cname + " changed the balance of " + oname + " from " + bal1 + " to " + bal2);

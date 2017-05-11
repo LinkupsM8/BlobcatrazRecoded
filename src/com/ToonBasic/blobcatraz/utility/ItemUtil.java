@@ -144,7 +144,7 @@ public class ItemUtil extends Util {
 		String name1 = nms.getName();
 		int count = nms.getCount();
 		boolean x = (count > 1);
-		String name2 = x ? (name1 + " &fx" + count) : name1;
+		String name2 = x ? (name1 + "&f x" + count) : name1;
 		String name3 = color("&b<&r" + name2 + "&b>&r");
 		TextComponent txt = new TextComponent(name3);
 		ComponentBuilder cb = new ComponentBuilder(nbt(is));

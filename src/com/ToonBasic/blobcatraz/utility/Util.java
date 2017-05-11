@@ -144,7 +144,7 @@ public class Util {
     	boolean neg = (amount < 0);
     	boolean inf = (amount >= Double.POSITIVE_INFINITY);
     	boolean neginf = (amount <= Double.NEGATIVE_INFINITY);
-    	String money = neg ? color("&c$" + format) : color("&c$" + format);
+    	String money = neg ? color("&c$" + format) : color("&a$" + format);
     	if(inf) money = color("&a$\u221E");
     	if(neginf) money = color("&c$-\u221E");
     	return money;

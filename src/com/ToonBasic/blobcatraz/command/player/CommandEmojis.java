@@ -14,9 +14,9 @@ import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandEmojis extends ICommand implements Listener {	
-	private List<String> labelEmojis = Util.newList(":)", "<3", "^", "->", "<-");
-	private List<String> inputEmojis = Util.newList(":\\)", "<3", "\\^", "->", "<-");
-	private List<String> outputEmojis = Util.newList("\u263b", "\u2665", "\u2191", "\u2192", "\u2190");
+	private List<String> labelEmojis = Util.newList(":)", "<3", "^", "->", "<-", ":(");
+	private List<String> inputEmojis = Util.newList(":\\)", "<3", "\\^", "->", "<-", ":\\(");
+	private List<String> outputEmojis = Util.newList("\u263b", "\u2665", "\u2191", "\u2192", "\u2190", "\u2639");
 
 	public CommandEmojis() {super("emojis", null, "blobcatraz.staff.emojis");}
 
