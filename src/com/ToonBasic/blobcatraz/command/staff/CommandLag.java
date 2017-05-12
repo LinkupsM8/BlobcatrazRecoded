@@ -19,12 +19,17 @@ public class CommandLag extends ICommand {
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
 		if(args.length == 0) {
-			String[] msg = new String[] {
+			String tps = Util.cropDecimal(ServerUtil.latestTicksPerSecond(), 2) + "/s";
+			String cpu = Util.cropDecimal(ServerUtil.processorUsage(), 5) + "%";
+			String uram = ServerUtil.memoryUsage() + "MB";
+			String tram = ServerUtil.memoryTotal() + "MB";
+			String[] msg = Util.color(new String[] {
 				prefix + "Server Information:",
-				Util.color("&6&lTPS: &e" + ServerUtil.latestTicksPerSecond() + "/s"),
-				Util.color("&6&lCPU Usage: &e" + ServerUtil.processorUsage() + "%"),
-				Util.color("&6&lRAM Usage: &e" + ServerUtil.memoryUsage() + "MB")
-			};
+				"&6&lTPS: &e" + tps,
+				"&6&lCPU Usage: &e" + cpu,
+				"&6&lRAM Usage: &e" + uram,
+				"&6&lTotal RAM: &e" + tram
+			});
 			cs.sendMessage(msg);
 		} else {
 			String sub = args[0].toLowerCase();

@@ -139,8 +139,14 @@ public class Util {
         return json;
     }
     
+    public static String cropDecimal(double d, int places) {
+    	String format = "%,." + places + "f";
+    	String dec = String.format(format, d);
+    	return dec;
+    }
+    
     public static String money(double amount) {
-    	String format = String.format("%,.2f", amount);
+    	String format = cropDecimal(amount, 2);
     	boolean neg = (amount < 0);
     	boolean inf = (amount >= Double.POSITIVE_INFINITY);
     	boolean neginf = (amount <= Double.NEGATIVE_INFINITY);

@@ -34,10 +34,10 @@ public class ServerUtil extends Util {
 		return total;
 	}
 	
-	public static double memoryUsage() {
+	public static long memoryUsage() {
 		long total = memoryTotal();
 		long free = memoryFree();
-		double usage = total - free;
+		long usage = total - free;
 		return usage;
 	}
 }
