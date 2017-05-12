@@ -31,7 +31,7 @@ public class CommandBaltop extends ICommand {
 		Collections.sort(entryList, reverse);
 		
 		List<Entry<String, Double>> t;
-		boolean b = (entryList.size() > 9);
+		boolean b = (entryList.size() > 10);
 		t = b ? entryList.subList(0, 9) : entryList;
 		
 		List<String> list = Util.newList();

@@ -33,7 +33,7 @@ public class CommandIgnore extends ICommand implements Listener {
 			String msg = prefix + Util.color("&eYou are now ignoring &a" + t.getName());
 			p.sendMessage(msg);
 		} else {
-			String error = prefix + "Invalid Target!";
+			String error = prefix + Language.INVALID_TARGET;
 			p.sendMessage(error);
 		}
 	}

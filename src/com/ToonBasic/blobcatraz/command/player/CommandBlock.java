@@ -14,8 +14,7 @@ public class CommandBlock extends ICommand {
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
 		Player p = (Player) cs;
-		if (
-				
+		if (			
 			!craft(p.getInventory(), Material.COAL, Material.COAL_BLOCK, 9) &
 			!craft(p.getInventory(), Material.DIAMOND, Material.DIAMOND_BLOCK, 9) &
 			!craft(p.getInventory(), Material.EMERALD, Material.EMERALD_BLOCK, 9) &
@@ -23,9 +22,8 @@ public class CommandBlock extends ICommand {
 			!craft(p.getInventory(), Material.IRON_INGOT, Material.IRON_BLOCK, 9) &
 			!craft(p.getInventory(), Material.INK_SACK, (short) 4, Material.LAPIS_BLOCK, 9) &
 			!craft(p.getInventory(), Material.QUARTZ, Material.QUARTZ_BLOCK, 4) &
-			!craft(p.getInventory(), Material.REDSTONE, Material.REDSTONE_BLOCK, 9)
-			
-			) {
+			!craft(p.getInventory(), Material.REDSTONE, Material.REDSTONE_BLOCK, 9)			
+		) {
 			p.sendMessage(prefix + "Not enough materials!");
 			return;
 		}

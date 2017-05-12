@@ -135,9 +135,9 @@ public class Core extends JavaPlugin {
     
     public void onEnable() {
         instance = this;
-        Util.enable();
         LOG = getLogger();
         folder = getDataFolder();
+        Util.enable();
         if(PM.isPluginEnabled("Vault")) {
         	BEconomy be = new BEconomy();
         	Vault V = Vault.getPlugin(Vault.class);

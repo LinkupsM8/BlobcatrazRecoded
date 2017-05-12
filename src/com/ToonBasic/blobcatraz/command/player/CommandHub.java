@@ -25,7 +25,7 @@ public class CommandHub extends ICommand {
 		double x = 66.50D;
 		double y = 105.0D;
 		double z = -23.50D;
-		float yaw = -90.0F;
+		float yaw = 90.0F;
 		float pitch = 0.0F;
 		Location hub = new Location(w, x, y, z, yaw, pitch);
 		p.teleport(hub);
