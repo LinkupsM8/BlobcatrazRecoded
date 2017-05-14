@@ -20,13 +20,13 @@ public class CommandHelp extends ICommand {
 		String perm = "blobcatraz.staff.help";
 		if(cs.hasPermission(perm)) {
 			String cmd = getCommandUsed();
-			String bkt = "bukkit:" + cmd;
+			String bkt = "bukkit:" + cmd + " " + Util.finalArgs(0, args);
 			Bukkit.dispatchCommand(cs, bkt);
 		} else {
 			cs.sendMessage("Ask a staff member for help if you don't know what commands to use!");
 			cs.sendMessage("Basic Commands: ");
 			String[] commands = new String[] {
-				"&l/warp - &rWarp somewhere (buggy)",
+				"&l/warp - &rteleport somewhere",
 				"&l/island - &rGo to your island (working on it)",
 				"&l/msg - &rSend a private message to a friend",
 				"&l/afk - &rAway From Keyboard",

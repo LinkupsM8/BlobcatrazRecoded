@@ -73,10 +73,4 @@ public class PlayerUtil extends Util {
 		pc.sendPacket(ppoc);
 		ping(p);
 	}
-	
-	public static String possesive(String name) {
-		boolean s = name.toLowerCase().endsWith("s");
-		String poss = s ? name + "'" : name + "'s";
-		return poss;
-	}
 }

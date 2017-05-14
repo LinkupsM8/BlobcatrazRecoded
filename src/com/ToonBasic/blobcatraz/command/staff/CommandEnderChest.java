@@ -7,7 +7,7 @@ import org.bukkit.inventory.Inventory;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
-import com.ToonBasic.blobcatraz.utility.PlayerUtil;
+import com.ToonBasic.blobcatraz.utility.WordUtil;
 
 @PlayerOnly
 public class CommandEnderChest extends ICommand {
@@ -22,7 +22,7 @@ public class CommandEnderChest extends ICommand {
         	if(t != null) {
         		Inventory chest = t.getEnderChest();
         		p.openInventory(chest);
-        		p.sendMessage("Opening " + PlayerUtil.possesive(t.getName()) + " enderchest...");
+        		p.sendMessage("Opening " + WordUtil.possesive(t.getName()) + " enderchest...");
         	} else {
         		String error = prefix + Language.INVALID_TARGET;
         		p.sendMessage(error);

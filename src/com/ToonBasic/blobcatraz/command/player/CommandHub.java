@@ -1,5 +1,7 @@
 package com.ToonBasic.blobcatraz.command.player;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -20,14 +22,25 @@ public class CommandHub extends ICommand {
 	}
 	
 	public static void hub(Player p) {
-		World w = Bukkit.getWorld("Hub");
-		if(w == null) w = Bukkit.getWorlds().get(0);
-		double x = 66.50D;
-		double y = 105.0D;
-		double z = -23.50D;
-		float yaw = 90.0F;
-		float pitch = 0.0F;
-		Location hub = new Location(w, x, y, z, yaw, pitch);
+		Location hub = hub();
 		p.teleport(hub);
+	}
+	
+	public static Location hub() {
+		World w = Bukkit.getWorld("Hub");
+		if(w == null) {
+			List<World> worlds = Bukkit.getWorlds();
+			World w2 = worlds.get(0);
+			Location hub = w2.getSpawnLocation();
+			return hub;
+		} else {
+			double x = 66.5D;
+			double y = 105.0D;
+			double z = -23.5D;
+			float yaw = 90.0F;
+			float pitch = 0.0F;
+			Location hub = new Location(w, x, y, z, yaw, pitch);
+			return hub;
+		}
 	}
 }

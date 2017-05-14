@@ -10,8 +10,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
-import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
+import com.ToonBasic.blobcatraz.utility.WordUtil;
 
 @PlayerOnly
 public class CommandSkull extends ICommand {
@@ -25,7 +25,7 @@ public class CommandSkull extends ICommand {
 			ItemStack is = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 			ItemMeta meta = is.getItemMeta();
 			SkullMeta skull = (SkullMeta) meta;
-			String display = Util.color("&r" + PlayerUtil.possesive(name) + " Head");
+			String display = Util.color("&r" + WordUtil.possesive(name) + " Head");
 			skull.setDisplayName(display);
 			skull.setOwner(name);
 			is.setItemMeta(skull);

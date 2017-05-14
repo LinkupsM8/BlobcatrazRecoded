@@ -47,6 +47,7 @@ import com.ToonBasic.blobcatraz.command.special.CommandCenter;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
 import com.ToonBasic.blobcatraz.command.special.CommandDelPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandItemHolo;
+import com.ToonBasic.blobcatraz.command.special.CommandKillAll;
 import com.ToonBasic.blobcatraz.command.special.CommandKitToChest;
 import com.ToonBasic.blobcatraz.command.special.CommandMobEgg;
 import com.ToonBasic.blobcatraz.command.special.CommandNuke;
@@ -242,6 +243,7 @@ public class Core extends JavaPlugin {
         	new CommandChestToKit(),
         	new CommandDelPortal(),
         	new CommandItemHolo(),
+        	new CommandKillAll(),
         	new CommandKitToChest(),
         	new CommandMobEgg(),
         	new CommandNuke(),

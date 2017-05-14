@@ -109,11 +109,10 @@ public class CommandWarps extends ICommand implements Listener {
 	private Inventory gui(Player p, int page) {
 		List<Warp> list = ConfigWarps.warps();
 		int start = (27 * page) - 27;
-		int end = start + 27;
 		Inventory i = Bukkit.createInventory(null, 45, TITLE);
-		for(int j = start; j < end; j++) {
-			if(list.size() > j) {
-				Warp w = list.get(j);
+		for(int j = 0; j < 27; j++) {
+			if(list.size() > j + start) {
+				Warp w = list.get(j + start);
 				String name = w.name();
 				if(p.hasPermission("blobcatraz.warps." + name)) {
 					ItemStack icon = w.icon();

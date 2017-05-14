@@ -5,8 +5,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
+import com.ToonBasic.blobcatraz.utility.WordUtil;
 
 public class CommandWhoIs extends ICommand {
 	public CommandWhoIs() {super("whois", "<nickname>", "blobcatraz.staff.whois", "realname");}
@@ -20,7 +20,7 @@ public class CommandWhoIs extends ICommand {
 			if(disp.contains(nick)) {
 				String d = o.getDisplayName();
 				String name = o.getName();
-				String msg = prefix + Util.color(PlayerUtil.possesive(d) + " &foriginal name is " + name);
+				String msg = prefix + Util.color(WordUtil.possesive(d) + " &foriginal name is " + name);
 				cs.sendMessage(msg);
 				break;
 			}

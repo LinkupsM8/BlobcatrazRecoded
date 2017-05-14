@@ -1,9 +1,14 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
+import static org.bukkit.entity.EntityType.*;
+
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
@@ -14,56 +19,84 @@ import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandMobSpawn extends ICommand {
-    public CommandMobSpawn() {
-        super("spawnmob", "<mob> [amount] [player]", "blobcatraz.staff.spawnmob", "mob");
-    }
+    public CommandMobSpawn() {super("spawnmob", "<mob[,mob2,mob3,...]> [amount] [player]", "blobcatraz.staff.spawnmob", "mob", "mobspawn");}
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
-        if (args.length > 0) {
-        	int amount = 1;
-        	if(args.length > 1) {
-        		try{amount = Integer.parseInt(args[1]);} 
-        		catch(Exception ex) {}
-        	}
-        	Player p = (Player) cs;
-        	Location look = PlayerUtil.lookLocation(p);
-        	if(args.length > 2) {
-        		String targ = args[2];
-        		Player t = Bukkit.getPlayer(targ);
-        		if(t == null) {
-        			look = PlayerUtil.lookLocation(p);
-        			p.sendMessage(prefix + Language.INVALID_TARGET);
-        		} else {
-        			look = t.getLocation();
-        		}
-        	}
-        	look.setY(look.getY() + 1.5);
-        	String ent = args[0].toUpperCase();
-    		if(amount > 50) amount = 50;
-    		String[] mobs = ent.split(",");
-    		for(String mob : mobs) {
-            	if(spawn(look, mob, amount)) {
-            		String msg = Util.color(prefix + "&ESpawned &4" + amount + " &eof " + mob);
-            		p.sendMessage(msg);
-            	} else {
-            		String msg = Util.color(prefix + "&cInvalid Entity: " + mob);
-            		p.sendMessage(msg);
-            	}
-    		}
+        Player p = (Player) cs;
+        String id = args[0];
+        String amt = "1";
+        String target = null;
+        if(args.length > 1) {
+        	amt = args[1];
+        	amt = Util.onlyInteger(amt);
         }
+        
+        if(args.length > 2) {target = args[2];}
+        int amount = 1;
+        try {amount = Integer.parseInt(amt);}
+        catch(Exception ex) {amount = 1;}
+        
+        Location l = PlayerUtil.lookLocation(p);
+        l.setY(l.getY() + 1.5D);
+        if(target != null) {
+        	Player t = Bukkit.getPlayer(target);
+        	if(t != null) l = t.getLocation();
+        	else {p.sendMessage(prefix + Language.INVALID_TARGET);}
+        }
+        
+        int count = spawn(id, l, amount);
+        String msg = prefix + Util.color("You spawned &c" + count + " &fentities!");
+        p.sendMessage(msg);
     }
     
-    private boolean spawn(Location loc, String mob, int amount) {
-    	try {
-    		EntityType et = EntityType.valueOf(mob);
-        	if(et != null) {
-        		World w = loc.getWorld();
-        		for(int i = amount; i > 0; i--) {
-            		w.spawnEntity(loc, et);
+    private int spawn(String id, Location l, int amount) {
+    	String[] split = id.split(",");
+    	List<EntityType> ets = mobs(split);
+    	World w = l.getWorld();
+    	int count = 0;
+    	for(int i = 0; i < amount; i++) {
+        	Entity prev = null;
+        	for(EntityType et : ets) {
+        		Entity e = w.spawnEntity(l, et);
+        		if(prev == null) {prev = e;}
+        		else {
+        			prev.addPassenger(e);
+        			prev = e;
         		}
-        		return true;
-        	} else return false;
-    	} catch(Exception ex) {return false;}
+        		count++;
+        	}
+    	}
+    	return count;
+    }
+    
+    public static final List<EntityType> INVALID = Util.newList(
+		PLAYER,
+		DRAGON_FIREBALL,
+		DROPPED_ITEM,
+		LINGERING_POTION,
+		LIGHTNING,
+		SPLASH_POTION,
+		COMPLEX_PART, 
+		AREA_EFFECT_CLOUD, 
+		EVOKER_FANGS, 
+		EXPERIENCE_ORB, 
+		THROWN_EXP_BOTTLE, 
+		SHULKER_BULLET, 
+		UNKNOWN
+    );
+    
+    private List<EntityType> mobs(String[] ss) {
+    	List<EntityType> list = Util.newList();
+    	for(String s : ss) {
+    		s = s.toUpperCase();
+    		EntityType et = null;
+    		try {et = EntityType.valueOf(s);}
+    		catch(Exception ex) {et = null;}
+    		boolean n = ((et == null) || (INVALID.contains(et)));
+    		if(!n) list.add(et);
+    	}
+    	if(list.isEmpty()) list.add(SLIME);
+    	return list;
     }
 }

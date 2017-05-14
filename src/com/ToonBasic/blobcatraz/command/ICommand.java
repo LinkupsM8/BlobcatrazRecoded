@@ -99,7 +99,7 @@ public abstract class ICommand implements CommandExecutor {
         return this;
     }
 
-    public abstract void handleCommand(CommandSender sender, String[] args);
+    public abstract void handleCommand(CommandSender cs, String[] args);
 
     public String getCommand() {
         return command;
@@ -135,7 +135,7 @@ public abstract class ICommand implements CommandExecutor {
         public static String NO_PERMISSION = Util.color("&cYou're not allowed to use this command!");
         public static String PLAYER_ONLY = Util.color("Only players can execute this command");
         public static String INVALID_TARGET = Util.color("&cInvalid Target");
-        public static String INCORRECT_USAGE = Util.color("&cIncorrect usage");
+        public static String INCORRECT_USAGE = Util.color("&cIncorrect usage, please try again with these arguments:\n&f/%1s");
         public static String COMMAND_DISABLED = Util.color("&cThis command is disabled");
     }
 }
