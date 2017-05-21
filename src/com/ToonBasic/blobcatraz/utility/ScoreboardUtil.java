@@ -50,11 +50,12 @@ public class ScoreboardUtil extends Util implements Runnable {
 		String[] list = color(new String[] { //Arrays show up in reverse order on scoreboards
 			"&b&lPing&c: &a&l" + PlayerUtil.getPing(p),
 			"&b&lTokens&c: &a&l" + ConfigDatabase.tokens(p),
-			"&b&lBalance&c: &a&l" + Util.money(VaultUtil.balance(p)),
+			"&b&lBalance&c: &a&l" + NumberUtil.money(VaultUtil.balance(p)),
 			"&b&lCurrent Rank&c: &a&l" + VaultUtil.mainRank(p)
 		});
 		for(int i = list.length; i > 0; i -= 1) {
 			String entry = list[i - 1];
+			if(entry.length() > 40) entry = entry.substring(0, 40);
 			Score sc = custom.getScore(entry);
 			sc.setScore(i);
 		}

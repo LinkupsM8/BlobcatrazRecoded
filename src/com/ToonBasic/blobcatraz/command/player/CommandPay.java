@@ -8,7 +8,7 @@ import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 import com.ToonBasic.blobcatraz.logger.EconomyLog;
-import com.ToonBasic.blobcatraz.utility.Util;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 
 @PlayerOnly
 public class CommandPay extends ICommand {
@@ -28,11 +28,11 @@ public class CommandPay extends ICommand {
 				if(pay <= bal) {
 					ConfigDatabase.withdraw(p, pay);
 					ConfigDatabase.deposit(t, pay);
-					p.sendMessage("You sent " + Util.money(pay) + " to " + t.getName());
-					t.sendMessage("You received " + Util.money(pay) + " from " + p.getName());
-					EconomyLog.print(p.getName() + " payed " + Util.money(pay) + " to " + t.getName());
+					p.sendMessage("You sent " + NumberUtil.money(pay) + " to " + t.getName());
+					t.sendMessage("You received " + NumberUtil.money(pay) + " from " + p.getName());
+					EconomyLog.print(p.getName() + " payed " + NumberUtil.money(pay) + " to " + t.getName());
 				} else {
-					String error = "You don't have enough money! You only have " + Util.money(bal);
+					String error = "You don't have enough money! You only have " + NumberUtil.money(bal);
 					p.sendMessage(error);
 				}
 			} else {

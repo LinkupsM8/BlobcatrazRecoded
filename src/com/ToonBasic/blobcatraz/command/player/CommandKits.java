@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.config.ConfigKits;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
@@ -34,7 +35,7 @@ public class CommandKits extends ICommand implements Listener {
 		if(args.length > 0) {
 			try {
 				String pg = args[0];
-				pg = Util.onlyInteger(pg);
+				pg = NumberUtil.onlyInteger(pg);
 				page = Integer.parseInt(pg);
 			} catch(Exception ex) {
 				String error = Util.color(prefix + "Invalid Page, Setting to 1");

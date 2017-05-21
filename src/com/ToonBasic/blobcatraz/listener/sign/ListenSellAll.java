@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
@@ -72,7 +73,7 @@ public class ListenSellAll implements Listener {
 					ItemStack[] items = i.getContents();
 					double worth = ItemUtil.worth(items);
 					ConfigDatabase.deposit(p, worth);
-					p.sendMessage(Util.prefix + "You sold an inventory worth " + Util.money(worth));
+					p.sendMessage(Util.prefix + "You sold an inventory worth " + NumberUtil.money(worth));
 				}
 			}
 		}

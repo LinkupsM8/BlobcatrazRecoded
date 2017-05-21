@@ -10,6 +10,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.ServerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
@@ -19,8 +20,8 @@ public class CommandLag extends ICommand {
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
 		if(args.length == 0) {
-			String tps = Util.cropDecimal(ServerUtil.latestTicksPerSecond(), 2) + "/s";
-			String cpu = Util.cropDecimal(ServerUtil.processorUsage(), 5) + "%";
+			String tps = NumberUtil.cropDecimal(ServerUtil.latestTicksPerSecond(), 2) + "/s";
+			String cpu = NumberUtil.cropDecimal(ServerUtil.processorUsage(), 5) + "%";
 			String uram = ServerUtil.memoryUsage() + "MB";
 			String tram = ServerUtil.memoryTotal() + "MB";
 			String[] msg = Util.color(new String[] {

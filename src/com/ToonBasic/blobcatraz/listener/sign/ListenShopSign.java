@@ -1,7 +1,7 @@
 package com.ToonBasic.blobcatraz.listener.sign;
 
 import static com.ToonBasic.blobcatraz.utility.ItemUtil.worth;
-import static com.ToonBasic.blobcatraz.utility.Util.toShort;
+import static com.ToonBasic.blobcatraz.utility.NumberUtil.toShort;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -24,6 +24,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
@@ -105,7 +106,7 @@ public class ListenShopSign implements Listener {
 							} else {
 								pi.setItem(slot, is2);
 								ConfigDatabase.withdraw(p, price);
-								String msg = Util.color("&eYou bought &a" + amount + " &eof &a" + ItemUtil.name(is2) + "&e for &a" + Util.money(price));
+								String msg = Util.color("&eYou bought &a" + amount + " &eof &a" + ItemUtil.name(is2) + "&e for &a" + NumberUtil.money(price));
 								p.closeInventory();
 								PlayerUtil.action(p, msg);
 								PlayerUtil.ping(p);
@@ -125,10 +126,10 @@ public class ListenShopSign implements Listener {
 	
 	private void sign(SignChangeEvent e) {
 		Player p = e.getPlayer();
-		String l1 = e.getLine(1);
+		String l1 = e.getLine(1).replaceAll(" ", "_");
 		String l2 = e.getLine(2);
 		if(l2.equals("")) l2 = "0";
-		l2 = Util.onlyInteger(l2);
+		l2 = NumberUtil.onlyInteger(l2);
 		try {
 			if(!ItemUtil.special().containsKey(l1)) {
 				Material mat = Material.matchMaterial(l1.toUpperCase());
@@ -226,7 +227,7 @@ public class ListenShopSign implements Listener {
 		ItemStack is = item.clone();
 		ItemMeta meta = is.getItemMeta();
 		double pr = worth(is) * 2;
-		String price = Util.money(pr);
+		String price = NumberUtil.money(pr);
 		meta.setLore(Util.newList(price));
 		is.setItemMeta(meta);
 		return is;

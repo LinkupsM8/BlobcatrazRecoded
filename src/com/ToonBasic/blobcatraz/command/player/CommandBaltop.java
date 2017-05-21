@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 public class CommandBaltop extends ICommand {
@@ -41,7 +42,7 @@ public class CommandBaltop extends ICommand {
 			if(name != null) {
 				double bal = e.getValue();
 				if(bal > 0.0D) {
-					String add = Util.color(i + ". &6" + name + ": &e" + Util.money(bal));
+					String add = Util.color(i + ". &6" + name + ": &e" + NumberUtil.money(bal));
 					list.add(add);
 					i++;
 				}

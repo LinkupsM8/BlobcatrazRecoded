@@ -1,6 +1,19 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import static org.bukkit.entity.EntityType.*;
+import static org.bukkit.entity.EntityType.AREA_EFFECT_CLOUD;
+import static org.bukkit.entity.EntityType.COMPLEX_PART;
+import static org.bukkit.entity.EntityType.DRAGON_FIREBALL;
+import static org.bukkit.entity.EntityType.DROPPED_ITEM;
+import static org.bukkit.entity.EntityType.EVOKER_FANGS;
+import static org.bukkit.entity.EntityType.EXPERIENCE_ORB;
+import static org.bukkit.entity.EntityType.LIGHTNING;
+import static org.bukkit.entity.EntityType.LINGERING_POTION;
+import static org.bukkit.entity.EntityType.PLAYER;
+import static org.bukkit.entity.EntityType.SHULKER_BULLET;
+import static org.bukkit.entity.EntityType.SLIME;
+import static org.bukkit.entity.EntityType.SPLASH_POTION;
+import static org.bukkit.entity.EntityType.THROWN_EXP_BOTTLE;
+import static org.bukkit.entity.EntityType.UNKNOWN;
 
 import java.util.List;
 
@@ -14,6 +27,7 @@ import org.bukkit.entity.Player;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
@@ -29,7 +43,7 @@ public class CommandMobSpawn extends ICommand {
         String target = null;
         if(args.length > 1) {
         	amt = args[1];
-        	amt = Util.onlyInteger(amt);
+        	amt = NumberUtil.onlyInteger(amt);
         }
         
         if(args.length > 2) {target = args[2];}

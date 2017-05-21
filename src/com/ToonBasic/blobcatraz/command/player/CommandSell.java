@@ -12,6 +12,7 @@ import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
@@ -35,7 +36,7 @@ public class CommandSell extends ICommand {
 					double worth = ItemUtil.worth(is);
 					is.setAmount(0);
 					ConfigDatabase.deposit(p, worth);
-					String msg = prefix + Util.color("&eYou sold &a" + amount + " &eof &a" + name + " &efor " + Util.money(worth));
+					String msg = prefix + Util.color("&eYou sold &a" + amount + " &eof &a" + name + " &efor " + NumberUtil.money(worth));
 					p.sendMessage(msg);
 				} else {
 					String error = prefix + "You cannot sell AIR!";

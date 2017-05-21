@@ -80,14 +80,14 @@ public class ItemUtil extends Util {
 	}
 	
 	public static ItemStack dye(int meta) {
-		ItemStack dye = new ItemStack(Material.INK_SACK, 1, toShort(meta));
+		ItemStack dye = new ItemStack(Material.INK_SACK, 1, NumberUtil.toShort(meta));
 		return dye;
 	}
 	
 	public static ItemStack getItem(String id, int amount, short data) {
 		Map<String, ItemStack> special = special();
 		Material mat = Material.matchMaterial(id.toUpperCase());
-		id = id.toLowerCase().replace(' ', '_');
+		id = id.toLowerCase().replaceAll(" ", "_");
 		if(mat != null) {
 			ItemStack is = new ItemStack(mat, amount, data);
 			return is;

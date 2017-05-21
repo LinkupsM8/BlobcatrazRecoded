@@ -9,6 +9,7 @@ import org.bukkit.inventory.PlayerInventory;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
@@ -26,7 +27,7 @@ public class CommandWorth extends ICommand {
 			short data = is.getDurability();
 			String item = name + ":" + data;
 			double worth = ItemUtil.worth(is);
-			String msg = prefix + Util.color("&eYour &a" + item + "&e is worth " + Util.money(worth));
+			String msg = prefix + Util.color("&eYour &a" + item + "&e is worth " + NumberUtil.money(worth));
 			p.sendMessage(msg);
 		} else {
 			String error = prefix + "AIR is not valueable!";

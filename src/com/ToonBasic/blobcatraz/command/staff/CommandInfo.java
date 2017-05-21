@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 import com.ToonBasic.blobcatraz.utility.VaultUtil;
 import com.ToonBasic.blobcatraz.utility.WordUtil;
@@ -55,9 +56,9 @@ public class CommandInfo extends ICommand {
 				"&e&lFlying: &f" + string(fly),
 				"&e&lOP: &f" + string(op),
 				"&e&lGame Mode: &f" + string(gm),
-				"&e&lHealth: &f" + Util.cropDecimal(health, 2),
+				"&e&lHealth: &f" + NumberUtil.cropDecimal(health, 2),
 				"&e&lFood: &f" + food,
-				"&e&lSaturation: &f" + Util.cropDecimal(sat, 2),
+				"&e&lSaturation: &f" + NumberUtil.cropDecimal(sat, 2),
 				""
 			});
 			cs.sendMessage(msg);

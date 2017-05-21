@@ -32,6 +32,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandNickname;
 import com.ToonBasic.blobcatraz.command.player.CommandPay;
 import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
 import com.ToonBasic.blobcatraz.command.player.CommandReply;
+import com.ToonBasic.blobcatraz.command.player.CommandReport;
 import com.ToonBasic.blobcatraz.command.player.CommandRules;
 import com.ToonBasic.blobcatraz.command.player.CommandSell;
 import com.ToonBasic.blobcatraz.command.player.CommandSetHome;
@@ -57,6 +58,7 @@ import com.ToonBasic.blobcatraz.command.special.CommandPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandSetPortal;
 import com.ToonBasic.blobcatraz.command.special.CommandShhh;
 import com.ToonBasic.blobcatraz.command.special.CommandSlimeCannon;
+import com.ToonBasic.blobcatraz.command.special.CommandWorld;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandChat;
@@ -78,6 +80,8 @@ import com.ToonBasic.blobcatraz.command.staff.CommandItem;
 import com.ToonBasic.blobcatraz.command.staff.CommandLag;
 import com.ToonBasic.blobcatraz.command.staff.CommandMobSpawn;
 import com.ToonBasic.blobcatraz.command.staff.CommandMute;
+import com.ToonBasic.blobcatraz.command.staff.CommandOP;
+import com.ToonBasic.blobcatraz.command.staff.CommandOPPassword;
 import com.ToonBasic.blobcatraz.command.staff.CommandPowertool;
 import com.ToonBasic.blobcatraz.command.staff.CommandRepair;
 import com.ToonBasic.blobcatraz.command.staff.CommandSeen;
@@ -181,6 +185,8 @@ public class Core extends JavaPlugin {
         	new CommandLag(),
         	new CommandMobSpawn(),
         	new CommandMute(),
+        	new CommandOP(),
+        	new CommandOPPassword(),
         	new CommandPowertool(),
         	new CommandRepair(),
         	new CommandSeen(),
@@ -226,6 +232,7 @@ public class Core extends JavaPlugin {
         	new CommandPay(),
         	new CommandPrefix(),
         	new CommandReply(),
+        	new CommandReport(),
         	new CommandRules(),
         	new CommandSell(),
         	new CommandSetHome(),
@@ -254,7 +261,8 @@ public class Core extends JavaPlugin {
         	new CommandPWeather(),
         	new CommandSetPortal(),
         	new CommandShhh(),
-        	new CommandSlimeCannon()
+        	new CommandSlimeCannon(),
+        	new CommandWorld()
         );
         
      //Dependents

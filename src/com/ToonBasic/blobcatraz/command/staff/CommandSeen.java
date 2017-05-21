@@ -23,9 +23,9 @@ public class CommandSeen extends ICommand implements Listener {
 	public CommandSeen() {super("seen", "<player>", "blobcatraz.staff.seen", "laston");}
 	
 	@Override
+	@SuppressWarnings("deprecation")
 	public void handleCommand(CommandSender cs, String[] args) {
 		String target = args[0];
-		@SuppressWarnings("deprecation")
 		OfflinePlayer ot = Bukkit.getOfflinePlayer(target);
 		if(ot.isOnline()) {
 			Player t = ot.getPlayer();

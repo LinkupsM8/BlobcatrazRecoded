@@ -12,6 +12,7 @@ import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.config.ConfigWorth;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
@@ -23,7 +24,7 @@ public class CommandSetWorth extends ICommand {
 		Player p = (Player) cs;
 		if(args.length > 0) {
 			String amount = args[0];
-			amount = Util.onlyDouble(amount);
+			amount = NumberUtil.onlyDouble(amount);
 			double worth = Double.parseDouble(amount);
 			PlayerInventory pi = p.getInventory();
 			ItemStack is = pi.getItemInMainHand();
@@ -32,10 +33,10 @@ public class CommandSetWorth extends ICommand {
 				short data = is.getDurability();
 				String item = mat.name() + ":" + data;
 				ConfigWorth.setWorth(is, worth);
-				String msg = prefix + Util.color("&eYou set the value of &a" + item + "&e to " + Util.money(worth));
+				String msg = prefix + Util.color("&eYou set the value of &a" + item + "&e to " + NumberUtil.money(worth));
 				p.sendMessage(msg);
 
-				String log = Util.color("&a" + p.getName() + " &fchanged the value of &c" + ItemUtil.name(is) + " &fto " + Util.money(worth));
+				String log = Util.color("&a" + p.getName() + " &fchanged the value of &c" + ItemUtil.name(is) + " &fto " + NumberUtil.money(worth));
 				print(log);
 			}
 		} else {

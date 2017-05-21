@@ -14,7 +14,7 @@ import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.config.ConfigHolo;
 import com.ToonBasic.blobcatraz.config.CustomHologram;
-import com.ToonBasic.blobcatraz.utility.Util;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 
 @PlayerOnly
 public class CommandItemHolo extends ICommand {
@@ -30,7 +30,7 @@ public class CommandItemHolo extends ICommand {
 				String msg = prefix + "Reloaded all item holograms!";
 				p.sendMessage(msg);
 			} else if(sub.equals("delete") && args.length > 1) {
-				String radius = Util.onlyInteger(args[1]);
+				String radius = NumberUtil.onlyInteger(args[1]);
 				int r = Integer.parseInt(radius);
 				List<CustomHologram> near = ConfigHolo.near(p, r);
 				ConfigHolo.remove(near.toArray(new CustomHologram[0]));

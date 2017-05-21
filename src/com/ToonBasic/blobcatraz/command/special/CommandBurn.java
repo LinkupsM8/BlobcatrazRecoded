@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 public class CommandBurn extends ICommand {
@@ -20,7 +21,7 @@ public class CommandBurn extends ICommand {
 		} else {
 			String time = args[1];
 			try {
-				time = Util.onlyInteger(time);
+				time = NumberUtil.onlyInteger(time);
 				int ti = Integer.parseInt(time);
 				t.setFireTicks(ti);
 				String msg = Util.color(prefix + "You set &a" + t.getName() + "&r on fire for &a" + ti + "&r ticks");

@@ -9,21 +9,18 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-import com.ToonBasic.blobcatraz.Core;
 import com.ToonBasic.blobcatraz.utility.Util;
 
-public class ConfigCustomItems {
-	private static final File FOLDER = Core.folder;
+public class ConfigCustomItems extends Config {
 	private static final File FILE = new File(FOLDER, "custom items.yml");
 	private static YamlConfiguration config = YamlConfiguration.loadConfiguration(FILE);
 	
 	public static YamlConfiguration load() {
 		try {
-			if(!FILE.exists()) save();
-			config.load(FILE);
-			defaults();
+			config = load(FILE);
 			return config;
-		} catch(Exception ex) {
+		} 
+		catch(Exception ex) {
 			String error = "Failed to load custom items:\n" + ex.getCause();
 			Util.print(error);
 			return null;
@@ -35,9 +32,11 @@ public class ConfigCustomItems {
 			if(!FILE.exists()) {
 				FOLDER.mkdirs();
 				FILE.createNewFile();
+				defaults();
 			}
-			config.save(FILE);
-		} catch(Exception ex) {
+			save(config, FILE);
+		}
+		catch(Exception ex) {
 			String error = "Failed to save custom items:\n" + ex.getCause();
 			Util.print(error);
 		}

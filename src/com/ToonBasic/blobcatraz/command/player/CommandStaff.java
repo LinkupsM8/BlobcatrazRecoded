@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
@@ -27,7 +28,7 @@ public class CommandStaff extends ICommand {
     
     public static void gui(Player p) {
     	Inventory i = Bukkit.createInventory(null, 9, Util.color("&2Online Staff"));
-    	ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, Util.toShort(3));
+    	ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, NumberUtil.toShort(3));
     	ItemMeta meta = head.getItemMeta();
     	SkullMeta sm = (SkullMeta) meta;
     	

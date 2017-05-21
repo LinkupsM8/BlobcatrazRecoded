@@ -29,7 +29,7 @@ public class CommandAFK extends ICommand implements Listener {
 			reason = Util.color(reason);
 			boolean b = ((reason == null) || (reason.equals("")));
 			String msg1 = Util.color("&6 * &7" + p.getName() + " &eis now AFK");
-			String msg2 = b ? msg1 : (msg1 + Util.color("&f" + reason));
+			String msg2 = b ? msg1 : Util.color(msg1 + "\n&f- " + reason);
 			afk.add(p);
 			ScoreboardUtil.afk(p);
 			Bukkit.broadcastMessage(msg2);

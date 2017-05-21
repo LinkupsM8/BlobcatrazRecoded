@@ -15,6 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
@@ -37,7 +38,7 @@ public class ListenEnchantSign implements Listener {
 					b.breakNaturally();
 				} else {
 					String lvl = e.getLine(2);
-					lvl = Util.onlyInteger(lvl);
+					lvl = NumberUtil.onlyInteger(lvl);
 					if(lvl.equals("")) lvl = "1";
 					
 					e.setLine(0, ENCHANT);
@@ -79,7 +80,7 @@ public class ListenEnchantSign implements Listener {
 								ConfigDatabase.withdraw(p, price);
 								meta.addEnchant(ench, level, true);
 								is.setItemMeta(meta);
-								String msg = "You bought an enchantment for " + Util.money(price);
+								String msg = "You bought an enchantment for " + NumberUtil.money(price);
 								PlayerUtil.action(p, msg);
 							} else {
 								String error = "You don't have enough money!";

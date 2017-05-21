@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 import com.ToonBasic.blobcatraz.utility.WordUtil;
 
@@ -22,7 +23,7 @@ public class CommandBalance extends ICommand {
 			Player t = Bukkit.getPlayer(target);
 			if(t != null) {
 				double bal = ConfigDatabase.balance(t);
-				String balance = Util.money(bal);
+				String balance = NumberUtil.money(bal);
 				String msg = prefix + Util.color("&d" + WordUtil.possesive(t.getName()) + " &fbalance is &e" + balance);
 				p.sendMessage(msg);
 			} else {
@@ -31,7 +32,7 @@ public class CommandBalance extends ICommand {
 			}
 		} else {
 			double bal = ConfigDatabase.balance(p);
-			String balance = Util.money(bal);
+			String balance = NumberUtil.money(bal);
 			String msg = prefix + Util.color("&aYour balance is &e" + balance);
 			p.sendMessage(msg);
 		}

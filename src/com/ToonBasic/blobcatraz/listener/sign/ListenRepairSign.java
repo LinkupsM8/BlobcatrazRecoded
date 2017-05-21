@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
@@ -26,7 +27,7 @@ public class ListenRepairSign implements Listener {
 			String l0 = e.getLine(0).toLowerCase();
 			if(l0.equals("[repair]")) {
 				e.setLine(0, REPAIR);
-				e.setLine(1, Util.money(100000.00D));
+				e.setLine(1, NumberUtil.money(100000.00D));
 				String msg = "Created repair sign!";
 				PlayerUtil.action(p, msg);
 			}
@@ -51,7 +52,7 @@ public class ListenRepairSign implements Listener {
 						if(bal >= price) {
 							String name = ItemUtil.name(is);
 							ConfigDatabase.withdraw(p, price);
-							is.setDurability(Util.toShort(0));
+							is.setDurability(NumberUtil.toShort(0));
 							PlayerUtil.action(p, "Successfully repaired your &a" + name);
 						} else {
 							String error = "You don't have enough money!";
