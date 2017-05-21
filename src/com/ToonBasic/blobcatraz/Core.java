@@ -37,6 +37,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandRules;
 import com.ToonBasic.blobcatraz.command.player.CommandSell;
 import com.ToonBasic.blobcatraz.command.player.CommandSetHome;
 import com.ToonBasic.blobcatraz.command.player.CommandStaff;
+import com.ToonBasic.blobcatraz.command.player.CommandStats;
 import com.ToonBasic.blobcatraz.command.player.CommandToggleScoreboard;
 import com.ToonBasic.blobcatraz.command.player.CommandTpChoose;
 import com.ToonBasic.blobcatraz.command.player.CommandTpa;
@@ -113,6 +114,7 @@ import com.ToonBasic.blobcatraz.listener.ListenChat;
 import com.ToonBasic.blobcatraz.listener.ListenDeath;
 import com.ToonBasic.blobcatraz.listener.ListenJoin;
 import com.ToonBasic.blobcatraz.listener.ListenPortal;
+import com.ToonBasic.blobcatraz.listener.ListenStats;
 import com.ToonBasic.blobcatraz.listener.ListenVote;
 import com.ToonBasic.blobcatraz.listener.item.ListenChatItem;
 import com.ToonBasic.blobcatraz.listener.item.ListenSonic;
@@ -237,6 +239,7 @@ public class Core extends JavaPlugin {
         	new CommandSell(),
         	new CommandSetHome(),
         	new CommandStaff(),
+        	new CommandStats(),
         	new CommandToggleScoreboard(),
         	new CommandTpa(),
         	new CommandTpChoose(),
@@ -313,7 +316,8 @@ public class Core extends JavaPlugin {
     		new ListenDeath(),
     		new ListenAutoPickup(),
     		new ListenSonic(),
-    		new ListenChatItem()
+    		new ListenChatItem(),
+    		new ListenStats()
     	);
     }
 }

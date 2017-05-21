@@ -28,6 +28,7 @@ public class CommandReport extends ICommand {
 				}
 			}
 			String msg = prefix + Util.color("&4" + t.getName() + " &ewas reported!");
+			p.sendMessage(msg);
 		} else {
 			String error = prefix + Language.INVALID_TARGET;
 			p.sendMessage(error);

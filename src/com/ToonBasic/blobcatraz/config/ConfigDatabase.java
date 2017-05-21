@@ -60,6 +60,9 @@ public class ConfigDatabase {
         set(config, "tokens", 0, false);
         set(config, "warnings", Util.newList(), false);
         set(config, "spy", false, false);
+        set(config, "stats.deaths", 0, false);
+        set(config, "stats.kills", 0, false);
+        set(config, "stats.kill streak", 0, false);
         save(config, file);
     }
 
@@ -283,5 +286,44 @@ public class ConfigDatabase {
     	YamlConfiguration config = load(op);
 		config.set("homes." + rawName.toLowerCase(), null);
     	save(config, file(op));
+    }
+    
+    //Stats
+    public static void addDeath(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	int deaths = config.getInt("stats.deaths") + 1;
+    	set(config, "stats.deaths", deaths, true);
+    	save(config, file(op));
+    }
+    
+    public static void addKill(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	int kills = config.getInt("stats.kills") + 1;
+    	set(config, "stats.kills", kills, true);
+    	save(config, file(op));
+    }
+    
+    public static void setKillStreak(OfflinePlayer op, int streak) {
+    	YamlConfiguration config = load(op);
+    	set(config, "stats.kill streak", streak, true);
+    	save(config, file(op));
+    }
+    
+    public static int kills(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	int s = config.getInt("stats.kills");
+    	return s;
+    }
+    
+    public static int deaths(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	int s = config.getInt("stats.deaths");
+    	return s;
+    }
+    
+    public static int killStreak(OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	int s = config.getInt("stats.kill streak");
+    	return s;
     }
 }
