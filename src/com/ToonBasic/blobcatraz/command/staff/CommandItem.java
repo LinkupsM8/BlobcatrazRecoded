@@ -20,10 +20,17 @@ public class CommandItem extends ICommand {
 		Player p = (Player) cs;
 		PlayerInventory pi = p.getInventory();
 		String id = args[0];
-		int amount = 1;
-		short data = 0;
-		try{amount = Integer.parseInt(NumberUtil.onlyInteger(args[1]));} catch(Exception ex) {p.sendMessage("Invalid item amount. Defaulting to 1"); amount = 1;}
-		try{data = Short.parseShort(NumberUtil.onlyInteger(args[2]));} catch(Exception ex) {p.sendMessage("Invalid meta value. Defaulting to 0"); data = (short) 0;}
+		int amount = NumberUtil.getInteger(args[1]);
+		short data = NumberUtil.toShort(NumberUtil.getInteger(args[2]));
+		if(amount < 1) {
+			String error = "Invalid amount value! Defaulting to 1";
+			p.sendMessage(error);
+			amount = 1;
+		} if(data < 1) {
+			String error = "Invalid data value! Defaulting to 0";
+			p.sendMessage(error);
+			data = NumberUtil.toShort(0);
+		}
 
 		ItemStack give = ItemUtil.getItem(id, amount, data);
 		pi.addItem(give);

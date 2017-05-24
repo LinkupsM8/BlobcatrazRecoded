@@ -30,8 +30,7 @@ public class CommandItemHolo extends ICommand {
 				String msg = prefix + "Reloaded all item holograms!";
 				p.sendMessage(msg);
 			} else if(sub.equals("delete") && args.length > 1) {
-				String radius = NumberUtil.onlyInteger(args[1]);
-				int r = Integer.parseInt(radius);
+				int r = NumberUtil.getInteger(args[1]);
 				List<CustomHologram> near = ConfigHolo.near(p, r);
 				ConfigHolo.remove(near.toArray(new CustomHologram[0]));
 				String msg = prefix + "Deleted nearby holograms in a radius of " + r;

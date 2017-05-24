@@ -97,6 +97,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandSonic;
 import com.ToonBasic.blobcatraz.command.staff.CommandSpeed;
 import com.ToonBasic.blobcatraz.command.staff.CommandSpy;
 import com.ToonBasic.blobcatraz.command.staff.CommandSudo;
+import com.ToonBasic.blobcatraz.command.staff.CommandTP;
 import com.ToonBasic.blobcatraz.command.staff.CommandTPAll;
 import com.ToonBasic.blobcatraz.command.staff.CommandTempBan;
 import com.ToonBasic.blobcatraz.command.staff.CommandTop;
@@ -104,6 +105,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandVanish;
 import com.ToonBasic.blobcatraz.command.staff.CommandWarn;
 import com.ToonBasic.blobcatraz.command.staff.CommandWhoIs;
 import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
+import com.ToonBasic.blobcatraz.command.troll.CommandTroll;
 import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
 import com.ToonBasic.blobcatraz.config.ConfigHolo;
 import com.ToonBasic.blobcatraz.config.CustomHologram;
@@ -141,6 +143,7 @@ public class Core extends JavaPlugin {
     private static final PluginManager PM = SERVER.getPluginManager();
     private static final ServicesManager SM = SERVER.getServicesManager();
     
+    @Override
     public void onEnable() {
         instance = this;
         LOG = getLogger();
@@ -154,13 +157,17 @@ public class Core extends JavaPlugin {
         	VaultUtil.setup();
         }
         framework = new CommandFramework(instance);
-        LOG.info("Now registering Blobcatraz...");
         ConfigurationSerialization.registerClass(CustomHologram.class);
         commands();
         events();
+        String ena = "&2Blobcatraz is now enabled!";
+        Util.broadcast(ena);
     }
+    
+    @Override
     public void onDisable() {
-        LOG.info("Now disabling Blobcatraz...");
+        String dis = "&cBlobcatraz is now disabled!";
+        Util.broadcast(dis);
     }
     
     public void commands() {
@@ -205,6 +212,7 @@ public class Core extends JavaPlugin {
         	new CommandSudo(),
         	new CommandTempBan(),
         	new CommandTop(),
+        	new CommandTP(),
         	new CommandTPAll(),
         	new CommandVanish(),
         	new CommandWarn(),
@@ -265,7 +273,8 @@ public class Core extends JavaPlugin {
         	new CommandSetPortal(),
         	new CommandShhh(),
         	new CommandSlimeCannon(),
-        	new CommandWorld()
+        	new CommandWorld(),
+        	new CommandTroll()
         );
         
      //Dependents

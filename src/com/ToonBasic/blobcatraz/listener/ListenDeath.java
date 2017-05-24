@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import com.ToonBasic.blobcatraz.utility.Util;
+import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 
 import net.md_5.bungee.api.chat.TextComponent;
 
@@ -16,7 +16,7 @@ public class ListenDeath implements Listener {
 	public void die(PlayerDeathEvent e) {
 		Player p = e.getEntity();
 		String msg = e.getDeathMessage();
-		TextComponent tc = Util.death(p, msg);
+		TextComponent tc = PlayerUtil.death(p, msg);
 		e.setDeathMessage(null);
 		for(Player o : Bukkit.getOnlinePlayers()) {
 			Spigot s = o.spigot();

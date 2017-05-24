@@ -19,17 +19,11 @@ public class CommandBurn extends ICommand {
 			String error = Language.INVALID_TARGET;
 			cs.sendMessage(error);
 		} else {
-			String time = args[1];
-			try {
-				time = NumberUtil.onlyInteger(time);
-				int ti = Integer.parseInt(time);
-				t.setFireTicks(ti);
-				String msg = Util.color(prefix + "You set &a" + t.getName() + "&r on fire for &a" + ti + "&r ticks");
-				cs.sendMessage(msg);
-			} catch(Exception ex) {
-				String error = "Invalid Number: " + time;
-				cs.sendMessage(error);
-			}
+			String ti = args[1];
+			int time = NumberUtil.getInteger(ti);
+			t.setFireTicks(time);
+			String msg = Util.color(prefix + "You set &a" + t.getName() + "&r on fire for &a" + time + "&r ticks");
+			cs.sendMessage(msg);
 		}
 	}
 }

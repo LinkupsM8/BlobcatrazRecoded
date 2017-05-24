@@ -25,10 +25,9 @@ public class CommandMobEgg extends ICommand {
 		String ent = args[0].toUpperCase();
 		int amount = 1;
 		if(args.length > 1) {
-			String am = args[1];
-			am = NumberUtil.onlyInteger(am);
-			try{amount = Integer.parseInt(am);}
-			catch(Exception ex) {amount = 1;}
+			amount = NumberUtil.getInteger(args[1]);
+			if(amount < 0) amount = 0;
+			if(amount > 64) amount = 64;
 		}
 		
 		EntityType et = EntityType.valueOf(ent);

@@ -129,7 +129,7 @@ public class ListenShopSign implements Listener {
 		String l1 = e.getLine(1).replaceAll(" ", "_");
 		String l2 = e.getLine(2);
 		if(l2.equals("")) l2 = "0";
-		l2 = NumberUtil.onlyInteger(l2);
+		l2 = "" + NumberUtil.getInteger(l2);
 		try {
 			if(!ItemUtil.special().containsKey(l1)) {
 				Material mat = Material.matchMaterial(l1.toUpperCase());

@@ -1,19 +1,6 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import static org.bukkit.entity.EntityType.AREA_EFFECT_CLOUD;
-import static org.bukkit.entity.EntityType.COMPLEX_PART;
-import static org.bukkit.entity.EntityType.DRAGON_FIREBALL;
-import static org.bukkit.entity.EntityType.DROPPED_ITEM;
-import static org.bukkit.entity.EntityType.EVOKER_FANGS;
-import static org.bukkit.entity.EntityType.EXPERIENCE_ORB;
-import static org.bukkit.entity.EntityType.LIGHTNING;
-import static org.bukkit.entity.EntityType.LINGERING_POTION;
-import static org.bukkit.entity.EntityType.PLAYER;
-import static org.bukkit.entity.EntityType.SHULKER_BULLET;
-import static org.bukkit.entity.EntityType.SLIME;
-import static org.bukkit.entity.EntityType.SPLASH_POTION;
-import static org.bukkit.entity.EntityType.THROWN_EXP_BOTTLE;
-import static org.bukkit.entity.EntityType.UNKNOWN;
+import static org.bukkit.entity.EntityType.*;
 
 import java.util.List;
 
@@ -39,17 +26,12 @@ public class CommandMobSpawn extends ICommand {
     public void handleCommand(CommandSender cs, String[] args) {
         Player p = (Player) cs;
         String id = args[0];
-        String amt = "1";
         String target = null;
-        if(args.length > 1) {
-        	amt = args[1];
-        	amt = NumberUtil.onlyInteger(amt);
-        }
-        
-        if(args.length > 2) {target = args[2];}
         int amount = 1;
-        try {amount = Integer.parseInt(amt);}
-        catch(Exception ex) {amount = 1;}
+        if(args.length > 1) amount = NumberUtil.getInteger(args[0]);
+        if(amount > 1) amount = 1;
+        if(amount > 50) amount = 50;
+        if(args.length > 2) {target = args[2];}
         
         Location l = PlayerUtil.lookLocation(p);
         l.setY(l.getY() + 1.5D);

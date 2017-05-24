@@ -38,7 +38,7 @@ public class ListenEnchantSign implements Listener {
 					b.breakNaturally();
 				} else {
 					String lvl = e.getLine(2);
-					lvl = NumberUtil.onlyInteger(lvl);
+					lvl = "" + NumberUtil.getInteger(lvl);
 					if(lvl.equals("")) lvl = "1";
 					
 					e.setLine(0, ENCHANT);

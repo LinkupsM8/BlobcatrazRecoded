@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -14,20 +13,16 @@ import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 
 import com.ToonBasic.blobcatraz.Core;
 
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.HoverEvent.Action;
-import net.md_5.bungee.api.chat.TextComponent;
-
 public class Util {
 	private static final Server SERVER = Bukkit.getServer();
+	private static final ConsoleCommandSender CONSOLE = SERVER.getConsoleSender();
 	private static final PluginManager PM = SERVER.getPluginManager();
 	private static Core PLUGIN = Core.instance;
 	
@@ -35,31 +30,39 @@ public class Util {
     
     public static void enable() {PLUGIN = Core.instance;}
 
+    public static String strip(String msg) {return ChatColor.stripColor(msg);}
     public static String color(String msg) {return ChatColor.translateAlternateColorCodes('&', msg);}
-    public static String[] color(String[] msg) {
+    public static String[] color(String... msg) {
     	for(int i = msg.length; i > 0; i--) {
     		msg[i - 1] = color(msg[i - 1]);
     	}
     	return msg;
     }
     
-    public static String strip(String msg) {return ChatColor.stripColor(msg);}
+    public static void print(Object... os) {
+    	for(Object o : os) {
+    		if(o != null) {
+    			String msg = color(o.toString());
+    			CONSOLE.sendMessage(msg);
+    		}
+    	}
+    }
+    
+    public static void broadcast(Object... os) {
+    	print(os);
+    	for(Player p : SERVER.getOnlinePlayers()) {
+    		for(Object o : os) {
+    			if(o != null) {
+    				String msg = color(o.toString());
+    				p.sendMessage(msg);
+    			}
+    		}
+    	}
+    }
     
     public static void regEvents(Listener... ls) {
     	for(Listener l : ls) {
     		if(l != null) PM.registerEvents(l, PLUGIN);
-    	}
-    }
-    
-    public static void print(Object o) {
-        String msg = o.toString();
-        Logger log = Bukkit.getLogger();
-        log.info(strip(prefix + msg));
-    }
-    
-    public static void broadcast(String... msg) {
-    	for(String o : msg) {
-    		Bukkit.broadcastMessage(o);
     	}
     }
     
@@ -106,6 +109,12 @@ public class Util {
         }
         return sb.toString();
     }
+    
+    public static String[] subArgs(int start, String... args) {
+    	String f = finalArgs(start, args);
+    	String[] ss = f.split(" ");
+    	return ss;
+    }
 
     public static List<String> matching(List<String> o, String mat) {
         if(o == null || mat == null) return Collections.emptyList();
@@ -125,12 +134,14 @@ public class Util {
 
     public static List<Block> blocks(Location l1, Location l2) {
         List<Block> list = Collections.emptyList();
-        int topX = (l1.getBlockX() < l2.getBlockX() ? l2.getBlockX() : l1.getBlockX());
-        int botX = (l1.getBlockX() > l2.getBlockX() ? l2.getBlockX() : l1.getBlockX());
-        int topY = (l1.getBlockY() < l2.getBlockY() ? l2.getBlockY() : l1.getBlockY());
-        int botY = (l1.getBlockY() > l2.getBlockY() ? l2.getBlockY() : l1.getBlockY());
-        int topZ = (l1.getBlockZ() < l2.getBlockZ() ? l2.getBlockZ() : l1.getBlockZ());
-        int botZ = (l1.getBlockZ() > l2.getBlockZ() ? l2.getBlockZ() : l1.getBlockZ());
+        int x1 = l1.getBlockX(), x2 = l2.getBlockX();
+        int y1 = l1.getBlockY(), y2 = l2.getBlockY();
+        int z1 = l1.getBlockZ(), z2 = l2.getBlockZ();
+        
+        int topX = (x1 < x2 ? x2 : x1), botX = (x1 > x2 ? x2 : x1);
+        int topY = (y1 < y2 ? y2 : y1), botY = (y1 > y2 ? y2 : y1);
+        int topZ = (z1 < z2 ? z2 : z1), botZ = (z1 > z2 ? z2 : z1);
+        
         for(int x = botX; x <= topX; x++) {
             for(int z = botZ; z <= topZ; z++) {
                 for(int y = botY; y <= topY; y++) {
@@ -141,14 +152,5 @@ public class Util {
             }
         }
         return list;
-    }
-    
-    public static TextComponent death(Player p, String msg) {
-    	String name = p.getName();
-    	TextComponent text = new TextComponent(color(name + " &fwas successfully revived by our medics"));
-    	BaseComponent[] bc = new ComponentBuilder(msg).create();
-    	HoverEvent he = new HoverEvent(Action.SHOW_TEXT, bc);
-    	text.setHoverEvent(he);
-    	return text;
     }
 }

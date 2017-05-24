@@ -23,9 +23,7 @@ public class CommandSetWorth extends ICommand {
 	public void handleCommand(CommandSender cs, String[] args) {
 		Player p = (Player) cs;
 		if(args.length > 0) {
-			String amount = args[0];
-			amount = NumberUtil.onlyDouble(amount);
-			double worth = Double.parseDouble(amount);
+			double worth = NumberUtil.getDouble(args[0]);
 			PlayerInventory pi = p.getInventory();
 			ItemStack is = pi.getItemInMainHand();
 			if(!ItemUtil.air(is)) {

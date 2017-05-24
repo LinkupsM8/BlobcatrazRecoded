@@ -27,10 +27,7 @@ public class CommandEconomy extends ICommand {
 				double oldBal = ConfigDatabase.balance(ot);
 				String sub = args[0].toLowerCase();
 				if(sub.equals("give")) {
-					String amt = NumberUtil.onlyDouble(args[2]);
-					double amount = 0.0D;
-					try {amount = Double.parseDouble(amt);}
-					catch(Exception ex) {amount = 0.0D;}
+					double amount = NumberUtil.getDouble(args[2]);
 					double newBal = oldBal + amount;
 					ConfigDatabase.deposit(ot, amount);
 					String amt2 = NumberUtil.money(amount);
@@ -52,10 +49,7 @@ public class CommandEconomy extends ICommand {
 					msg(cs, ot, msg1, msg2);
 					print(cname + " changed the balance of " + oname + " from " + bal1 + " to " + bal2);
 				} else if(sub.equals("set")) {
-					String amt = NumberUtil.onlyDouble(args[2]);
-					double amount = 0.0D;
-					try {amount = Double.parseDouble(amt);}
-					catch(Exception ex) {amount = 0.0D;}
+					double amount = NumberUtil.getDouble(args[2]);
 					double newBal = amount;
 					ConfigDatabase.setBalance(ot, amount);
 					String amt2 = NumberUtil.money(amount);
@@ -66,10 +60,7 @@ public class CommandEconomy extends ICommand {
 					msg(cs, ot, msg1, msg2);
 					print(cname + " changed the balance of " + oname + " from " + bal1 + " to " + bal2);
 				} else if(sub.equals("take")) {
-					String amt = NumberUtil.onlyDouble(args[2]);
-					double amount = 0.0D;
-					try {amount = Double.parseDouble(amt);}
-					catch(Exception ex) {amount = 0.0D;}
+					double amount = NumberUtil.getDouble(args[2]);
 					double newBal = oldBal - amount;
 					ConfigDatabase.withdraw(ot, amount);
 					String amt2 = NumberUtil.money(amount);

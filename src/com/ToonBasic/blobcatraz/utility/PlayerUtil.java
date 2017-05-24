@@ -10,6 +10,11 @@ import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.HoverEvent.Action;
 import net.minecraft.server.v1_11_R1.EntityPlayer;
 import net.minecraft.server.v1_11_R1.IChatBaseComponent;
 import net.minecraft.server.v1_11_R1.IChatBaseComponent.ChatSerializer;
@@ -73,4 +78,13 @@ public class PlayerUtil extends Util {
 		pc.sendPacket(ppoc);
 		ping(p);
 	}
+    
+    public static TextComponent death(Player p, String msg) {
+    	String name = p.getName();
+    	TextComponent text = new TextComponent(color(name + " &fwas successfully revived by our medics"));
+    	BaseComponent[] bc = new ComponentBuilder(msg).create();
+    	HoverEvent he = new HoverEvent(Action.SHOW_TEXT, bc);
+    	text.setHoverEvent(he);
+    	return text;
+    }
 }

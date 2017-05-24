@@ -34,15 +34,9 @@ public class CommandWarps extends ICommand implements Listener {
 		Player p = (Player) cs;
 		int page = 1;
 		if(args.length > 0) {
-			try {
-				String pg = args[0];
-				pg = NumberUtil.onlyInteger(pg);
-				page = Integer.parseInt(pg);
-			} catch(Exception ex) {
-				String error = Util.color(prefix + "Invalid Page, Setting to 1");
-				p.sendMessage(error);
-				page = 1;
-			}
+			String pg = args[0];
+			page = NumberUtil.getInteger(pg);
+			if(page < 1) page = 1;
 		}
 		Inventory gui = gui(p, page);
 		p.openInventory(gui);

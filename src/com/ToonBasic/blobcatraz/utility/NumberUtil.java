@@ -16,7 +16,7 @@ public class NumberUtil extends Util {
 	
 	public static int randomInt(Random rand, int min, int max) {
 		int r = rand.nextInt(max);
-		r = r + min;
+		if(r < min) r += Math.abs(min);
 		return r;
 	}
 	
@@ -24,15 +24,21 @@ public class NumberUtil extends Util {
 		double r = rand.nextGaussian();
 		return r;
 	}
-
-    public static String onlyInteger(String o) {
-    	String n = o.replaceAll("[^\\d-]", "");
-    	return n;
+    
+    public static int getInteger(String o) {
+    	try {
+    		String n = o.replaceAll("[^\\d-]", "");
+    		int i = Integer.parseInt(n);
+    		return i;
+    	} catch(Exception ex) {return 0;}
     }
     
-    public static String onlyDouble(String o) {
-    	String n = o.replaceAll("[^\\d-.E]", "");
-    	return n;
+    public static double getDouble(String o) {
+    	try {
+    		String n = o.replaceAll("[^\\d-.E]", "");
+    		double d = Double.parseDouble(n);
+    		return d;
+    	} catch(Exception ex) {return 0.0D;}
     }
     
     public static short toShort(Number n) {
@@ -56,5 +62,18 @@ public class NumberUtil extends Util {
     	if(inf) money = color("&a$\u221E");
     	if(neginf) money = color("&c$-\u221E");
     	return money;
+    }
+    
+    public static double relative(String sd, double od) {
+    	if(sd.equals("~")) return od;
+    	else {
+        	char[] cd = sd.toCharArray();
+        	boolean relative = (cd[0] == '~');
+        	double d = getDouble(sd);
+        	if(relative) {
+        		double n = d + od;
+        		return n;
+        	} else return d;
+    	}
     }
 }
