@@ -78,6 +78,24 @@ public class PlayerUtil extends Util {
 		pc.sendPacket(ppoc);
 		ping(p);
 	}
+	
+	public static boolean within(Player p, Location l1, Location l2) {
+		int x1 = l1.getBlockX(), x2 = l2.getBlockX(),
+		y1 = l1.getBlockY(), y2 = l2.getBlockY(),
+		z1 = l1.getBlockZ(), z2 = l2.getBlockZ();
+		
+		int ax = Math.max(x1, x2), bx = Math.min(x1, x2),
+		ay = Math.max(y1, y2), by = Math.min(y1, y2),
+		az = Math.max(z1, z2), bz = Math.min(z1, z2);
+		
+		Location pl = p.getLocation();
+		int px = pl.getBlockX(), py = pl.getBlockY(), pz = pl.getBlockZ();
+
+		boolean x = ((px <= ax) && (px >= bx));
+		boolean y = ((py <= ay) && (py >= by));
+		boolean z = ((pz <= az) && (pz >= bz));
+		return (x && y && z);
+	}
     
     public static TextComponent death(Player p, String msg) {
     	String name = p.getName();

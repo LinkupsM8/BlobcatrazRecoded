@@ -1,12 +1,12 @@
 package com.ToonBasic.blobcatraz.listener;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,11 +14,11 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.ToonBasic.blobcatraz.config.ConfigPortals;
+import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 public class ListenPortal implements Listener {
@@ -29,86 +29,83 @@ public class ListenPortal implements Listener {
 		for (String name : ConfigPortals.getPortalList()) {
 			
 			Player p = e.getPlayer();
+			Location pl = p.getLocation();
+			World pw = pl.getWorld();
 			Location primary = ConfigPortals.getPrimary(name);
 			Location secondary = ConfigPortals.getSecondary(name);
 			
-			if (!p.getLocation().getWorld().equals(primary.getWorld())) return;
-			
-			if (p.getLocation().getX() >= Math.min(primary.getX(), secondary.getX()) - 0.3 &&
-				p.getLocation().getX() <= Math.max(primary.getX(), secondary.getX()) + 1.3 &&
-				p.getLocation().getY() >= Math.min(primary.getY(), secondary.getY()) &&
-				p.getLocation().getY() <= Math.max(primary.getY(), secondary.getY()) &&
-				p.getLocation().getZ() >= Math.min(primary.getZ(), secondary.getZ()) - 0.3 &&
-				p.getLocation().getZ() <= Math.max(primary.getZ(), secondary.getZ()) + 1.3) {
-				
-				p.teleport(ConfigPortals.getDestination(name));
-				
+			if (pw.equals(primary.getWorld())) {
+				if (PlayerUtil.within(p, primary, secondary)) {
+					Location l = ConfigPortals.getDestination(name);
+					p.teleport(l);
+				}
 			}
 		}
 	}
 	
-	private static Map<UUID, Location> primary = new HashMap<UUID, Location>();
-	private static Map<UUID, Location> secondary = new HashMap<UUID, Location>();
+	private static Map<UUID, Location> primary = Util.newMap();
+	private static Map<UUID, Location> secondary = Util.newMap();
 	
-	public static final ItemStack wand() {
-		
+	public static final ItemStack wand() {	
 		ItemStack wand = new ItemStack(Material.BLAZE_ROD);
 		ItemMeta im = wand.getItemMeta();
-		im.setDisplayName("\u00a72Portal Wand");
+		im.setDisplayName(Util.color("&2Portal Wand"));
 		wand.setItemMeta(im);
 		return wand;
 	}
 	
 	@EventHandler
 	public void antiNether(PlayerPortalEvent e) {
-		World w = e.getFrom().getWorld();
-		if(w.getName().equals("Hub")) e.setCancelled(true);
+		Location from = e.getFrom();
+		World w = from.getWorld();
+		String name = w.getName().toLowerCase();
+		if(name.equals("hub")) e.setCancelled(true);
 	}
 	
 	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent  e) {
-		
-		if (e.getHand() != EquipmentSlot.HAND) return;
-		
+	public void wand(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
-		
-		if (!p.getInventory().getItemInMainHand().equals(wand())) return;
-		if (!p.hasPermission("blobcatraz.special.portal.wand")) {
-			p.sendMessage(Util.prefix + "Permission \u00a7cblobcatraz.special.portal.wand \u00a7rrequired!");
-			return;
-		}
-		
-		if (e.getAction() == Action.LEFT_CLICK_BLOCK) {
-			
-			Location loc = e.getClickedBlock().getLocation();
-			if (primary.containsKey(uuid)) primary.remove(uuid);
-			primary.put(uuid, loc);
-			p.sendMessage(Util.prefix + "\u00a72Primary \u00a7rlocation set!");
+		Action a = e.getAction();
+		ItemStack is = e.getItem();
+		if(is.equals(wand())) {
 			e.setCancelled(true);
-		
-		} else if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			
-			Location loc = e.getClickedBlock().getLocation();
-			if (primary.get(uuid).getWorld() != loc.getWorld()) {
-				e.getPlayer().sendMessage(Util.prefix + "The \u00a72Secondary \u00a7rlocation must be set in the same world as the \u00a72Primary \u00a7rlocation!");
-				return;
+			String perm = "blobcatraz.special.portal.wand";
+			if(p.hasPermission(perm)) {
+				if(a == Action.LEFT_CLICK_BLOCK) {
+					Block b = e.getClickedBlock();
+					Location l = b.getLocation();
+					primary.put(uuid, l);
+					String msg = Util.color("&2Primary &rlocation set!");
+					p.sendMessage(msg);
+				} else if(a == Action.RIGHT_CLICK_BLOCK) {
+					Block b = e.getClickedBlock();
+					Location l = b.getLocation();
+					Location pl = getPrimary(uuid);
+					if(p != null && !l.getWorld().equals(pl.getWorld())) {
+						String error = Util.color("The &2Secondary &rlocation must be set in the same world as the &2Primary &rlocation");
+						p.sendMessage(error);
+					} else {
+						secondary.put(uuid, l);
+						String msg = Util.color("&2Secondary &rlocation set!");
+						p.sendMessage(msg);
+					}
+				}
 			}
-			
-			if (secondary.containsKey(uuid)) secondary.remove(uuid);
-			secondary.put(uuid, loc);
-			p.sendMessage(Util.prefix + "\u00a72Secondary \u00a7rlocation set!");
-			
 		}
 	}
 
 	public static Location getPrimary(UUID uuid) {
-		
-		return primary.get(uuid);
+		if(primary.containsKey(uuid)) {
+			Location l = primary.get(uuid);
+			return l;
+		} else return null;
 	}
 	
 	public static Location getSecondary(UUID uuid) {
-		
-		return secondary.get(uuid);
+		if(secondary.containsKey(uuid)) {
+			Location l = secondary.get(uuid);
+			return l;
+		} else return null;
 	}
 }

@@ -96,6 +96,17 @@ public class Util {
 		return sb.toString();
 	}
 	
+	public static String listToString(List<String> list, String split) {
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < list.size(); i++) {
+			if(i != 0) sb.append(color(split));
+			String s = list.get(i);
+			sb.append(color("&2" + s));
+		}
+		String ss = sb.toString();
+		return ss;
+	}
+	
 	public static <K, V> Map<K, V> newMap() {
 		Map<K, V> map = new HashMap<K, V>();
 		return map;
