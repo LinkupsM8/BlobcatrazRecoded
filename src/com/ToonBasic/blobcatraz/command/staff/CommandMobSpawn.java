@@ -28,8 +28,8 @@ public class CommandMobSpawn extends ICommand {
         String id = args[0];
         String target = null;
         int amount = 1;
-        if(args.length > 1) amount = NumberUtil.getInteger(args[0]);
-        if(amount > 1) amount = 1;
+        if(args.length > 1) amount = NumberUtil.getInteger(args[1]);
+        if(amount < 1) amount = 1;
         if(amount > 50) amount = 50;
         if(args.length > 2) {target = args[2];}
         

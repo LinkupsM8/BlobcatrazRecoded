@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.IronGolem;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 
@@ -37,6 +38,7 @@ public class CommandTroll extends ICommand {
 				else if(troll.equals("golem")) golem(t);
 				else if(troll.equals("end")) end(t);
 				else if(troll.equals("creeper")) creeper(t);
+				else if(troll.equals("pigmen")) pigmen(t);
 				else {
 					String error = "Invalid Troll!";
 					p.sendMessage(error);
@@ -98,6 +100,16 @@ public class CommandTroll extends ICommand {
 	private void creeper(Player p) {
 		World w = p.getWorld();
 		Location l = p.getLocation();
-		w.spawn(l, Creeper.class);
+		Creeper creeper = w.spawn(l, Creeper.class);
+		creeper.setPowered(true);
+	}
+	
+	private void pigmen(Player p) {
+		World w = p.getWorld();
+		Location l = p.getLocation();
+		PigZombie pig = w.spawn(l, PigZombie.class);
+		pig.setAngry(true);
+		pig.setAnger(Integer.MAX_VALUE);
+		pig.setTarget(p);
 	}
 }

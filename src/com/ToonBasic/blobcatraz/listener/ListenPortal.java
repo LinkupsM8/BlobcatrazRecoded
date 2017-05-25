@@ -18,16 +18,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.ToonBasic.blobcatraz.config.ConfigPortals;
+import com.ToonBasic.blobcatraz.utility.ItemUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
 public class ListenPortal implements Listener {
 	
 	@EventHandler
-	public void onPlayerMove(PlayerMoveEvent e) {
-		
-		for (String name : ConfigPortals.getPortalList()) {
-			
+	public void move(PlayerMoveEvent e) {	
+		for (String name : ConfigPortals.getPortalList()) {		
 			Player p = e.getPlayer();
 			Location pl = p.getLocation();
 			World pw = pl.getWorld();
@@ -68,7 +67,7 @@ public class ListenPortal implements Listener {
 		UUID uuid = p.getUniqueId();
 		Action a = e.getAction();
 		ItemStack is = e.getItem();
-		if(is.equals(wand())) {
+		if(!ItemUtil.air(is) && is.equals(wand())) {
 			e.setCancelled(true);
 			String perm = "blobcatraz.special.portal.wand";
 			if(p.hasPermission(perm)) {
