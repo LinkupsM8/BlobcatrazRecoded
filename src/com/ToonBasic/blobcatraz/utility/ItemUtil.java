@@ -24,6 +24,8 @@ public class ItemUtil extends Util {
 	private static Map<String, Enchantment> enchants = newMap();	
 	public static Map<String, ItemStack> special() {return ConfigCustomItems.items();}
 	public static Map<String, Enchantment> customEnchants() {return enchants;}
+	public static final ItemStack AIR = new ItemStack(Material.AIR);
+	
 	public static void load() {
 		enchants.put("sharpness", Enchantment.DAMAGE_ALL);
 		enchants.put("bane of spiders", Enchantment.DAMAGE_ARTHROPODS);
@@ -105,6 +107,7 @@ public class ItemUtil extends Util {
 	
 	public static boolean air(ItemStack is) {
 		if(is == null) return true;
+		if(is.equals(AIR)) return true;
 		Material mat = is.getType();
 		boolean air = (mat == Material.AIR);
 		return air;

@@ -1,5 +1,7 @@
 package com.ToonBasic.blobcatraz.utility;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
@@ -53,5 +55,20 @@ public class VaultUtil extends Util {
 			double balance = ConfigDatabase.balance(p);
 			return balance;
 		}
+	}
+	
+	public static String nextRank(Player p, String o) {
+		List<Character> list = newList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+		o = o.toUpperCase();
+		if(o.length() > 1) return "None";
+		char first = o.charAt(0);
+		int i = list.indexOf(first);
+		int n = i + 1;
+		try {
+			char c = list.get(n);
+			String s = Character.toString(c);
+			return s;
+		}
+		catch(Exception ex) {return "None";}
 	}
 }

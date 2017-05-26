@@ -47,16 +47,19 @@ public class ScoreboardUtil extends Util implements Runnable {
 		custom.setDisplayName(color("&1&l&ki&3&lBlobcatraz&1&l&ki&f"));
 		custom.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-		String[] list = color(new String[] { //Arrays show up in reverse order on scoreboards
-			"&b&lPing&c: &a&l" + PlayerUtil.getPing(p),
-			"&b&lTokens&c: &a&l" + ConfigDatabase.tokens(p),
+		List<String> list = Util.newList( //Arrays show up backwands on scoreboards
+			"&b&lCurrent Rank&c: &a&l" + VaultUtil.mainRank(p),
+			"&b&lNext Rank&c: &a&l" + VaultUtil.nextRank(p, VaultUtil.mainRank(p)),
 			"&b&lBalance&c: &a&l" + NumberUtil.money(VaultUtil.balance(p)),
-			"&b&lCurrent Rank&c: &a&l" + VaultUtil.mainRank(p)
-		});
-		for(int i = list.length; i > 0; i -= 1) {
-			String entry = list[i - 1];
+			"&b&lTokens&c: &a&l" + ConfigDatabase.tokens(p),
+			"&b&lPing&c: &a&l" + PlayerUtil.getPing(p)
+		);
+		
+		for(String s : list) {
+			String entry = color(s);
 			if(entry.length() > 40) entry = entry.substring(0, 40);
 			Score sc = custom.getScore(entry);
+			int i = (list.size() - list.indexOf(s));
 			sc.setScore(i);
 		}
 		p.setScoreboard(SB);

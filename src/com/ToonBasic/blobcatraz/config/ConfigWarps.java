@@ -130,7 +130,7 @@ public class ConfigWarps {
 			Warp warp = new Warp(name, icon, loc);
 			list.add(warp);
 		}
-		list.sort(new WarpComparator());
+		Collections.sort(list);
 		return list;
 	}
 	
