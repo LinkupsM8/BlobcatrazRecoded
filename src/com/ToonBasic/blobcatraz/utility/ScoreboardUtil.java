@@ -48,11 +48,11 @@ public class ScoreboardUtil extends Util implements Runnable {
 		custom.setDisplaySlot(DisplaySlot.SIDEBAR);
 
 		List<String> list = Util.newList( //Arrays show up backwands on scoreboards
-			"&b&lCurrent Rank&c: &a&l" + VaultUtil.mainRank(p),
-			"&b&lNext Rank&c: &a&l" + VaultUtil.nextRank(p, VaultUtil.mainRank(p)),
-			"&b&lBalance&c: &a&l" + NumberUtil.money(VaultUtil.balance(p)),
-			"&b&lTokens&c: &a&l" + ConfigDatabase.tokens(p),
-			"&b&lPing&c: &a&l" + PlayerUtil.getPing(p)
+			"&bCurrent Rank&c: &a" + VaultUtil.mainRank(p),
+			"&bNext Rank&c: &a" + VaultUtil.nextRank(p, VaultUtil.mainRank(p)),
+			"&bBalance&c: &a" + NumberUtil.money(VaultUtil.balance(p)),
+			"&bTokens&c: &a" + ConfigDatabase.tokens(p),
+			"&bPing&c: &a" + PlayerUtil.getPing(p)
 		);
 		
 		for(String s : list) {

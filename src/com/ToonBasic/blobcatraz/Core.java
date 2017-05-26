@@ -44,6 +44,7 @@ import com.ToonBasic.blobcatraz.command.player.CommandTpa;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
 import com.ToonBasic.blobcatraz.command.player.CommandWarps;
 import com.ToonBasic.blobcatraz.command.player.CommandWorth;
+import com.ToonBasic.blobcatraz.command.special.CommandBigTree;
 import com.ToonBasic.blobcatraz.command.special.CommandBurn;
 import com.ToonBasic.blobcatraz.command.special.CommandCenter;
 import com.ToonBasic.blobcatraz.command.special.CommandChestToKit;
@@ -62,6 +63,7 @@ import com.ToonBasic.blobcatraz.command.special.CommandSlimeCannon;
 import com.ToonBasic.blobcatraz.command.special.CommandWorld;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
+import com.ToonBasic.blobcatraz.command.staff.CommandBroadcast;
 import com.ToonBasic.blobcatraz.command.staff.CommandChat;
 import com.ToonBasic.blobcatraz.command.staff.CommandClearInventory;
 import com.ToonBasic.blobcatraz.command.staff.CommandCreateItem;
@@ -175,6 +177,7 @@ public class Core extends JavaPlugin {
         framework.registerCommands(
         	new CommandAnvil(),
         	new CommandBan(),
+        	new CommandBroadcast(),
         	new CommandChat(),
         	new CommandClearInventory(),
         	new CommandCreateItem(),
@@ -258,6 +261,7 @@ public class Core extends JavaPlugin {
         
     //Special Commands
         framework.registerCommands(
+        	new CommandBigTree(),
         	new CommandBurn(),
         	new CommandCenter(),
         	new CommandChestToKit(),

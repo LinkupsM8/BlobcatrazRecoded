@@ -3,6 +3,8 @@ package com.ToonBasic.blobcatraz.command.troll;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Creeper;
@@ -10,6 +12,8 @@ import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
@@ -39,6 +43,8 @@ public class CommandTroll extends ICommand {
 				else if(troll.equals("end")) end(t);
 				else if(troll.equals("creeper")) creeper(t);
 				else if(troll.equals("pigmen")) pigmen(t);
+				else if(troll.equals("pumpkin")) pumpkin(t);
+				else if(troll.equals("scream")) scream(t);
 				else {
 					String error = "Invalid Troll!";
 					p.sendMessage(error);
@@ -111,5 +117,19 @@ public class CommandTroll extends ICommand {
 		pig.setAngry(true);
 		pig.setAnger(Integer.MAX_VALUE);
 		pig.setTarget(p);
+	}
+	
+	private void pumpkin(Player p) {
+		PlayerInventory pi = p.getInventory();
+		ItemStack is = new ItemStack(Material.PUMPKIN, 1);
+		pi.setHelmet(is);
+	}
+	
+	private void scream(Player p) {
+		Location l = p.getLocation();
+		Sound s = Sound.ENTITY_GHAST_SCREAM;
+		float v = 1000.0F;
+		float pi = 1.0F;
+		p.playSound(l, s, v, pi);
 	}
 }
