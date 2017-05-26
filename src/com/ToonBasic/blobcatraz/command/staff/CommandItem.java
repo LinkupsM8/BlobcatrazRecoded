@@ -20,13 +20,15 @@ public class CommandItem extends ICommand {
 		Player p = (Player) cs;
 		PlayerInventory pi = p.getInventory();
 		String id = args[0];
-		int amount = NumberUtil.getInteger(args[1]);
-		short data = NumberUtil.toShort(NumberUtil.getInteger(args[2]));
+		int amount = 1;
+		short data = 0;
+		if(args.length > 1) amount = NumberUtil.getInteger(args[1]);
+		if(args.length > 2) data = NumberUtil.toShort(NumberUtil.getInteger(args[2]));
 		if(amount < 1) {
 			String error = "Invalid amount value! Defaulting to 1";
 			p.sendMessage(error);
 			amount = 1;
-		} if(data < 1) {
+		} if(data < 0) {
 			String error = "Invalid data value! Defaulting to 0";
 			p.sendMessage(error);
 			data = NumberUtil.toShort(0);

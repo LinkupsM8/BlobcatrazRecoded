@@ -76,4 +76,9 @@ public class NumberUtil extends Util {
         	} else return d;
     	}
     }
+    
+    public static boolean isEven(int i) {
+    	boolean even = ((i % 2) == 0);
+    	return even;
+    }
 }

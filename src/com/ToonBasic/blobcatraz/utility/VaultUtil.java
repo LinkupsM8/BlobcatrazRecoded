@@ -40,7 +40,7 @@ public class VaultUtil extends Util {
 			String[] groups = perm.getPlayerGroups(p);
 			return groups;
 		} else {
-			String[] groups = color(newArray("&4&lFailed", "&4&lto get", "&4&lGroups!"));
+			String[] groups = color("&4&lFailed", "&4&lto get", "&4&lGroups!");
 			return groups;
 		}
 	}

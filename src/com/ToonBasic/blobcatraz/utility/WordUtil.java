@@ -12,9 +12,11 @@ public class WordUtil extends Util {
 		String l = o.toLowerCase();
 		boolean ies = (l.endsWith("y"));
 		boolean es = (l.endsWith("s"));
+		boolean i = (l.endsWith("us"));
 		String p = o;
 		if(ies) p = (o.substring(0, o.length() - 1)) + "ies";
 		else if(es) p = o + "es";
+		else if(i) p = o.substring(0, o.length() - 2) + "i";
 		else p = o + "s";
 		return p;
 	}
