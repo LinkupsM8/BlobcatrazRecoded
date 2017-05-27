@@ -29,6 +29,7 @@ public class CommandBigTree extends ICommand {
 		}
 		
 		Location l = PlayerUtil.lookLocation(p);
+		l.setY(l.getY() + 1);
 		World w = l.getWorld();
 		boolean success = w.generateTree(l, tree);
 		if(success) {

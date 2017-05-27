@@ -44,17 +44,11 @@ public class ScoreboardUtil extends Util implements Runnable {
 		Objective custom = SB.getObjective("blobcatraz");
 		custom.unregister();
 		custom = SB.registerNewObjective("blobcatraz", "dummy");
-		custom.setDisplayName(color("&1&l&ki&3&lBlobcatraz&1&l&ki&f"));
+		String disp = "&1&l&ki&3&lBlobcatraz&1&l&ki&f";
+		custom.setDisplayName(color(disp));
 		custom.setDisplaySlot(DisplaySlot.SIDEBAR);
-
-		List<String> list = Util.newList( //Arrays show up backwands on scoreboards
-			"&bCurrent Rank&c: &a" + VaultUtil.mainRank(p),
-			"&bNext Rank&c: &a" + VaultUtil.nextRank(p, VaultUtil.mainRank(p)),
-			"&bBalance&c: &a" + NumberUtil.money(VaultUtil.balance(p)),
-			"&bTokens&c: &a" + ConfigDatabase.tokens(p),
-			"&bPing&c: &a" + PlayerUtil.getPing(p)
-		);
 		
+		List<String> list = normal(p);
 		for(String s : list) {
 			String entry = color(s);
 			if(entry.length() > 40) entry = entry.substring(0, 40);
@@ -64,6 +58,17 @@ public class ScoreboardUtil extends Util implements Runnable {
 		}
 		p.setScoreboard(SB);
 		scores.put(p, SB);
+	}
+	
+	private static List<String> normal(Player p) {
+		List<String> list = newList(
+			"&bCurrent Rank&c: &a" + VaultUtil.mainRank(p),
+			"&bNext Rank&c: &a" + VaultUtil.nextRank(p, VaultUtil.mainRank(p)),
+			"&bBalance&c: &a" + NumberUtil.money(VaultUtil.balance(p)),
+			"&bTokens&c: &a" + ConfigDatabase.tokens(p),
+			"&bPing&c: &a" + PlayerUtil.getPing(p)
+		);
+		return list;
 	}
 	
 	public static void remove(Player p) {

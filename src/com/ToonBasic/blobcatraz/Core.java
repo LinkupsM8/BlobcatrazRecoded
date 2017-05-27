@@ -36,11 +36,12 @@ import com.ToonBasic.blobcatraz.command.player.CommandReport;
 import com.ToonBasic.blobcatraz.command.player.CommandRules;
 import com.ToonBasic.blobcatraz.command.player.CommandSell;
 import com.ToonBasic.blobcatraz.command.player.CommandSetHome;
-import com.ToonBasic.blobcatraz.command.player.CommandStaff;
+import com.ToonBasic.blobcatraz.command.player.CommandStaffList;
 import com.ToonBasic.blobcatraz.command.player.CommandStats;
 import com.ToonBasic.blobcatraz.command.player.CommandToggleScoreboard;
 import com.ToonBasic.blobcatraz.command.player.CommandTpChoose;
 import com.ToonBasic.blobcatraz.command.player.CommandTpa;
+import com.ToonBasic.blobcatraz.command.player.CommandVote;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
 import com.ToonBasic.blobcatraz.command.player.CommandWarps;
 import com.ToonBasic.blobcatraz.command.player.CommandWorth;
@@ -72,6 +73,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandDelWarp;
 import com.ToonBasic.blobcatraz.command.staff.CommandEconomy;
 import com.ToonBasic.blobcatraz.command.staff.CommandEnchant;
 import com.ToonBasic.blobcatraz.command.staff.CommandEnderChest;
+import com.ToonBasic.blobcatraz.command.staff.CommandFakeVote;
 import com.ToonBasic.blobcatraz.command.staff.CommandFireball;
 import com.ToonBasic.blobcatraz.command.staff.CommandFly;
 import com.ToonBasic.blobcatraz.command.staff.CommandFreeze;
@@ -220,7 +222,8 @@ public class Core extends JavaPlugin {
         	new CommandVanish(),
         	new CommandWarn(),
         	new CommandWhoIs(),
-        	new CommandWorkbench()
+        	new CommandWorkbench(),
+        	new CommandVote()
         );
         
     //Player Commands
@@ -233,6 +236,7 @@ public class Core extends JavaPlugin {
         	new CommandBlockChest(),
         	new CommandDelHome(),
         	new CommandEmojis(),
+        	new CommandFakeVote(),
         	new CommandHelp(),
         	new CommandHome(),
         	new CommandHomes(),
@@ -249,7 +253,7 @@ public class Core extends JavaPlugin {
         	new CommandRules(),
         	new CommandSell(),
         	new CommandSetHome(),
-        	new CommandStaff(),
+        	new CommandStaffList(),
         	new CommandStats(),
         	new CommandToggleScoreboard(),
         	new CommandTpa(),

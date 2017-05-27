@@ -16,8 +16,8 @@ import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
 
-public class CommandStaff extends ICommand {
-    public CommandStaff() {super("staff", "", "blobcatraz.player.staff", "admins", "liststaff");}
+public class CommandStaffList extends ICommand {
+    public CommandStaffList() {super("stafflist", "", "blobcatraz.player.staff", "listadmins", "adminlist", "liststaff");}
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -93,7 +94,7 @@ public class Util {
 			String val = " " + list.get(i);
 			sb.append(type + val);
 		}
-		return sb.toString();
+		return color(sb.toString());
 	}
 	
 	public static String listToString(List<String> list, String split) {
@@ -163,5 +164,16 @@ public class Util {
             }
         }
         return list;
+    }
+    
+    public static String toString(Object o) {
+    	if(o instanceof Boolean) {
+    		boolean b = (boolean) o;
+    		return b ? "yes" : "no";
+    	} else if(o instanceof GameMode) {
+    		GameMode gm = (GameMode) o;
+    		String name = gm.name();
+    		return WordUtil.capitalize(name);
+    	} else return o.toString();
     }
 }
