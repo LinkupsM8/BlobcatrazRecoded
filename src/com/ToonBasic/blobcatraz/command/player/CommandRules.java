@@ -27,7 +27,5 @@ public class CommandRules extends ICommand {
 	public CommandRules() {super("rules", "", "blobcatraz.player.rules");}
 	
 	@Override
-	public void handleCommand(CommandSender cs, String[] args) {
-		cs.sendMessage(RULES);
-	}
+	public void handleCommand(CommandSender cs, String[] args) {cs.sendMessage(RULES);}
 }

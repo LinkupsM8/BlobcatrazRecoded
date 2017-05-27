@@ -23,18 +23,25 @@ public class CommandEmojis extends ICommand implements Listener {
 	@Override
 	public void handleCommand(CommandSender sender, String[] args) {
 		Player p = (Player) sender;
-		StringBuilder msg = new StringBuilder("\u00a7lEmojis\u00a7r:\n");
+		String sb = Util.color("&lEmojis&r:\n");
+		StringBuilder msg = new StringBuilder(sb);
 		for (int i = 0; i < labelEmojis.size(); i++) {
-			msg.append(labelEmojis.get(i) + " \u00a7lis\u00a7r " + outputEmojis.get(i) + "\n");
+			String label = labelEmojis.get(i);
+			String output = outputEmojis.get(i);
+			String app = Util.color(label + " &lis&r " + output + "\n");
+			msg.append(app);
 		}
-		p.sendMessage(msg.toString());
+		String send = msg.toString();
+		p.sendMessage(send);
 	}
 
 	@EventHandler
-	public void onPlayerChat(AsyncPlayerChatEvent e) {
+	public void emojis(AsyncPlayerChatEvent e) {
 		String msg = e.getMessage();
 		for (int i = 0; i < labelEmojis.size(); i++) {
-			msg = msg.replaceAll(inputEmojis.get(i), outputEmojis.get(i));
+			String input = inputEmojis.get(i);
+			String output = outputEmojis.get(i);
+			msg = msg.replaceAll(input, output);
 		}
 		e.setMessage(msg);
 	}

@@ -174,6 +174,21 @@ public class Util {
     		GameMode gm = (GameMode) o;
     		String name = gm.name();
     		return WordUtil.capitalize(name);
+    	} else if(o instanceof Location) {
+    		Location l = (Location) o;
+    		String x = NumberUtil.cropDecimal(l.getX(), 2);
+    		String y = NumberUtil.cropDecimal(l.getY(), 2);
+    		String z = NumberUtil.cropDecimal(l.getZ(), 2);
+    		String ya = NumberUtil.cropDecimal(l.getYaw(), 2);
+    		String pi = NumberUtil.cropDecimal(l.getPitch(), 2);
+    		String s = color(
+    			"\n&2X: &f" + x +
+    			" &2Y: &f" + y +
+    			" &2Z: &f" + z +
+    			" &2Yaw: &f" + ya +
+    			" &2Pitch: &f" + pi
+    		);
+    		return s;
     	} else return o.toString();
     }
 }

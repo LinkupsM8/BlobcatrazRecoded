@@ -26,16 +26,14 @@ public class CommandBlockChest extends ICommand {
 		if(bs instanceof Chest) {
 			Chest c = (Chest) bs;
 			Inventory i = c.getInventory();
-			if (
-					!craft(i, Material.COAL, Material.COAL_BLOCK, 9) &
-					!craft(i, Material.DIAMOND, Material.DIAMOND_BLOCK, 9) &
-					!craft(i, Material.EMERALD, Material.EMERALD_BLOCK, 9) &
-					!craft(i, Material.GOLD_INGOT, Material.GOLD_BLOCK, 9) &
-					!craft(i, Material.IRON_INGOT, Material.IRON_BLOCK, 9) &
-					!craft(i, Material.INK_SACK, (short) 4, Material.LAPIS_BLOCK, 9) &
-					!craft(i, Material.QUARTZ, Material.QUARTZ_BLOCK, 4) &
-					!craft(i, Material.REDSTONE, Material.REDSTONE_BLOCK, 9)
-				) {
+			if (!craft(i, Material.COAL, Material.COAL_BLOCK, 9) &
+				!craft(i, Material.DIAMOND, Material.DIAMOND_BLOCK, 9) &
+				!craft(i, Material.EMERALD, Material.EMERALD_BLOCK, 9) &
+				!craft(i, Material.GOLD_INGOT, Material.GOLD_BLOCK, 9) &
+				!craft(i, Material.IRON_INGOT, Material.IRON_BLOCK, 9) &
+				!craft(i, Material.INK_SACK, (short) 4, Material.LAPIS_BLOCK, 9) &
+				!craft(i, Material.QUARTZ, Material.QUARTZ_BLOCK, 4) &
+				!craft(i, Material.REDSTONE, Material.REDSTONE_BLOCK, 9)) {
 					String msg = "That chest doesn't have enough materials!";
 					PlayerUtil.action(p, msg);
 				} else {

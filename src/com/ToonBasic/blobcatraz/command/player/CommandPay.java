@@ -22,8 +22,7 @@ public class CommandPay extends ICommand {
 			String tar = args[0];
 			Player t = Bukkit.getPlayer(tar);
 			if(t != null) {
-				String mon = args[1];
-				double pay = Double.parseDouble(mon);
+				double pay = NumberUtil.getDouble(args[1]);
 				if(pay < 0) pay *= -1;
 				if(pay <= bal) {
 					ConfigDatabase.withdraw(p, pay);
@@ -40,7 +39,7 @@ public class CommandPay extends ICommand {
 				p.sendMessage(error);
 			}
 		} catch(Exception ex) {
-			String error = "Invalid Usage! Use /pay <player> <amount>";
+			String error = prefix + getFormattedUsage(getCommandUsed());
 			p.sendMessage(error);
 		}
 	}

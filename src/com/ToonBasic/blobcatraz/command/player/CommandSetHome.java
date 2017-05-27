@@ -12,17 +12,14 @@ import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandSetHome extends ICommand {
-	
-	public CommandSetHome() {
-		super("sethome", "[name]", "blobcatraz.player.sethome", "createhome");
-	}
+	public CommandSetHome() {super("sethome", "[name]", "blobcatraz.player.sethome", "createhome");}
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {
 		Player p = (Player) cs;
-		Location dest = p.getLocation();
+		Location l = p.getLocation();
 		if (args.length == 0) {
-			ConfigDatabase.setHome(p, "home", dest);
+			ConfigDatabase.setHome(p, "home", l);
 			p.sendMessage(prefix + "You have set home \u00a72home \u00a7rto your current location");
 		} else if (args.length > 0) {
 			int maxHomes = 0;
@@ -38,7 +35,7 @@ public class CommandSetHome extends ICommand {
 			}
 			if (p.hasPermission("blobcatraz.player.sethome.infinite") || ConfigDatabase.getHomes(p).size() < maxHomes) {
 				String name = Util.finalArgs(0, args);
-				ConfigDatabase.setHome(p, name, dest);
+				ConfigDatabase.setHome(p, name, l);
 				p.sendMessage(prefix + "You have set home \u00a72" + name + " \u00a7rto your current location");
 			} else {
 				p.sendMessage(prefix + "Permission \u00a7cblobcatraz.player.sethome.infinite \u00a7ror \u00a7cblobcatraz.player.sethome.<integer> \u00a7rrequired!");

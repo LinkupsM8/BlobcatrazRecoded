@@ -28,7 +28,7 @@ public class CommandSell extends ICommand {
 			if(sub.equals("hand")) {
 				PlayerInventory pi = p.getInventory();
 				ItemStack is = pi.getItemInMainHand();
-				if(is != null && is.getType() != Material.AIR) {
+				if(!ItemUtil.air(is)) {
 					Material mat = is.getType();
 					short data = is.getDurability();
 					String name = mat.name() + ":" + data; 

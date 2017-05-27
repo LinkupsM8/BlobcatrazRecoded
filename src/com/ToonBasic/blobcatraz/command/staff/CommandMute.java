@@ -1,20 +1,21 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.utility.Util;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import java.util.List;
-import java.util.UUID;
+import com.ToonBasic.blobcatraz.command.ICommand;
+import com.ToonBasic.blobcatraz.utility.Util;
 
 public class CommandMute extends ICommand implements Listener {
-    private static List<UUID> muted = Util.newList();
-    public CommandMute() {super("mute", "<player>", "blobcatraz.player.mute", "shutup", "bequiet");}
+    private static List<Player> muted = Util.newList();
+    public CommandMute() {super("mute", "<player>", "blobcatraz.staff.mute", "shutup", "bequiet");}
 
     @Override
     public void handleCommand(CommandSender cs, String[] args) {
@@ -24,13 +25,12 @@ public class CommandMute extends ICommand implements Listener {
             	String error = prefix + Language.INVALID_TARGET;
             	cs.sendMessage(error);
             } else {
-                UUID uuid = t.getUniqueId();
-                if(muted.contains(uuid)) {
-                    muted.remove(uuid);
+                if(muted.contains(t)) {
+                    muted.remove(t);
                     t.sendMessage(Util.color(prefix + "You are no longer muted!"));
                     cs.sendMessage(Util.color(prefix + "You have unmuted c" + t.getName()));
                 } else {
-                    muted.add(uuid);
+                    muted.add(t);
                     t.sendMessage(Util.color(prefix + "You have been muted!"));
                     cs.sendMessage(Util.color(prefix + "You have muted &c" + t.getName()));
                 }
@@ -38,11 +38,11 @@ public class CommandMute extends ICommand implements Listener {
         }
     }
     
-    @EventHandler
+    @EventHandler(priority=EventPriority.HIGHEST)
     public void chat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
-        UUID uuid = p.getUniqueId();
-        if(muted.contains(uuid)) {
+        if(muted.contains(p)) {
+            e.setMessage("");
             e.setCancelled(true);
             p.sendMessage(prefix + "You are currently muted from the chat!");
         }

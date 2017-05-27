@@ -1,6 +1,12 @@
 package com.ToonBasic.blobcatraz.command;
 
-import org.bukkit.ChatColor;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,13 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
 import com.ToonBasic.blobcatraz.utility.Util;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public abstract class ICommand implements CommandExecutor {
     private String command;
@@ -27,14 +26,8 @@ public abstract class ICommand implements CommandExecutor {
     private String commandUsed;
 
     public String prefix = Util.prefix;
-    public ICommand(String name, String usage) {
-        this(name, usage, null);
-    }
-
-    public ICommand(String name) {
-        this(name, "", null);
-    }
-
+    public ICommand(String name, String usage) {this(name, usage, null);}
+    public ICommand(String name) {this(name, "", null);}
     public ICommand(String name, String usage, String perm, String... aliases) {
         this.command = name;
         this.usage = usage;
@@ -42,19 +35,14 @@ public abstract class ICommand implements CommandExecutor {
         this.perm = new Permission(perm);
         if ((usage != null) && (!usage.equalsIgnoreCase(""))) {
             Matcher matcher = Pattern.compile("<.*?>").matcher(usage);
-            while (matcher.find()) {
-                this.minArgs += 1;
-            }
+            while (matcher.find()) {this.minArgs += 1;}
         }
-        if (getClass().getAnnotation(PlayerOnly.class) != null)
-            this.player = true;
-        if (getClass().getAnnotation(Disabled.class) != null)
-            this.disabled = true;
+        Class<? extends ICommand> clazz = getClass();
+        if(clazz.isAnnotationPresent(PlayerOnly.class)) this.player = true;
+        if(clazz.isAnnotationPresent(Disabled.class)) this.disabled = true;
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        return executeCmd(sender, cmd, label, args);
-    }
+    public boolean onCommand(CommandSender cs, Command c, String label, String[] args) {return executeCmd(cs, c, label, args);}
 
     private boolean executeCmd(CommandSender sender, Command cmd, String label, String[] args) {
         this.sender = sender;
@@ -92,48 +80,30 @@ public abstract class ICommand implements CommandExecutor {
     }
 
     public String getFormattedUsage(String command) {
-        return ChatColor.translateAlternateColorCodes('&', String.format(Language.INCORRECT_USAGE, (command + " " + usage)));
-    }
-
-    public CommandExecutor getExecutor() {
-        return this;
-    }
-
-    public abstract void handleCommand(CommandSender cs, String[] args);
-
-    public String getCommand() {
-        return command;
-    }
-
-    public String getUsage() {
+    	String format = String.format(Language.INCORRECT_USAGE, (command + " " + usage));
+    	String usage = Util.color(format);
         return usage;
     }
 
-    public CommandSender getSender() {
-        return sender;
-    }
-
-    public String[] getAliases() {
-        return aliases;
-    }
-
-    public String getCommandUsed() {
-        return commandUsed;
-    }
+    public CommandExecutor getExecutor() {return this;}
+    public abstract void handleCommand(CommandSender cs, String[] args);
+    public String getCommand() {return command;}
+    public String getUsage() {return usage;}
+    public CommandSender getSender() {return sender;}
+    public String[] getAliases() {return aliases;}
+    public String getCommandUsed() {return commandUsed;}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.TYPE})
-    public @interface PlayerOnly {
-    }
+    public @interface PlayerOnly {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.TYPE})
-    public @interface Disabled {
-    }
+    public @interface Disabled {}
 
     public static class Language {
         public static String NO_PERMISSION = Util.color("&cYou're not allowed to use this command!");
-        public static String PLAYER_ONLY = Util.color("Only players can execute this command");
+        public static String PLAYER_ONLY = Util.color("&cOnly players can execute this command");
         public static String INVALID_TARGET = Util.color("&cInvalid Target");
         public static String INCORRECT_USAGE = Util.color("&cIncorrect usage, please try again with these arguments:\n&f/%1s");
         public static String COMMAND_DISABLED = Util.color("&cThis command is disabled");

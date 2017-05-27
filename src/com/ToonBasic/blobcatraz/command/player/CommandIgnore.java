@@ -25,6 +25,7 @@ public class CommandIgnore extends ICommand implements Listener {
 		List<Player> list = Util.newList();
 		if(!ignore.containsKey(p)) ignore.put(p, list);
 		list = ignore.get(p);
+		
 		String target = args[0];
 		Player t = Bukkit.getPlayer(target);
 		if(t != null) {

@@ -76,7 +76,6 @@ public class PlayerUtil extends Util {
 		EntityPlayer ep = cp.getHandle();
 		PlayerConnection pc = ep.playerConnection;
 		pc.sendPacket(ppoc);
-		ping(p);
 	}
 	
 	public static boolean within(Player p, Location l1, Location l2) {

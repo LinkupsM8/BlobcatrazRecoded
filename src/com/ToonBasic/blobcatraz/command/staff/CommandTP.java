@@ -13,7 +13,7 @@ import com.ToonBasic.blobcatraz.utility.Util;
 
 @PlayerOnly
 public class CommandTP extends ICommand {
-	public CommandTP() {super("tp", "", "blobcatraz.command.tp", "teleport");}
+	public CommandTP() {super("tp", "", "blobcatraz.staff.tp", "teleport");}
 	
 	@Override
 	public void handleCommand(CommandSender cs, String[] args) {

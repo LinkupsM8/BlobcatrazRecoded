@@ -1,9 +1,12 @@
 package com.ToonBasic.blobcatraz.listener;
 
+import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -15,31 +18,34 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.ToonBasic.blobcatraz.utility.ItemUtil;
 import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.PlayerUtil;
 
 public class ListenAutoPickup implements Listener {
     @EventHandler(priority=EventPriority.HIGHEST)
     public void onBlockBreak(BlockBreakEvent e) {
+    	if(e.isCancelled()) return;
     	Player p = e.getPlayer();
     	GameMode gm = p.getGameMode();
     	if(gm == GameMode.CREATIVE) return;
-    	if(e.isCancelled()) return;
     	
-    	Block b = e.getBlock();
+
         e.setCancelled(true);
+    	Block b = e.getBlock();
     	PlayerInventory pi = p.getInventory();
         ItemStack held = pi.getItemInMainHand();
-        for(ItemStack is : b.getDrops()) {
-        	int slot = pi.firstEmpty();
-        	if(slot == -1) {
+        for(ItemStack is : b.getDrops(held)) {
+    		is = fortune(held, is);
+        	Map<Integer, ItemStack> leftover = pi.addItem(is);
+        	if(!leftover.isEmpty()) {
         		String msg = "Your inventory is full!";
         		PlayerUtil.action(p, msg);
-        		return;
-        	} else {
-        		if(!ItemUtil.air(held)) {is = fortune(held, is);}
-        		pi.addItem(is);
+        		PlayerUtil.ping(p);
+        		for(ItemStack drop : leftover.values()) {
+        			World w = p.getWorld();
+        			Location l = b.getLocation();
+        			w.dropItem(l, drop);
+        		}
         	}
         }
         
