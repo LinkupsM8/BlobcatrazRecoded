@@ -8,6 +8,8 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -104,4 +106,10 @@ public class PlayerUtil extends Util {
     	text.setHoverEvent(he);
     	return text;
     }
+	
+	public static ItemStack held(Player p) {
+		PlayerInventory pi = p.getInventory();
+		ItemStack held = pi.getItemInMainHand();
+		return held;
+	}
 }

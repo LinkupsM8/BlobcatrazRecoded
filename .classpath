@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="C:/Users/SirBlobman/Documents/Java Workspace/Minecraft/Library/Spigot and Bukkit/Vault v1.5.6.jar" sourcepath="C:/Users/SirBlobman/Documents/Java Workspace/Minecraft/Library/Spigot and Bukkit/Source Files/Vault/src/main/java"/>
 	<classpathentry kind="lib" path="C:/Users/SirBlobman/Documents/Java Workspace/Minecraft/Library/Spigot and Bukkit/NuVotifier v2.3.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/SirBlobman/Documents/Java Workspace/Minecraft/Library/Spigot and Bukkit/HolographicDisplays v2.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SirBlobman/Documents/Java Workspace/Minecraft/Library/Spigot and Bukkit/PlaceholderAPI v2.7.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

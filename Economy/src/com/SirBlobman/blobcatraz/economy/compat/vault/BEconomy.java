@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.compat.vault;
+package com.SirBlobman.blobcatraz.economy.compat.vault;
 
 import java.text.NumberFormat;
 import java.util.List;

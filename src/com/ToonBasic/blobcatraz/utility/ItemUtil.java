@@ -27,6 +27,7 @@ public class ItemUtil extends Util {
 	public static final ItemStack AIR = new ItemStack(Material.AIR);
 	
 	public static void load() {
+		ConfigCustomItems.load();
 		enchants.put("sharpness", Enchantment.DAMAGE_ALL);
 		enchants.put("bane of spiders", Enchantment.DAMAGE_ARTHROPODS);
 		enchants.put("smite", Enchantment.DAMAGE_UNDEAD);

@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.command.staff;
+package com.SirBlobman.blobcatraz.economy.command.staff;
 
 import static com.ToonBasic.blobcatraz.logger.EconomyLog.print;
 

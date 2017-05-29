@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.command.player;
+package com.SirBlobman.blobcatraz.economy.command.player;
 
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;

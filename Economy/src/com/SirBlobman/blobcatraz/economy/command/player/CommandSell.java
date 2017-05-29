@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.command.player;
+package com.SirBlobman.blobcatraz.economy.command.player;
 
 import static com.ToonBasic.blobcatraz.listener.sign.ListenSellAll.gui;
 

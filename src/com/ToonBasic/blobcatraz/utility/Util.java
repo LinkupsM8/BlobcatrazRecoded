@@ -108,6 +108,18 @@ public class Util {
 		return ss;
 	}
 	
+	public static <T> List<T> cropList(List<T> o, int start, int end) {
+		if(o.size() < end) return o;
+		else {
+			List<T> list = newList();
+			for(int i = start; i <= end; i++) {
+				T t = o.get(i);
+				list.add(t);
+			}
+			return list;
+		}
+	}
+	
 	public static <K, V> Map<K, V> newMap() {
 		Map<K, V> map = new HashMap<K, V>();
 		return map;
@@ -189,6 +201,14 @@ public class Util {
     			" &2Pitch: &f" + pi
     		);
     		return s;
-    	} else return o.toString();
+    	} else if(o instanceof Integer) {
+    		int i = (int) o;
+    		return "" + i;
+    	} else if(o instanceof Number) {
+    		Number n = (Number) o;
+    		double d = n.doubleValue();
+    		return "" + d;
+    	} 
+    	else return o.toString();
     }
 }

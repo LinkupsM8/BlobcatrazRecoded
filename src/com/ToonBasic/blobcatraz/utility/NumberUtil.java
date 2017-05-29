@@ -52,7 +52,7 @@ public class NumberUtil extends Util {
     	String dec = String.format(format, d);
     	return dec;
     }
-    
+
     public static String money(double amount) {
     	String format = cropDecimal(amount, 2);
     	boolean neg = (amount < 0);

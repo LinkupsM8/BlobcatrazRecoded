@@ -1,4 +1,4 @@
-package com.ToonBasic.blobcatraz.command.player;
+package com.SirBlobman.blobcatraz.economy.command.player;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,10 +31,7 @@ public class CommandBaltop extends ICommand {
 		Comparator<Entry<String, Double>> reverse = Collections.reverseOrder(compare);
 		Collections.sort(entryList, reverse);
 		
-		List<Entry<String, Double>> t;
-		boolean b = (entryList.size() > 10);
-		t = b ? entryList.subList(0, 9) : entryList;
-		
+		List<Entry<String, Double>> t = Util.cropList(entryList, 0, 9);
 		List<String> list = Util.newList();
 		int i = 1;
 		for(Entry<String, Double> e : t) {
@@ -48,8 +45,7 @@ public class CommandBaltop extends ICommand {
 				}
 			}
 		}
-		return list;
-		
+		return list;	
 	}
 	
 	private class BalanceComparator implements Comparator<Entry<String, Double>> {

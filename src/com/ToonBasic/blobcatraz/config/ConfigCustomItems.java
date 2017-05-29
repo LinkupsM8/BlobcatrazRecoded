@@ -18,6 +18,7 @@ public class ConfigCustomItems extends Config {
 	public static YamlConfiguration load() {
 		try {
 			config = load(FILE);
+			defaults();
 			return config;
 		} 
 		catch(Exception ex) {
@@ -32,7 +33,6 @@ public class ConfigCustomItems extends Config {
 			if(!FILE.exists()) {
 				FOLDER.mkdirs();
 				FILE.createNewFile();
-				defaults();
 			}
 			save(config, FILE);
 		}
@@ -73,6 +73,10 @@ public class ConfigCustomItems extends Config {
 		load();
 		Map<String, ItemStack> map = Util.newMap();
 		ConfigurationSection set = config.getConfigurationSection("items");
+		if(set == null) {
+			save();
+			return map;
+		}
 		Map<String, Object> vals = set.getValues(false);
 		for(Entry<String, Object> e : vals.entrySet()) {
 			String id = e.getKey();

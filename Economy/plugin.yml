@@ -1,0 +1,7 @@
+name: BlobcatrazEconomy
+version: 1.0
+description: Economy addon for Blobcatraz
+main: com.SirBlobman.blobcatraz.economy.EconomyCore
+load: STARTUP
+depend: [Blobcatraz, Vault]
+loadbefore: [ASkyBlock, Rankup]

@@ -17,7 +17,8 @@ import org.bukkit.scoreboard.Team.Option;
 import org.bukkit.scoreboard.Team.OptionStatus;
 
 import com.ToonBasic.blobcatraz.Core;
-import com.ToonBasic.blobcatraz.config.ConfigDatabase;
+
+import me.clip.placeholderapi.PlaceholderAPI;
 
 public class ScoreboardUtil extends Util implements Runnable {
 	private static final Server SERVER = Bukkit.getServer();
@@ -50,7 +51,7 @@ public class ScoreboardUtil extends Util implements Runnable {
 		
 		List<String> list = normal(p);
 		for(String s : list) {
-			String entry = color(s);
+			String entry = format(p, s);
 			if(entry.length() > 40) entry = entry.substring(0, 40);
 			Score sc = custom.getScore(entry);
 			int i = (list.size() - list.indexOf(s));
@@ -62,10 +63,11 @@ public class ScoreboardUtil extends Util implements Runnable {
 	
 	private static List<String> normal(Player p) {
 		List<String> list = newList(
-			"&bCurrent Rank&c: &a" + VaultUtil.mainRank(p),
-			"&bNext Rank&c: &a" + VaultUtil.nextRank(p, VaultUtil.mainRank(p)),
-			"&bBalance&c: &a" + NumberUtil.money(VaultUtil.balance(p)),
-			"&bTokens&c: &a" + ConfigDatabase.tokens(p),
+			"&bCurrent Rank&c: &a%blobcatraz_current_rank%",
+			"&bNext Rank&c: &a%rankup_next_rank%",
+			"&bNext Rank Price&c: &a$%rankup_next_rank_cost_formatted%",
+			"&bBalance&c: &a$%blobcatraz_balance%",
+			"&bTokens&c: &a%blobcatraz_tokens%",
 			"&bPing&c: &a" + PlayerUtil.getPing(p)
 		);
 		return list;
@@ -75,6 +77,19 @@ public class ScoreboardUtil extends Util implements Runnable {
 		disabled.add(p);
 		Scoreboard MAIN = SM.getMainScoreboard();
 		p.setScoreboard(MAIN);
+	}
+	
+	private static String format(Player p, String o) {
+		try {
+			String c = PlaceholderAPI.setPlaceholders(p, o);
+			c = color(c);
+			c = c.replaceAll("#notinladder", "None");
+			return c;
+		} 
+		catch(Throwable ex) {
+			ex.printStackTrace();
+			return color(o);
+		}
 	}
 	
 	public static Scoreboard getBoard(Player p) {

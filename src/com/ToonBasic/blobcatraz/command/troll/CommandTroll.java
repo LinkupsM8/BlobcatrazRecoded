@@ -127,7 +127,7 @@ public class CommandTroll extends ICommand {
 	
 	private void scream(Player p) {
 		Location l = p.getLocation();
-		Sound s = Sound.ENTITY_GHAST_SCREAM;
+		Sound s = Sound.ENTITY_GHAST_HURT;
 		float v = 1000.0F;
 		float pi = 1.0F;
 		p.playSound(l, s, v, pi);

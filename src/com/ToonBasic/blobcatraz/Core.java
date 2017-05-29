@@ -7,15 +7,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.ServicePriority;
-import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ToonBasic.blobcatraz.command.CommandFramework;
 import com.ToonBasic.blobcatraz.command.player.CommandAFK;
 import com.ToonBasic.blobcatraz.command.player.CommandBack;
-import com.ToonBasic.blobcatraz.command.player.CommandBalance;
-import com.ToonBasic.blobcatraz.command.player.CommandBaltop;
 import com.ToonBasic.blobcatraz.command.player.CommandBlock;
 import com.ToonBasic.blobcatraz.command.player.CommandBlockChest;
 import com.ToonBasic.blobcatraz.command.player.CommandDelHome;
@@ -29,12 +25,10 @@ import com.ToonBasic.blobcatraz.command.player.CommandKit;
 import com.ToonBasic.blobcatraz.command.player.CommandKits;
 import com.ToonBasic.blobcatraz.command.player.CommandMessage;
 import com.ToonBasic.blobcatraz.command.player.CommandNickname;
-import com.ToonBasic.blobcatraz.command.player.CommandPay;
 import com.ToonBasic.blobcatraz.command.player.CommandPrefix;
 import com.ToonBasic.blobcatraz.command.player.CommandReply;
 import com.ToonBasic.blobcatraz.command.player.CommandReport;
 import com.ToonBasic.blobcatraz.command.player.CommandRules;
-import com.ToonBasic.blobcatraz.command.player.CommandSell;
 import com.ToonBasic.blobcatraz.command.player.CommandSetHome;
 import com.ToonBasic.blobcatraz.command.player.CommandStaffList;
 import com.ToonBasic.blobcatraz.command.player.CommandStats;
@@ -44,7 +38,6 @@ import com.ToonBasic.blobcatraz.command.player.CommandTpa;
 import com.ToonBasic.blobcatraz.command.player.CommandVote;
 import com.ToonBasic.blobcatraz.command.player.CommandWarp;
 import com.ToonBasic.blobcatraz.command.player.CommandWarps;
-import com.ToonBasic.blobcatraz.command.player.CommandWorth;
 import com.ToonBasic.blobcatraz.command.special.CommandBigTree;
 import com.ToonBasic.blobcatraz.command.special.CommandBurn;
 import com.ToonBasic.blobcatraz.command.special.CommandCenter;
@@ -70,7 +63,6 @@ import com.ToonBasic.blobcatraz.command.staff.CommandClearInventory;
 import com.ToonBasic.blobcatraz.command.staff.CommandCreateItem;
 import com.ToonBasic.blobcatraz.command.staff.CommandDelKit;
 import com.ToonBasic.blobcatraz.command.staff.CommandDelWarp;
-import com.ToonBasic.blobcatraz.command.staff.CommandEconomy;
 import com.ToonBasic.blobcatraz.command.staff.CommandEnchant;
 import com.ToonBasic.blobcatraz.command.staff.CommandEnderChest;
 import com.ToonBasic.blobcatraz.command.staff.CommandFakeVote;
@@ -93,7 +85,6 @@ import com.ToonBasic.blobcatraz.command.staff.CommandSeen;
 import com.ToonBasic.blobcatraz.command.staff.CommandSetKit;
 import com.ToonBasic.blobcatraz.command.staff.CommandSetMOTD;
 import com.ToonBasic.blobcatraz.command.staff.CommandSetWarp;
-import com.ToonBasic.blobcatraz.command.staff.CommandSetWorth;
 import com.ToonBasic.blobcatraz.command.staff.CommandShowinv;
 import com.ToonBasic.blobcatraz.command.staff.CommandSkull;
 import com.ToonBasic.blobcatraz.command.staff.CommandSmite;
@@ -110,7 +101,7 @@ import com.ToonBasic.blobcatraz.command.staff.CommandWarn;
 import com.ToonBasic.blobcatraz.command.staff.CommandWhoIs;
 import com.ToonBasic.blobcatraz.command.staff.CommandWorkbench;
 import com.ToonBasic.blobcatraz.command.troll.CommandTroll;
-import com.ToonBasic.blobcatraz.compat.vault.BEconomy;
+import com.ToonBasic.blobcatraz.compat.placeholderapi.BPlaceholders;
 import com.ToonBasic.blobcatraz.config.ConfigHolo;
 import com.ToonBasic.blobcatraz.config.CustomHologram;
 import com.ToonBasic.blobcatraz.listener.ListenAntiVoid;
@@ -132,10 +123,6 @@ import com.ToonBasic.blobcatraz.listener.sign.ListenSignColor;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
 import com.ToonBasic.blobcatraz.utility.ScoreboardUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
-import com.ToonBasic.blobcatraz.utility.VaultUtil;
-
-import net.milkbowl.vault.Vault;
-import net.milkbowl.vault.economy.Economy;
 
 public class Core extends JavaPlugin {
     public static Core instance;
@@ -145,7 +132,6 @@ public class Core extends JavaPlugin {
 
     private static final Server SERVER = Bukkit.getServer();
     private static final PluginManager PM = SERVER.getPluginManager();
-    private static final ServicesManager SM = SERVER.getServicesManager();
     
     @Override
     public void onEnable() {
@@ -153,12 +139,9 @@ public class Core extends JavaPlugin {
         LOG = getLogger();
         folder = getDataFolder();
         Util.enable();
-        if(PM.isPluginEnabled("Vault")) {
-        	BEconomy be = new BEconomy();
-        	Vault V = Vault.getPlugin(Vault.class);
-        	ServicePriority SP = ServicePriority.Highest;
-        	SM.register(Economy.class, be, V, SP);
-        	VaultUtil.setup();
+        if(PM.isPluginEnabled("PlaceholderAPI")) {
+        	BPlaceholders bp = new BPlaceholders();
+        	bp.hook();
         }
         framework = new CommandFramework(instance);
         ConfigurationSerialization.registerClass(CustomHologram.class);
@@ -185,7 +168,6 @@ public class Core extends JavaPlugin {
         	new CommandCreateItem(),
         	new CommandDelKit(),
         	new CommandDelWarp(),
-        	new CommandEconomy(),
         	new CommandEnchant(),
         	new CommandEnderChest(),
         	new CommandFireball(),
@@ -207,7 +189,6 @@ public class Core extends JavaPlugin {
         	new CommandSetKit(),
         	new CommandSetMOTD(),
         	new CommandSetWarp(),
-        	new CommandSetWorth(),
         	new CommandShowinv(),
         	new CommandSkull(),
         	new CommandSmite(),
@@ -230,8 +211,6 @@ public class Core extends JavaPlugin {
         framework.registerCommands(
         	new CommandAFK(),
         	new CommandBack(),
-        	new CommandBalance(),
-        	new CommandBaltop(),
         	new CommandBlock(),
         	new CommandBlockChest(),
         	new CommandDelHome(),
@@ -246,12 +225,10 @@ public class Core extends JavaPlugin {
         	new CommandKits(),
         	new CommandMessage(),
         	new CommandNickname(),
-        	new CommandPay(),
         	new CommandPrefix(),
         	new CommandReply(),
         	new CommandReport(),
         	new CommandRules(),
-        	new CommandSell(),
         	new CommandSetHome(),
         	new CommandStaffList(),
         	new CommandStats(),
@@ -259,8 +236,7 @@ public class Core extends JavaPlugin {
         	new CommandTpa(),
         	new CommandTpChoose(),
         	new CommandWarp(),
-        	new CommandWarps(),
-        	new CommandWorth()
+        	new CommandWarps()
         );
         
     //Special Commands
