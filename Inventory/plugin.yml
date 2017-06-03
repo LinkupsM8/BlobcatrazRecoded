@@ -1,0 +1,6 @@
+name: BlobcatrazInventory
+version: 1.0
+description: Inventory addon for Blobcatraz
+main: com.SirBlobman.blobcatraz.inventory.InventoryCore
+load: STARTUP
+depend: [Blobcatraz]

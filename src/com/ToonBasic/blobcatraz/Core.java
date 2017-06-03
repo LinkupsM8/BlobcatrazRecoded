@@ -57,6 +57,7 @@ import com.ToonBasic.blobcatraz.command.special.CommandSlimeCannon;
 import com.ToonBasic.blobcatraz.command.special.CommandWorld;
 import com.ToonBasic.blobcatraz.command.staff.CommandAnvil;
 import com.ToonBasic.blobcatraz.command.staff.CommandBan;
+import com.ToonBasic.blobcatraz.command.staff.CommandBlockData;
 import com.ToonBasic.blobcatraz.command.staff.CommandBroadcast;
 import com.ToonBasic.blobcatraz.command.staff.CommandChat;
 import com.ToonBasic.blobcatraz.command.staff.CommandClearInventory;
@@ -162,6 +163,7 @@ public class Core extends JavaPlugin {
         framework.registerCommands(
         	new CommandAnvil(),
         	new CommandBan(),
+        	new CommandBlockData(),
         	new CommandBroadcast(),
         	new CommandChat(),
         	new CommandClearInventory(),

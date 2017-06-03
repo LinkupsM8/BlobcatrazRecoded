@@ -17,6 +17,7 @@ import org.bukkit.block.Block;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
 import com.ToonBasic.blobcatraz.Core;
@@ -64,6 +65,12 @@ public class Util {
     public static void regEvents(Listener... ls) {
     	for(Listener l : ls) {
     		if(l != null) PM.registerEvents(l, PLUGIN);
+    	}
+    }
+    
+    public static void regEvents(Plugin pl, Listener... ls) {
+    	for(Listener l : ls) {
+    		if(l != null) PM.registerEvents(l, pl);
     	}
     }
     

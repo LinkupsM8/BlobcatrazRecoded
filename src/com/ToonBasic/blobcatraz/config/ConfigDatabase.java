@@ -10,7 +10,9 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
 
 import com.ToonBasic.blobcatraz.Core;
 import com.ToonBasic.blobcatraz.utility.Util;
@@ -325,5 +327,23 @@ public class ConfigDatabase {
     	YamlConfiguration config = load(op);
     	int s = config.getInt("stats.kill streak");
     	return s;
+    }
+    
+    public static void setInventory(World w, OfflinePlayer op, List<ItemStack> items) {
+    	YamlConfiguration config = load(op);
+    	String name = w.getName();
+    	String path = "inventory." + name;
+    	set(config, path, items, true);
+    	save(config, file(op));
+    }
+    
+    @SuppressWarnings("unchecked")
+	public static List<ItemStack> getInventory(World w, OfflinePlayer op) {
+    	YamlConfiguration config = load(op);
+    	String name = w.getName();
+    	String path = "inventory." + name;
+    	List<ItemStack> list = (List<ItemStack>) config.get(path);
+    	if(list == null) list = Util.newList();
+    	return list;
     }
 }

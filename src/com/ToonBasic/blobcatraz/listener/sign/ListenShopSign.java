@@ -156,7 +156,7 @@ public class ListenShopSign implements Listener {
 		}
 	}
 	
-	private Inventory shop(ItemStack toBuy) {
+	public static Inventory shop(ItemStack toBuy) {
 		ItemStack copy = withPrice(toBuy);
 		Inventory i = fillerInv(toBuy);
 		i.setItem(4, copy);
@@ -179,7 +179,7 @@ public class ListenShopSign implements Listener {
 		i.setItem(4, withPrice(is));
 	}
 	
-	private Inventory fillerInv(ItemStack is) {
+	private static Inventory fillerInv(ItemStack is) {
 		Inventory i = Bukkit.createInventory(null, 54, TITLE + ItemUtil.name(is));
 		for(int j = 0; j < 54; j++) {i.setItem(j, filler());}
 		int[] con = new int[] {36, 37, 38, 45, 46, 47};
@@ -189,7 +189,7 @@ public class ListenShopSign implements Listener {
 		return i;
 	}
 	
-	private final ItemStack filler() {
+	private final static ItemStack filler() {
 		ItemStack is = new ItemStack(Material.STAINED_GLASS_PANE, 1, toShort(8));
 		ItemMeta meta = is.getItemMeta();
 		meta.setDisplayName(Util.color("&f"));
@@ -197,7 +197,7 @@ public class ListenShopSign implements Listener {
 		return is;
 	}
 	
-	private final ItemStack confirm() {
+	private final static ItemStack confirm() {
 		ItemStack is = new ItemStack(Material.STAINED_GLASS_PANE, 1, toShort(5));
 		ItemMeta meta = is.getItemMeta();
 		meta.setDisplayName(Util.color("&2\u2713 &aConfirm &2\u2713"));
@@ -205,7 +205,7 @@ public class ListenShopSign implements Listener {
 		return is;
 	}
 	
-	private final ItemStack cancel() {
+	private final static ItemStack cancel() {
 		ItemStack is = new ItemStack(Material.STAINED_GLASS_PANE, 1, toShort(14));
 		ItemMeta meta = is.getItemMeta();
 		meta.setDisplayName(Util.color("&4\u2717 &cCancel &4\u2717"));
@@ -213,7 +213,7 @@ public class ListenShopSign implements Listener {
 		return is;
 	}
 	
-	private final ItemStack amount(int change) {
+	private final static ItemStack amount(int change) {
 		boolean neg = (change < 0);
 		short data = neg ? toShort(3) : toShort(4);
 		ItemStack is = new ItemStack(Material.STAINED_GLASS_PANE, neg ? (change * -1) : change, data);
@@ -223,7 +223,7 @@ public class ListenShopSign implements Listener {
 		return is;
 	}
 	
-	private ItemStack withPrice(ItemStack item) {
+	private static ItemStack withPrice(ItemStack item) {
 		ItemStack is = item.clone();
 		ItemMeta meta = is.getItemMeta();
 		double pr = worth(is) * 2;

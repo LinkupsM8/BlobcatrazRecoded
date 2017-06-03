@@ -1,0 +1,5 @@
+name: BlobcatrazShop
+version: 1.0
+description: Shop addon for Blobcatraz
+main: com.SirBlobman.blobcatraz.shop.ShopCore
+depend: [BlobcatrazEconomy, Citizens]
