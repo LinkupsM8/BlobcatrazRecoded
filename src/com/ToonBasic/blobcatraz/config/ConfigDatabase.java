@@ -84,7 +84,7 @@ public class ConfigDatabase {
     public static String nickName(OfflinePlayer op) {
         YamlConfiguration config = load(op);
         String name = config.getString("nickname");
-        String nick = Util.color(name + "&r");
+        String nick = Util.format(name + "&r");
         return nick;
     }
     
@@ -97,7 +97,7 @@ public class ConfigDatabase {
     public static String prefix(OfflinePlayer op) {
     	YamlConfiguration config = load(op);
     	String prefix = config.getString("prefix");
-    	prefix = Util.color(prefix);
+    	prefix = Util.format(prefix);
     	return prefix;
     }
     
@@ -332,6 +332,7 @@ public class ConfigDatabase {
     public static void setInventory(World w, OfflinePlayer op, List<ItemStack> items) {
     	YamlConfiguration config = load(op);
     	String name = w.getName();
+    	if(name.equals("Mines") || name.contains("SkyBlock")) {name = "SkyBlock";}
     	String path = "inventory." + name;
     	set(config, path, items, true);
     	save(config, file(op));
@@ -341,6 +342,7 @@ public class ConfigDatabase {
 	public static List<ItemStack> getInventory(World w, OfflinePlayer op) {
     	YamlConfiguration config = load(op);
     	String name = w.getName();
+    	if(name.equals("Mines") || name.contains("SkyBlock")) {name = "SkyBlock";}
     	String path = "inventory." + name;
     	List<ItemStack> list = (List<ItemStack>) config.get(path);
     	if(list == null) list = Util.newList();

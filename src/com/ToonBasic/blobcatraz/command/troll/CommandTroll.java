@@ -14,6 +14,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
@@ -45,6 +47,7 @@ public class CommandTroll extends ICommand {
 				else if(troll.equals("pigmen")) pigmen(t);
 				else if(troll.equals("pumpkin")) pumpkin(t);
 				else if(troll.equals("scream")) scream(t);
+				else if(troll.equals("blind")) blind(t);
 				else {
 					String error = "Invalid Troll!";
 					p.sendMessage(error);
@@ -128,8 +131,17 @@ public class CommandTroll extends ICommand {
 	private void scream(Player p) {
 		Location l = p.getLocation();
 		Sound s = Sound.ENTITY_GHAST_HURT;
-		float v = 1000.0F;
+		float v = 10000.0F;
 		float pi = 1.0F;
 		p.playSound(l, s, v, pi);
+	}
+	
+	private void blind(Player p) {
+		PotionEffectType BLIND = PotionEffectType.BLINDNESS;
+		PotionEffectType NIGHT = PotionEffectType.NIGHT_VISION;
+		PotionEffect p1 = new PotionEffect(BLIND, Integer.MAX_VALUE, 20, true, false);
+		PotionEffect p2 = new PotionEffect(NIGHT, Integer.MAX_VALUE, 20, true, false);
+		p.addPotionEffect(p1);
+		p.addPotionEffect(p2);
 	}
 }

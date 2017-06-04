@@ -3,6 +3,7 @@ package com.SirBlobman.blobcatraz.shop.compat.citizens;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,7 +11,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SpawnEggMeta;
 
 import com.ToonBasic.blobcatraz.listener.sign.ListenShopSign;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
@@ -51,6 +55,12 @@ public class ShopTrait extends Trait implements Listener {
 		 * Tools such as axes, swords, bows, shovels, and pickaxes
 		 */
 		TOOLS,
+		/** Resources, like diamonds, sticks, iron and coal */
+		RESOURCES,
+		/** Armor, such as helmets, chestplates, leggings, boots, and horse armor */
+		ARMOR,
+		/** Spawn eggs */
+		MOBS,
 		/** Default Type, will have an empty shop**/
 		UNKNOWN
 	}
@@ -71,13 +81,9 @@ public class ShopTrait extends Trait implements Listener {
 	
 	@Override
 	public void save(DataKey key) {
-		key.setString("shop type", shopType.name());
-	}
-	
-	@Override
-	public void onAttach() {
-		String msg = npc.getName() + " has been converted into a shop with type " + shopType;
-		Util.print(msg);
+		String path = "shop type";
+		String value = shopType.name();
+		key.setString(path, value);
 	}
 	
 	@EventHandler
@@ -96,32 +102,17 @@ public class ShopTrait extends Trait implements Listener {
 		if(npc.hasTrait(ShopTrait.class)) {
 			ShopTrait trait = npc.getTrait(ShopTrait.class);
 			ShopType shop = trait.shopType();
-			switch(shop) {
-			case FOOD: {
-				foodGUI(p);
-				break;
-			}
-			case REDSTONE: {
-				redstoneGUI(p);
-				break;
-			}
-			case SKYBLOCK: {
-				skyBlockGUI(p);
-				break;
-			}
-			case FARMING: {
-				farmingGUI(p);
-				break;
-			}
-			case TOOLS: {
-				toolsGUI(p);
-				break;
-			}
-			default: {
-				Inventory i = Bukkit.createInventory(null, 9, TITLE);
-				p.openInventory(i);
-				break;
-			}
+			if(shop == ShopType.ARMOR) armorGUI(p);
+			else if(shop == ShopType.FARMING) farmingGUI(p);
+			else if(shop == ShopType.FOOD) foodGUI(p);
+			else if(shop == ShopType.MOBS) mobsGUI(p);
+			else if(shop == ShopType.REDSTONE) redstoneGUI(p);
+			else if(shop == ShopType.RESOURCES) resourceGUI(p);
+			else if(shop == ShopType.SKYBLOCK) skyBlockGUI(p);
+			else if(shop == ShopType.TOOLS) toolsGUI(p);
+			else {
+				String error = "Invalid shop! Contact an admin!";
+				p.sendMessage(error);
 			}
 		}
 	}
@@ -176,8 +167,32 @@ public class ShopTrait extends Trait implements Listener {
 		}
 	}*/
 	
+	private ItemStack spawnEgg(EntityType et) {
+		ItemStack is = newItem(Material.MONSTER_EGG);
+		ItemMeta meta = is.getItemMeta();
+		SpawnEggMeta egg = (SpawnEggMeta) meta;
+		egg.setSpawnedType(et);
+		is.setItemMeta(egg);
+		return is;
+	}
+	
+	private Inventory newInv(int i) {
+		InventoryHolder ih = null;
+		float div = (((float) i) / 9.0F);
+		long round = Math.round(div);
+		int size = (int) (9 * round);
+		Inventory inv = Bukkit.createInventory(ih, size, TITLE);
+		return inv;
+	}
+	
+	private Inventory newInv(ItemStack[] contents) {
+		int size = contents.length;
+		Inventory i = newInv(size);
+		i.setContents(contents);
+		return i;
+	}
+	
 	private void foodGUI(Player p) {
-		Inventory i = Bukkit.createInventory(null, 18, TITLE);
 		ItemStack apple = newItem(Material.APPLE);
 		ItemStack msoup = newItem(Material.MUSHROOM_SOUP);
 		ItemStack bread = newItem(Material.BREAD);
@@ -199,12 +214,11 @@ public class ShopTrait extends Trait implements Listener {
 			apple, msoup, bread, pork, golden_apple, notch_apple, fish, salmon, cake,
 			cookie, steak, chicken, pie, rabbit, rstew, mutton, bsoup
 		);
-		i.setContents(contents);
+		Inventory i = newInv(contents);
 		p.openInventory(i);
 	}
 	
 	private void redstoneGUI(Player p) {
-		Inventory i = Bukkit.createInventory(null, 18, TITLE);
 		ItemStack redstone = newItem(Material.REDSTONE);
 		ItemStack block = newItem(Material.REDSTONE_BLOCK);
 		ItemStack torch = newItem(Material.REDSTONE_TORCH_ON);
@@ -227,12 +241,11 @@ public class ShopTrait extends Trait implements Listener {
 			redstone, block, torch, lever, lamp, sensor, observer, dispenser, dropper,
 			hopper, sbutton, wbutton, piston, sticky, trip, repeat, compare, tnt
 		);
-		i.setContents(contents);
+		Inventory i = newInv(contents);
 		p.openInventory(i);
 	}
 	
 	private void skyBlockGUI(Player p) {
-		Inventory i = Bukkit.createInventory(null, 18, TITLE);
 		ItemStack oaksap = newItem(Material.SAPLING, 1, 0);
 		ItemStack sprsap = newItem(Material.SAPLING, 1, 1);
 		ItemStack birsap = newItem(Material.SAPLING, 1, 2);
@@ -249,12 +262,11 @@ public class ShopTrait extends Trait implements Listener {
 			oaksap, sprsap, birsap, junsap, acasap, doasap, AIR, AIR, AIR,
 			grass, dirt, mycel, water, lava, bucket
 		);
-		i.setContents(contents);
+		Inventory i = newInv(contents);
 		p.openInventory(i);
 	}
 	
 	private void farmingGUI(Player p) {
-		Inventory i = Bukkit.createInventory(null, 27, TITLE);
 		ItemStack dhoe = newItem(Material.DIAMOND_HOE);
 		ItemStack ihoe = newItem(Material.IRON_HOE);
 		ItemStack ghoe = newItem(Material.GOLD_HOE);
@@ -268,23 +280,24 @@ public class ShopTrait extends Trait implements Listener {
 		ItemStack melon = newItem(Material.MELON);
 		ItemStack bmelon = newItem(Material.MELON_BLOCK);
 		ItemStack pumpkin = newItem(Material.PUMPKIN);
+		ItemStack chorus = newItem(Material.CHORUS_FLOWER);
 		
 		ItemStack wseeds = newItem(Material.SEEDS);
 		ItemStack bseeds = newItem(Material.BEETROOT_SEEDS);
 		ItemStack mseeds = newItem(Material.MELON_SEEDS);
 		ItemStack pseeds = newItem(Material.PUMPKIN_SEEDS);
+		ItemStack cseeds = newItem(Material.INK_SACK, 1, 3);
 		
 		ItemStack[] contents = Util.newArray(
 			dhoe, ihoe, ghoe, shoe, whoe, AIR, AIR, AIR, AIR,
-			wheat, potato, carrot, beetroot, melon, bmelon, pumpkin, AIR, AIR,
-			wseeds, bseeds, mseeds, pseeds
+			wheat, potato, carrot, beetroot, melon, bmelon, pumpkin, chorus, AIR,
+			wseeds, bseeds, mseeds, pseeds, cseeds
 		);
-		i.setContents(contents);
+		Inventory i = newInv(contents);
 		p.openInventory(i);
 	}
 	
 	private void toolsGUI(Player p) {
-		Inventory i = Bukkit.createInventory(null, 45, TITLE);
 		ItemStack dsword = newItem(Material.DIAMOND_SWORD);
 		ItemStack isword = newItem(Material.IRON_SWORD);
 		ItemStack gsword = newItem(Material.GOLD_SWORD);
@@ -320,7 +333,136 @@ public class ShopTrait extends Trait implements Listener {
 			dspad, AIR, ispad, AIR, gspad, AIR, sspad, AIR, wspad,
 			bow, AIR, arrow, AIR, arrow2
 		);
-		i.setContents(contents);
+		Inventory i = newInv(contents);
+		p.openInventory(i);
+	}
+	
+	private void resourceGUI(Player p) {
+		ItemStack dblock = newItem(Material.DIAMOND_BLOCK);
+		ItemStack eblock = newItem(Material.EMERALD_BLOCK);
+		ItemStack lblock = newItem(Material.LAPIS_BLOCK);
+		ItemStack qblock = newItem(Material.QUARTZ_BLOCK);
+		ItemStack rblock = newItem(Material.REDSTONE_BLOCK);
+		ItemStack gblock = newItem(Material.GOLD_BLOCK);
+		ItemStack iblock = newItem(Material.IRON_BLOCK);
+		ItemStack cblock = newItem(Material.COAL_BLOCK);
+		
+		ItemStack diamond = newItem(Material.DIAMOND);
+		ItemStack emerald = newItem(Material.EMERALD);
+		ItemStack lapis = newItem(Material.INK_SACK, 1, 4);
+		ItemStack quartz = newItem(Material.QUARTZ);
+		ItemStack redstone = newItem(Material.REDSTONE);
+		ItemStack gold = newItem(Material.GOLD_INGOT);
+		ItemStack iron = newItem(Material.IRON_INGOT);
+		ItemStack coal = newItem(Material.COAL);
+		
+		ItemStack stick = newItem(Material.STICK);
+		ItemStack bonem = newItem(Material.INK_SACK, 1, 15);
+		ItemStack feather = newItem(Material.FEATHER);
+		ItemStack glowstone = newItem(Material.GLOWSTONE_DUST);
+		ItemStack sulfur = newItem(Material.SULPHUR);
+		ItemStack endstone = newItem(Material.ENDER_STONE);
+		ItemStack[] contents = Util.newArray(
+			dblock, eblock, lblock, qblock, rblock, gblock, iblock, cblock, AIR,
+			diamond, emerald, lapis, quartz, redstone, gold, iron, coal, AIR,
+			stick, bonem, feather, glowstone, sulfur, endstone
+		);
+		Inventory i = newInv(contents);
+		p.openInventory(i);
+	}
+	
+	private void armorGUI(Player p) {
+		ItemStack dhelm = newItem(Material.DIAMOND_HELMET);
+		ItemStack dches = newItem(Material.DIAMOND_CHESTPLATE);
+		ItemStack dlegs = newItem(Material.DIAMOND_LEGGINGS);
+		ItemStack dboot = newItem(Material.DIAMOND_BOOTS);
+
+		ItemStack ihelm = newItem(Material.IRON_HELMET);
+		ItemStack iches = newItem(Material.IRON_CHESTPLATE);
+		ItemStack ilegs = newItem(Material.IRON_LEGGINGS);
+		ItemStack iboot = newItem(Material.IRON_BOOTS);
+
+		ItemStack chelm = newItem(Material.CHAINMAIL_HELMET);
+		ItemStack cches = newItem(Material.CHAINMAIL_CHESTPLATE);
+		ItemStack clegs = newItem(Material.CHAINMAIL_LEGGINGS);
+		ItemStack cboot = newItem(Material.CHAINMAIL_BOOTS);
+
+		ItemStack ghelm = newItem(Material.GOLD_HELMET);
+		ItemStack gches = newItem(Material.GOLD_CHESTPLATE);
+		ItemStack glegs = newItem(Material.GOLD_LEGGINGS);
+		ItemStack gboot = newItem(Material.GOLD_BOOTS);
+
+		ItemStack lhelm = newItem(Material.LEATHER_HELMET);
+		ItemStack lches = newItem(Material.LEATHER_CHESTPLATE);
+		ItemStack llegs = newItem(Material.LEATHER_LEGGINGS);
+		ItemStack lboot = newItem(Material.LEATHER_BOOTS);
+		
+		ItemStack saddle = newItem(Material.SADDLE);
+		ItemStack ihorse = newItem(Material.IRON_BARDING);
+		ItemStack ghorse = newItem(Material.GOLD_BARDING);
+		ItemStack dhorse = newItem(Material.DIAMOND_BARDING);
+		
+		ItemStack[] contents = Util.newArray(
+			dhelm, dches, dlegs, dboot, AIR, ihelm, iches, ilegs, iboot,
+			chelm, cches, clegs, cboot, AIR, ghelm, gches, glegs, gboot,
+			lhelm, lches, llegs, lboot, AIR, saddle, ihorse, ghorse, dhorse
+		);
+		Inventory i = newInv(contents);
+		p.openInventory(i);
+	}
+	
+	private void mobsGUI(Player p) {
+		ItemStack spawner = newItem(Material.MOB_SPAWNER);
+		ItemStack bat = spawnEgg(EntityType.BAT);
+		ItemStack blaze = spawnEgg(EntityType.BLAZE);
+		ItemStack cavespider = spawnEgg(EntityType.CAVE_SPIDER);
+		ItemStack chicken = spawnEgg(EntityType.CHICKEN);
+		ItemStack cow = spawnEgg(EntityType.COW);
+		ItemStack creeper = spawnEgg(EntityType.CREEPER);
+		ItemStack donkey = spawnEgg(EntityType.DONKEY);
+		ItemStack elderguardian = spawnEgg(EntityType.ELDER_GUARDIAN);
+		ItemStack enderman = spawnEgg(EntityType.ENDERMAN);
+		ItemStack endermite = spawnEgg(EntityType.ENDERMITE);
+		ItemStack evoker = spawnEgg(EntityType.EVOKER);
+		ItemStack ghast = spawnEgg(EntityType.GHAST);
+		ItemStack guardian = spawnEgg(EntityType.GUARDIAN);
+		ItemStack horse = spawnEgg(EntityType.HORSE);
+		ItemStack husk = spawnEgg(EntityType.HUSK);
+		ItemStack llama = spawnEgg(EntityType.LLAMA);
+		ItemStack magmacube = spawnEgg(EntityType.MAGMA_CUBE);
+		ItemStack mooshroom = spawnEgg(EntityType.MUSHROOM_COW);
+		ItemStack mule = spawnEgg(EntityType.MULE);
+		ItemStack ocelot = spawnEgg(EntityType.OCELOT);
+		ItemStack pig = spawnEgg(EntityType.PIG);
+		ItemStack polarbear = spawnEgg(EntityType.POLAR_BEAR);
+		ItemStack rabbit = spawnEgg(EntityType.RABBIT);
+		ItemStack sheep = spawnEgg(EntityType.SHEEP);
+		ItemStack shulker = spawnEgg(EntityType.SHULKER);
+		ItemStack silverfish = spawnEgg(EntityType.SILVERFISH);
+		ItemStack skeleton = spawnEgg(EntityType.SKELETON);
+		ItemStack skeletonhorse = spawnEgg(EntityType.SKELETON_HORSE);
+		ItemStack slime = spawnEgg(EntityType.SLIME);
+		ItemStack spider = spawnEgg(EntityType.SPIDER);
+		ItemStack squid = spawnEgg(EntityType.SQUID);
+		ItemStack stray = spawnEgg(EntityType.STRAY);
+		ItemStack vex = spawnEgg(EntityType.VEX);
+		ItemStack villager = spawnEgg(EntityType.VILLAGER);
+		ItemStack vindicator = spawnEgg(EntityType.VINDICATOR);
+		ItemStack witch = spawnEgg(EntityType.WITCH);
+		ItemStack witherskeleton = spawnEgg(EntityType.WITHER_SKELETON);
+		ItemStack wolf = spawnEgg(EntityType.WOLF);
+		ItemStack zombie = spawnEgg(EntityType.ZOMBIE);
+		ItemStack zombiehorse = spawnEgg(EntityType.ZOMBIE_HORSE);
+		ItemStack zombiepigman = spawnEgg(EntityType.PIG_ZOMBIE);
+		ItemStack zombievillager = spawnEgg(EntityType.ZOMBIE_VILLAGER);
+		ItemStack[] contents = Util.newArray(
+			spawner, bat, blaze, cavespider, chicken, cow, creeper, donkey, elderguardian,
+			enderman, endermite, evoker, ghast, guardian, horse, husk, llama, magmacube,
+			mooshroom, mule, ocelot, pig, polarbear, rabbit, sheep, shulker, silverfish,
+			skeleton, skeletonhorse, slime, spider, squid, stray, vex, villager, vindicator,
+			witch, witherskeleton, wolf, zombie, zombiehorse, zombiepigman, zombievillager
+		);
+		Inventory i = newInv(contents);
 		p.openInventory(i);
 	}
 }

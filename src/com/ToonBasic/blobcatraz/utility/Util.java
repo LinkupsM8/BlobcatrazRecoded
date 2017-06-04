@@ -21,6 +21,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
 import com.ToonBasic.blobcatraz.Core;
+import com.ToonBasic.blobcatraz.command.player.CommandEmojis;
 
 public class Util {
 	private static final Server SERVER = Bukkit.getServer();
@@ -39,6 +40,12 @@ public class Util {
     		msg[i - 1] = color(msg[i - 1]);
     	}
     	return msg;
+    }
+   
+    public static String format(String o) {
+    	String c = CommandEmojis.format(o);
+    	c = color(c);
+    	return c;
     }
     
     public static void print(Object... os) {

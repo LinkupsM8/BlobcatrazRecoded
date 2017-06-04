@@ -1,5 +1,6 @@
 package com.ToonBasic.blobcatraz.utility;
 
+import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Material;
@@ -19,12 +20,13 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.HoverEvent.Action;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.minecraft.server.v1_11_R1.NBTTagCompound;
+import net.minecraft.server.v1_11_R1.NBTTagString;
 
 public class ItemUtil extends Util {
 	private static Map<String, Enchantment> enchants = newMap();	
 	public static Map<String, ItemStack> special() {return ConfigCustomItems.items();}
 	public static Map<String, Enchantment> customEnchants() {return enchants;}
-	public static final ItemStack AIR = new ItemStack(Material.AIR);
+	public static final ItemStack AIR = newItem(Material.AIR);
 	
 	public static void load() {
 		ConfigCustomItems.load();
@@ -106,6 +108,43 @@ public class ItemUtil extends Util {
 		}
 	}
 	
+	public static ItemStack newItem(Material mat) {
+		ItemStack is = new ItemStack(mat);
+		return is;
+	}
+	
+	public static ItemStack newItem(Material mat, int amount) {
+		ItemStack is = newItem(mat);
+		is.setAmount(amount);
+		return is;
+	}
+	
+	public static ItemStack newItem(Material mat, int amount, int data) {
+		ItemStack is = newItem(mat, amount);
+		short meta = NumberUtil.toShort(data);
+		is.setDurability(meta);
+		return is;
+	}
+	
+	public static ItemStack newItem(Material mat, int amount, int data, String name) {
+		ItemStack is = newItem(mat, amount, data);
+		ItemMeta meta = is.getItemMeta();
+		String disp = color(name);
+		meta.setDisplayName(disp);
+		is.setItemMeta(meta);
+		return is;
+	}
+	
+	public static ItemStack newItem(Material mat, int amount, int data, String name, String... lore) {
+		ItemStack is = newItem(mat, amount, data, name);
+		ItemMeta meta = is.getItemMeta();
+		lore = Util.color(lore);
+		List<String> list = Util.newList(lore);
+		meta.setLore(list);
+		is.setItemMeta(meta);
+		return is;
+	}
+	
 	public static boolean air(ItemStack is) {
 		if(is == null) return true;
 		if(is.equals(AIR)) return true;
@@ -141,6 +180,14 @@ public class ItemUtil extends Util {
 		toNMS(is).save(nbt);
 		String s = nbt.toString();
 		return s;
+	}
+	
+	public static void setNBT(ItemStack is, String data) {
+		net.minecraft.server.v1_11_R1.ItemStack nms = toNMS(is);
+		NBTTagString string = new NBTTagString(data);
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.set("", string);
+		nms.load(nbt);
 	}
 	
 	public static TextComponent getHover(ItemStack is) {

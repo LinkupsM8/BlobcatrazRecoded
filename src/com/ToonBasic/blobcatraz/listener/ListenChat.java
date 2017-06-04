@@ -45,7 +45,7 @@ public class ListenChat implements Listener {
 	}
 
 	@EventHandler
-	public void onPlayerChat(AsyncPlayerChatEvent e) {
+	public void mute(AsyncPlayerChatEvent e) {
 		Player p = e.getPlayer();
 		if (isChatMuted) {
 			if (p.isOp() || p.hasPermission("blobcatraz.chat.bypass")) {
@@ -58,7 +58,7 @@ public class ListenChat implements Listener {
 	}
 
 	@EventHandler
-	public void onPlayerSwear(AsyncPlayerChatEvent e) {
+	public void swear(AsyncPlayerChatEvent e) {
 		//List of bad words
 		String[] swearWords = {"fuck", "bitch", "cunt", "whore", "slut", "nigger", "nigga", "shit"};
 		//End of list
@@ -74,7 +74,7 @@ public class ListenChat implements Listener {
 	}
 
 	@EventHandler
-    public void onStaffChat(AsyncPlayerChatEvent e) {
+    public void staff(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
 
         if (p.hasPermission("blobcatraz.staff.chat")) {
