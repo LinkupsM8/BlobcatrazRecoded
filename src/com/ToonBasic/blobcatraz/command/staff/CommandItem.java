@@ -1,25 +1,18 @@
 package com.ToonBasic.blobcatraz.command.staff;
 
-import java.util.List;
-
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_11_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Player.Spigot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
 import com.ToonBasic.blobcatraz.utility.ItemUtil;
 import com.ToonBasic.blobcatraz.utility.NumberUtil;
 import com.ToonBasic.blobcatraz.utility.Util;
-import com.google.common.base.Joiner;
 
 import net.md_5.bungee.api.chat.TextComponent;
-import net.minecraft.server.v1_11_R1.MojangsonParser;
-import net.minecraft.server.v1_11_R1.NBTTagCompound;
 
 @PlayerOnly	
 public class CommandItem extends ICommand {
