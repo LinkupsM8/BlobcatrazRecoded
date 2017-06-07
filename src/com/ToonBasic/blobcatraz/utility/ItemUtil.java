@@ -19,8 +19,9 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.HoverEvent.Action;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.minecraft.server.v1_11_R1.MojangsonParseException;
+import net.minecraft.server.v1_11_R1.MojangsonParser;
 import net.minecraft.server.v1_11_R1.NBTTagCompound;
-import net.minecraft.server.v1_11_R1.NBTTagString;
 
 public class ItemUtil extends Util {
 	private static Map<String, Enchantment> enchants = newMap();	
@@ -182,12 +183,14 @@ public class ItemUtil extends Util {
 		return s;
 	}
 	
-	public static void setNBT(ItemStack is, String data) {
-		net.minecraft.server.v1_11_R1.ItemStack nms = toNMS(is);
-		NBTTagString string = new NBTTagString(data);
-		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.set("", string);
-		nms.load(nbt);
+	public static ItemStack setNBT(ItemStack is, String data) throws MojangsonParseException {
+		ItemStack ni = is.clone();
+		net.minecraft.server.v1_11_R1.ItemStack nms = toNMS(ni);
+		NBTTagCompound nbt = MojangsonParser.parse(data);
+		nms.setTag(nbt);
+		ItemMeta meta = CraftItemStack.getItemMeta(nms);
+		ni.setItemMeta(meta);
+		return ni;
 	}
 	
 	public static TextComponent getHover(ItemStack is) {
@@ -198,6 +201,18 @@ public class ItemUtil extends Util {
 		String name2 = x ? (name1 + "&f x" + count) : name1;
 		String name3 = color("&b<&r" + name2 + "&b>&r");
 		TextComponent txt = new TextComponent(name3);
+		ComponentBuilder cb = new ComponentBuilder(nbt(is));
+		BaseComponent[] bc = cb.create();
+		HoverEvent he = new HoverEvent(Action.SHOW_ITEM, bc);
+		txt.setHoverEvent(he);
+		return txt;
+	}
+	
+	public static TextComponent getGiveHover(ItemStack is) {
+		net.minecraft.server.v1_11_R1.ItemStack nms = toNMS(is);
+		String name1 = nms.getName();
+		String name2 = color("&r" + name1 + "&r");
+		TextComponent txt = new TextComponent(name2);
 		ComponentBuilder cb = new ComponentBuilder(nbt(is));
 		BaseComponent[] bc = cb.create();
 		HoverEvent he = new HoverEvent(Action.SHOW_ITEM, bc);

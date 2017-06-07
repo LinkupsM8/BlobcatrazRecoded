@@ -1,13 +1,18 @@
 package com.ToonBasic.blobcatraz.command;
 
-import com.ToonBasic.blobcatraz.utility.Util;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import com.google.common.reflect.ClassPath;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
+import org.bukkit.event.Listener;
 import org.bukkit.help.GenericCommandHelpTopic;
 import org.bukkit.help.HelpMap;
 import org.bukkit.help.HelpTopic;
@@ -17,13 +22,10 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.SimplePluginManager;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.ToonBasic.blobcatraz.utility.Util;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.google.common.reflect.ClassPath;
 
 public class CommandFramework {
     private static final Server SERVER = Bukkit.getServer();
@@ -105,6 +107,11 @@ public class CommandFramework {
             Command cmd = commandMap.getCommand(ic.getCommand());
             HelpTopic ht = new GenericCommandHelpTopic(cmd);
             help.add(ht);
+            
+            if(ic instanceof Listener) {
+            	Listener l = (Listener) ic;
+            	Util.regEvents(plugin, l);
+            }
         }
         IndexHelpTopic iht = new IndexHelpTopic(plugin.getName(), "All commands for " + plugin.getName(), null, help, "§6Below is a list of commands from " + plugin.getName());
         HELP_MAP.addTopic(iht);

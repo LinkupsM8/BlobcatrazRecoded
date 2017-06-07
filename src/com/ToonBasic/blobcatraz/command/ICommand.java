@@ -71,7 +71,7 @@ public abstract class ICommand implements CommandExecutor {
         }
         try {
             handleCommand(sender, args);
-        } catch(Exception ex) {
+        } catch(Throwable ex) {
             String error = Util.color("There was a command processing error! Please report this!");
             sender.sendMessage(error);
             ex.printStackTrace();

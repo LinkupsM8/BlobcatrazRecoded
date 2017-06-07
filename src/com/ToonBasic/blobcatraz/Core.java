@@ -140,10 +140,12 @@ public class Core extends JavaPlugin {
         LOG = getLogger();
         folder = getDataFolder();
         Util.enable();
+    	ItemUtil.load();
         if(PM.isPluginEnabled("PlaceholderAPI")) {
         	BPlaceholders bp = new BPlaceholders();
         	bp.hook();
         }
+    	ScoreboardUtil.enable();
         framework = new CommandFramework(instance);
         ConfigurationSerialization.registerClass(CustomHologram.class);
         commands();
@@ -275,28 +277,7 @@ public class Core extends JavaPlugin {
     }
     
     public void events() {
-    	ItemUtil.load();
-    	ScoreboardUtil.enable();
     	Util.regEvents(
-    		//Command Events
-    		new CommandBack(),
-    		new CommandFreeze(),
-    		new CommandVanish(),
-    		new CommandSetMOTD(),
-    		new CommandShowinv(),
-    		new CommandSpy(),
-    		new CommandAFK(),
-    		new CommandNickname(),
-    		new CommandEmojis(),
-            new CommandGod(),
-            new CommandIgnore(),
-            new CommandMute(),
-            new CommandSeen(),
-            new CommandPowertool(),
-            new CommandKits(),
-            new CommandWarps(),
-
-    		//Listener Events
     		new ListenAntiVoid(),
     		new ListenAutoLapis(),
     		new ListenChat(),
