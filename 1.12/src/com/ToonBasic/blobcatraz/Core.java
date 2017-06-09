@@ -219,7 +219,6 @@ public class Core extends JavaPlugin {
         	new CommandBlockChest(),
         	new CommandDelHome(),
         	new CommandEmojis(),
-        	new CommandFakeVote(),
         	new CommandHelp(),
         	new CommandHome(),
         	new CommandHomes(),
@@ -242,7 +241,6 @@ public class Core extends JavaPlugin {
         	new CommandWarp(),
         	new CommandWarps()
         );
-        
     //Special Commands
         framework.registerCommands(
         	new CommandBigTree(),
@@ -272,6 +270,11 @@ public class Core extends JavaPlugin {
         	ConfigHolo.load();
         }
         
+        if(PM.isPluginEnabled("Votifier")) {
+        	framework.registerCommand(new CommandFakeVote());
+        	Util.regEvents(new ListenVote());
+        }
+        
     //Register All    
         framework.registerCommands();
     }
@@ -288,7 +291,6 @@ public class Core extends JavaPlugin {
     		new ListenShopSign(),
     		new ListenEnchantSign(),
     		new ListenRepairSign(),
-    		new ListenVote(),
     		new ListenDeath(),
     		new ListenAutoPickup(),
     		new ListenSonic(),
