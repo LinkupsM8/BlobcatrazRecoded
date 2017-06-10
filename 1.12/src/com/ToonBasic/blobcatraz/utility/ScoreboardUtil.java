@@ -80,16 +80,13 @@ public class ScoreboardUtil extends Util implements Runnable {
 	}
 	
 	private static String format(Player p, String o) {
+		String c = "";
 		try {
-			String c = PlaceholderAPI.setPlaceholders(p, o);
-			c = color(c);
-			c = c.replaceAll("#notinladder", "None");
-			return c;
-		} 
-		catch(Throwable ex) {
-			ex.printStackTrace();
-			return color(o);
-		}
+			c = PlaceholderAPI.setPlaceholders(p, o);
+		} catch(NoClassDefFoundError ex) { c = color(o);}
+		c = color(c);
+		c = c.replaceAll("#notinladder", "None");
+		return c;
 	}
 	
 	public static Scoreboard getBoard(Player p) {

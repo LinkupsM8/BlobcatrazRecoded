@@ -47,23 +47,28 @@ public class CommandItem extends ICommand {
                 p.sendMessage(error);
                 give(p, give);
             }
-        }
+        } else give(p, give);
 	}
 	
-	private void give(Player p, ItemStack give) {		
-		PlayerInventory pi = p.getInventory();
-		int slot = pi.firstEmpty();
-		if(slot != -1) {
-			pi.addItem(give);
-			String msg = Util.color(prefix + "&fYou received &e");
-			TextComponent text = new TextComponent(msg);
-			TextComponent item = ItemUtil.getGiveHover(give);
-			text.addExtra(item);
-			Spigot s = p.spigot();
-			s.sendMessage(text);
-		} else {
-			String error = "Your inventory is too full to receive items!";
+	private void give(Player p, ItemStack give) {
+		if(ItemUtil.air(give)) {
+			String error = "Invalid Item ID";
 			p.sendMessage(error);
+		} else {
+			PlayerInventory pi = p.getInventory();
+			int slot = pi.firstEmpty();
+			if(slot != -1) {
+				pi.addItem(give);
+				String msg = Util.color(prefix + "&fYou received &e");
+				TextComponent text = new TextComponent(msg);
+				TextComponent item = ItemUtil.getGiveHover(give);
+				text.addExtra(item);
+				Spigot s = p.spigot();
+				s.sendMessage(text);
+			} else {
+				String error = "Your inventory is too full to receive items!";
+				p.sendMessage(error);
+			}
 		}
 	}
 }
