@@ -30,28 +30,34 @@ public class CommandTroll extends ICommand {
 		String target = args[0];
 		Player t = Bukkit.getPlayer(target);
 		if(t != null) {
-			String troll = args[1].toLowerCase();
-			int amount = 1;
-			try {amount = Integer.parseInt(args[2]);} catch(Throwable ex) {amount = 1;}
-			if(amount > 50) amount = 50;
-			t.setGameMode(GameMode.SURVIVAL);
-			for(int i = amount; i > 0; i--) {
-				if(troll.equals("fall")) fall(t);
-				else if(troll.equals("explode")) explode(t);
-				else if(troll.equals("strike")) strike(t);
-				else if(troll.equals("burn")) burn(t);
-				else if(troll.equals("hounds")) hounds(t);
-				else if(troll.equals("golem")) golem(t);
-				else if(troll.equals("end")) end(t);
-				else if(troll.equals("creeper")) creeper(t);
-				else if(troll.equals("pigmen")) pigmen(t);
-				else if(troll.equals("pumpkin")) pumpkin(t);
-				else if(troll.equals("scream")) scream(t);
-				else if(troll.equals("blind")) blind(t);
-				else {
-					String error = "Invalid Troll!";
-					p.sendMessage(error);
-					break;
+			String name = t.getName();
+			if(name.equals("SirBlobman")) {
+				String error = "You can't troll the owner!";
+				p.sendMessage(error);
+			} else {
+				String troll = args[1].toLowerCase();
+				int amount = 1;
+				try {amount = Integer.parseInt(args[2]);} catch(Throwable ex) {amount = 1;}
+				if(amount > 50) amount = 50;
+				t.setGameMode(GameMode.SURVIVAL);
+				for(int i = amount; i > 0; i--) {
+					if(troll.equals("fall")) fall(t);
+					else if(troll.equals("explode")) explode(t);
+					else if(troll.equals("strike")) strike(t);
+					else if(troll.equals("burn")) burn(t);
+					else if(troll.equals("hounds")) hounds(t);
+					else if(troll.equals("golem")) golem(t);
+					else if(troll.equals("end")) end(t);
+					else if(troll.equals("creeper")) creeper(t);
+					else if(troll.equals("pigmen")) pigmen(t);
+					else if(troll.equals("pumpkin")) pumpkin(t);
+					else if(troll.equals("scream")) scream(t);
+					else if(troll.equals("blind")) blind(t);
+					else {
+						String error = "Invalid Troll!";
+						p.sendMessage(error);
+						break;
+					}
 				}
 			}
 		} else {
