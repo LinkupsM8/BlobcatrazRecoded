@@ -27,7 +27,8 @@ public class CommandSetWarp extends ICommand {
 			ItemStack icon = pi.getItemInMainHand();
 			if(ItemUtil.air(icon)) icon = new ItemStack(Material.ENDER_PEARL);
 			ConfigWarps.save(name, warp, icon);
-			String msg = Util.color(prefix + "You set a warp called &2" + name + "&r to " + Util.toString(warp));
+			String str = Util.str(warp);
+			String msg = Util.color(prefix + "You set a warp called &2" + name + "&r to " + str);
 			p.sendMessage(msg);
 		}
 	}
