@@ -19,6 +19,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.ToonBasic.blobcatraz.command.ICommand;
 import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+import com.ToonBasic.blobcatraz.utility.NumberUtil;
 
 @PlayerOnly
 public class CommandTroll extends ICommand {
@@ -37,8 +38,9 @@ public class CommandTroll extends ICommand {
 			} else {
 				String troll = args[1].toLowerCase();
 				int amount = 1;
-				try {amount = Integer.parseInt(args[2]);} catch(Throwable ex) {amount = 1;}
+				if(args.length > 2) amount = NumberUtil.getInteger(args[2]);
 				if(amount > 50) amount = 50;
+				if(amount < 1) amount = 1;
 				t.setGameMode(GameMode.SURVIVAL);
 				for(int i = amount; i > 0; i--) {
 					if(troll.equals("fall")) fall(t);
