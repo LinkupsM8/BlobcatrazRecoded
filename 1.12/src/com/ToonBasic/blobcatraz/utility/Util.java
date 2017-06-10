@@ -192,7 +192,7 @@ public class Util {
         return list;
     }
     
-    public static String toString(Object o) {
+    public static String str(Object o) {
     	if(o instanceof Boolean) {
     		boolean b = (boolean) o;
     		return b ? "yes" : "no";
@@ -215,13 +215,14 @@ public class Util {
     			" &2Pitch: &f" + pi
     		);
     		return s;
-    	} else if(o instanceof Integer) {
-    		int i = (int) o;
-    		return "" + i;
-    	} else if(o instanceof Number) {
+    	} else if((o instanceof Short) || (o instanceof Integer) || (o instanceof Long)) {
+    		Number n = (Number) o;
+    		long l = n.longValue();
+    		return Long.toString(l);
+    	} else if((o instanceof Float) || (o instanceof Double) || (o instanceof Number)) {
     		Number n = (Number) o;
     		double d = n.doubleValue();
-    		return "" + d;
+    		return Double.toString(d);
     	} 
     	else return o.toString();
     }

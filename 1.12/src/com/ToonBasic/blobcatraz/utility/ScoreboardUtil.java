@@ -17,6 +17,7 @@ import org.bukkit.scoreboard.Team.Option;
 import org.bukkit.scoreboard.Team.OptionStatus;
 
 import com.ToonBasic.blobcatraz.Core;
+import com.ToonBasic.blobcatraz.config.ConfigDatabase;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 
@@ -51,7 +52,7 @@ public class ScoreboardUtil extends Util implements Runnable {
 		
 		List<String> list = normal(p);
 		for(String s : list) {
-			String entry = format(p, s);
+			String entry = color(s);
 			if(entry.length() > 40) entry = entry.substring(0, 40);
 			Score sc = custom.getScore(entry);
 			int i = (list.size() - list.indexOf(s));
@@ -62,14 +63,13 @@ public class ScoreboardUtil extends Util implements Runnable {
 	}
 	
 	private static List<String> normal(Player p) {
-		List<String> list = newList(
-			"&bCurrent Rank&c: &a%blobcatraz_current_rank%",
-			"&bNext Rank&c: &a%rankup_next_rank%",
-			"&bNext Rank Price&c: &a$%rankup_next_rank_cost_formatted%",
-			"&bBalance&c: &a$%blobcatraz_balance%",
-			"&bTokens&c: &a%blobcatraz_tokens%",
-			"&bPing&c: &a" + PlayerUtil.getPing(p)
-		);
+		String curr = format(p, "&bCurrent Rank&c: &a{0}", "%blobcatraz_current_rank%", VaultUtil.mainRank(p));
+		String next = format(p, "&bNext Rank&c: &a{0}", "%rankup_next_rank%", "None");
+		String pric = format(p, "&bNext Rank Price&c: &a${0}", "rankup_next_rank_cost_formatted%", "0.00");
+		String bala = format(p, "&bBalance&c: &a${0}", "%blobcatraz_balance%", NumberUtil.cropDecimal(VaultUtil.balance(p), 2));
+		String toke = format(p, "&bTokens&c: &a{0}", "%blobcatraz_tokens%", str(ConfigDatabase.tokens(p)));
+		String ping = format(p, "&bPing&c: &a{0}", PlayerUtil.getPing(p), PlayerUtil.getPing(p));
+		List<String> list = newList(curr, next, pric, bala, toke, ping);
 		return list;
 	}
 	
@@ -79,11 +79,12 @@ public class ScoreboardUtil extends Util implements Runnable {
 		p.setScoreboard(MAIN);
 	}
 	
-	private static String format(Player p, String o) {
-		String c = "";
+	private static String format(Player p, String o, String r1, String r2) {
+		String c = o;
 		try {
-			c = PlaceholderAPI.setPlaceholders(p, o);
-		} catch(NoClassDefFoundError ex) { c = color(o);}
+			String re = PlaceholderAPI.setPlaceholders(p, r1);
+			c = c.replaceAll("\\{0\\}", re);
+		} catch(Throwable ex) {c = c.replaceAll("\\{0\\}", r2);}
 		c = color(c);
 		c = c.replaceAll("#notinladder", "None");
 		return c;
