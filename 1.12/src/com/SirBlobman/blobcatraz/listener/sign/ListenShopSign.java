@@ -169,11 +169,11 @@ public class ListenShopSign implements Listener {
 		for(int j : can) {i.setItem(j, CANCEL);}
 		i.setItem(4, is);
 		i.setItem(19, amount(-32));
-		i.setItem(19, amount(-10));
-		i.setItem(19, amount(-1));
-		i.setItem(19, amount(1));
-		i.setItem(19, amount(10));
-		i.setItem(19, amount(32));
+		i.setItem(20, amount(-10));
+		i.setItem(21, amount(-1));
+		i.setItem(23, amount(1));
+		i.setItem(24, amount(10));
+		i.setItem(25, amount(32));
 		return i;
 	}
 	
