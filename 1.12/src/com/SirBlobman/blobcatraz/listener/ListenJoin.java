@@ -32,7 +32,7 @@ public class ListenJoin implements Listener {
 			Util.broadcast(msg1);
 			p.sendMessage(msg2);
 		} else {
-			String msg = Util.color(Util.PREFIX + "&dWelcome back \u264b");
+			String msg = Util.color(Util.PREFIX + "&dWelcome back \u263b");
 			p.sendMessage(msg);
 		}
 		fireworks(p);
