@@ -1,27 +1,27 @@
 package com.SirBlobman.blobcatraz.economy.command.staff;
 
-import static com.ToonBasic.blobcatraz.logger.EconomyLog.print;
+import static com.SirBlobman.blobcatraz.log.EconomyLog.print;
+
+import com.SirBlobman.blobcatraz.command.ICommand;
+import com.SirBlobman.blobcatraz.config.ConfigDatabase;
+import com.SirBlobman.blobcatraz.utility.NumberUtil;
+import com.SirBlobman.blobcatraz.utility.Util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.config.ConfigDatabase;
-import com.ToonBasic.blobcatraz.utility.NumberUtil;
-import com.ToonBasic.blobcatraz.utility.Util;
-
 public class CommandEconomy extends ICommand {
 	public CommandEconomy() {super("eco", "<give/reset/set/take> <player> [amount]", "blobcatraz.staff.economy", "economy");}
 	
 	@Override
 	@SuppressWarnings("deprecation")
-	public void handleCommand(CommandSender cs, String[] args) {
+	public void run(CommandSender cs, String[] args) {
 		if(args.length > 1) {
 			String target = args[1];
 			OfflinePlayer ot = Bukkit.getOfflinePlayer(target);
-			if(ConfigDatabase.hasAccount(ot)) {
+			if(ConfigDatabase.exists(ot)) {
 				String cname = cs.getName();
 				String oname = ot.getName();
 				double oldBal = ConfigDatabase.balance(ot);

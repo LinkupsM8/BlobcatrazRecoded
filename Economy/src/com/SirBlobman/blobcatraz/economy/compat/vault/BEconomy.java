@@ -1,7 +1,6 @@
 package com.SirBlobman.blobcatraz.economy.compat.vault;
 
-import java.text.NumberFormat;
-import java.util.List;
+import com.SirBlobman.blobcatraz.config.ConfigDatabase;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -9,7 +8,8 @@ import org.bukkit.Server;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicesManager;
 
-import com.ToonBasic.blobcatraz.config.ConfigDatabase;
+import java.text.NumberFormat;
+import java.util.List;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -42,7 +42,7 @@ public class BEconomy implements Economy {
 	}
 	
 	public boolean hasAccount(OfflinePlayer op) {
-		boolean has = ConfigDatabase.hasAccount(op);
+		boolean has = ConfigDatabase.exists(op);
 		return has;
 	}
 	public boolean hasAccount(OfflinePlayer op, String world) {return hasAccount(op);}

@@ -1,14 +1,14 @@
 package com.SirBlobman.blobcatraz.shop;
 
+import com.SirBlobman.blobcatraz.Core;
+import com.SirBlobman.blobcatraz.command.CommandFramework;
+import com.SirBlobman.blobcatraz.shop.command.CommandShopNPC;
+import com.SirBlobman.blobcatraz.shop.compat.citizens.ShopTrait;
+import com.SirBlobman.blobcatraz.utility.Util;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
-
-import com.SirBlobman.blobcatraz.shop.command.CommandShopNPC;
-import com.SirBlobman.blobcatraz.shop.compat.citizens.ShopTrait;
-import com.ToonBasic.blobcatraz.Core;
-import com.ToonBasic.blobcatraz.command.CommandFramework;
-import com.ToonBasic.blobcatraz.utility.Util;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.trait.TraitFactory;

@@ -1,23 +1,19 @@
 package com.SirBlobman.blobcatraz.economy;
 
+import com.SirBlobman.blobcatraz.Core;
+import com.SirBlobman.blobcatraz.command.CommandFramework;
+import com.SirBlobman.blobcatraz.economy.command.player.*;
+import com.SirBlobman.blobcatraz.economy.command.staff.CommandEconomy;
+import com.SirBlobman.blobcatraz.economy.command.staff.CommandSetWorth;
+import com.SirBlobman.blobcatraz.economy.compat.vault.BEconomy;
+import com.SirBlobman.blobcatraz.utility.Util;
+import com.SirBlobman.blobcatraz.utility.VaultUtil;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;
-
-import com.SirBlobman.blobcatraz.economy.command.player.CommandBalance;
-import com.SirBlobman.blobcatraz.economy.command.player.CommandBaltop;
-import com.SirBlobman.blobcatraz.economy.command.player.CommandPay;
-import com.SirBlobman.blobcatraz.economy.command.player.CommandSell;
-import com.SirBlobman.blobcatraz.economy.command.player.CommandWorth;
-import com.SirBlobman.blobcatraz.economy.command.staff.CommandEconomy;
-import com.SirBlobman.blobcatraz.economy.command.staff.CommandSetWorth;
-import com.SirBlobman.blobcatraz.economy.compat.vault.BEconomy;
-import com.ToonBasic.blobcatraz.Core;
-import com.ToonBasic.blobcatraz.command.CommandFramework;
-import com.ToonBasic.blobcatraz.utility.Util;
-import com.ToonBasic.blobcatraz.utility.VaultUtil;
 
 import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;

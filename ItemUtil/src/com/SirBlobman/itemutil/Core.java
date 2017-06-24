@@ -1,18 +1,12 @@
 package com.SirBlobman.itemutil;
 
+import com.SirBlobman.blobcatraz.command.CommandFramework;
+import com.SirBlobman.blobcatraz.utility.Util;
+import com.SirBlobman.itemutil.command.*;
+
 import java.io.File;
 
-import com.SirBlobman.itemutil.command.CommandAddLore;
-import com.SirBlobman.itemutil.command.CommandChangeType;
-import com.SirBlobman.itemutil.command.CommandHideAll;
-import com.SirBlobman.itemutil.command.CommandItemDB;
-import com.SirBlobman.itemutil.command.CommandRename;
-import com.SirBlobman.itemutil.command.CommandSetLore;
-import com.SirBlobman.itemutil.command.CommandUnbreakable;
-import com.ToonBasic.blobcatraz.command.CommandFramework;
-import com.ToonBasic.blobcatraz.utility.Util;
-
-public class Core extends com.ToonBasic.blobcatraz.Core {
+public class Core extends com.SirBlobman.blobcatraz.Core {
 	public static Core instance;
 	public static File folder;
 	private static CommandFramework framework;

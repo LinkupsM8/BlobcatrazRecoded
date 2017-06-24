@@ -1,16 +1,16 @@
-package com.SirBlobman.itemutil.util;
+package com.SirBlobman.itemutil.utility;
 
-import java.util.List;
+import com.SirBlobman.blobcatraz.utility.Util;
 
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_11_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.ToonBasic.blobcatraz.utility.Util;
+import java.util.List;
 
-import net.minecraft.server.v1_11_R1.NBTTagCompound;
+import net.minecraft.server.v1_12_R1.NBTTagCompound;
 
 public class ItemUtil extends Util {
 	public static boolean air(ItemStack is) {
@@ -67,7 +67,7 @@ public class ItemUtil extends Util {
 	}
 	
 /*Stuff past this point does not change meta/nbt*/	
-	public static net.minecraft.server.v1_11_R1.ItemStack toNMS(ItemStack is) {return CraftItemStack.asNMSCopy(is);}
+	public static net.minecraft.server.v1_12_R1.ItemStack toNMS(ItemStack is) {return CraftItemStack.asNMSCopy(is);}
 
 	public static String name(ItemStack is) {
 		if(air(is)) {return "AIR";}
@@ -77,7 +77,7 @@ public class ItemUtil extends Util {
 			return disp;
 		} else {
 			try {
-				net.minecraft.server.v1_11_R1.ItemStack nms = toNMS(is);
+				net.minecraft.server.v1_12_R1.ItemStack nms = toNMS(is);
 				String name = nms.getName();
 				return name;
 			} catch(Throwable ex) {
@@ -102,7 +102,7 @@ public class ItemUtil extends Util {
 	
 	public static String nbt(ItemStack is) {
 		if(air(is)) return "{}";
-		net.minecraft.server.v1_11_R1.ItemStack nms = toNMS(is);
+		net.minecraft.server.v1_12_R1.ItemStack nms = toNMS(is);
 		NBTTagCompound nbt = new NBTTagCompound();
 		nms.save(nbt);
 		String s = nbt.toString();

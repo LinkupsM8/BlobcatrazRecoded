@@ -1,23 +1,23 @@
 package com.SirBlobman.blobcatraz.economy.command.player;
 
+import com.SirBlobman.blobcatraz.command.ICommand;
+import com.SirBlobman.blobcatraz.config.ConfigDatabase;
+import com.SirBlobman.blobcatraz.utility.NumberUtil;
+import com.SirBlobman.blobcatraz.utility.Util;
+
+import org.bukkit.command.CommandSender;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.bukkit.command.CommandSender;
-
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.config.ConfigDatabase;
-import com.ToonBasic.blobcatraz.utility.NumberUtil;
-import com.ToonBasic.blobcatraz.utility.Util;
-
 public class CommandBaltop extends ICommand {
 	public CommandBaltop() {super("balancetop", "", "blobcatraz.player.balancetop", "baltop", "topten");}
 	
 	@Override
-	public void handleCommand(CommandSender cs, String[] args) {
+	public void run(CommandSender cs, String[] args) {
 		List<String> list = baltop();
 		String[] msg = list.toArray(new String[0]);
 		cs.sendMessage("Top Ten Players:");

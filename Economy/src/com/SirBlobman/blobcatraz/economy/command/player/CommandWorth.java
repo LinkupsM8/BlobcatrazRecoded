@@ -1,27 +1,23 @@
 package com.SirBlobman.blobcatraz.economy.command.player;
 
+import com.SirBlobman.blobcatraz.command.PlayerCommand;
+import com.SirBlobman.blobcatraz.utility.ItemUtil;
+import com.SirBlobman.blobcatraz.utility.NumberUtil;
+import com.SirBlobman.blobcatraz.utility.Util;
+
 import org.bukkit.Material;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Player.Spigot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
-import com.ToonBasic.blobcatraz.utility.ItemUtil;
-import com.ToonBasic.blobcatraz.utility.NumberUtil;
-import com.ToonBasic.blobcatraz.utility.Util;
-
 import net.md_5.bungee.api.chat.TextComponent;
 
-@PlayerOnly
-public class CommandWorth extends ICommand {
+public class CommandWorth extends PlayerCommand {
 	public CommandWorth() {super("worth", "", "blobcatraz.player.worth", "value");}
 	
 	@Override
-	public void handleCommand(CommandSender cs, String[] args) {
-		Player p = (Player) cs;
+	public void run(Player p, String[] args) {
 		PlayerInventory pi = p.getInventory();
 		ItemStack is = pi.getItemInMainHand();
 		if(is != null && is.getType() != Material.AIR) {

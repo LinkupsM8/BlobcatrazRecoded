@@ -1,22 +1,18 @@
 package com.SirBlobman.itemutil.command;
 
-import org.bukkit.command.CommandSender;
+import com.SirBlobman.blobcatraz.command.PlayerCommand;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
-
-@PlayerOnly
-public class CommandHideAll extends ICommand {
+public class CommandHideAll extends PlayerCommand {
 	public CommandHideAll() {super("hideall", "", "blobcatraz.special.hideflags", "hideflags", "noflags");}
 	
 	@Override
-	public void handleCommand(CommandSender cs, String[] args) {
-		Player p = (Player) cs;
+	public void run(Player p, String[] args) {
 		PlayerInventory pi = p.getInventory();
 		ItemStack is = pi.getItemInMainHand();
 		if(is != null) {

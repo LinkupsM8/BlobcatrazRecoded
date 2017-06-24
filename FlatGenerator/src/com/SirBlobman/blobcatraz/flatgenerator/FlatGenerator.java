@@ -19,6 +19,7 @@ public class FlatGenerator extends ChunkGenerator {
 	private byte[] dataValues;
 	
 	public FlatGenerator() {this("64,stone");}
+	
 	@SuppressWarnings("deprecation")
 	public FlatGenerator(String id) {
 		if(id != null) {

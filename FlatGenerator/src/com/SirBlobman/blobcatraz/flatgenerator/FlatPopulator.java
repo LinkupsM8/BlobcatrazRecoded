@@ -11,8 +11,8 @@ public class FlatPopulator extends BlockPopulator {
 	byte[] data;
 	protected FlatPopulator(byte[] data) {this.data = data;}
 	
-	@SuppressWarnings("deprecation")
 	@Override
+	@SuppressWarnings("deprecation")
 	public void populate(World w, Random r, Chunk c) {
 		if(data != null) {
 			int x = c.getX() << 4;

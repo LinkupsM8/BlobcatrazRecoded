@@ -1,13 +1,11 @@
 package com.SirBlobman.blobcatraz.shop.command;
 
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-
+import com.SirBlobman.blobcatraz.command.PlayerCommand;
 import com.SirBlobman.blobcatraz.shop.compat.citizens.ShopTrait;
 import com.SirBlobman.blobcatraz.shop.compat.citizens.ShopTrait.ShopType;
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
+
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -15,13 +13,11 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import net.citizensnpcs.api.npc.NPCSelector;
 import net.citizensnpcs.api.trait.Trait;
 
-@PlayerOnly
-public class CommandShopNPC extends ICommand {
+public class CommandShopNPC extends PlayerCommand {
 	public CommandShopNPC() {super("shopnpc", "<create/type> <name/type>", "blobcatraz.special.shopnpc");}
 	
 	@Override
-	public void handleCommand(CommandSender cs, String[] args) {
-		Player p = (Player) cs;
+	public void run(Player p, String[] args) {
 		String sub = args[0].toLowerCase();
 		if(sub.equals("create")) {
 			String name = args[1];

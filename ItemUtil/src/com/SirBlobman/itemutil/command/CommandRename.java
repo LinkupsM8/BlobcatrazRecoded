@@ -1,22 +1,18 @@
 package com.SirBlobman.itemutil.command;
 
-import org.bukkit.command.CommandSender;
+import com.SirBlobman.blobcatraz.command.PlayerCommand;
+import com.SirBlobman.blobcatraz.utility.Util;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
-import com.ToonBasic.blobcatraz.utility.Util;
-
-@PlayerOnly
-public class CommandRename extends ICommand {
+public class CommandRename extends PlayerCommand {
 	public CommandRename() {super("rename", "<name>", "blobcatraz.player.rename");}
 	
 	@Override
-	public void handleCommand(CommandSender cs, String[] args) {
-		Player p = (Player) cs;
+	public void run(Player p, String[] args) {
 		PlayerInventory pi = p.getInventory();
 		if(args.length > 0) {
 			String name = Util.color(Util.finalArgs(0, args));

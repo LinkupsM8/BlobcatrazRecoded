@@ -1,27 +1,23 @@
 package com.SirBlobman.blobcatraz.economy.command.staff;
 
-import static com.ToonBasic.blobcatraz.logger.EconomyLog.print;
+import static com.SirBlobman.blobcatraz.log.EconomyLog.print;
+
+import com.SirBlobman.blobcatraz.command.PlayerCommand;
+import com.SirBlobman.blobcatraz.config.ConfigWorth;
+import com.SirBlobman.blobcatraz.utility.ItemUtil;
+import com.SirBlobman.blobcatraz.utility.NumberUtil;
+import com.SirBlobman.blobcatraz.utility.Util;
 
 import org.bukkit.Material;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
-import com.ToonBasic.blobcatraz.config.ConfigWorth;
-import com.ToonBasic.blobcatraz.utility.ItemUtil;
-import com.ToonBasic.blobcatraz.utility.NumberUtil;
-import com.ToonBasic.blobcatraz.utility.Util;
-
-@PlayerOnly
-public class CommandSetWorth extends ICommand {
+public class CommandSetWorth extends PlayerCommand {
 	public CommandSetWorth() {super("setworth", "", "blobcatraz.staff.setworth", "setvalue");}
 	
 	@Override
-	public void handleCommand(CommandSender cs, String[] args) {
-		Player p = (Player) cs;
+	public void run(Player p, String[] args) {
 		if(args.length > 0) {
 			double worth = NumberUtil.getDouble(args[0]);
 			PlayerInventory pi = p.getInventory();
@@ -42,4 +38,4 @@ public class CommandSetWorth extends ICommand {
 			p.sendMessage(error);
 		}
 	}
-	}
+}

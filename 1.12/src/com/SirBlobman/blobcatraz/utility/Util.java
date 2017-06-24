@@ -141,6 +141,18 @@ public class Util {
 		return ss;
 	}
 	
+	public static <T> List<T> cropList(List<T> o, int start, int end) {
+		if(o.size() < end) return o;
+		else {
+			List<T> list = newList();
+			for(int i = start; i <= end; i++) {
+				T t = o.get(i);
+				list.add(t);
+			}
+			return list;
+		}
+	}
+	
 	public static <O> List<O> newList(Collection<O> os) {
 		List<O> list = newList();
 		list.addAll(os);

@@ -1,6 +1,8 @@
 package com.SirBlobman.blobcatraz.inventory;
 
-import java.util.List;
+import com.SirBlobman.blobcatraz.Core;
+import com.SirBlobman.blobcatraz.config.ConfigDatabase;
+import com.SirBlobman.blobcatraz.utility.Util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -15,9 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 
-import com.ToonBasic.blobcatraz.Core;
-import com.ToonBasic.blobcatraz.config.ConfigDatabase;
-import com.ToonBasic.blobcatraz.utility.Util;
+import java.util.List;
 
 public class InventoryCore extends Core implements Listener {
 	public static InventoryCore instance;

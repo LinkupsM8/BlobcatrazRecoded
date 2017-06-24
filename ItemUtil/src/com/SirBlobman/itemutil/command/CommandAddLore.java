@@ -1,24 +1,20 @@
 package com.SirBlobman.itemutil.command;
 
-import java.util.List;
+import com.SirBlobman.blobcatraz.command.PlayerCommand;
+import com.SirBlobman.blobcatraz.utility.Util;
+import com.SirBlobman.itemutil.utility.ItemUtil;
 
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.SirBlobman.itemutil.util.ItemUtil;
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
-import com.ToonBasic.blobcatraz.utility.Util;
+import java.util.List;
 
-@PlayerOnly
-public class CommandAddLore extends ICommand {
+public class CommandAddLore extends PlayerCommand {
 	public CommandAddLore() {super("addlore", "<lore>", "blobcatraz.player.addlore");}
 	
 	@Override
-	public void handleCommand(CommandSender cs, String[] args) {
-		Player p = (Player) cs;
+	public void run(Player p, String[] args) {
 		PlayerInventory pi = p.getInventory();
 		if(args.length > 0) {
 			String vals = Util.finalArgs(0, args);
@@ -31,7 +27,7 @@ public class CommandAddLore extends ICommand {
 				ItemUtil.addLore(is, lore);
 				String name = ItemUtil.name(is);
 				List<String> list = ItemUtil.lore(is);
-				String msg = prefix + Util.color("Changed the lore of your &a" + name + " &fto:\n" + Util.formatList('-', list));
+				String msg = prefix + Util.color("Changed the lore of your &a" + name + " &fto:" + Util.joinList(list, "\n-"));
 				p.sendMessage(msg);
 			}
 		}

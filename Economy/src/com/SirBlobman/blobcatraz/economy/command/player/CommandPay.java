@@ -1,22 +1,18 @@
 package com.SirBlobman.blobcatraz.economy.command.player;
 
+import com.SirBlobman.blobcatraz.command.PlayerCommand;
+import com.SirBlobman.blobcatraz.config.ConfigDatabase;
+import com.SirBlobman.blobcatraz.log.EconomyLog;
+import com.SirBlobman.blobcatraz.utility.NumberUtil;
+
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.ToonBasic.blobcatraz.command.ICommand;
-import com.ToonBasic.blobcatraz.command.ICommand.PlayerOnly;
-import com.ToonBasic.blobcatraz.config.ConfigDatabase;
-import com.ToonBasic.blobcatraz.logger.EconomyLog;
-import com.ToonBasic.blobcatraz.utility.NumberUtil;
-
-@PlayerOnly
-public class CommandPay extends ICommand {
+public class CommandPay extends PlayerCommand {
 	public CommandPay() {super("pay", "<player> <amount>", "blobcatraz.player.pay");}
 	
 	@Override
-	public void handleCommand(CommandSender cs, String[] args) {
-		Player p = (Player) cs;
+	public void run(Player p, String[] args) {
 		try {
 			double bal = ConfigDatabase.balance(p);
 			String tar = args[0];
