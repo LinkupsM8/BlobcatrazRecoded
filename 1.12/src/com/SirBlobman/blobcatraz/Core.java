@@ -69,9 +69,9 @@ public class Core extends JavaPlugin {
 		
 		//Special
 		CF.registerCommands(
-			new CommandAnvil(), new CommandBlockData(), new CommandCreateItem(), new CommandEnderChest(),
-			new CommandPowerTool(), new CommandProjectile(), new CommandRepair(), new CommandSkull(),
-			new CommandSonic(), new CommandWorkbench()
+			new CommandAnvil(), new CommandBlockData(), new CommandCenter(), new CommandCreateItem(), 
+			new CommandEnderChest(), new CommandPowerTool(), new CommandProjectile(), new CommandRepair(), 
+			new CommandSkull(), new CommandSonic(), new CommandWorkbench()
 		);
 		
 		if(PM.isPluginEnabled("Votifier")) {
