@@ -20,6 +20,9 @@ public class Core extends com.SirBlobman.blobcatraz.Core {
 		Util.print("&2ItemUtil addon is now enabled!");
 	}
 	
+	@Override
+	public void onDisable() {}
+	
 	private void icommands() {
 		framework.registerCommands(
 			new CommandAddLore(),
