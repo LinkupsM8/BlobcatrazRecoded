@@ -12,6 +12,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -19,11 +20,10 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import java.util.Random;
 
 public class ListenJoin implements Listener {
-	@EventHandler
+	@EventHandler(priority=EventPriority.HIGHEST)
 	public void join(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
 		String name = p.getName();
-		fireworks(p);
 		boolean noob = !p.hasPlayedBefore();
 		if(noob) {
 			p.performCommand("hub");
@@ -35,6 +35,7 @@ public class ListenJoin implements Listener {
 			String msg = Util.color(Util.PREFIX + "&dWelcome back \u264b");
 			p.sendMessage(msg);
 		}
+		fireworks(p);
 	}
 	
 	private void fireworks(Player p) {

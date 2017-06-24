@@ -75,7 +75,7 @@ public class Core extends JavaPlugin {
 		);
 		
 		if(PM.isPluginEnabled("Votifier")) {
-			Util.regEvents(new ListenVote());
+			Util.regEvents(this, new ListenVote());
 			CF.registerCommand(new CommandFakeVote());
 		}
 		

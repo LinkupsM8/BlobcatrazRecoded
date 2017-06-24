@@ -85,6 +85,7 @@ public class PlayerUtil extends Util {
 	}
 	
 	public static boolean within(Player p, Location l1, Location l2) {
+		if(p == null || l1 == null || l2 == null) return false;
 		World pw = p.getWorld(), w1 = l1.getWorld(), w2 = l2.getWorld();
 		String np = pw.getName(), n1 = w1.getName(), n2 = w2.getName();
 		if(np.equals(n1) && n1.equals(n2)) {	
