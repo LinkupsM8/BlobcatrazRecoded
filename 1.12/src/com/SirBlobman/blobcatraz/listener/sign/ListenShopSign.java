@@ -118,12 +118,12 @@ public class ListenShopSign implements Listener {
 								String error = "You don't have enough money!";
 								PlayerUtil.action(p, error);
 							}
-						} else if(is.equals(amount(-32))) recalc(i, -64);
+						} else if(is.equals(amount(-32))) recalc(i, -32);
 						else if(is.equals(amount(-10))) recalc(i, -10);
 						else if(is.equals(amount(-1))) recalc(i, -1);
 						else if(is.equals(amount(1))) recalc(i, 1);
 						else if(is.equals(amount(10))) recalc(i, 10);
-						else if(is.equals(amount(32))) recalc(i, 64);
+						else if(is.equals(amount(32))) recalc(i, 32);
 					}
 				}
 			}
