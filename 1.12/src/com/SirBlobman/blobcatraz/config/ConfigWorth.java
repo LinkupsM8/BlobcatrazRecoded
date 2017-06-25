@@ -39,7 +39,7 @@ public class ConfigWorth extends Config {
 			if(mat != Material.AIR) {
 				String name = mat.name();
 				String path = name + ".0";
-				set(path, 0.0D, false);
+				set(path, 1.0D, false);
 			}
 		}
 		save();
