@@ -14,8 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 public class CommandKit extends PlayerCommand {
+	private static Map<Player, Long> COOLDOWN = Util.newMap();
 	public CommandKit() {super("kit", "[name]", "blobcatraz.player.kit");}
-	
+
 	@Override
 	public void run(Player p, String[] args) {
 		if(args.length == 0) list(p);
@@ -24,29 +25,31 @@ public class CommandKit extends PlayerCommand {
 			if(ConfigKits.exists(name)) {
 				String perm = Util.format("blobcatraz.kits.%1s", name);
 				if(p.hasPermission(perm)) {
-					PlayerInventory pi = p.getInventory();
-					List<ItemStack> list = ConfigKits.kit(name);
-					boolean full = false;
-					List<ItemStack> drop = Util.newList();
-					for(ItemStack is : list) {
-						Map<Integer, ItemStack> map = pi.addItem(is);
-						if(map.isEmpty()) continue;
-						else {
-							full = true;
-							drop.addAll(map.values());
+					if(cooldown(p)) {
+						PlayerInventory pi = p.getInventory();
+						List<ItemStack> list = ConfigKits.kit(name);
+						boolean full = false;
+						List<ItemStack> drop = Util.newList();
+						for(ItemStack is : list) {
+							Map<Integer, ItemStack> map = pi.addItem(is);
+							if(map.isEmpty()) continue;
+							else {
+								full = true;
+								drop.addAll(map.values());
+							}
 						}
+
+						if(full) {
+							String error = prefix + "Your inventory is full, dumping items on the floor...";
+							p.sendMessage(error);
+							Location l = p.getLocation();
+							World w = l.getWorld();
+							for(ItemStack is : drop) w.dropItem(l, is);
+						}
+
+						String msg = Util.format(prefix + "You received a kit called '%1s'", name);
+						p.sendMessage(msg);
 					}
-					
-					if(full) {
-						String error = prefix + "Your inventory is full, dumping items on the floor...";
-						p.sendMessage(error);
-						Location l = p.getLocation();
-						World w = l.getWorld();
-						for(ItemStack is : drop) w.dropItem(l, is);
-					}
-					
-					String msg = Util.format(prefix + "You received a kit called '%1s'", name);
-					p.sendMessage(msg);
 				} else {
 					String error = Util.format(prefix + Language.NO_PERMISSION, perm);
 					p.sendMessage(error);
@@ -57,7 +60,7 @@ public class CommandKit extends PlayerCommand {
 			}
 		}
 	}
-	
+
 	private void list(Player p) {
 		String perm = "blobcatraz.player.kits";
 		if(p.hasPermission(perm)) {
@@ -70,7 +73,7 @@ public class CommandKit extends PlayerCommand {
 				if(p.hasPermission(perm2)) {
 					String s1 = Util.color("&r, ");
 					String s2 = Util.format("&2%1s", name);
-					
+
 					if(i != 0) sb.append(s1);
 					sb.append(s2);
 				}
@@ -81,5 +84,30 @@ public class CommandKit extends PlayerCommand {
 			String error = Util.format(prefix + Language.NO_PERMISSION, perm);
 			p.sendMessage(error);
 		}
+	}
+
+	private boolean cooldown(Player p) {
+		String perm = "blobcatraz.cooldown.bypass";
+		if(!p.hasPermission(perm) && COOLDOWN.containsKey(p)) {
+			long l = COOLDOWN.get(p);
+			long c = System.currentTimeMillis();
+			long t = l - c;
+			int time = (int) (t / 1000L);
+			if(time <= 0) {
+				COOLDOWN.remove(p);
+				return true;
+			} else {
+				String f = Util.color("&cYou must wait &6%1s &cseconds before getting another kit!");
+				String error = String.format(f, time);
+				p.sendMessage(error);
+				return false;
+			}
+		} else return true;
+	}
+
+	public static void addCooldown(Player p) {
+		long c = System.currentTimeMillis();
+		long l = c + (30 * 60 * 1000L);
+		COOLDOWN.put(p, l);
 	}
 }
