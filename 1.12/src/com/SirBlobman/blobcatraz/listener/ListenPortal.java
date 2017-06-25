@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ListenPortal implements Listener {
-	private static final ItemStack WAND = ItemUtil.newItem(Material.BLAZE_ROD, 1, 0, "&2Portal Wand");
+	public static final ItemStack WAND = ItemUtil.newItem(Material.BLAZE_ROD, 1, 0, "&2Portal Wand");
 	private static Map<UUID, Location> POS1 = Util.newMap();
 	private static Map<UUID, Location> POS2 = Util.newMap();
 	

@@ -47,6 +47,8 @@ public class ConfigKits extends Config {
 				file.createNewFile();
 			}
 			YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+			config.set("name", c);
+			config.set("items", items);
 			save(config, file);
 		} catch(Throwable ex) {
 			String error = "Failed to save kit '" + name + "':";
@@ -65,8 +67,10 @@ public class ConfigKits extends Config {
 				String name = FilenameUtils.getBaseName(f);
 				YamlConfiguration config = load(name);
 				String name2 = config.getString("name");
-				String name3 = WordUtil.capitalize(name2);
-				list.add(name3);
+				if(name2 != null) {
+					String name3 = WordUtil.capitalize(name2);
+					list.add(name3);
+				}
 			}
 		}
 		Collections.sort(list);

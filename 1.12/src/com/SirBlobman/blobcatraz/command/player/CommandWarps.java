@@ -24,8 +24,8 @@ import java.util.Map;
 
 public class CommandWarps extends PlayerCommand implements Listener {
 	private static final String TITLE = Util.color("&1Warps");
-	private static final ItemStack NEXT = ItemUtil.newItem(Material.FEATHER, 1, 0, "Next Page");
-	private static final ItemStack BACK = ItemUtil.newItem(Material.ARROW, 1, 0, "Previous Page");
+	private static final ItemStack NEXT = ItemUtil.newItem(Material.FEATHER, 1, 0, "&fNext Page");
+	private static final ItemStack BACK = ItemUtil.newItem(Material.ARROW, 1, 0, "&fPrevious Page");
 	private static Map<Player, Integer> PAGE = Util.newMap();
 	public CommandWarps() {super("warps", "[page]", "blobcatraz.player.warp");}
 	
@@ -34,7 +34,7 @@ public class CommandWarps extends PlayerCommand implements Listener {
 		int page = 1;
 		if(args.length > 0) {
 			page = NumberUtil.getInteger(args[0]);
-			if(page > 1) page = 1;
+			if(page < 1) page = 1;
 		}
 		
 		Inventory i = gui(p, page);

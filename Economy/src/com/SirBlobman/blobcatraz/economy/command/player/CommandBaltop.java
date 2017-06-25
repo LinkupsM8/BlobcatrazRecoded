@@ -38,7 +38,7 @@ public class CommandBaltop extends ICommand {
 			String name = e.getKey();
 			if(name != null) {
 				double bal = e.getValue();
-				if(bal > 0.0D) {
+				if(bal != Double.POSITIVE_INFINITY && bal > 0.0D) {
 					String add = Util.color(i + ". &6" + name + ": &e" + NumberUtil.money(bal));
 					list.add(add);
 					i++;

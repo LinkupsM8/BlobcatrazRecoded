@@ -56,9 +56,10 @@ public class CommandTempBan extends ICommand {
 			Player p = op.getPlayer();
 			String r = Util.color("&4&lYou are now banned!\n" + s);
 			p.kickPlayer(r);
-			String b = Util.format(Util.PREFIX + "&c&l%1s &ewas temp-banned by &a%2s for:", name, banner);
-			Util.broadcast(b, Util.color(reason));
 		}
+		
+		String b = Util.format(Util.PREFIX + "&c&l%1s &ewas temp-banned by &a%2s for:", name, banner);
+		Util.broadcast(b, Util.color(reason));
 	}
 	
 	public static Date date(String time) {

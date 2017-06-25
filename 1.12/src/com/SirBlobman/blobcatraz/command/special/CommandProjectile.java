@@ -18,33 +18,31 @@ public class CommandProjectile extends PlayerCommand {
 	
 	@Override
 	public void run(Player p, String[] args) {
-		Location l = p.getLocation();
-		World w = l.getWorld();
-		float ya = l.getYaw();
-		float pi = l.getPitch();
-		
+		World w = p.getWorld();
 		Location e = p.getEyeLocation();
-		Vector v = e.toVector();
 		Vector d = e.getDirection();
 		Vector m = d.multiply(2);
-		Vector a = v.add(m);
-		Location s = a.toLocation(w, ya, pi);
 		
 		String sub = args[0].toLowerCase();
 		if(sub.equals("skull")) {
-			WitherSkull ws = w.spawn(s, WitherSkull.class);
+			WitherSkull ws = w.spawn(e, WitherSkull.class);
+			ws.setVelocity(m);
 			ws.setYield(10.0F);
 		} else if(sub.equals("fireball")) {
-			Fireball f = w.spawn(s, Fireball.class);
+			Fireball f = w.spawn(e, Fireball.class);
+			f.setVelocity(m);
 			f.setYield(10.0F);
 		} else if(sub.equals("egg")) {
-			Egg egg = w.spawn(s, Egg.class);
+			Egg egg = w.spawn(e, Egg.class);
+			egg.setVelocity(m);
 			egg.setGlowing(true);
 		} else if(sub.equals("snowball")) {
-			Snowball sb = w.spawn(s, Snowball.class);
+			Snowball sb = w.spawn(e, Snowball.class);
+			sb.setVelocity(m);
 			sb.setGlowing(true);
 		} else if(sub.equals("arrow")) {
-			Arrow ar = w.spawn(s, Arrow.class);
+			Arrow ar = w.spawn(e, Arrow.class);
+			ar.setVelocity(m);
 			Spigot sp = ar.spigot();
 			sp.setDamage(Double.MAX_VALUE);
 		} else {

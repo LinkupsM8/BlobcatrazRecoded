@@ -1,7 +1,8 @@
 package com.SirBlobman.blobcatraz.command.player;
 
-import java.util.List;
-import java.util.Map;
+import com.SirBlobman.blobcatraz.command.PlayerCommand;
+import com.SirBlobman.blobcatraz.config.ConfigKits;
+import com.SirBlobman.blobcatraz.utility.Util;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -9,9 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.SirBlobman.blobcatraz.command.PlayerCommand;
-import com.SirBlobman.blobcatraz.config.ConfigKits;
-import com.SirBlobman.blobcatraz.utility.Util;
+import java.util.List;
+import java.util.Map;
 
 public class CommandKit extends PlayerCommand {
 	public CommandKit() {super("kit", "[name]", "blobcatraz.player.kit");}
@@ -59,6 +59,27 @@ public class CommandKit extends PlayerCommand {
 	}
 	
 	private void list(Player p) {
-		
+		String perm = "blobcatraz.player.kits";
+		if(p.hasPermission(perm)) {
+			String msg = Util.color(prefix + "List of Kits:\n");
+			StringBuilder sb = new StringBuilder(msg);
+			List<String> list = ConfigKits.kits();
+			for(int i = 0; i < list.size(); i++) {
+				String name = list.get(i);
+				String perm2 = perm + "." + name;
+				if(p.hasPermission(perm2)) {
+					String s1 = Util.color("&r, ");
+					String s2 = Util.format("&2%1s", name);
+					
+					if(i != 0) sb.append(s1);
+					sb.append(s2);
+				}
+			}
+			String s = sb.toString();
+			p.sendMessage(s);
+		} else {
+			String error = Util.format(prefix + Language.NO_PERMISSION, perm);
+			p.sendMessage(error);
+		}
 	}
 }

@@ -3,11 +3,14 @@ package com.SirBlobman.blobcatraz;
 import com.SirBlobman.blobcatraz.command.CommandFramework;
 import com.SirBlobman.blobcatraz.command.player.*;
 import com.SirBlobman.blobcatraz.command.special.*;
+import com.SirBlobman.blobcatraz.command.special.CommandWorld;
 import com.SirBlobman.blobcatraz.command.staff.*;
 import com.SirBlobman.blobcatraz.compat.BPlaceholders;
+import com.SirBlobman.blobcatraz.config.ConfigHolo;
 import com.SirBlobman.blobcatraz.listener.*;
 import com.SirBlobman.blobcatraz.listener.sign.*;
 import com.SirBlobman.blobcatraz.utility.ItemUtil;
+import com.SirBlobman.blobcatraz.utility.ScoreboardUtil;
 import com.SirBlobman.blobcatraz.utility.Util;
 import com.SirBlobman.blobcatraz.utility.VaultUtil;
 
@@ -32,6 +35,7 @@ public class Core extends JavaPlugin {
 		FOLDER = getDataFolder();
 		CF = new CommandFramework(INSTANCE);
 		ItemUtil.load();
+		ScoreboardUtil.enable();
 		commands();
 		events();
 		Util.broadcast("&9Blobcatraz &ais now enabled!");
@@ -69,22 +73,27 @@ public class Core extends JavaPlugin {
 		
 		//Special
 		CF.registerCommands(
-			new CommandAnvil(), new CommandBlockData(), new CommandCenter(), new CommandCreateItem(), 
-			new CommandEnderChest(), new CommandPowerTool(), new CommandProjectile(), new CommandRepair(), 
-			new CommandSkull(), new CommandSonic(), new CommandWorkbench()
+			new CommandAnvil(), new CommandBigTree(), new CommandBlockData(), new CommandBurn(),
+			new CommandCenter(), new CommandChestToKit(), new CommandCreateItem(), new CommandCreatePortal(),
+			new CommandDeletePortal(), new CommandEnderChest(), new CommandItemHolo(), new CommandKillAll(),
+			new CommandKitToChest(), new CommandMobEgg(), new CommandNuke(), new CommandPortal(),
+			new CommandPowerTool(), new CommandProjectile(), new CommandPTime(), new CommandPWeather(),
+			new CommandRepair(), new CommandSkull(), new CommandSlimeCannon(), new CommandSonic(),
+			new CommandWorkbench(), new CommandWorld()
 		);
 		
-		if(PM.isPluginEnabled("Votifier")) {
-			Util.regEvents(this, new ListenVote());
-			CF.registerCommand(new CommandFakeVote());
-		}
+		if(PM.isPluginEnabled("HolographicDisplays")) ConfigHolo.load();
+		if(PM.isPluginEnabled("Vault")) VaultUtil.setup();
 		
 		if(PM.isPluginEnabled("PlaceholderAPI")) {
 			BPlaceholders bp = new BPlaceholders();
 			bp.hook();
 		}
 		
-		if(PM.isPluginEnabled("Vault")) VaultUtil.setup();
+		if(PM.isPluginEnabled("Votifier")) {
+			Util.regEvents(this, new ListenVote());
+			CF.registerCommand(new CommandFakeVote());
+		}
 		
 		CF.registerCommands();
 	}

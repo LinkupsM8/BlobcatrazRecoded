@@ -89,6 +89,7 @@ public class ScoreboardUtil extends Util implements Runnable {
 		String c = o;
 		try {
 			String re = PlaceholderAPI.setPlaceholders(p, r1);
+			if(re.equals(r1)) re = r2;
 			c = c.replaceAll("\\{0\\}", re);
 		} catch(Throwable ex) {c = c.replaceAll("\\{0\\}", r2);}
 		c = color(c);
@@ -99,7 +100,7 @@ public class ScoreboardUtil extends Util implements Runnable {
 	private static List<String> list(Player p) {
 		String curr = format(p, "&bCurrent Rank&c: &a{0}", "%blobcatraz_current_rank%", VaultUtil.mainRank(p));
 		String next = format(p, "&bNext Rank&c: &a{0}", "%rankup_next_rank%", "None");
-		String pric = format(p, "&bNext Rank Price&c: &a${0}", "rankup_next_rank_cost_formatted%", "0.00");
+		String pric = format(p, "&bNext Rank Price&c: &a${0}", "%rankup_next_rank_cost_formatted%", "0.00");
 		String bala = format(p, "&bBalance&c: &a${0}", "%blobcatraz_balance%", NumberUtil.cropDecimal(VaultUtil.balance(p), 2));
 		String toke = format(p, "&bTokens&c: &a{0}", "%blobcatraz_tokens%", str(ConfigDatabase.tokens(p)));
 		String ping = format(p, "&bPing&c: &a{0}", PlayerUtil.getPing(p), PlayerUtil.getPing(p));
