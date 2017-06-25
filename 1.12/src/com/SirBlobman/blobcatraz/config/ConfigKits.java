@@ -11,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import com.SirBlobman.blobcatraz.utility.ItemUtil;
 import com.SirBlobman.blobcatraz.utility.Util;
 import com.SirBlobman.blobcatraz.utility.WordUtil;
 
@@ -97,6 +98,16 @@ public class ConfigKits extends Config {
 			String error = "There was an error loading the kit with the name '" + name + "':";
 			Util.print(error, ex.getCause());
 			return Util.newList();
+		}
+	}
+	
+	public static ItemStack icon(String name) {
+		List<ItemStack> list = kit(name);
+		if(list.isEmpty()) return ItemUtil.AIR;
+		else {
+			ItemStack is = list.get(0);
+			is.setAmount(1);
+			return is;
 		}
 	}
 	

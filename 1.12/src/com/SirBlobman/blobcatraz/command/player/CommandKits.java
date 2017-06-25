@@ -93,8 +93,7 @@ public class CommandKits extends PlayerCommand implements Listener {
 				String name = list.get(j);
 				String perm = Util.format("blobcatraz.kits.%1s", name);
 				if(p.hasPermission(perm)) {
-					List<ItemStack> kit = ConfigKits.kit(name);
-					ItemStack is = kit.get(0);
+					ItemStack is = ConfigKits.icon(name);
 					String disp = Util.color("&2" + name);
 					ItemMeta meta = is.getItemMeta();
 					meta.setDisplayName(disp);
