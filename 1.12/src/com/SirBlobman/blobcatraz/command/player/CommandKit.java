@@ -48,6 +48,7 @@ public class CommandKit extends PlayerCommand {
 						}
 
 						String msg = Util.format(prefix + "You received a kit called '%1s'", name);
+						addCooldown(p);
 						p.sendMessage(msg);
 					}
 				} else {
