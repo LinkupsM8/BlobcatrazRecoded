@@ -8,7 +8,6 @@ import com.SirBlobman.blobcatraz.utility.ItemUtil;
 import com.SirBlobman.blobcatraz.utility.NumberUtil;
 import com.SirBlobman.blobcatraz.utility.Util;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -23,14 +22,12 @@ public class CommandSetWorth extends PlayerCommand {
 			PlayerInventory pi = p.getInventory();
 			ItemStack is = pi.getItemInMainHand();
 			if(!ItemUtil.air(is)) {
-				Material mat = is.getType();
-				short data = is.getDurability();
-				String item = mat.name() + ":" + data;
+				String item = ItemUtil.name(is);
 				ConfigWorth.setWorth(is, worth);
 				String msg = prefix + Util.color("&eYou set the value of &a" + item + "&e to " + NumberUtil.money(worth));
 				p.sendMessage(msg);
 
-				String log = Util.color("&a" + p.getName() + " &fchanged the value of &c" + ItemUtil.name(is) + " &fto " + NumberUtil.money(worth));
+				String log = Util.color("&a" + p.getName() + " &fchanged the value of &c" + item + " &fto " + NumberUtil.money(worth));
 				print(log);
 			}
 		} else {

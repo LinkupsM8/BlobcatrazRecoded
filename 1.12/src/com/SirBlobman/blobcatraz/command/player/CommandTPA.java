@@ -20,7 +20,7 @@ public class CommandTPA extends PlayerCommand {
 		if(t != null) {
 			String tname = t.getName();
 			TPRequest req = new TPRequest(p, p, t);
-			TP.put(p, req);
+			TP.put(t, req);
 			String[] msg1 = Util.color(
 				prefix + "&a" + pname + " &ewants to TP to you",
 				"&eTo allow them, type &a/tpaccept",

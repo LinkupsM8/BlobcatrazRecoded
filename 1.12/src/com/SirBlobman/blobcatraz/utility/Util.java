@@ -128,10 +128,7 @@ public class Util {
 	@SafeVarargs
 	public static <O> List<O> newList(O... os) {
 		List<O> list = new ArrayList<O>();
-		for(O o : os) {
-			boolean n = (o != null);
-			if(n) list.add(o);
-		}
+		for(O o : os) list.add(o);
 		return list;
 	}
 	

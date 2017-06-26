@@ -58,7 +58,7 @@ public class ConfigWorth extends Config {
 		short data = is.getDurability();
 		int amount = is.getAmount();
 		
-		YamlConfiguration config = load();
+		load();
 		String path = name + "." + data;
 		double worth = 0.0D;
 		
