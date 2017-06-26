@@ -26,6 +26,9 @@ public class CommandSetMOTD extends ICommand implements Listener {
 	
 	@EventHandler
 	public void motd(ServerListPingEvent e) {
+		int num = e.getNumPlayers();
+		int max = num + 1;
+		e.setMaxPlayers(max);
 		String motd = get();
 		if(motd == null) motd = Util.color("&5Example MOTD");
 		e.setMotd(motd);
