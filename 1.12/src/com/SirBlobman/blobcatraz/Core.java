@@ -7,6 +7,7 @@ import com.SirBlobman.blobcatraz.command.special.CommandWorld;
 import com.SirBlobman.blobcatraz.command.staff.*;
 import com.SirBlobman.blobcatraz.compat.BPlaceholders;
 import com.SirBlobman.blobcatraz.config.ConfigHolo;
+import com.SirBlobman.blobcatraz.config.special.CustomHologram;
 import com.SirBlobman.blobcatraz.listener.*;
 import com.SirBlobman.blobcatraz.listener.sign.*;
 import com.SirBlobman.blobcatraz.utility.ItemUtil;
@@ -16,6 +17,8 @@ import com.SirBlobman.blobcatraz.utility.VaultUtil;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -75,15 +78,19 @@ public class Core extends JavaPlugin {
 		CF.registerCommands(
 			new CommandAnvil(), new CommandBigTree(), new CommandBlockData(), new CommandBurn(),
 			new CommandCenter(), new CommandChestToKit(), new CommandCreateItem(), new CommandCreatePortal(),
-			new CommandDeletePortal(), new CommandEnderChest(), new CommandItemHolo(), new CommandKillAll(),
-			new CommandKitToChest(), new CommandMobEgg(), new CommandNuke(), new CommandPortal(),
-			new CommandPowerTool(), new CommandProjectile(), new CommandPTime(), new CommandPWeather(),
-			new CommandRepair(), new CommandSkull(), new CommandSlimeCannon(), new CommandSonic(),
-			new CommandWorkbench(), new CommandWorld()
+			new CommandDeletePortal(), new CommandEnderChest(), new CommandKillAll(), new CommandKitToChest(), 
+			new CommandMobEgg(), new CommandNuke(), new CommandPortal(), new CommandPowerTool(), new CommandProjectile(), 
+			new CommandPTime(), new CommandPWeather(), new CommandRepair(), new CommandSkull(), 
+			new CommandSlimeCannon(), new CommandSonic(), new CommandWorkbench(), new CommandWorld()
 		);
 		
-		if(PM.isPluginEnabled("HolographicDisplays")) ConfigHolo.load();
-		if(PM.isPluginEnabled("Vault")) VaultUtil.setup();
+		printEnabled();
+		
+		if(PM.isPluginEnabled("HolographicDisplays")) {
+			ConfigurationSerialization.registerClass(CustomHologram.class);
+			ConfigHolo.load();
+			CF.registerCommand(new CommandItemHolo());
+		}
 		
 		if(PM.isPluginEnabled("PlaceholderAPI")) {
 			BPlaceholders bp = new BPlaceholders();
@@ -94,6 +101,7 @@ public class Core extends JavaPlugin {
 			Util.regEvents(this, new ListenVote());
 			CF.registerCommand(new CommandFakeVote());
 		}
+		if(PM.isPluginEnabled("Vault")) VaultUtil.setup();
 		
 		CF.registerCommands();
 	}
@@ -106,5 +114,12 @@ public class Core extends JavaPlugin {
 			new ListenEnchantSign(), new ListenRepairSign(), new ListenSellAll(),
 			new ListenShopSign(), new ListenSign(), new ListenSignColor()
 		);
+	}
+	
+	private void printEnabled() {
+		Plugin[] pp = PM.getPlugins();
+		for(Plugin p : pp) {
+			if(p.isEnabled()) Util.print(p);
+		}
 	}
 }

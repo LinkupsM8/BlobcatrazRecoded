@@ -82,6 +82,10 @@ public class Util {
 		} else if(o instanceof String) {
 			String s = (String) o;
 			return s;
+		} else if(o instanceof Plugin) {
+			Plugin p = (Plugin) o;
+			String name = p.getName();
+			return name;
 		} else {
 			String s = o.toString();
 			return s;

@@ -20,8 +20,8 @@ public class CommandMobSpawn extends PlayerCommand {
 	public static final List<EntityType> INVALID = Util.newList(
 		PLAYER, DRAGON_FIREBALL, DROPPED_ITEM, LINGERING_POTION,
 		LIGHTNING, SPLASH_POTION, COMPLEX_PART, AREA_EFFECT_CLOUD,
-		EVOKER_FANGS, EXPERIENCE_ORB, THROWN_EXP_BOTTLE,
-		SHULKER_BULLET, UNKNOWN
+		EVOKER_FANGS, EXPERIENCE_ORB, THROWN_EXP_BOTTLE, ITEM_FRAME,
+		ARMOR_STAND, SHULKER_BULLET, UNKNOWN
 	);
 	public CommandMobSpawn() {super("mobspawn", "<mob[,mob2,mob3,...]> [amount] [player]", "blobcatraz.staff.mobspawn", "spawnmob", "mob");}
 	

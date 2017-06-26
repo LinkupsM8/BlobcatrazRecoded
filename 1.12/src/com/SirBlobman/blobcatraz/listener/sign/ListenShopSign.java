@@ -98,7 +98,7 @@ public class ListenShopSign implements Listener {
 							ItemMeta meta = buy.getItemMeta();
 							meta.setLore(Util.newList());
 							int a = buy.getAmount();
-							double price = ItemUtil.worth(is) * 2;
+							double price = ItemUtil.worth(buy) * 2;
 							double bal = ConfigDatabase.balance(p);
 							if(bal >= price) {
 								PlayerInventory pi = p.getInventory();

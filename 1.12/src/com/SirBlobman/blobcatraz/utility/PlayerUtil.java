@@ -122,7 +122,6 @@ public class PlayerUtil extends Util {
 	public static ItemStack held(Player p) {
 		PlayerInventory pi = p.getInventory();
 		ItemStack is = pi.getItemInMainHand();
-		if(ItemUtil.air(is)) is = pi.getItemInOffHand();
 		return is;
 	}
 }

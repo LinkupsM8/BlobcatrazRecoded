@@ -27,7 +27,6 @@ import net.minecraft.server.v1_12_R1.NBTTagCompound;
 
 public class ItemUtil extends Util {
 	public static Map<String, Enchantment> ENCHANTS = Util.newMap();
-	public static Map<String, ItemStack> SPECIAL = ConfigCustomItems.items();
 	public static final ItemStack AIR = newItem(Material.AIR);
 
 	private static void rege(String k, Enchantment v) {ENCHANTS.put(k, v);}
@@ -76,7 +75,7 @@ public class ItemUtil extends Util {
 	}
 	
 	public static ItemStack getItem(String id, int amount, int data) {
-		Map<String, ItemStack> special = SPECIAL;
+		Map<String, ItemStack> special = ConfigCustomItems.items();
 		id = id.toLowerCase().replace(' ', '_');
 		String up = id.toUpperCase();
 		Material mat = Material.matchMaterial(up);

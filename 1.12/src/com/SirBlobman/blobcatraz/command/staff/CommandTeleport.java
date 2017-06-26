@@ -10,7 +10,7 @@ import com.SirBlobman.blobcatraz.utility.NumberUtil;
 import com.SirBlobman.blobcatraz.utility.Util;
 
 public class CommandTeleport extends PlayerCommand {
-	public CommandTeleport() {super("teleport", "", "blobcatraz.staff.teleport", "tp");}
+	public CommandTeleport() {super("tp", "", "blobcatraz.staff.teleport", "teleport");}
 	
 	@Override
 	public void run(Player p, String[] args) {

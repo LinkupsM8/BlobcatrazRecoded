@@ -2,5 +2,5 @@ name: Blobcatraz
 version: 1.0
 description: Core Plugin
 main: com.SirBlobman.blobcatraz.Core
-depend: [Vault]
-softdepend: [HolographicDisplays, PlaceholderAPI, Votifier]
+depend: [HolographicDisplays, Vault]
+softdepend: [PlaceholderAPI, Votifier]

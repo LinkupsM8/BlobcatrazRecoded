@@ -280,18 +280,30 @@ public class ShopTrait extends Trait implements Listener {
 		ItemStack melon = newItem(Material.MELON);
 		ItemStack bmelon = newItem(Material.MELON_BLOCK);
 		ItemStack pumpkin = newItem(Material.PUMPKIN);
-		ItemStack chorus = newItem(Material.CHORUS_FLOWER);
+		ItemStack cacti = newItem(Material.CACTUS);
+		ItemStack scane = newItem(Material.SUGAR_CANE);
 
 		ItemStack wseeds = newItem(Material.SEEDS);
 		ItemStack bseeds = newItem(Material.BEETROOT_SEEDS);
 		ItemStack mseeds = newItem(Material.MELON_SEEDS);
 		ItemStack pseeds = newItem(Material.PUMPKIN_SEEDS);
 		ItemStack cseeds = newItem(Material.INK_SACK, 1, 3);
+		ItemStack bmush = newItem(Material.BROWN_MUSHROOM);
+		ItemStack rmush = newItem(Material.RED_MUSHROOM);
+		ItemStack chorus = newItem(Material.CHORUS_FLOWER);
+		
+		ItemStack mycel = newItem(Material.MYCEL);
+		ItemStack dirt = newItem(Material.DIRT);
+		ItemStack soil = newItem(Material.SOIL);
+		ItemStack sand = newItem(Material.SAND);
+		ItemStack estone = newItem(Material.ENDER_STONE);
+		
 
 		ItemStack[] contents = new ItemStack[] {
 				dhoe, ihoe, ghoe, shoe, whoe, AIR, AIR, AIR, AIR,
-				wheat, potato, carrot, beetroot, melon, bmelon, pumpkin, chorus, AIR,
-				wseeds, bseeds, mseeds, pseeds, cseeds
+				wheat, potato, carrot, beetroot, melon, bmelon, pumpkin, cacti, scane,
+				wseeds, bseeds, mseeds, pseeds, cseeds, bmush, rmush, chorus, AIR,
+				mycel, dirt, soil, sand, estone, AIR, AIR, AIR, AIR
 		};
 		Inventory i = newInv(contents);
 		p.openInventory(i);
@@ -434,6 +446,7 @@ public class ShopTrait extends Trait implements Listener {
 		ItemStack mooshroom = spawnEgg(EntityType.MUSHROOM_COW);
 		ItemStack mule = spawnEgg(EntityType.MULE);
 		ItemStack ocelot = spawnEgg(EntityType.OCELOT);
+		ItemStack parrot = spawnEgg(EntityType.PARROT);
 		ItemStack pig = spawnEgg(EntityType.PIG);
 		ItemStack polarbear = spawnEgg(EntityType.POLAR_BEAR);
 		ItemStack rabbit = spawnEgg(EntityType.RABBIT);
@@ -460,9 +473,9 @@ public class ShopTrait extends Trait implements Listener {
 		ItemStack[] contents = new ItemStack[] {
 				spawner, bat, blaze, cavespider, chicken, cow, creeper, donkey, elderguardian,
 				enderman, endermite, evoker, ghast, guardian, horse, husk, llama, magmacube,
-				mooshroom, mule, ocelot, pig, polarbear, rabbit, sheep, shulker, silverfish,
-				skeleton, skeletonhorse, slime, spider, squid, stray, vex, villager, vindicator,
-				witch, witherskeleton, wolf, zombie, zombiehorse, zombiepigman, zombievillager
+				mooshroom, mule, ocelot, parrot, pig, polarbear, rabbit, sheep, shulker, 
+				silverfish, skeleton, skeletonhorse, slime, spider, squid, stray, vex, villager, 
+				vindicator, witch, witherskeleton, wolf, zombie, zombiehorse, zombiepigman, zombievillager
 		};
 		Inventory i = newInv(contents);
 		p.openInventory(i);

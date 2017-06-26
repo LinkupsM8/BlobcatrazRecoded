@@ -19,9 +19,14 @@ public class ConfigHolo extends Config {
 	private static YamlConfiguration config = YamlConfiguration.loadConfiguration(FILE);
 	private static List<CustomHologram> old = Util.newList();
 	
+	@SuppressWarnings("unchecked")
 	public static YamlConfiguration load() {
 		try {
 			config = load(FILE);
+			if(old.isEmpty()) {
+				List<?> list = config.getList("holograms");
+				old = (List<CustomHologram>) list;
+			}
 			respawn();
 			return config;
 		} catch(Exception ex) {
@@ -52,7 +57,7 @@ public class ConfigHolo extends Config {
 			Hologram h = HologramsAPI.createHologram(Core.INSTANCE, l);
 			h.appendItemLine(is);
 			
-			CustomHologram chn = new CustomHologram(o, is, l);
+			CustomHologram chn = new CustomHologram(h, is, l);
 			list.add(chn);
 		}
 		old = list;
@@ -79,8 +84,12 @@ public class ConfigHolo extends Config {
 	}
 	
 	public static void remove(CustomHologram... chs) {
-		for(CustomHologram ch : chs) old.remove(ch);
+		for(CustomHologram ch : chs) {
+			Hologram o = ch.hologram();
+			o.delete();
+			old.remove(ch);
+		}
 		save();
-		load();
+		respawn();
 	}
 }
