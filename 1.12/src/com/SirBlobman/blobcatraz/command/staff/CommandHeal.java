@@ -37,6 +37,7 @@ public class CommandHeal extends PlayerCommand {
 		p.setHealth(max);
 		p.setFoodLevel(20);
 		p.setSaturation(20.0F);
+		p.setFireTicks(0);
 		Collection<PotionEffect> pes = p.getActivePotionEffects();
 		for(PotionEffect pe : pes) {
 			PotionEffectType pet = pe.getType();
