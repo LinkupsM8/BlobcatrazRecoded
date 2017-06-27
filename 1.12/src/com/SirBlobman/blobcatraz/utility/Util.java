@@ -188,7 +188,7 @@ public class Util {
 		for(String s : o) {
 			String l = s.toLowerCase();
 			String a = match.toLowerCase();
-			if(l.startsWith(a)) list.add(s);
+			if(l.startsWith(a) || l.contains(a)) list.add(s);
 		}
 		return list;
 	}

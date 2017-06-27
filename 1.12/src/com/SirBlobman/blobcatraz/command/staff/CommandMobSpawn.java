@@ -2,21 +2,24 @@ package com.SirBlobman.blobcatraz.command.staff;
 
 import static org.bukkit.entity.EntityType.*;
 
-import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-
 import com.SirBlobman.blobcatraz.command.PlayerCommand;
 import com.SirBlobman.blobcatraz.utility.NumberUtil;
 import com.SirBlobman.blobcatraz.utility.PlayerUtil;
 import com.SirBlobman.blobcatraz.utility.Util;
 
-public class CommandMobSpawn extends PlayerCommand {
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+
+import java.util.List;
+
+public class CommandMobSpawn extends PlayerCommand implements TabCompleter {
 	public static final List<EntityType> INVALID = Util.newList(
 		PLAYER, DRAGON_FIREBALL, DROPPED_ITEM, LINGERING_POTION,
 		LIGHTNING, SPLASH_POTION, COMPLEX_PART, AREA_EFFECT_CLOUD,
@@ -50,6 +53,23 @@ public class CommandMobSpawn extends PlayerCommand {
 		int count = spawn(id, l, amount);
 		String msg = Util.format(prefix + "You spawned &c%1s &fentities!", count);
 		p.sendMessage(msg);
+	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender cs, Command cmd, String label, String[] args) {		
+		if(args.length == 1) {
+			List<String> list = Util.newList();
+			EntityType[] tt = EntityType.values();
+			for(EntityType et : tt) {
+				if(!INVALID.contains(et)) {
+					String name = et.name();
+					list.add(name);
+				} else continue;
+			}
+			
+			List<String> match = Util.matching(list, args[0]);
+			return match;
+		} else return null;
 	}
 	
 	private int spawn(String id, Location l, int amount) {

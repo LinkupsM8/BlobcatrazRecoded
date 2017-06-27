@@ -25,9 +25,14 @@ public class VaultUtil extends Util {
 	}
 	
 	public static String mainRank(Player p) {
-		if(PERM != null) {
-			String rank = PERM.getPrimaryGroup(p);
-			return rank;
+		if(PERM != null && PERM.hasGroupSupport()) {
+			try {
+				String rank = PERM.getPrimaryGroup(p);
+				return rank;
+			} catch(Throwable ex) {
+				String rank = color("&4Error");
+				return rank;
+			}
 		} else {
 			String rank = color("&4Error");
 			return rank;

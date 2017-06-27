@@ -53,12 +53,12 @@ public class Core extends JavaPlugin {
 		//Player
 		CF.registerCommands(
 			new CommandAFK(), new CommandBack(), new CommandBlock(), new CommandBlockChest(),
-			new CommandDeleteHome(), new CommandEmojis(), new CommandHome(), new CommandHomes(),
-			new CommandHub(), new CommandIgnore(), new CommandKit(), new CommandKits(),
-			new CommandMessage(), new CommandNickname(), new CommandReply(), new CommandReport(),
-			new CommandRules(), new CommandSetHome(), new CommandStaffList(), new CommandStats(),
-			new CommandToggleScoreboard(), new CommandTPA(), new CommandTPAHere(), new CommandTPChoose(),
-			new CommandVote(), new CommandWarp(), new CommandWarps()
+			new CommandDeleteHome(), new CommandDiscard(), new CommandEmojis(), new CommandHome(), 
+			new CommandHomes(), new CommandHub(), new CommandIgnore(), new CommandKit(), 
+			new CommandKits(), new CommandMessage(), new CommandNickname(), new CommandReply(), 
+			new CommandReport(), new CommandRules(), new CommandSetHome(), new CommandStaffList(), 
+			new CommandStats(), new CommandToggleScoreboard(), new CommandTPA(), new CommandTPAHere(), 
+			new CommandTPChoose(), new CommandVote(), new CommandWarp(), new CommandWarps()
 		);
 		
 		//Staff
