@@ -94,8 +94,6 @@ public class Core extends JavaPlugin {
 			new CommandSlimeCannon(), new CommandSonic(), new CommandWorkbench(), new CommandWorld()
 		);
 		
-		printEnabled();
-		
 		if(PM.isPluginEnabled("HolographicDisplays")) {
 			ConfigurationSerialization.registerClass(CustomHologram.class);
 			ConfigHolo.load();
@@ -124,12 +122,5 @@ public class Core extends JavaPlugin {
 			new ListenEnchantSign(), new ListenRepairSign(), new ListenSellAll(),
 			new ListenShopSign(), new ListenSign(), new ListenSignColor()
 		);
-	}
-	
-	private void printEnabled() {
-		Plugin[] pp = PM.getPlugins();
-		for(Plugin p : pp) {
-			if(p.isEnabled()) Util.print(p);
-		}
 	}
 }
