@@ -114,7 +114,8 @@ public class ConfigKits extends Config {
 	public static void create(String name, Inventory i) {
 		String c = WordUtil.capitalize(name);
 		ItemStack[] items = i.getContents();
-		List<ItemStack> list = Util.newList(items);
+		List<ItemStack> list = Util.newList();
+		for(ItemStack is : items) if(is != null) list.add(is);
 		save(c, list);
 	}
 	

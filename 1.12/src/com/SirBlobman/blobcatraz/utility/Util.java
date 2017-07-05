@@ -15,8 +15,6 @@ import org.bukkit.plugin.PluginManager;
 import java.net.InetSocketAddress;
 import java.util.*;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class Util {
 	public static final Server SERVER = Bukkit.getServer();
 	public static final ConsoleCommandSender CONSOLE = SERVER.getConsoleSender();

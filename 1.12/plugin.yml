@@ -2,5 +2,4 @@ name: Blobcatraz
 version: 1.0
 description: Core Plugin
 main: com.SirBlobman.blobcatraz.Core
-depend: [HolographicDisplays, Vault]
-softdepend: [PlaceholderAPI, Votifier]
+load: POSTWORLD

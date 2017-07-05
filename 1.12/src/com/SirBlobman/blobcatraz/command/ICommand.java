@@ -60,23 +60,23 @@ public abstract class ICommand implements CommandExecutor {
 			return true;
 		} else {
 			if(player) {
-				if(cs instanceof Player) {
-					boolean has = cs.hasPermission(perm);
-					if(perm == null || perm.getName() == "") has = true;
-					if(!has) {
-						String error = prefix + Util.format(Language.NO_PERMISSION, perm.getName());
-						cs.sendMessage(error);
-						return true;
-					}
-				} else {
+				if(!(cs instanceof Player)) {
 					String error = prefix + Language.PLAYER_ONLY;
 					cs.sendMessage(error);
 					return true;
 				}
 			}
 			
+			boolean has = cs.hasPermission(perm);
+			if(perm == null || perm.getName() == "") has = true;
+			if(!has) {
+				String error = prefix + Util.format(Language.NO_PERMISSION, perm.getName());
+				cs.sendMessage(error);
+				return true;
+			}
+			
 			if(args.length < minArgs) {
-				String error = getFormattedUsage(label);
+				String error = prefix + getFormattedUsage(label);
 				cs.sendMessage(error);
 				return true;
 			} else {

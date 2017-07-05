@@ -1,0 +1,5 @@
+name: BlobcatrazHub
+version: 0.0.1
+description: Hub/Lobby stuff for Blobcatraz
+main: com.SirBlobman.blobcatraz.hub.HubCore
+depend: [Blobcatraz]

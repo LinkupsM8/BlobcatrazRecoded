@@ -6,6 +6,7 @@ import com.SirBlobman.blobcatraz.command.special.*;
 import com.SirBlobman.blobcatraz.command.special.CommandWorld;
 import com.SirBlobman.blobcatraz.command.staff.*;
 import com.SirBlobman.blobcatraz.compat.BPlaceholders;
+import com.SirBlobman.blobcatraz.config.ConfigBlobcatraz;
 import com.SirBlobman.blobcatraz.config.ConfigHolo;
 import com.SirBlobman.blobcatraz.config.special.CustomHologram;
 import com.SirBlobman.blobcatraz.listener.*;
@@ -21,12 +22,14 @@ import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.File;
 
 public class Core extends JavaPlugin {
 	private static final Server SERVER = Bukkit.getServer();
 	private static final PluginManager PM = SERVER.getPluginManager();
+	private static final BukkitScheduler BS = SERVER.getScheduler();
 	
 	public static Core INSTANCE;
 	public static File FOLDER;
@@ -37,11 +40,17 @@ public class Core extends JavaPlugin {
 		INSTANCE = this;
 		FOLDER = getDataFolder();
 		CF = new CommandFramework(INSTANCE);
-		ItemUtil.load();
-		ScoreboardUtil.enable();
-		commands();
-		events();
-		Util.broadcast("&9Blobcatraz &ais now enabled!");
+		BS.runTaskLater(this, new Runnable() {
+			@Override
+			public void run() {
+				ConfigBlobcatraz.load();
+				ScoreboardUtil.enable();
+				ItemUtil.load();
+				commands();
+				events();
+				Util.broadcast("&9Blobcatraz &ais now enabled!");
+			}
+		}, 0);
 	}
 	
 	@Override
@@ -56,9 +65,10 @@ public class Core extends JavaPlugin {
 			new CommandDeleteHome(), new CommandDiscard(), new CommandEmojis(), new CommandHome(), 
 			new CommandHomes(), new CommandHub(), new CommandIgnore(), new CommandKit(), 
 			new CommandKits(), new CommandMessage(), new CommandNickname(), new CommandReply(), 
-			new CommandReport(), new CommandRules(), new CommandSetHome(), new CommandStaffList(), 
-			new CommandStats(), new CommandToggleScoreboard(), new CommandTPA(), new CommandTPAHere(), 
-			new CommandTPChoose(), new CommandVote(), new CommandWarp(), new CommandWarps()
+			new CommandReport(), new CommandRules(), new CommandSetHome(),  new CommandSpawn(),
+			new CommandStaffList(), new CommandStats(), new CommandToggleScoreboard(), new CommandTPA(), 
+			new CommandTPAHere(), new CommandTPChoose(), new CommandVote(), new CommandWarp(), 
+			new CommandWarps()
 		);
 		
 		//Staff
@@ -69,9 +79,9 @@ public class Core extends JavaPlugin {
 			new CommandGod(), new CommandHeal(), new CommandInfo(), new CommandItem(), 
 			new CommandLag(), new CommandMobSpawn(), new CommandMute(), new CommandPrefix(),
 			new CommandRealName(), new CommandSeen(), new CommandSetHub(), new CommandSetMOTD(),
-			new CommandShowInv(), new CommandSmite(), new CommandSpeed(), new CommandSpy(),
-			new CommandSudo(), new CommandTeleport(), new CommandTempBan(), new CommandTop(),
-			new CommandTPAll(), new CommandVanish(), new CommandWarning()
+			new CommandSetSpawn(), new CommandShowInv(), new CommandSmite(), new CommandSpeed(), 
+			new CommandSpy(), new CommandSudo(), new CommandTeleport(), new CommandTempBan(), 
+			new CommandTop(), new CommandTPAll(), new CommandVanish(), new CommandWarning()
 		);
 		
 		//Special
