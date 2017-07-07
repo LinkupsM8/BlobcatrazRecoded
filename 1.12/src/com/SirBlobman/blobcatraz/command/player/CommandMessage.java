@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class CommandMessage extends ICommand {
 	public static Map<CommandSender, CommandSender> REPLY = Util.newMap();
-	public CommandMessage() {super("message", "<player> <message>", "blobcatraz.player.message", "msg", "tell", "whisper", "w");}
+	public CommandMessage() {super("tell", "<player> <message>", "blobcatraz.player.message", "msg", "message", "whisper", "w");}
 	
 	@Override
 	public void run(CommandSender cs, String[] args) {

@@ -118,7 +118,10 @@ public class CommandFramework {
 			String[] aliases = ic.getAliases();
 			if(aliases != null) {
 				List<String> list = Util.newList(aliases);
-				list.forEach(s -> commands.add(s));
+				list.forEach(s -> {
+					if(known.containsKey(s)) known.remove(s);
+					commands.add(s);
+				});
 				bc.setAliases(list);
 			}
 			
@@ -134,7 +137,7 @@ public class CommandFramework {
 				known.remove(cmd);
 			}
 			
-			boolean reg = cMap.register(cmd, pname,  bc);
+			boolean reg = cMap.register(cmd, pname, bc);
 			if(reg) {		
 				Command c = cMap.getCommand(cmd);
 				HelpTopic ht = new GenericCommandHelpTopic(c);
