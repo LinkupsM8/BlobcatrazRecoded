@@ -18,7 +18,7 @@ public class CommandSpy extends PlayerCommand implements Listener {
 	public void run(Player p, String[] args) {
 		ConfigDatabase.toggleSpy(p);
 		boolean spy = ConfigDatabase.spy(p);
-		String str = Util.str(spy);
+		String str = str(spy);
 		String msg = Util.format(prefix + "&aCommandSpy is now %1s", str);
 		p.sendMessage(msg);
 	}
@@ -37,5 +37,13 @@ public class CommandSpy extends PlayerCommand implements Listener {
 				o.sendMessage(msg);
 			}
 		}
+	}
+	
+	private String str(Object o) {
+		if(o instanceof Boolean) {
+			boolean b = (boolean) o;
+			String s = b ? "on" : "off";
+			return s;
+		} else return Util.str(o);
 	}
 }

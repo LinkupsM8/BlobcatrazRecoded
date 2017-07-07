@@ -87,11 +87,11 @@ public class CommandWarps extends PlayerCommand implements Listener {
 	private Inventory gui(Player p, int page) {
 		List<Warp> list = ConfigWarps.warps();
 		int start = (page * 27) - 27;
-		int end = start + 27;
 		Inventory i = Bukkit.createInventory(null, 45, TITLE);
-		for(int j = start; j < end; j++) {
-			if(list.size() > j) {
-				Warp w = list.get(j);
+		for(int j = 0; j < 27; j++) {
+			int in = (j + start);
+			if(list.size() > in) {
+				Warp w = list.get(in);
 				String name = w.name();
 				String perm = Util.format("blobcatraz.warps.%1s", name);
 				if(p.hasPermission(perm)) {

@@ -126,7 +126,14 @@ public class CommandFramework {
 			if(use != null) {bc.setUsage("/" + cmd + " " + use);}
 			bc.setLabel(cmd);
 			bc.setDescription(pname + " " + cmd + " command.");
-			if(known.containsKey(cmd)) known.remove(cmd);
+			if(known.containsKey(cmd)) {
+				Command c = known.get(cmd);
+				String cname = c.getName();
+				String msg = Util.format("Attempting to override the previously registered command '%1s'", cname);
+				Util.print(msg);
+				known.remove(cmd);
+			}
+			
 			boolean reg = cMap.register(cmd, pname,  bc);
 			if(reg) {		
 				Command c = cMap.getCommand(cmd);
@@ -143,7 +150,7 @@ public class CommandFramework {
 					Util.regEvents(pl, l);
 				}
 			} else {
-				String error = Util.format("Failed to register '%1s' from the plugin '%2s': The command is already created", cmd, pname);
+				String error = Util.format("'%1s' could not override the command '%2s'", pname, cmd);
 				Util.print(error);
 			}
 		}

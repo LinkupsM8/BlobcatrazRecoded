@@ -86,11 +86,11 @@ public class CommandKits extends PlayerCommand implements Listener {
 	private Inventory gui(Player p, int page) {
 		List<String> list = ConfigKits.kits();
 		int start = (page * 27) - 27;
-		int end = start + 27;
 		Inventory i = Bukkit.createInventory(null, 45, TITLE);
-		for(int j = start; j < end; j++) {
-			if(list.size() > j) {
-				String name = list.get(j);
+		for(int j = 0; j < 27; j++) {
+			int in = (j + start);
+			if(list.size() > in) {
+				String name = list.get(in);
 				String perm = Util.format("blobcatraz.kits.%1s", name);
 				if(p.hasPermission(perm)) {
 					ItemStack is = ConfigKits.icon(name);
