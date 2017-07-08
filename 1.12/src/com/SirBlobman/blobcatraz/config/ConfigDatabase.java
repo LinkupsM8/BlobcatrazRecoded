@@ -266,12 +266,14 @@ public class ConfigDatabase extends Config {
 	public static List<String> homes(OfflinePlayer op) {
 		YamlConfiguration config = load(op);
 		ConfigurationSection cs = config.getConfigurationSection("homes");
-		Set<String> keys = cs.getKeys(false);
-		
-		List<String> list = Util.newList();
-		for(String s : keys) {list.add(s);}
-		Collections.sort(list);
-		return list;
+		if(cs != null) {
+			Set<String> keys = cs.getKeys(false);
+			
+			List<String> list = Util.newList();
+			for(String s : keys) {list.add(s);}
+			Collections.sort(list);
+			return list;
+		} else return Util.newList();
 	}
 	
 	public static boolean homeExists(OfflinePlayer op, String name) {

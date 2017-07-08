@@ -32,7 +32,7 @@ public class CommandWorld extends PlayerCommand {
 			}
 		} else {
 			List<String> list = worlds();
-			String j = Util.joinList(list, "\n-");
+			String j = Util.joinList(list, "\n-", 0);
 			String msg = prefix + "Current Worlds: " + j;
 			p.sendMessage(msg);
 		}

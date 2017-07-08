@@ -14,7 +14,7 @@ public class CommandHomes extends PlayerCommand {
 	@Override
 	public void run(Player p, String[] args) {
 		List<String> list = ConfigDatabase.homes(p);
-		String h = Util.format("&2%1s", Util.joinList(list, "&r, &2"));
+		String h = Util.format("&2%1s", Util.joinList(list, "&r, &2", 1));
 		String[] msg = Util.color(prefix + "Homes:", h);
 		p.sendMessage(msg);
 	}

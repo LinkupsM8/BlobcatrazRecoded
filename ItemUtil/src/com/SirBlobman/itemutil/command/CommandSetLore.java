@@ -27,7 +27,7 @@ public class CommandSetLore extends PlayerCommand {
 				ItemUtil.setLore(is, lore);
 				String name = ItemUtil.name(is);
 				List<String> list = ItemUtil.lore(is);
-				String msg = prefix + Util.color("Set the lore of your &a" + name + " &fto:" + Util.joinList(list, "\n-"));
+				String msg = prefix + Util.color("Set the lore of your &a" + name + " &fto:" + Util.joinList(list, "\n- ", 0));
 				p.sendMessage(msg);
 			}
 		}

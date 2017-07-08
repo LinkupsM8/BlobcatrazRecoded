@@ -39,7 +39,7 @@ public class CommandEnchant extends PlayerCommand implements TabCompleter {
 			}
 		} catch(Throwable ex) {
 			String error = prefix + getFormattedUsage(getCommandUsed());
-			String valid = "Valid Enchants:" + Util.joinList(valid(), "\n-");
+			String valid = "Valid Enchants:" + Util.joinList(valid(), "\n-", 0);
 			String[] ss = Util.color(error, valid);
 			p.sendMessage(ss);
 		}

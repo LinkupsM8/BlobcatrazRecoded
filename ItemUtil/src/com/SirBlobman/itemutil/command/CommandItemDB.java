@@ -29,12 +29,12 @@ public class CommandItemDB extends PlayerCommand {
 					Class<? extends ItemMeta> metac = meta.getClass();
 					String ctype = metac.getSimpleName();
 					String name = ItemUtil.name(is);
-					List<String> lore = meta.getLore();
+					List<String> lore = meta.hasLore() ? meta.getLore() : Util.newList();
 					String[] msg = Util.color(new String[] {
 							prefix + "Item Metadata:",
 							"&e Class Type: &f" + ctype,
 							"&e Display Name: &f" + name,
-							"&e Lore: &f\n" + Util.joinList(lore, "\n-"),
+							"&e Lore: &f" + Util.joinList(lore, "\n- ", 0),
 					});
 					p.sendMessage(msg);
 				} else if(sub.equals("nbt")) {

@@ -130,11 +130,14 @@ public class Util {
 		return list;
 	}
 	
-	public static String joinList(List<String> list, String join) {
+	public static String joinList(List<String> list, String join, int start) {
+		if(list.isEmpty()) return "[]";
 		StringBuilder sb = new StringBuilder();
+		int i = 0;
 		for(String s : list) {
-			sb.append(join);
+			if(start <= i) sb.append(join);
 			sb.append(s);
+			i++;
 		}
 		String ss = sb.toString();
 		return ss;

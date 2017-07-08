@@ -15,7 +15,7 @@ public class CommandVote extends ICommand {
 	
 	@Override
 	public void run(CommandSender cs, String[] args) {
-		String nlist = Util.joinList(LINKS, "\n- ");
+		String nlist = Util.joinList(LINKS, "\n- ", 0);
 		String msg = Util.format(prefix + "Vote Links: %1s", nlist);
 		cs.sendMessage(msg);
 	}
