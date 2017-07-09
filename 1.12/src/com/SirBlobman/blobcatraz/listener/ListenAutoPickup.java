@@ -18,17 +18,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.List;
+import java.util.Map;
 
 public class ListenAutoPickup implements Listener {
-	private static List<ItemStack> NOPICKUP = Util.newList();
-	
+	private static Map<Player, ItemStack> NOPICKUP = Util.newMap();
+
 	@EventHandler(priority=EventPriority.HIGHEST)
 	public void drop(PlayerDropItemEvent e) {
+		Player p = e.getPlayer();
 		Item i = e.getItemDrop();
 		ItemStack is = i.getItemStack();
-		NOPICKUP.add(is);
+		NOPICKUP.put(p, is);
 	}
-	
+
 	@EventHandler(priority=EventPriority.HIGHEST)
 	public void item(EntitySpawnEvent e) {
 		Entity en = e.getEntity();
@@ -39,25 +41,29 @@ public class ListenAutoPickup implements Listener {
 			if(et == EntityType.DROPPED_ITEM) {
 				Item i = (Item) en;
 				ItemStack is = i.getItemStack();
-				if(!NOPICKUP.contains(is)) {
-					Player p = closest(i);
-					if(p != null) {
-						PlayerInventory pi = p.getInventory();
-						int slot = pi.firstEmpty();
-						if(slot == -1) {
-							String msg = "Your inventory is too full!";
-							PlayerUtil.action(p, msg);
-							PlayerUtil.ping(p);
-						} else {
-							e.setCancelled(true);
-							pi.addItem(is);
+				Player p = closest(i);
+				if(p != null) {
+					if(NOPICKUP.containsKey(p)) {
+						ItemStack is2 = NOPICKUP.get(p);
+						if(is.equals(is2)) {
+							NOPICKUP.remove(p);
+							return;
 						}
+					}
+
+					PlayerInventory pi = p.getInventory();
+					Map<Integer, ItemStack> add = pi.addItem(is);
+					e.setCancelled(true);
+					if(!add.isEmpty()) {
+						String msg = "&3\u272A&6 Inventory Full &3\u272A";
+						PlayerUtil.title(p, "", msg);
+						PlayerUtil.ping(p);
 					}
 				}
 			}
 		}
 	}
-	
+
 	private Player closest(Entity en) {
 		List<Entity> ee = en.getNearbyEntities(5, 5, 5);
 		List<Player> near = players(ee);
@@ -76,7 +82,7 @@ public class ListenAutoPickup implements Listener {
 			return c;
 		}
 	}
-	
+
 	private List<Player> players(List<Entity> ee) {
 		List<Player> list = Util.newList();
 		for(Entity e : ee) {

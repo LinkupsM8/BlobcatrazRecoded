@@ -38,7 +38,7 @@ public class HubCore extends Core implements Listener {
 		Player p = e.getPlayer();
 		World w = p.getWorld();
 		String name = w.getName();
-		if(name.equals("Hub")) {
+		if(name.equals("Spawn")) {
 			PlayerInventory pi = p.getInventory();
 			pi.clear();
 			pi.addItem(COMPASS);
@@ -81,7 +81,7 @@ public class HubCore extends Core implements Listener {
 							p.closeInventory();
 							String[] msg = Util.color(
 								"&7&m======================================",
-								"&fSorry, this feature is unavailable",
+								"&fSorry, this feature is currently unavailable",
 								"&7&m======================================"
 							);
 							p.sendMessage(msg);

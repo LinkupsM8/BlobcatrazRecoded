@@ -3,6 +3,12 @@ package com.SirBlobman.blobcatraz.utility;
 import java.util.Random;
 
 public class NumberUtil extends Util {
+	public static final long MILLISECOND = 1L;
+	public static final long SECOND = MILLISECOND * 1000L;
+	public static final long MINUTE = SECOND * 60L;
+	public static final long HOUR = MINUTE * 60L;
+	public static final long DAY = HOUR * 24L;
+	
 	public static Random random() {
 		Random rand = new Random();
 		return rand;
@@ -76,5 +82,22 @@ public class NumberUtil extends Util {
 	public static boolean isOdd(int i) {
 		boolean even = isEven(i);
 		return !even;
+	}
+	
+	public static String timeLeft(long time) {
+		if(time < SECOND) return time + " millisecond(s)";
+		else if(time < MINUTE) {
+			long r = (time / SECOND);
+			return r + " second(s)";
+		} else if(time < HOUR) {
+			long r = (time / MINUTE);
+			return r + " minute(s)";
+		} else if(time < DAY) {
+			long r = (time / HOUR);
+			return r + " hour(s)";
+		} else {
+			long r = (time / DAY);
+			return r + " day(s)";
+		}
 	}
 }

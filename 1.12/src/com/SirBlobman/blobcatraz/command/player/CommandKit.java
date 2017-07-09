@@ -2,6 +2,7 @@ package com.SirBlobman.blobcatraz.command.player;
 
 import com.SirBlobman.blobcatraz.command.PlayerCommand;
 import com.SirBlobman.blobcatraz.config.ConfigKits;
+import com.SirBlobman.blobcatraz.utility.NumberUtil;
 import com.SirBlobman.blobcatraz.utility.Util;
 
 import org.bukkit.Location;
@@ -92,14 +93,14 @@ public class CommandKit extends PlayerCommand {
 		if(!p.hasPermission(perm) && COOLDOWN.containsKey(p)) {
 			long l = COOLDOWN.get(p);
 			long c = System.currentTimeMillis();
-			long t = l - c;
-			int time = (int) (t / 1000L);
+			long time = l - c;
 			if(time <= 0) {
 				COOLDOWN.remove(p);
 				return true;
 			} else {
-				String f = Util.color("&cYou must wait &6%1s &cseconds before getting another kit!");
-				String error = String.format(f, time);
+				String left = NumberUtil.timeLeft(time);
+				String f = Util.color("&cYou must wait &6%1s &cbefore getting another kit!");
+				String error = String.format(f, left);
 				p.sendMessage(error);
 				return false;
 			}

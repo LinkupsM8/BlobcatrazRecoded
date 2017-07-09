@@ -124,4 +124,10 @@ public class PlayerUtil extends Util {
 		ItemStack is = pi.getItemInMainHand();
 		return is;
 	}
+
+	public static void title(Player p, String title, String subtitle) {
+		String c1 = color(title);
+		String c2 = color(subtitle);
+		p.sendTitle(c1, c2, 10, 70, 20);
+	}
 }

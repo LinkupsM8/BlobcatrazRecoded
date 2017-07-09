@@ -1,7 +1,10 @@
 package com.SirBlobman.blobcatraz.command.player;
 
-import java.util.List;
-import java.util.Map;
+import com.SirBlobman.blobcatraz.command.PlayerCommand;
+import com.SirBlobman.blobcatraz.config.ConfigKits;
+import com.SirBlobman.blobcatraz.utility.ItemUtil;
+import com.SirBlobman.blobcatraz.utility.NumberUtil;
+import com.SirBlobman.blobcatraz.utility.Util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -15,11 +18,8 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.SirBlobman.blobcatraz.command.PlayerCommand;
-import com.SirBlobman.blobcatraz.config.ConfigKits;
-import com.SirBlobman.blobcatraz.utility.ItemUtil;
-import com.SirBlobman.blobcatraz.utility.NumberUtil;
-import com.SirBlobman.blobcatraz.utility.Util;
+import java.util.List;
+import java.util.Map;
 
 public class CommandKits extends PlayerCommand implements Listener {
 	private static final String TITLE = Util.color("&1Kits");
@@ -84,28 +84,46 @@ public class CommandKits extends PlayerCommand implements Listener {
 	}
 	
 	private Inventory gui(Player p, int page) {
-		List<String> list = ConfigKits.kits();
-		int start = (page * 27) - 27;
-		Inventory i = Bukkit.createInventory(null, 45, TITLE);
-		for(int j = 0; j < 27; j++) {
-			int in = (j + start);
-			if(list.size() > in) {
-				String name = list.get(in);
-				String perm = Util.format("blobcatraz.kits.%1s", name);
+		List<String> kits = ConfigKits.kits();
+		int end = (page * 27);
+		int start = end - 27;
+		Inventory i = blank(page, end);
+		if(kits.isEmpty()) return i;
+		else {
+			if(kits.size() < start) return gui(p, 1);
+			if(kits.size() < end) end = kits.size();
+			List<String> list = kits.subList(start, end);
+			int j = 0;
+			for(String s : list) {
+				String perm = Util.format("blobcatraz.kits.%1s", s);
 				if(p.hasPermission(perm)) {
-					ItemStack is = ConfigKits.icon(name);
-					String disp = Util.color("&2" + name);
-					ItemMeta meta = is.getItemMeta();
-					meta.setDisplayName(disp);
-					meta.addItemFlags(ItemFlag.values());
-					is.setItemMeta(meta);
-					i.setItem(j, is);
+					List<ItemStack> items = ConfigKits.kit(s);
+					if(items.isEmpty()) {
+						Util.print("Empty Kit: " + s + ", deleting...");
+						ConfigKits.delete(s);
+						continue;
+					} else {
+						String name = Util.format("&2%1s", s);
+						ItemStack is = items.get(0).clone();
+						is.setAmount(1);
+						ItemMeta meta = is.getItemMeta();
+						meta.addItemFlags(ItemFlag.values());
+						meta.setDisplayName(name);
+						is.setItemMeta(meta);
+						i.setItem(j, is);
+						j++;
+					}
 				} else continue;
-			} else break;
+			}
+			return i;
 		}
-		
-		i.setItem(36, BACK);
-		i.setItem(44, NEXT);
+	}
+	
+	private Inventory blank(int page, int end) {
+		List<String> list = ConfigKits.kits();
+		Inventory i = Bukkit.createInventory(null, 45, TITLE);
+		if(page != 1) i.setItem(36, BACK);
+		if(list.size() > end) i.setItem(44, NEXT);
 		return i;
 	}
 }

@@ -85,29 +85,40 @@ public class CommandWarps extends PlayerCommand implements Listener {
 	}
 	
 	private Inventory gui(Player p, int page) {
-		List<Warp> list = ConfigWarps.warps();
-		int start = (page * 27) - 27;
-		Inventory i = Bukkit.createInventory(null, 45, TITLE);
-		for(int j = 0; j < 27; j++) {
-			int in = (j + start);
-			if(list.size() > in) {
-				Warp w = list.get(in);
-				String name = w.name();
-				String perm = Util.format("blobcatraz.warps.%1s", name);
+		List<Warp> warps = ConfigWarps.warps();
+		int end = (page * 27);
+		int start = end - 27;
+		Inventory i = blank(page, end);
+		if(warps.isEmpty()) return i;
+		else {
+			if(warps.size() < start) return gui(p, 1);
+			if(warps.size() < end) end = warps.size();
+			List<Warp> list = warps.subList(start, end);
+			int j = 0;
+			for(Warp w : list) {
+				String s = w.name();
+				String name = Util.format("&2%1s", s);
+				String perm = Util.format("blobcatraz.warps.%1s", s);
 				if(p.hasPermission(perm)) {
-					ItemStack is = w.icon();
-					String disp = Util.color("&2" + name);
+					ItemStack is = w.icon().clone();
+					is.setAmount(1);
 					ItemMeta meta = is.getItemMeta();
-					meta.setDisplayName(disp);
 					meta.addItemFlags(ItemFlag.values());
+					meta.setDisplayName(name);
 					is.setItemMeta(meta);
 					i.setItem(j, is);
+					j++;
 				} else continue;
-			} else break;
+			}
+			return i;
 		}
-		
-		i.setItem(36, BACK);
-		i.setItem(44, NEXT);
+	}
+	
+	private Inventory blank(int page, int end) {
+		List<Warp> list = ConfigWarps.warps();
+		Inventory i = Bukkit.createInventory(null, 45, TITLE);
+		if(page != 1) i.setItem(36, BACK);
+		if(list.size() > end) i.setItem(44, NEXT);
 		return i;
 	}
 }

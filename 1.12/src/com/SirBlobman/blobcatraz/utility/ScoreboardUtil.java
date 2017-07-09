@@ -98,12 +98,12 @@ public class ScoreboardUtil extends Util implements Runnable {
 	}
 	
 	private static List<String> list(Player p) {
-		String curr = format(p, "&bCurrent Rank&c: &a{0}", "%blobcatraz_current_rank%", VaultUtil.mainRank(p));
-		String next = format(p, "&bNext Rank&c: &a{0}", "%rankup_next_rank%", "None");
-		String pric = format(p, "&bNext Rank Price&c: &a${0}", "%rankup_next_rank_cost_formatted%", "0.00");
-		String bala = format(p, "&bBalance&c: &a${0}", "%blobcatraz_balance%", NumberUtil.cropDecimal(VaultUtil.balance(p), 2));
-		String toke = format(p, "&bTokens&c: &a{0}", "%blobcatraz_tokens%", str(ConfigDatabase.tokens(p)));
-		String ping = format(p, "&bPing&c: &a{0}", PlayerUtil.getPing(p), PlayerUtil.getPing(p));
+		String curr = format(p, "&7Current Rank&c: &a{0}", "%blobcatraz_current_rank%", VaultUtil.mainRank(p));
+		String next = format(p, "&7Next Rank&c: &a{0}", "%rankup_next_rank%", "None");
+		String pric = format(p, "&7Next Rank Price&c: &a${0}", "%rankup_next_rank_cost_formatted%", "0.00");
+		String bala = format(p, "&7Balance&c: &a${0}", "%blobcatraz_balance%", NumberUtil.cropDecimal(VaultUtil.balance(p), 2));
+		String toke = format(p, "&7Tokens&c: &a{0}", "%blobcatraz_tokens%", str(ConfigDatabase.tokens(p)));
+		String ping = format(p, "&7Ping&c: &a{0}", PlayerUtil.getPing(p), PlayerUtil.getPing(p));
 		List<String> list = newList(curr, next, pric, bala, toke, ping);
 		return list;
 	}

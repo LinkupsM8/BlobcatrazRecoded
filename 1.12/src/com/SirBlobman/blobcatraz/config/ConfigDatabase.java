@@ -157,6 +157,7 @@ public class ConfigDatabase extends Config {
 	
 	public static boolean exists(OfflinePlayer op) {
 		if(op == null) return false;
+		if(!op.hasPlayedBefore()) return false;
 		File file = file(op);
 		boolean e = file.exists();
 		return e;
