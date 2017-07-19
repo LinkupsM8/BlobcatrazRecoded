@@ -46,7 +46,7 @@ public class CommandTempBan extends ICommand {
 		String s = Util.format(
 			"&f%1s\n" +
 			"&b&lBanned By: &f%2s\n" +
-			"&b&lUntil: &f%3s" +
+			"&b&lUntil: &f%3s\n" +
 			"&b&lAppeal At: &f%4s",
 			reason, banner, end.toString(), SITE
 		);

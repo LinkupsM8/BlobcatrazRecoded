@@ -33,6 +33,7 @@ public class CommandKillAll extends PlayerCommand {
 			catch(Throwable ex) {
 				String error = Util.format(prefix + "Invalid Entity '%1s'!", type);
 				p.sendMessage(error);
+				return;
 			}
 			
 			if(INVALID.contains(et)) {

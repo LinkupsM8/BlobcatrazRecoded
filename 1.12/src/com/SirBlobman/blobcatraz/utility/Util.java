@@ -36,7 +36,8 @@ public class Util {
 	
 	public static String format(Object o, Object... os) {
 		String s = str(o);
-		String e = CommandEmojis.format(s);
+		String n = s.replace("\\n", "\n").replace("/n", "\n");
+		String e = CommandEmojis.format(n);
 		String f = String.format(e, os);
 		String c = color(f);
 		return c;
