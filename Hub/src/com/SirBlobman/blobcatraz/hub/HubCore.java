@@ -26,7 +26,11 @@ import org.bukkit.plugin.Plugin;
 
 public class HubCore extends Core implements Listener {
 	@Override
-	public void onEnable() {Util.regEvents((Plugin) this, this);}
+	public void onEnable() {
+	    Plugin plugin = this;
+	    Util.regEvents(plugin, this);
+	    if(Util.PM.isPluginEnabled("ProtocolSupport")) Util.regEvents(plugin, new BlockVersion());
+	}
 	
 	@Override
 	public void onDisable() {}

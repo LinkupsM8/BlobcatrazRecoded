@@ -21,7 +21,9 @@ public class BEconomy implements Economy {
 		Server server = Bukkit.getServer();
 		ServicesManager sm = server.getServicesManager();
 		RegisteredServiceProvider<Economy> rsp = sm.getRegistration(Economy.class);
-		return rsp.equals(BEconomy.class);
+		Class<Economy> reg = rsp.getService();
+		boolean is = reg.equals(BEconomy.class);
+		return is;
 	}
 	
 	public String getName() {return "Blobcatraz";}

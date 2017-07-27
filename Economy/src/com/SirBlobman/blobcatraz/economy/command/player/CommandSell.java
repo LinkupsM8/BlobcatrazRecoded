@@ -9,7 +9,6 @@ import com.SirBlobman.blobcatraz.utility.NumberUtil;
 import com.SirBlobman.blobcatraz.utility.PlayerUtil;
 import com.SirBlobman.blobcatraz.utility.Util;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -24,14 +23,14 @@ public class CommandSell extends PlayerCommand {
 			PlayerInventory pi = p.getInventory();
 			ItemStack is = pi.getItemInMainHand();
 			if(!ItemUtil.air(is)) {
-				Material mat = is.getType();
-				short data = is.getDurability();
-				String name = mat.name() + ":" + data; 
+                String name = ItemUtil.name(is);
 				int amount = is.getAmount();
 				double worth = ItemUtil.worth(is);
 				is.setAmount(0);
 				ConfigDatabase.deposit(p, worth);
-				String msg = prefix + Util.color("&eYou sold &a" + amount + " &eof &a" + name + " &efor " + NumberUtil.money(worth));
+				
+				String money = NumberUtil.money(worth);
+				String msg = prefix + Util.format("You sold &a%1s&r of &b%2s&r for &2%3s", amount, name, money);
 				p.sendMessage(msg);
 			} else {
 				String error = prefix + "You cannot sell AIR!";
@@ -41,7 +40,7 @@ public class CommandSell extends PlayerCommand {
 			gui(p);
 			PlayerUtil.action(p, "Opening Sell All GUI");
 		} else {
-			String error = prefix + Language.INCORRECT_USAGE;
+			String error = prefix + getFormattedUsage(getUsage());
 			p.sendMessage(error);
 		}
 	}

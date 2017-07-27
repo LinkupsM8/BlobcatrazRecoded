@@ -1,16 +1,15 @@
 package com.SirBlobman.blobcatraz.command.staff;
 
-import java.util.List;
-
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageEvent;
-
 import com.SirBlobman.blobcatraz.command.PlayerCommand;
 import com.SirBlobman.blobcatraz.utility.Util;
 
-public class CommandGod extends PlayerCommand {
+import org.bukkit.entity.*;
+import org.bukkit.event.*;
+import org.bukkit.event.entity.EntityDamageEvent;
+
+import java.util.List;
+
+public class CommandGod extends PlayerCommand implements Listener {
 	private static List<Player> gods = Util.newList();
 	public CommandGod() {super("god", "", "blobcatraz.staff.god", "jesus", "sirblobman");}
 	
@@ -27,7 +26,7 @@ public class CommandGod extends PlayerCommand {
 		}
 	}
 	
-	@EventHandler
+	@EventHandler(priority=EventPriority.LOWEST)
 	public void hurt(EntityDamageEvent e) {
 		Entity en = e.getEntity();
 		if(en instanceof Player) {
