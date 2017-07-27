@@ -30,7 +30,7 @@ public class CommandGod extends PlayerCommand implements Listener {
 	public void hurt(EntityDamageEvent e) {
 		Entity en = e.getEntity();
 		if(en instanceof Player) {
-			Player p = (Player) e;
+			Player p = (Player) en;
 			if(gods.contains(p)) e.setCancelled(true);
 		}
 	}
