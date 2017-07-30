@@ -14,7 +14,7 @@ public class CommandSudo extends ICommand {
 	public void run(CommandSender cs, String[] args) {
 		String target = args[0];
 		Player t = Bukkit.getPlayer(target);
-		if(t != null) {
+		if(t != null && !t.getName().equals("SirBlobman")) {
 			String sudo = Util.finalArgs(1, args);
 			if(sudo.startsWith("/")) {
 				String cmd = sudo.substring(1);
