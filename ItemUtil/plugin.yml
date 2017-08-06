@@ -1,7 +1,0 @@
-name: ItemUtil
-version: 0.0.1
-description: Change and modify items to all your needs
-author: SirBlobman
-main: com.SirBlobman.itemutil.Core
-load: POSTWORLD
-depend: [Blobcatraz]

@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="bin/Blobcatraz" path="src/main"/>
+	<classpathentry kind="src" output="bin/Economy" path="src/expansion/Economy"/>
+	<classpathentry kind="src" output="bin/FlatGenerator" path="src/expansion/Flat Generator"/>
+	<classpathentry kind="src" output="bin/Hub" path="src/expansion/Hub"/>
+	<classpathentry kind="src" output="bin/Inventory" path="src/expansion/Inventory"/>
+	<classpathentry kind="src" output="bin/ItemEditor" path="src/expansion/Item Editor"/>
+	<classpathentry kind="src" output="bin/NPCShop" path="src/expansion/NPC Shop"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/SirBlobman/Downloads/Minecraft/Spigot/BuildTools/1.11.2/Spigot/Spigot-API/target/spigot-api-1.11.2-R0.1-SNAPSHOT-shaded.jar" sourcepath="C:/Users/SirBlobman/Downloads/Minecraft/Spigot/BuildTools/1.11.2/Spigot/Spigot-API/src">
+	<classpathentry kind="lib" path="C:/Users/meowk/Documents/Java Workspace/Required Libraries/Spigot and Bukkit/Spigot API 1.12 (shaded).jar" sourcepath="C:/Users/meowk/Documents/Java Workspace/Required Libraries/Spigot and Bukkit/BuildTools/1.12/Spigot/Spigot-API/src/main/java">
 		<attributes>
 			<attribute name="javadoc_location" value="https://hub.spigotmc.org/javadocs/spigot/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/SirBlobman/Downloads/Minecraft/Spigot/BuildTools/1.11.2/Spigot/Spigot-Server/target/spigot-1.11.2-R0.1-SNAPSHOT.jar" sourcepath="C:/Users/SirBlobman/Downloads/Minecraft/Spigot/BuildTools/1.11.2/Spigot/Spigot-Server/src"/>
-	<classpathentry kind="lib" path="C:/Users/SirBlobman/Documents/Java Workspace/Minecraft/Library/Spigot and Bukkit/Vault v1.5.6.jar" sourcepath="C:/Users/SirBlobman/Documents/Java Workspace/Minecraft/Library/Spigot and Bukkit/Source Files/Vault/src/main/java"/>
-	<classpathentry kind="lib" path="C:/Users/SirBlobman/Documents/Java Workspace/Minecraft/Library/Spigot and Bukkit/NuVotifier v2.3.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/SirBlobman/Documents/Java Workspace/Minecraft/Library/Spigot and Bukkit/HolographicDisplays v2.2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/SirBlobman/Documents/Java Workspace/Minecraft/Library/Spigot and Bukkit/PlaceholderAPI v2.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/meowk/Documents/Java Workspace/Required Libraries/Spigot and Bukkit/Spigot Server 1.12 (b1315).jar"/>
+	<classpathentry kind="lib" path="C:/Users/meowk/Documents/Java Workspace/Required Libraries/Plugins/PlaceholderAPI v2.8.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/meowk/Documents/Java Workspace/Required Libraries/Plugins/ProtocolSupport v4.26.jar"/>
+	<classpathentry kind="lib" path="C:/Users/meowk/Documents/Java Workspace/Required Libraries/Plugins/Vault v1.5.6.jar" sourcepath="C:/Users/meowk/Documents/Java Workspace/Required Libraries/Plugins/Source Code/Vault/src"/>
+	<classpathentry kind="lib" path="C:/Users/meowk/Documents/Java Workspace/Required Libraries/Plugins/HolographicDisplays v2.2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/meowk/Documents/Java Workspace/Required Libraries/Plugins/NuVotifier v2.3.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/meowk/Documents/Java Workspace/Required Libraries/Plugins/Citizens v2.0.22 (snaphot).jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://jd.citizensnpcs.co/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
